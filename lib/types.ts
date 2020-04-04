@@ -20,6 +20,13 @@ export type LineupEntry = {
 
 export type Lineup = LineupEntry[][]
 
+type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
+
+export type InitialGame = Partial<Game> & {
+  homeLineup?: InitialLineupEntry[]
+  visitingLineup?: InitialLineupEntry[]
+}
+
 export type Game = {
   homeTeam: Team
   visitingTeam: Team

@@ -1,5 +1,5 @@
 import { Scorekeeper } from '../lib'
-import { Game } from '../lib/types'
+import { Game, InitialGame } from '../lib/types'
 
 describe('Scorekeeper', () => {
   it('initializes an empty game', () => {
@@ -15,21 +15,41 @@ describe('Scorekeeper', () => {
   })
 
   it('intializes a game with some data', () => {
-    const initialGame: Partial<Game> = {
+    const initialGameInfo = {
       date: '2020-08-09',
       homeTeam: 'Atlanta Braves',
       visitingTeam: 'Washington Nationals',
       startTime: '7:00pm',
       location: 'Truist Park'
     }
+    const initialLineups = {
+      homeLineup: [
+        {
+          player: { name: 'Freddie Freeman', number: 5 },
+          position: 3
+        }
+      ],
+      visitingLineup: [
+        {
+          player: { name: 'Pete Alonson', number: 20 },
+          position: 3
+        }
+      ]
+    }
+
+    const initialGame: InitialGame = { ...initialGameInfo, ...initialLineups }
+
     const scorekeeper = new Scorekeeper(initialGame)
     const currentGame = scorekeeper.getCurrentGameInfo()
+    const currentLineups = scorekeeper.getCurrentLineups()
 
-    expect(currentGame.date).toBe(initialGame.date)
-    expect(currentGame.homeTeam).toEqual(initialGame.homeTeam)
-    expect(currentGame.visitingTeam).toEqual(initialGame.visitingTeam)
-    expect(currentGame.startTime).toEqual(initialGame.startTime)
-    expect(currentGame.location).toEqual(initialGame.location)
+    expect(currentGame).toEqual(initialGameInfo)
+    expect(currentLineups.home).toEqual([
+      [{ ...initialLineups.homeLineup[0], inning: 1 }]
+    ])
+    expect(currentLineups.visiting).toEqual([
+      [{ ...initialLineups.visitingLineup[0], inning: 1 }]
+    ])
   })
 
   it('updates game info', () => {

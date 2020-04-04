@@ -1,15 +1,32 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/game'
-import { subHome, subVisiting } from './store/lineup'
+import { subHome, subVisiting, setLineups } from './store/lineup'
 
-import { Game, LineupEntry } from './types'
+import { Game, LineupEntry, InitialGame } from './types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
 
-  constructor(game: Partial<Game> = {}) {
+  constructor(game: Partial<InitialGame> = {}) {
+    const { homeLineup = [], visitingLineup = [], ...gameInfo } = game
     this.store = getStore()
-    this.updateGameInfo(game)
+    this.updateGameInfo(gameInfo)
+    this.store.dispatch(
+      setLineups({
+        home: homeLineup.map(l => [
+          {
+            ...l,
+            inning: 1
+          }
+        ]),
+        visiting: visitingLineup.map(l => [
+          {
+            ...l,
+            inning: 1
+          }
+        ])
+      })
+    )
   }
 
   getCurrentGameInfo() {
