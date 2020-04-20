@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { gameReducer } from './game'
+import { gameReducer } from './gameInfo'
 import { lineupReducer } from './lineup'
+import { gameplayReducer } from './gameplay'
 
 export function getStore() {
   const store = configureStore({
     reducer: {
-      game: gameReducer,
-      lineup: lineupReducer
+      gameInfo: gameReducer,
+      lineup: lineupReducer,
+      gameplay: gameplayReducer
     },
     devTools: false
   })

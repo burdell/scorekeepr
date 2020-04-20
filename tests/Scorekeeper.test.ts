@@ -5,8 +5,8 @@ describe('Scorekeeper', () => {
   it('initializes an empty game', () => {
     const scorekeeper = new Scorekeeper()
 
-    const currentGame = scorekeeper.getCurrentGameInfo()
-    const { home, visiting } = scorekeeper.getCurrentLineups()
+    const currentGame = scorekeeper.gameInfo
+    const { home, visiting } = scorekeeper.lineups
     expect(currentGame.date).toBe('')
     expect(currentGame.homeTeam).toEqual('')
     expect(currentGame.visitingTeam).toEqual('')
@@ -40,8 +40,8 @@ describe('Scorekeeper', () => {
     const initialGame: InitialGame = { ...initialGameInfo, ...initialLineups }
 
     const scorekeeper = new Scorekeeper(initialGame)
-    const currentGame = scorekeeper.getCurrentGameInfo()
-    const currentLineups = scorekeeper.getCurrentLineups()
+    const currentGame = scorekeeper.gameInfo
+    const currentLineups = scorekeeper.lineups
 
     expect(currentGame).toEqual(initialGameInfo)
     expect(currentLineups.home).toEqual([
@@ -62,14 +62,12 @@ describe('Scorekeeper', () => {
     }
     const scorekeeper = new Scorekeeper(initialGame)
 
-    expect(scorekeeper.getCurrentGameInfo().startTime).toEqual(
-      initialGame.startTime
-    )
+    expect(scorekeeper.gameInfo.startTime).toEqual(initialGame.startTime)
 
     const newStartTime = '10:00pm'
     scorekeeper.updateGameInfo({ startTime: newStartTime })
 
-    expect(scorekeeper.getCurrentGameInfo().startTime).toEqual(newStartTime)
+    expect(scorekeeper.gameInfo.startTime).toEqual(newStartTime)
   })
 
   it('makes subsitutions in the lineup', () => {
@@ -88,10 +86,8 @@ describe('Scorekeeper', () => {
     }
     scorekeeper.substituteVisitingPlayer(0, visitingPlayer)
 
-    expect(scorekeeper.getCurrentLineups().home[0][0]).toEqual(homePlayer)
-    expect(scorekeeper.getCurrentLineups().visiting[0][0]).toEqual(
-      visitingPlayer
-    )
+    expect(scorekeeper.lineups.home[0][0]).toEqual(homePlayer)
+    expect(scorekeeper.lineups.visiting[0][0]).toEqual(visitingPlayer)
 
     const anotherHomePlayer = {
       inning: 7,
@@ -100,8 +96,6 @@ describe('Scorekeeper', () => {
     }
     scorekeeper.substituteHomePlayer(0, anotherHomePlayer)
 
-    expect(scorekeeper.getCurrentLineups().home[0][1]).toEqual(
-      anotherHomePlayer
-    )
+    expect(scorekeeper.lineups.home[0][1]).toEqual(anotherHomePlayer)
   })
 })

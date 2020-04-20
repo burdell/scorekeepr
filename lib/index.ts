@@ -1,8 +1,15 @@
 import { getStore } from './store'
-import { setGameInfo } from './store/game'
+import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups } from './store/lineup'
+import {
+  ball,
+  strike,
+  startGame,
+  foulTip,
+  setCurrentAtBat
+} from './store/gameplay'
 
-import { Game, LineupEntry, InitialGame } from './types'
+import { Game, LineupEntry, InitialGame, CurrentAtBat } from './types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -13,13 +20,13 @@ export class Scorekeeper {
     this.updateGameInfo(gameInfo)
     this.store.dispatch(
       setLineups({
-        home: homeLineup.map(l => [
+        home: homeLineup.map((l) => [
           {
             ...l,
             inning: 1
           }
         ]),
-        visiting: visitingLineup.map(l => [
+        visiting: visitingLineup.map((l) => [
           {
             ...l,
             inning: 1
@@ -29,12 +36,16 @@ export class Scorekeeper {
     )
   }
 
-  getCurrentGameInfo() {
-    return this.store.getState().game.currentGame
+  get gameInfo() {
+    return this.store.getState().gameInfo.currentGame
   }
 
-  getCurrentLineups() {
+  get lineups() {
     return this.store.getState().lineup
+  }
+
+  get gameplay() {
+    return this.store.getState().gameplay
   }
 
   substituteHomePlayer(lineupSpot: number, lineupEntry: LineupEntry) {
@@ -47,5 +58,25 @@ export class Scorekeeper {
 
   updateGameInfo(gameInfo: Partial<Game>) {
     this.store.dispatch(setGameInfo(gameInfo))
+  }
+
+  startGame() {
+    this.store.dispatch(startGame())
+  }
+
+  setCurrentAtBat(options: Partial<CurrentAtBat>) {
+    this.store.dispatch(setCurrentAtBat(options))
+  }
+
+  strike() {
+    this.store.dispatch(strike())
+  }
+
+  ball() {
+    this.store.dispatch(ball())
+  }
+
+  foulTip() {
+    this.store.dispatch(foulTip())
   }
 }

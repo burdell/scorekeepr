@@ -1,8 +1,3 @@
-type IdEntity = {
-  id?: string
-  name?: string
-}
-
 type Team = string
 export type Player = {
   name: string
@@ -21,6 +16,26 @@ export type LineupEntry = {
 export type Lineup = LineupEntry[][]
 
 type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
+
+export type AtBat = {
+  balls: number
+  strikes: number
+  pitchCount: number
+  isOut: boolean
+  result: string | undefined
+}
+
+export type CurrentAtBat = {
+  team: 'home' | 'visiting'
+  lineupSpot: number
+  inning: number
+}
+
+export type Gameplay = {
+  home: AtBat[][]
+  visiting: AtBat[][]
+  currentAtBat: CurrentAtBat | undefined
+}
 
 export type InitialGame = Partial<Game> & {
   homeLineup?: InitialLineupEntry[]
