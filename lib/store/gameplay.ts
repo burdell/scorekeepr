@@ -160,7 +160,8 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateFlyOut(action.payload)
+      result: generateFlyOut(action.payload),
+      isOut: true
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -175,7 +176,8 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generatePutout(action.payload)
+      result: generatePutout(action.payload),
+      isOut: true
     }
 
     state[team][inning][lineupSpot] = newFrame
