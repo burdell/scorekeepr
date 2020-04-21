@@ -23,7 +23,7 @@ function getDefaultAtBat(): CurrentAtBat {
   }
 }
 
-function getEmptyAtBat(): AtBat {
+export function getEmptyAtBat(): AtBat {
   return {
     balls: 0,
     strikes: 0,
