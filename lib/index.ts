@@ -6,10 +6,14 @@ import {
   strike,
   startGame,
   foulTip,
-  setCurrentAtBat
+  setCurrentAtBat,
+  hit,
+  flyOut,
+  defensiveError,
+  putOut
 } from './store/gameplay'
 
-import { Game, LineupEntry, InitialGame, CurrentAtBat } from './types'
+import { Game, LineupEntry, InitialGame, CurrentAtBat, Base } from './types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -78,5 +82,21 @@ export class Scorekeeper {
 
   foulTip() {
     this.store.dispatch(foulTip())
+  }
+
+  hit(base: Base) {
+    this.store.dispatch(hit(base))
+  }
+
+  flyout(position: number) {
+    this.store.dispatch(flyOut(position))
+  }
+
+  putout(positions: number[]) {
+    this.store.dispatch(putOut(positions))
+  }
+
+  defensiveError(position: number) {
+    this.store.dispatch(defensiveError(position))
   }
 }

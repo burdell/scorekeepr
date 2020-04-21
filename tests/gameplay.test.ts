@@ -81,7 +81,11 @@ describe('Scorekeeper', () => {
     expect(getAtBat(0).balls).toEqual(expectedBalls)
     expect(getAtBat(0).strikes).toEqual(expectedStrikes)
     expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
-    expect(getAtBat(0).result!.display).toEqual('BB')
+    expect(getAtBat(0).result).toEqual({
+      type: 'pitcher-result',
+      result: 'BB',
+      display: 'BB'
+    })
 
     scorekeeper.ball()
 
@@ -110,7 +114,11 @@ describe('Scorekeeper', () => {
     expect(getAtBat(0).balls).toEqual(expectedBalls)
     expect(getAtBat(0).strikes).toEqual(expectedStrikes)
     expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
-    expect(getAtBat(0).result!.display).toEqual('K')
+    expect(getAtBat(0).result).toEqual({
+      type: 'pitcher-result',
+      result: 'K',
+      display: 'K'
+    })
     expect(getAtBat(0).isOut).toEqual(true)
 
     scorekeeper.strike()
@@ -142,5 +150,107 @@ describe('Scorekeeper', () => {
 
     expect(getAtBat(0).strikes).toEqual(2)
     expect(getAtBat(0).pitchCount).toEqual(4)
+  })
+
+  it('records a hit', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.hit(1)
+
+    expect(getAtBat(0).result).toEqual({
+      type: 'hit',
+      result: 1,
+      display: '1B'
+    })
+    expect(getAtBat(0).pitchCount).toEqual(1)
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
+    scorekeeper.hit(4)
+
+    expect(getAtBat(1).result).toEqual({
+      type: 'hit',
+      result: 4,
+      display: 'HR'
+    })
+    expect(getAtBat(1).pitchCount).toEqual(1)
+  })
+
+  it('records a fly out', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.flyout(3)
+
+    expect(getAtBat(0).result).toEqual({
+      type: 'flyout',
+      result: 3,
+      display: 'P3'
+    })
+    expect(getAtBat(0).pitchCount).toEqual(1)
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
+    scorekeeper.flyout(8)
+
+    expect(getAtBat(1).result).toEqual({
+      type: 'flyout',
+      result: 8,
+      display: 'F8'
+    })
+    expect(getAtBat(1).pitchCount).toEqual(1)
+  })
+
+  it('records a put out', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.putout([3])
+
+    expect(getAtBat(0).result).toEqual({
+      type: 'putout',
+      result: [3],
+      display: '3u'
+    })
+    expect(getAtBat(0).pitchCount).toEqual(1)
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
+    scorekeeper.putout([6, 4, 3])
+
+    expect(getAtBat(1).result).toEqual({
+      type: 'putout',
+      result: [6, 4, 3],
+      display: '6-4-3'
+    })
+    expect(getAtBat(1).pitchCount).toEqual(1)
+  })
+
+  it('records an error', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.defensiveError(3)
+
+    expect(getAtBat(0).result).toEqual({
+      type: 'defensive-error',
+      result: 3,
+      display: 'E3'
+    })
+    expect(getAtBat(0).pitchCount).toEqual(1)
   })
 })

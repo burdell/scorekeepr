@@ -1,7 +1,13 @@
 import { createAction, createReducer, Dispatch } from '@reduxjs/toolkit'
 
-import { Gameplay, CurrentAtBat, AtBat } from '../types'
-import { generatePitcherResult } from '../atBatGenerators'
+import { Gameplay, CurrentAtBat, AtBat, Base } from '../types'
+import {
+  generatePitcherResult,
+  generateFlyOut,
+  generateHit,
+  generatePutout,
+  generateDefensiveError
+} from '../atBatGenerators'
 
 const initialState: Gameplay = {
   home: Array(9).fill([]),
@@ -48,6 +54,10 @@ export const setCurrentAtBat = createAction<Partial<CurrentAtBat>>(
 export const ball = createAction('ball')
 export const strike = createAction('strike')
 export const foulTip = createAction('foulTip')
+export const hit = createAction<Base>('hit')
+export const flyOut = createAction<number>('flyOut')
+export const putOut = createAction<number[]>('putOut')
+export const defensiveError = createAction<number>('defensiveError')
 
 export function startGame() {
   return (dispatch: Dispatch) => {
@@ -121,6 +131,66 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     if (newFrame.strikes < 2) {
       newFrame.strikes = currentFrame.strikes + 1
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(hit, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: generateHit(action.payload)
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(flyOut, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: generateFlyOut(action.payload)
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(putOut, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: generatePutout(action.payload)
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(defensiveError, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: generateDefensiveError(action.payload)
     }
 
     state[team][inning][lineupSpot] = newFrame

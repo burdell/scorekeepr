@@ -1,4 +1,11 @@
-import { PitcherResult, PutOut, FlyOut, PitcherResultString } from './types'
+import {
+  PitcherResult,
+  PutOut,
+  FlyOut,
+  PitcherResultString,
+  Hit,
+  DefensiveError
+} from './types'
 
 export function generatePitcherResult(
   result: PitcherResultString
@@ -29,10 +36,18 @@ export function generateFlyOut(defensivePlayer: number): FlyOut {
   }
 }
 
-export function generateHit(base: 1 | 2 | 3 | 4) {
+export function generateHit(base: 1 | 2 | 3 | 4): Hit {
   return {
     type: 'hit',
     result: base,
     display: base === 4 ? 'HR' : `${base}B`
+  }
+}
+
+export function generateDefensiveError(position: number): DefensiveError {
+  return {
+    type: 'defensive-error',
+    result: position,
+    display: `E${position}`
   }
 }
