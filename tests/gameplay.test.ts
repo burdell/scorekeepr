@@ -81,7 +81,7 @@ describe('Scorekeeper', () => {
     expect(getAtBat(0).balls).toEqual(expectedBalls)
     expect(getAtBat(0).strikes).toEqual(expectedStrikes)
     expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
-    expect(getAtBat(0).result).toEqual('BB')
+    expect(getAtBat(0).result!.display).toEqual('BB')
 
     scorekeeper.ball()
 
@@ -110,7 +110,7 @@ describe('Scorekeeper', () => {
     expect(getAtBat(0).balls).toEqual(expectedBalls)
     expect(getAtBat(0).strikes).toEqual(expectedStrikes)
     expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
-    expect(getAtBat(0).result).toEqual('K')
+    expect(getAtBat(0).result!.display).toEqual('K')
     expect(getAtBat(0).isOut).toEqual(true)
 
     scorekeeper.strike()

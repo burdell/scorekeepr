@@ -4,7 +4,6 @@ export type Player = {
   number: number
 }
 
-// type FieldPosition = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 'DH'
 type FieldPosition = number | 'DH'
 
 export type LineupEntry = {
@@ -17,12 +16,23 @@ export type Lineup = LineupEntry[][]
 
 type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
 
+export type PutOut = { type: 'putout'; result: number[]; display: string }
+export type FlyOut = { type: 'flyout'; result: number; display: string }
+export type Hit = { type: 'hit'; result: 1 | 2 | 3 | 4; display: string }
+export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'HBP'
+export type PitcherResult = {
+  type: 'pitcher-result'
+  result: PitcherResultString
+  display: string
+}
+export type AtBatResult = PutOut | FlyOut | Hit | PitcherResult
+
 export type AtBat = {
   balls: number
   strikes: number
   pitchCount: number
   isOut: boolean
-  result: string | undefined
+  result: AtBatResult | undefined
 }
 
 export type CurrentAtBat = {

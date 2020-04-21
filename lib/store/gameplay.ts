@@ -1,6 +1,7 @@
 import { createAction, createReducer, Dispatch } from '@reduxjs/toolkit'
 
 import { Gameplay, CurrentAtBat, AtBat } from '../types'
+import { generatePitcherResult } from '../atBatGenerators'
 
 const initialState: Gameplay = {
   home: Array(9).fill([]),
@@ -77,7 +78,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     if (newFrame.balls === 4) {
-      newFrame.result = 'BB'
+      newFrame.result = generatePitcherResult('BB')
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -100,7 +101,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     if (newFrame.strikes === 3) {
-      newFrame.result = 'K'
+      newFrame.result = generatePitcherResult('K')
       newFrame.isOut = true
     }
 
