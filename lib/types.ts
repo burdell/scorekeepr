@@ -31,7 +31,30 @@ export type DefensiveError = {
   result: number
   display: string
 }
-export type AtBatResult = PutOut | FlyOut | Hit | PitcherResult | DefensiveError
+
+export type FieldersChoice = {
+  type: 'fielders-choice'
+  result: PutOut // result here is the putout that occured elsewhere
+  display: 'FC'
+}
+export type AtBatResult =
+  | PutOut
+  | FlyOut
+  | Hit
+  | PitcherResult
+  | DefensiveError
+  | FieldersChoice
+
+export type BaseResultResult =
+  | PutOut
+  | DefensiveError
+  | FieldersChoice
+  | undefined
+
+export type BaseResult = {
+  advanced: boolean
+  result: BaseResultResult
+}
 
 export type AtBat = {
   balls: number
@@ -39,6 +62,7 @@ export type AtBat = {
   pitchCount: number
   isOut: boolean
   result: AtBatResult | undefined
+  bases: BaseResult[]
 }
 
 export type CurrentAtBat = {

@@ -8,6 +8,7 @@ function atBatWithDefaults(overrides: Partial<AtBat>): AtBat {
     pitchCount: 0,
     isOut: false,
     result: undefined,
+    bases: [],
     ...overrides
   }
 }
@@ -41,7 +42,8 @@ describe('At Bat Events', () => {
           type: 'pitcher-result',
           result: 'BB',
           display: 'BB'
-        }
+        },
+        bases: [{ advanced: true, result: undefined }]
       })
     )
 
@@ -131,7 +133,8 @@ describe('At Bat Events', () => {
           type: 'hit',
           result: 1,
           display: '1B'
-        }
+        },
+        bases: [{ advanced: true, result: undefined }]
       })
     )
 
@@ -145,7 +148,13 @@ describe('At Bat Events', () => {
           type: 'hit',
           result: 4,
           display: 'HR'
-        }
+        },
+        bases: [
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined }
+        ]
       })
     )
   })
@@ -234,7 +243,7 @@ describe('At Bat Events', () => {
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
-    scorekeeper.defensiveError(3)
+    scorekeeper.defensiveError({ defensivePlayer: 3, baseAdvancedTo: 1 })
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({
@@ -243,6 +252,29 @@ describe('At Bat Events', () => {
           type: 'defensive-error',
           result: 3,
           display: 'E3'
+        },
+        bases: [{ advanced: true, result: undefined }]
+      })
+    )
+  })
+
+  it.only('records a fielders choice', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.fieldersChoice([6, 4])
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        result: {
+          type: 'fielders-choice',
+          result: { type: 'putout', result: [6, 4], display: '6-4' },
+          display: 'FC'
         }
       })
     )

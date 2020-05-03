@@ -10,7 +10,8 @@ import {
   hit,
   flyOut,
   defensiveError,
-  putOut
+  putOut,
+  fieldersChoice
 } from './store/gameplay'
 
 import { Game, LineupEntry, InitialGame, CurrentAtBat, Base } from './types'
@@ -96,7 +97,11 @@ export class Scorekeeper {
     this.store.dispatch(putOut(positions))
   }
 
-  defensiveError(position: number) {
-    this.store.dispatch(defensiveError(position))
+  defensiveError(options: { defensivePlayer: number; baseAdvancedTo: Base }) {
+    this.store.dispatch(defensiveError(options))
+  }
+
+  fieldersChoice(positionList: number[]) {
+    this.store.dispatch(fieldersChoice(positionList))
   }
 }

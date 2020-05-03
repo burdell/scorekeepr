@@ -1,12 +1,21 @@
 import { createAction, createReducer, Dispatch } from '@reduxjs/toolkit'
 
-import { Gameplay, CurrentAtBat, AtBat, Base } from '../types'
+import {
+  Gameplay,
+  CurrentAtBat,
+  AtBat,
+  Base,
+  BaseResult,
+  BaseResultResult
+} from '../types'
+
 import {
   generatePitcherResult,
   generateFlyOut,
   generateHit,
   generatePutout,
-  generateDefensiveError
+  generateDefensiveError,
+  generateFieldersChoice
 } from '../atBatGenerators'
 
 const initialState: Gameplay = {
@@ -29,7 +38,8 @@ export function getEmptyAtBat(): AtBat {
     strikes: 0,
     pitchCount: 0,
     isOut: false,
-    result: undefined
+    result: undefined,
+    bases: []
   }
 }
 
@@ -48,6 +58,25 @@ function ensureCurrentAtBat(gameplay: Gameplay) {
   return gameplay.currentAtBat
 }
 
+function advanceRunner(
+  baseAdvancedTo: Base,
+  existingBases: BaseResult[] = [],
+  result: BaseResultResult = undefined
+) {
+  return new Array<BaseResult>(baseAdvancedTo)
+    .fill({ advanced: true, result: undefined })
+    .map((newResult, index) => {
+      const existingResult = existingBases[index]
+      const isAdvancedToBase = index + 1 === baseAdvancedTo
+      if (isAdvancedToBase) {
+        newResult.result = result
+        return newResult
+      }
+
+      return existingResult || newResult
+    })
+}
+
 export const setCurrentAtBat = createAction<Partial<CurrentAtBat>>(
   'setcurrentAtBat'
 )
@@ -57,7 +86,11 @@ export const foulTip = createAction('foulTip')
 export const hit = createAction<Base>('hit')
 export const flyOut = createAction<number>('flyOut')
 export const putOut = createAction<number[]>('putOut')
-export const defensiveError = createAction<number>('defensiveError')
+export const fieldersChoice = createAction<number[]>('fieldersChoice')
+export const defensiveError = createAction<{
+  defensivePlayer: number
+  baseAdvancedTo: Base
+}>('defensiveError')
 
 export function startGame() {
   return (dispatch: Dispatch) => {
@@ -89,6 +122,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     if (newFrame.balls === 4) {
       newFrame.result = generatePitcherResult('BB')
+      newFrame.bases = advanceRunner(1)
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -145,7 +179,8 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateHit(action.payload)
+      result: generateHit(action.payload),
+      bases: advanceRunner(action.payload)
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -192,11 +227,26 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateDefensiveError(action.payload)
+      result: generateDefensiveError(action.payload.defensivePlayer),
+      bases: advanceRunner(action.payload.baseAdvancedTo)
     }
 
     state[team][inning][lineupSpot] = newFrame
 
     return state
+  })
+
+  builder.addCase(fieldersChoice, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const putOut = generatePutout(action.payload)
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: generateFieldersChoice(putOut)
+    }
+
+    state[team][inning][lineupSpot] = newFrame
   })
 })

@@ -4,7 +4,8 @@ import {
   FlyOut,
   PitcherResultString,
   Hit,
-  DefensiveError
+  DefensiveError,
+  FieldersChoice
 } from './types'
 
 export function generatePitcherResult(
@@ -49,5 +50,13 @@ export function generateDefensiveError(position: number): DefensiveError {
     type: 'defensive-error',
     result: position,
     display: `E${position}`
+  }
+}
+
+export function generateFieldersChoice(putout: PutOut): FieldersChoice {
+  return {
+    type: 'fielders-choice',
+    result: putout,
+    display: 'FC'
   }
 }
