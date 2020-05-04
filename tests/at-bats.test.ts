@@ -311,10 +311,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
 
     scorekeeper.hit(1)
-    scorekeeper.advanceRunner(
-      2,
-      scorekeeper.resultGenerators.generateDefensiveError(6)
-    )
+    scorekeeper.advanceRunner(2, scorekeeper.resultGenerators.error(6))
 
     expect(getAtBat(1)).toEqual(
       atBatWithDefaults({
@@ -348,10 +345,7 @@ describe('At Bat Events', () => {
     scorekeeper.startGame()
 
     scorekeeper.hit(1)
-    scorekeeper.basepathOut(
-      2,
-      scorekeeper.resultGenerators.generatePutout([4, 6])
-    )
+    scorekeeper.basepathOut(2, scorekeeper.resultGenerators.putout([4, 6]))
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({

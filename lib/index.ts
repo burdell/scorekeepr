@@ -15,7 +15,7 @@ import {
   advanceRunner,
   recordBasepathOut
 } from './store/gameplay'
-import * as generators from './atBatGenerators'
+import * as generators from './resultGenerators'
 
 import {
   Game,

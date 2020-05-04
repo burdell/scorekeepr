@@ -11,14 +11,7 @@ import {
   OutBaseResult
 } from '../types'
 
-import {
-  generatePitcherResult,
-  generateFlyOut,
-  generateHit,
-  generatePutout,
-  generateDefensiveError,
-  generateFieldersChoice
-} from '../atBatGenerators'
+import * as resultGenerators from '../resultGenerators'
 
 const initialState: Gameplay = {
   home: Array(9).fill([]),
@@ -141,7 +134,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     if (newFrame.balls === 4) {
-      newFrame.result = generatePitcherResult('BB')
+      newFrame.result = resultGenerators.pitcherResult('BB')
       newFrame.bases = advanceRunnerHelper({ baseAdvancedTo: 1 })
     }
 
@@ -165,7 +158,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     if (newFrame.strikes === 3) {
-      newFrame.result = generatePitcherResult('K')
+      newFrame.result = resultGenerators.pitcherResult('K')
       newFrame.isOut = true
     }
 
@@ -199,7 +192,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateHit(action.payload),
+      result: resultGenerators.hit(action.payload),
       bases: advanceRunnerHelper({ baseAdvancedTo: action.payload })
     }
 
@@ -215,7 +208,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateFlyOut(action.payload),
+      result: resultGenerators.flyOut(action.payload),
       isOut: true
     }
 
@@ -231,7 +224,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generatePutout(action.payload),
+      result: resultGenerators.putout(action.payload),
       isOut: true
     }
 
@@ -247,7 +240,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateDefensiveError(action.payload.defensivePlayer),
+      result: resultGenerators.error(action.payload.defensivePlayer),
       bases: advanceRunnerHelper({
         baseAdvancedTo: action.payload.baseAdvancedTo
       })
@@ -262,11 +255,11 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 
-    const putOut = generatePutout(action.payload.putoutPositions)
+    const putOut = resultGenerators.putout(action.payload.putoutPositions)
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateFieldersChoice(putOut),
+      result: resultGenerators.fieldersChoice(putOut),
       bases: advanceRunnerHelper({
         baseAdvancedTo: action.payload.baseAdvancedTo
       })

@@ -8,9 +8,7 @@ import {
   FieldersChoice
 } from './types'
 
-export function generatePitcherResult(
-  result: PitcherResultString
-): PitcherResult {
+export function pitcherResult(result: PitcherResultString): PitcherResult {
   return {
     type: 'pitcher-result',
     result,
@@ -18,7 +16,7 @@ export function generatePitcherResult(
   }
 }
 
-export function generatePutout(defensivePlayers: number[]): PutOut {
+export function putout(defensivePlayers: number[]): PutOut {
   return {
     type: 'putout',
     result: defensivePlayers,
@@ -29,7 +27,7 @@ export function generatePutout(defensivePlayers: number[]): PutOut {
   }
 }
 
-export function generateFlyOut(defensivePlayer: number): FlyOut {
+export function flyOut(defensivePlayer: number): FlyOut {
   return {
     type: 'flyout',
     result: defensivePlayer,
@@ -37,7 +35,7 @@ export function generateFlyOut(defensivePlayer: number): FlyOut {
   }
 }
 
-export function generateHit(base: 1 | 2 | 3 | 4): Hit {
+export function hit(base: 1 | 2 | 3 | 4): Hit {
   return {
     type: 'hit',
     result: base,
@@ -45,7 +43,7 @@ export function generateHit(base: 1 | 2 | 3 | 4): Hit {
   }
 }
 
-export function generateDefensiveError(position: number): DefensiveError {
+export function error(position: number): DefensiveError {
   return {
     type: 'defensive-error',
     result: position,
@@ -53,7 +51,7 @@ export function generateDefensiveError(position: number): DefensiveError {
   }
 }
 
-export function generateFieldersChoice(putout: PutOut): FieldersChoice {
+export function fieldersChoice(putout: PutOut): FieldersChoice {
   return {
     type: 'fielders-choice',
     result: putout,
