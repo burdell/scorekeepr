@@ -11,10 +11,21 @@ import {
   flyOut,
   defensiveError,
   putOut,
-  fieldersChoice
+  fieldersChoice,
+  advanceRunner,
+  recordBasepathOut
 } from './store/gameplay'
+import * as generators from './atBatGenerators'
 
-import { Game, LineupEntry, InitialGame, CurrentAtBat, Base } from './types'
+import {
+  Game,
+  LineupEntry,
+  InitialGame,
+  CurrentAtBat,
+  Base,
+  AdvanceBaseResult,
+  OutBaseResult
+} from './types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -51,6 +62,10 @@ export class Scorekeeper {
 
   get gameplay() {
     return this.store.getState().gameplay
+  }
+
+  get resultGenerators() {
+    return generators
   }
 
   substituteHomePlayer(lineupSpot: number, lineupEntry: LineupEntry) {
@@ -101,7 +116,15 @@ export class Scorekeeper {
     this.store.dispatch(defensiveError(options))
   }
 
-  fieldersChoice(positionList: number[]) {
-    this.store.dispatch(fieldersChoice(positionList))
+  fieldersChoice(putoutPositions: number[], baseAdvancedTo: Base = 1) {
+    this.store.dispatch(fieldersChoice({ putoutPositions, baseAdvancedTo }))
+  }
+
+  advanceRunner(base: Base, result?: AdvanceBaseResult) {
+    this.store.dispatch(advanceRunner({ base, result }))
+  }
+
+  basepathOut(baseAttempted: Base, result: OutBaseResult) {
+    this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
   }
 }

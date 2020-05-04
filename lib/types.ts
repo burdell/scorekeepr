@@ -45,11 +45,9 @@ export type AtBatResult =
   | DefensiveError
   | FieldersChoice
 
-export type BaseResultResult =
-  | PutOut
-  | DefensiveError
-  | FieldersChoice
-  | undefined
+export type AdvanceBaseResult = DefensiveError | FieldersChoice
+export type OutBaseResult = PutOut
+export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
 
 export type BaseResult = {
   advanced: boolean

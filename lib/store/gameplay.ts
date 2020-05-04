@@ -6,7 +6,9 @@ import {
   AtBat,
   Base,
   BaseResult,
-  BaseResultResult
+  BaseResultResult,
+  AdvanceBaseResult,
+  OutBaseResult
 } from '../types'
 
 import {
@@ -58,11 +60,17 @@ function ensureCurrentAtBat(gameplay: Gameplay) {
   return gameplay.currentAtBat
 }
 
-function advanceRunner(
-  baseAdvancedTo: Base,
-  existingBases: BaseResult[] = [],
-  result: BaseResultResult = undefined
-) {
+function advanceRunnerHelper({
+  baseAdvancedTo,
+  existingBases = [],
+  result = undefined,
+  isOut = false
+}: {
+  baseAdvancedTo: Base
+  existingBases?: BaseResult[]
+  result?: BaseResultResult
+  isOut?: boolean
+}) {
   return new Array<BaseResult>(baseAdvancedTo)
     .fill({ advanced: true, result: undefined })
     .map((newResult, index) => {
@@ -70,6 +78,7 @@ function advanceRunner(
       const isAdvancedToBase = index + 1 === baseAdvancedTo
       if (isAdvancedToBase) {
         newResult.result = result
+        newResult.advanced = !isOut
         return newResult
       }
 
@@ -86,11 +95,22 @@ export const foulTip = createAction('foulTip')
 export const hit = createAction<Base>('hit')
 export const flyOut = createAction<number>('flyOut')
 export const putOut = createAction<number[]>('putOut')
-export const fieldersChoice = createAction<number[]>('fieldersChoice')
+export const fieldersChoice = createAction<{
+  putoutPositions: number[]
+  baseAdvancedTo: Base
+}>('fieldersChoice')
 export const defensiveError = createAction<{
   defensivePlayer: number
   baseAdvancedTo: Base
 }>('defensiveError')
+export const advanceRunner = createAction<{
+  base: Base
+  result: AdvanceBaseResult | undefined
+}>('advanceRunner')
+export const recordBasepathOut = createAction<{
+  baseAttempted: Base
+  result: OutBaseResult
+}>('recordBasepathOut')
 
 export function startGame() {
   return (dispatch: Dispatch) => {
@@ -122,7 +142,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     if (newFrame.balls === 4) {
       newFrame.result = generatePitcherResult('BB')
-      newFrame.bases = advanceRunner(1)
+      newFrame.bases = advanceRunnerHelper({ baseAdvancedTo: 1 })
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -180,7 +200,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
       result: generateHit(action.payload),
-      bases: advanceRunner(action.payload)
+      bases: advanceRunnerHelper({ baseAdvancedTo: action.payload })
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -228,7 +248,9 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
       result: generateDefensiveError(action.payload.defensivePlayer),
-      bases: advanceRunner(action.payload.baseAdvancedTo)
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: action.payload.baseAdvancedTo
+      })
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -240,11 +262,48 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 
-    const putOut = generatePutout(action.payload)
+    const putOut = generatePutout(action.payload.putoutPositions)
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: generateFieldersChoice(putOut)
+      result: generateFieldersChoice(putOut),
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: action.payload.baseAdvancedTo
+      })
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+  })
+
+  builder.addCase(advanceRunner, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: action.payload.base,
+        existingBases: currentFrame.bases,
+        result: action.payload.result
+      })
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+  })
+
+  builder.addCase(recordBasepathOut, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      isOut: true,
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: action.payload.baseAttempted,
+        existingBases: currentFrame.bases,
+        result: action.payload.result,
+        isOut: true
+      })
     }
 
     state[team][inning][lineupSpot] = newFrame

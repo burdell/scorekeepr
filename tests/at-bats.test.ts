@@ -258,7 +258,7 @@ describe('At Bat Events', () => {
     )
   })
 
-  it.only('records a fielders choice', () => {
+  it('records a fielders choice', () => {
     function getAtBat(lineupSpot: number) {
       return scorekeeper.gameplay.visiting[0][lineupSpot]
     }
@@ -275,7 +275,104 @@ describe('At Bat Events', () => {
           type: 'fielders-choice',
           result: { type: 'putout', result: [6, 4], display: '6-4' },
           display: 'FC'
-        }
+        },
+        bases: [{ advanced: true, result: undefined }]
+      })
+    )
+  })
+
+  it('advances a runner', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.advanceRunner(1)
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        bases: [{ advanced: true, result: undefined }]
+      })
+    )
+
+    scorekeeper.advanceRunner(2)
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        bases: [
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined }
+        ]
+      })
+    )
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
+
+    scorekeeper.hit(1)
+    scorekeeper.advanceRunner(
+      2,
+      scorekeeper.resultGenerators.generateDefensiveError(6)
+    )
+
+    expect(getAtBat(1)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        result: {
+          type: 'hit',
+          result: 1,
+          display: '1B'
+        },
+        bases: [
+          { advanced: true, result: undefined },
+          {
+            advanced: true,
+            result: {
+              type: 'defensive-error',
+              result: 6,
+              display: 'E6'
+            }
+          }
+        ]
+      })
+    )
+  })
+
+  it('records an out on the basepaths', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.hit(1)
+    scorekeeper.basepathOut(
+      2,
+      scorekeeper.resultGenerators.generatePutout([4, 6])
+    )
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        result: {
+          type: 'hit',
+          result: 1,
+          display: '1B'
+        },
+        isOut: true,
+        bases: [
+          { advanced: true, result: undefined },
+          {
+            advanced: false,
+            result: {
+              type: 'putout',
+              result: [4, 6],
+              display: '4-6'
+            }
+          }
+        ]
       })
     )
   })
