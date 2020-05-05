@@ -1,25 +1,9 @@
-import { Scorekeeper } from '../Scorekeeper'
-
 import { parseGames, GameplayEvent } from 'retrosheet-parse'
 
+import { Scorekeeper } from '../Scorekeeper'
 import { getStadium, getTeam, getLineup } from './translator'
-
-const strikes = ['C', 'K', 'L', 'O', 'Q', 'S', 'T', 'M']
-const balls = ['B', 'I', 'P']
-const fouls = ['F', 'R']
-function handlePitch(pitch: string, game: Scorekeeper) {
-  if (strikes.includes(pitch)) {
-    game.strike()
-  } else if (balls.includes(pitch)) {
-    game.ball()
-  } else if (fouls.includes(pitch)) {
-    game.foul()
-  }
-}
-
-function handleResult(result: string, game: Scorekeeper) {
-  return
-}
+import { handlePitch } from './pitches'
+import { handleResult } from './atBatResult'
 
 function handleGameplay(gameplayEvents: GameplayEvent[], game: Scorekeeper) {
   gameplayEvents.forEach((gameplayEvent) => {

@@ -195,10 +195,12 @@ describe('Retrosheet Parser', () => {
     ])
   })
 
-  // it('records pitches', async () => {
-  //   const scorekeeper = await getRetrosheetScorekeeper(
-  //     join(__dirname, './test_game.txt')
-  //   )
-  //   const { gameplay } = scorekeeper
-  // })
+  it.only('records pitches', async () => {
+    const scorekeeper = await getRetrosheetScorekeeper(
+      join(__dirname, './test_pitches.txt')
+    )
+    const { gameplay } = scorekeeper
+
+    console.log(gameplay.visiting)
+  })
 })
