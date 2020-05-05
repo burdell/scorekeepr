@@ -1,7 +1,7 @@
 type Team = string
 export type Player = {
   name: string
-  number: number
+  number: number | undefined
 }
 
 type FieldPosition = number | 'DH'
@@ -14,7 +14,7 @@ export type LineupEntry = {
 
 export type Lineup = LineupEntry[][]
 
-type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
+export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
 
 export type Base = 1 | 2 | 3 | 4
 export type PutOut = { type: 'putout'; result: number[]; display: string }

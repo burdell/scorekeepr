@@ -1,130 +1,33 @@
-import { getStore } from './store'
-import { setGameInfo } from './store/gameInfo'
-import { subHome, subVisiting, setLineups } from './store/lineup'
-import {
-  ball,
-  strike,
-  startGame,
-  foulTip,
-  setCurrentAtBat,
-  hit,
-  flyOut,
-  defensiveError,
-  putOut,
-  fieldersChoice,
-  advanceRunner,
-  recordBasepathOut
-} from './store/gameplay'
-import * as generators from './resultGenerators'
+import { Scorekeeper } from './Scorekeeper'
 
-import {
-  Game,
-  LineupEntry,
-  InitialGame,
-  CurrentAtBat,
-  Base,
-  AdvanceBaseResult,
-  OutBaseResult
-} from './types'
+import { parseGames } from 'retrosheet-parse'
 
-export class Scorekeeper {
-  private store: ReturnType<typeof getStore>
+import { getStadium, getTeam, getLineup } from './translator'
 
-  constructor(game: Partial<InitialGame> = {}) {
-    const { homeLineup = [], visitingLineup = [], ...gameInfo } = game
-    this.store = getStore()
-    this.updateGameInfo(gameInfo)
-    this.store.dispatch(
-      setLineups({
-        home: homeLineup.map((l) => [
-          {
-            ...l,
-            inning: 1
-          }
-        ]),
-        visiting: visitingLineup.map((l) => [
-          {
-            ...l,
-            inning: 1
-          }
-        ])
-      })
-    )
-  }
+export async function getRetrosheetScorekeeper(
+  gamefile: string,
+  gameIndex = 0
+) {
+  const gameList = await parseGames(gamefile)
+  const game = gameList[gameIndex]
 
-  get gameInfo() {
-    return this.store.getState().gameInfo.currentGame
-  }
+  if (!game) throw new Error('I could not find the game in the file!')
 
-  get lineups() {
-    return this.store.getState().lineup
-  }
+  const { info, lineup } = game
+  const scorebook = new Scorekeeper({
+    date: info.date,
+    homeTeam: getTeam(info.hometeam).fullName,
+    visitingTeam: getTeam(info.visteam).fullName,
+    location: getStadium(info.site).fullName,
+    startTime: info.starttime
+  })
 
-  get gameplay() {
-    return this.store.getState().gameplay
-  }
+  scorebook.setLineups({
+    home: getLineup(lineup.home),
+    visiting: getLineup(lineup.visiting)
+  })
 
-  get resultGenerators() {
-    return generators
-  }
-
-  substituteHomePlayer(lineupSpot: number, lineupEntry: LineupEntry) {
-    this.store.dispatch(subHome({ lineupSpot, lineupEntry }))
-  }
-
-  substituteVisitingPlayer(lineupSpot: number, lineupEntry: LineupEntry) {
-    this.store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
-  }
-
-  updateGameInfo(gameInfo: Partial<Game>) {
-    this.store.dispatch(setGameInfo(gameInfo))
-  }
-
-  startGame() {
-    this.store.dispatch(startGame())
-  }
-
-  setCurrentAtBat(options: Partial<CurrentAtBat>) {
-    this.store.dispatch(setCurrentAtBat(options))
-  }
-
-  strike() {
-    this.store.dispatch(strike())
-  }
-
-  ball() {
-    this.store.dispatch(ball())
-  }
-
-  foulTip() {
-    this.store.dispatch(foulTip())
-  }
-
-  hit(base: Base) {
-    this.store.dispatch(hit(base))
-  }
-
-  flyout(position: number) {
-    this.store.dispatch(flyOut(position))
-  }
-
-  putout(positions: number[]) {
-    this.store.dispatch(putOut(positions))
-  }
-
-  defensiveError(options: { defensivePlayer: number; baseAdvancedTo: Base }) {
-    this.store.dispatch(defensiveError(options))
-  }
-
-  fieldersChoice(putoutPositions: number[], baseAdvancedTo: Base = 1) {
-    this.store.dispatch(fieldersChoice({ putoutPositions, baseAdvancedTo }))
-  }
-
-  advanceRunner(base: Base, result?: AdvanceBaseResult) {
-    this.store.dispatch(advanceRunner({ base, result }))
-  }
-
-  basepathOut(baseAttempted: Base, result: OutBaseResult) {
-    this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
-  }
+  return scorebook
 }
+
+export { Scorekeeper }
