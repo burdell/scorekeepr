@@ -45,10 +45,10 @@ describe('Scorekeeper', () => {
 
     expect(currentGame).toEqual(initialGameInfo)
     expect(currentLineups.home).toEqual([
-      [{ ...initialLineups.homeLineup[0], inning: 1 }]
+      [{ ...initialLineups.homeLineup[0], inning: 0 }]
     ])
     expect(currentLineups.visiting).toEqual([
-      [{ ...initialLineups.visitingLineup[0], inning: 1 }]
+      [{ ...initialLineups.visitingLineup[0], inning: 0 }]
     ])
   })
 
@@ -74,13 +74,13 @@ describe('Scorekeeper', () => {
     const scorekeeper = new Scorekeeper()
 
     const homePlayer = {
-      inning: 1,
+      inning: 0,
       position: 3,
       player: { name: 'Freddie Freeman', number: 5 }
     }
     scorekeeper.substituteHomePlayer(0, homePlayer)
     const visitingPlayer = {
-      inning: 1,
+      inning: 0,
       position: 3,
       player: { name: 'Pete Alonso', number: 20 }
     }

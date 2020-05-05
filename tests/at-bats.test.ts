@@ -100,17 +100,17 @@ describe('At Bat Events', () => {
     scorekeeper.startGame()
 
     scorekeeper.strike()
-    scorekeeper.foulTip()
+    scorekeeper.foul()
 
     expect(getAtBat(0).strikes).toEqual(2)
     expect(getAtBat(0).pitchCount).toEqual(2)
 
-    scorekeeper.foulTip()
+    scorekeeper.foul()
 
     expect(getAtBat(0).strikes).toEqual(2)
     expect(getAtBat(0).pitchCount).toEqual(3)
 
-    scorekeeper.foulTip()
+    scorekeeper.foul()
 
     expect(getAtBat(0).strikes).toEqual(2)
     expect(getAtBat(0).pitchCount).toEqual(4)

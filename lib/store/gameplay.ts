@@ -45,7 +45,12 @@ function ensureCurrentAtBat(gameplay: Gameplay) {
   const { currentAtBat } = gameplay
   const { team, inning, lineupSpot } = currentAtBat
 
+  if (!gameplay[team][inning]) {
+    gameplay[team][inning] = []
+  }
+
   const currentInning = gameplay[team][inning]
+
   if (!currentInning[lineupSpot]) {
     currentInning[lineupSpot] = getEmptyAtBat()
   }
@@ -84,7 +89,7 @@ export const setCurrentAtBat = createAction<Partial<CurrentAtBat>>(
 )
 export const ball = createAction('ball')
 export const strike = createAction('strike')
-export const foulTip = createAction('foulTip')
+export const foul = createAction('foul')
 export const hit = createAction<Base>('hit')
 export const flyOut = createAction<number>('flyOut')
 export const putOut = createAction<number[]>('putOut')
@@ -167,7 +172,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     return state
   })
 
-  builder.addCase(foulTip, (state) => {
+  builder.addCase(foul, (state) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 

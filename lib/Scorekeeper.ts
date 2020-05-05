@@ -5,7 +5,7 @@ import {
   ball,
   strike,
   startGame,
-  foulTip,
+  foul,
   setCurrentAtBat,
   hit,
   flyOut,
@@ -38,13 +38,13 @@ export class Scorekeeper {
       home: homeLineup.map((l) => [
         {
           ...l,
-          inning: 1
+          inning: 0
         }
       ]),
       visiting: visitingLineup.map((l) => [
         {
           ...l,
-          inning: 1
+          inning: 0
         }
       ])
     })
@@ -90,6 +90,20 @@ export class Scorekeeper {
     this.store.dispatch(setCurrentAtBat(options))
   }
 
+  nextInning() {
+    const { gameplay } = this.store.getState()
+    const currentAtBat = gameplay.currentAtBat
+    this.setCurrentAtBat({ inning: currentAtBat ? currentAtBat.inning + 1 : 0 })
+  }
+
+  nextLineupSpot() {
+    const { gameplay } = this.store.getState()
+    const currentAtBat = gameplay.currentAtBat
+    const nextLineupSpot = currentAtBat ? (currentAtBat.lineupSpot + 1) % 9 : 0
+
+    this.setCurrentAtBat({ lineupSpot: nextLineupSpot })
+  }
+
   strike() {
     this.store.dispatch(strike())
   }
@@ -98,8 +112,8 @@ export class Scorekeeper {
     this.store.dispatch(ball())
   }
 
-  foulTip() {
-    this.store.dispatch(foulTip())
+  foul() {
+    this.store.dispatch(foul())
   }
 
   hit(base: Base) {
