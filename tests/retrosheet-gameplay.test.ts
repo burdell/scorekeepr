@@ -1,4 +1,5 @@
 import { handlePitchSequence } from '../lib/retrosheet/pitches'
+import { handleAtABat } from '../lib/retrosheet/atBats'
 
 function reset(mocks: { [m: string]: jest.Mock }) {
   Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())
@@ -38,5 +39,15 @@ describe('Retrosheet gameplay', () => {
     expect(strike).toHaveBeenCalledTimes(0)
     expect(ball).toHaveBeenCalledTimes(0)
     expect(foul).toHaveBeenCalledTimes(0)
+  })
+
+  it('records at bat events correctly', () => {
+    const hit = jest.fn()
+    const putout = jest.fn()
+    const flyout = jest.fn()
+
+    const game = { hit, putout, flyout }
+
+    handleAtABat('', game)
   })
 })

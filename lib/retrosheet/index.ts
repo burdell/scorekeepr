@@ -3,14 +3,13 @@ import { parseGames, GameplayEvent } from 'retrosheet-parse'
 import { Scorekeeper } from '../Scorekeeper'
 import { getStadium, getTeam, getLineup } from './translator'
 import { handlePitchSequence } from './pitches'
-import { handleResult } from './atBatResult'
 
 function handleGameplay(gameplayEvents: GameplayEvent[], game: Scorekeeper) {
   gameplayEvents.forEach((gameplayEvent) => {
     if (gameplayEvent.type === 'comment') return
 
     handlePitchSequence(gameplayEvent.pitchSequence, game)
-    if (game) handleResult(gameplayEvent.result, game)
+    // if (game) handleAtABat(gameplayEvent.result, game)
 
     game.nextLineupSpot()
   })

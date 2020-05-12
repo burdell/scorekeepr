@@ -1,6 +1,12 @@
 import { Scorekeeper } from '../Scorekeeper'
 
-export function handleResult(result: string, game: Scorekeeper) {
+type GameRecorder = {
+  hit: (base: number) => void
+  putout: (fielders: number[]) => void
+  flyout: (fielders: number) => void
+}
+
+export function handleAtABat(result: string, game: GameRecorder) {
   const [atBatResult] = result.split('/')
 
   if (atBatResult === 'HR') {

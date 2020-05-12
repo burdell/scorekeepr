@@ -5,7 +5,7 @@ type PitchRecorder = {
 }
 
 const strikes = ['C', 'K', 'L', 'O', 'Q', 'S', 'T', 'M']
-const balls = ['B', 'I', 'V']
+const balls = ['B', 'I', 'V', 'P']
 const fouls = ['F', 'R']
 
 export function handlePitch(pitch: string, game: PitchRecorder) {
