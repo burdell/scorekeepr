@@ -3,13 +3,14 @@ import { parseGames, GameplayEvent } from 'retrosheet-parse'
 import { Scorekeeper } from '../Scorekeeper'
 import { getStadium, getTeam, getLineup } from './translator'
 import { handlePitchSequence } from './pitches'
+import { handleAtABat } from './atBats'
 
 function handleGameplay(gameplayEvents: GameplayEvent[], game: Scorekeeper) {
   gameplayEvents.forEach((gameplayEvent) => {
     if (gameplayEvent.type === 'comment') return
 
     handlePitchSequence(gameplayEvent.pitchSequence, game)
-    // if (game) handleAtABat(gameplayEvent.result, game)
+    handleAtABat(gameplayEvent.result, game)
 
     game.nextLineupSpot()
   })
@@ -40,12 +41,17 @@ export async function getRetrosheetScorekeeper(
 
   scorebook.startGame()
 
+  scorebook.setCurrentAtBat({ team: 'visiting', inning: 0, lineupSpot: 0 })
   play.visiting.map((inning) => {
     handleGameplay(inning, scorebook)
     scorebook.nextInning()
   })
-  scorebook.setCurrentAtBat({ team: 'home' })
-  play.home.map((gameplay) => handleGameplay(gameplay, scorebook))
+
+  scorebook.setCurrentAtBat({ team: 'home', inning: 0, lineupSpot: 0 })
+  play.home.map((inning) => {
+    handleGameplay(inning, scorebook)
+    scorebook.nextInning()
+  })
 
   return scorebook
 }

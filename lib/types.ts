@@ -19,6 +19,7 @@ export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
 export type Base = 1 | 2 | 3 | 4
 export type PutOut = { type: 'putout'; result: number[]; display: string }
 export type FlyOut = { type: 'flyout'; result: number; display: string }
+export type LineOut = { type: 'lineout'; result: number; display: string }
 export type Hit = { type: 'hit'; result: Base; display: string }
 export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'HBP'
 export type PitcherResult = {
@@ -40,6 +41,7 @@ export type FieldersChoice = {
 export type AtBatResult =
   | PutOut
   | FlyOut
+  | LineOut
   | Hit
   | PitcherResult
   | DefensiveError

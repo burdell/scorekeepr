@@ -92,6 +92,7 @@ export const strike = createAction('strike')
 export const foul = createAction('foul')
 export const hit = createAction<Base>('hit')
 export const flyOut = createAction<number>('flyOut')
+export const lineout = createAction<number>('lineOut')
 export const putOut = createAction<number[]>('putOut')
 export const fieldersChoice = createAction<{
   putoutPositions: number[]
@@ -214,6 +215,22 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
       result: resultGenerators.flyOut(action.payload),
+      isOut: true
+    }
+
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(lineout, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: resultGenerators.lineOut(action.payload),
       isOut: true
     }
 

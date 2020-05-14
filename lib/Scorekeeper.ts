@@ -13,7 +13,8 @@ import {
   putOut,
   fieldersChoice,
   advanceRunner,
-  recordBasepathOut
+  recordBasepathOut,
+  lineout
 } from './store/gameplay'
 import * as generators from './resultGenerators'
 
@@ -126,6 +127,10 @@ export class Scorekeeper {
 
   putout(positions: number[]) {
     this.store.dispatch(putOut(positions))
+  }
+
+  lineout(position: number) {
+    this.store.dispatch(lineout(position))
   }
 
   defensiveError(options: { defensivePlayer: number; baseAdvancedTo: Base }) {

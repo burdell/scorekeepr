@@ -1,283 +1,12 @@
 {
-  "lineups": {
-    "home": [
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Kyle Schwarber"
-          },
-          "position": 7
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Kris Bryant"
-          },
-          "position": 9
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Anthony Rizzo"
-          },
-          "position": 3
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Javier Baez"
-          },
-          "position": 6
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Willson Contreras"
-          },
-          "position": 2
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "David Bote"
-          },
-          "position": 5
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Addison Russell"
-          },
-          "position": 4
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Adbert Alzolay"
-          },
-          "position": 1
-        },
-        {
-          "inning": 4,
-          "player": {
-            "name": "Mike Montgomery"
-          },
-          "position": 1
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Jason Heyward"
-          },
-          "position": 11
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Brad Brach"
-          },
-          "position": 1
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Albert Almora"
-          },
-          "position": 8
-        }
-      ]
-    ],
-    "visiting": [
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Ronald Acuna"
-          },
-          "position": 8
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Dansby Swanson"
-          },
-          "position": 6
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Freddie Freeman"
-          },
-          "position": 3
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Josh Donaldson"
-          },
-          "position": 5
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Nick Markakis"
-          },
-          "position": 9
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Austin Riley"
-          },
-          "position": 7
-        },
-        {
-          "inning": 9,
-          "player": {
-            "name": "Charlie Culberson"
-          },
-          "position": 7
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Brian McCann"
-          },
-          "position": 2
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Ozzie Albies"
-          },
-          "position": 4
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
-            "name": "Max Fried"
-          },
-          "position": 1
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Johan Camargo"
-          },
-          "position": 11
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Sean Newcomb"
-          },
-          "position": 1
-        },
-        {
-          "inning": 8,
-          "player": {
-            "name": "Anthony Swarzak"
-          },
-          "position": 1
-        },
-        {
-          "inning": 9,
-          "player": {
-            "name": "Luke Jackson"
-          },
-          "position": 1
-        }
-      ]
-    ]
-  },
-  "gameInfo": {
-    "homeTeam": "Chicago Cubs",
-    "visitingTeam": "Atlanta Braves",
-    "date": "2019/06/25",
-    "location": "Wrigley Field",
-    "startTime": "7:05PM"
-  },
   "gameplay": {
     "home": [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
       [
+        null,
         {
-          "balls": 4,
+          "balls": 0,
           "strikes": 3,
-          "pitchCount": 10,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 4,
-          "strikes": 3,
-          "pitchCount": 7,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 3,
-          "strikes": 3,
-          "pitchCount": 10,
+          "pitchCount": 4,
           "isOut": true,
           "result": {
             "type": "pitcher-result",
@@ -287,69 +16,21 @@
           "bases": []
         },
         {
-          "balls": 4,
-          "strikes": 3,
-          "pitchCount": 12,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "BB",
-            "display": "BB"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 3,
-          "strikes": 3,
-          "pitchCount": 9,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 1,
+          "isOut": false,
           "bases": []
-        },
+        }
+      ],
+      [
+        null,
+        null,
+        null,
         {
           "balls": 4,
-          "strikes": 3,
-          "pitchCount": 8,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 4,
-          "strikes": 3,
-          "pitchCount": 9,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 4,
-          "strikes": 2,
-          "pitchCount": 6,
+          "strikes": 1,
+          "pitchCount": 5,
           "isOut": false,
           "result": {
             "type": "pitcher-result",
@@ -364,9 +45,9 @@
         },
         {
           "balls": 4,
-          "strikes": 3,
-          "pitchCount": 9,
-          "isOut": true,
+          "strikes": 1,
+          "pitchCount": 5,
+          "isOut": false,
           "result": {
             "type": "pitcher-result",
             "result": "BB",
@@ -377,6 +58,318 @@
               "advanced": true
             }
           ]
+        },
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 4,
+          "strikes": 0,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 1,
+          "isOut": false,
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": false,
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "balls": 4,
+          "strikes": 0,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "bases": []
+        },
+        null,
+        {
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 4,
+          "strikes": 0,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 3,
+          "pitchCount": 3,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": false,
+          "bases": []
+        }
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 7,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 1,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        null,
+        {
+          "balls": 0,
+          "strikes": 3,
+          "pitchCount": 3,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 1,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": false,
+          "bases": []
+        },
+        null,
+        null,
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 3,
+          "strikes": 3,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
         }
       ]
     ],
@@ -756,7 +749,7 @@
     ],
     "currentAtBat": {
       "inning": 9,
-      "lineupSpot": 6,
+      "lineupSpot": 3,
       "team": "home"
     }
   }

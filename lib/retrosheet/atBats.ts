@@ -1,21 +1,37 @@
 import { Scorekeeper } from '../Scorekeeper'
 
-type GameRecorder = {
-  hit: (base: number) => void
-  putout: (fielders: number[]) => void
-  flyout: (fielders: number) => void
+const isNumber = (str: number) => !isNaN(str)
+
+function getOutType(
+  modifier: string
+): 'groundout' | 'lineout' | 'flyout' | undefined {
+  if (modifier.indexOf('/G') >= 0) return 'groundout'
+  if (modifier.indexOf('/L') >= 0) return 'lineout'
+  if (modifier.indexOf('/F') >= 0 || modifier.indexOf('/P') >= 0)
+    return 'flyout'
 }
 
-export function handleAtABat(result: string, game: GameRecorder) {
-  const [atBatResult] = result.split('/')
+function handleBatterAction(atBatResult: string, game: Scorekeeper) {
+  const [batterAction, ...modifiers] = atBatResult.split('/')
 
-  if (atBatResult === 'HR') {
+  if (batterAction === 'HR') {
     game.hit(4)
     return
   }
 
-  const resultNumber = Number(atBatResult)
-  if (resultNumber && atBatResult.length === 1) {
-    resultNumber < 7 ? game.putout([resultNumber]) : game.flyout(resultNumber)
+  const resultNumber = Number(batterAction)
+  if (isNumber(resultNumber)) {
+    const outType = getOutType(atBatResult)
+    if (outType === 'groundout') {
+      game.putout(batterAction.split('').map(Number))
+    } else if (outType === 'flyout') {
+      game.flyout(resultNumber)
+    } else if (outType === 'lineout') {
+      game.lineout(resultNumber)
+    }
   }
+}
+
+export function handleAtABat(result: string, game: Scorekeeper) {
+  handleBatterAction(result, game)
 }

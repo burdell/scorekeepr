@@ -2,6 +2,7 @@ import {
   PitcherResult,
   PutOut,
   FlyOut,
+  LineOut,
   PitcherResultString,
   Hit,
   DefensiveError,
@@ -32,6 +33,14 @@ export function flyOut(defensivePlayer: number): FlyOut {
     type: 'flyout',
     result: defensivePlayer,
     display: defensivePlayer < 7 ? `P${defensivePlayer}` : `F${defensivePlayer}`
+  }
+}
+
+export function lineOut(defensivePlayer: number): LineOut {
+  return {
+    type: 'lineout',
+    result: defensivePlayer,
+    display: `L${defensivePlayer}`
   }
 }
 

@@ -370,4 +370,27 @@ describe('At Bat Events', () => {
       })
     )
   })
+
+  it('records a lineout', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.lineout(6)
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        isOut: true,
+        result: {
+          type: 'lineout',
+          result: 6,
+          display: 'L6'
+        }
+      })
+    )
+  })
 })
