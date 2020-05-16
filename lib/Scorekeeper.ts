@@ -150,8 +150,8 @@ export class Scorekeeper {
     this.store.dispatch(defensiveError(options))
   }
 
-  fieldersChoice = (putoutPositions: number[], baseAdvancedTo: Base = 1) => {
-    this.store.dispatch(fieldersChoice({ putoutPositions, baseAdvancedTo }))
+  fieldersChoice = (baseAdvancedTo: Base = 1) => {
+    this.store.dispatch(fieldersChoice({ baseAdvancedTo }))
   }
 
   advanceRunner = (base: Base, result?: AdvanceBaseResult) => {

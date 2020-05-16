@@ -39,7 +39,7 @@ export type DefensiveError = {
 
 export type FieldersChoice = {
   type: 'fielders-choice'
-  result: PutOut // result here is the putout that occured elsewhere
+  result: Base
   display: 'FC'
 }
 export type AtBatResult =

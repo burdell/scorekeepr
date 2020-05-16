@@ -6,7 +6,8 @@ import {
   PitcherResultString,
   Hit,
   DefensiveError,
-  FieldersChoice
+  FieldersChoice,
+  Base
 } from './types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
@@ -60,10 +61,10 @@ export function error(position: number): DefensiveError {
   }
 }
 
-export function fieldersChoice(putout: PutOut): FieldersChoice {
+export function fieldersChoice(baseAdvancedTo: Base): FieldersChoice {
   return {
     type: 'fielders-choice',
-    result: putout,
+    result: baseAdvancedTo,
     display: 'FC'
   }
 }

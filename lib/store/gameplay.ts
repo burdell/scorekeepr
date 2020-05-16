@@ -95,7 +95,6 @@ export const flyOut = createAction<number>('flyOut')
 export const lineout = createAction<number>('lineOut')
 export const putOut = createAction<number[]>('putOut')
 export const fieldersChoice = createAction<{
-  putoutPositions: number[]
   baseAdvancedTo: Base
 }>('fieldersChoice')
 export const defensiveError = createAction<{
@@ -293,11 +292,10 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 
-    const putOut = resultGenerators.putout(action.payload.putoutPositions)
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: resultGenerators.fieldersChoice(putOut),
+      result: resultGenerators.fieldersChoice(action.payload.baseAdvancedTo),
       bases: advanceRunnerHelper({
         baseAdvancedTo: action.payload.baseAdvancedTo
       })

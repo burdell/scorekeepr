@@ -41,7 +41,7 @@ describe('Retrosheet gameplay', () => {
     expect(foul).toHaveBeenCalledTimes(0)
   })
 
-  it('records put outs correctly', () => {
+  it('records putouts correctly', () => {
     const putout = jest.fn()
     const sacrificeBunt = jest.fn()
 
@@ -96,13 +96,19 @@ describe('Retrosheet gameplay', () => {
     expect(sacrificeFly).toHaveBeenCalledWith(9)
   })
 
-  it('records hits correctly', () => {
+  it('records hits / fielders choices correctly', () => {
     const hit = jest.fn()
+    const fieldersChoice = jest.fn()
 
-    const game = { hit } as any
+    const game = { hit, fieldersChoice } as any
 
     handleAtABat('HR/78/F', game)
 
     expect(hit).toHaveBeenCalledWith(4)
+
+    reset(game)
+    handleAtABat('54(1)/FO/G5.3-H;B-1', game)
+
+    expect(fieldersChoice).toHaveBeenCalled()
   })
 })

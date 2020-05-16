@@ -1,48 +1,25 @@
 import { Scorekeeper } from '../Scorekeeper'
-import { main } from '../generate'
+import { handleOut } from './outs'
+
+type MultiActionAtBat = {
+  B: string
+  '1': string
+  '2': string
+  '3': string
+}
 
 const isNumber = (str: string) => !isNaN(Number(str))
+const getFieldersChoice = (batterAction: string) =>
+  batterAction.match(/(\d+)\(\d\)/)
+const getMultiOut = (batterAction: string): MultiActionAtBat | undefined => {
+  const matches = batterAction.matchAll(/(\d+)\(B|1|2|3\)/)
 
-function getOutType(
-  modifier: string
-): 'groundout' | 'lineout' | 'flyout' | 'sacrifice-fly' | undefined {
-  if (modifier.match(/\/(B*)G/)) return 'groundout'
-  if (modifier.indexOf('/L') >= 0) return 'lineout'
-  if (modifier.indexOf('/F') >= 0 || modifier.indexOf('/P') >= 0)
-    return 'flyout'
-  if (modifier.indexOf('/SF') >= 0) return 'sacrifice-fly'
-}
-
-function isSacrifice(atBatResult: string) {
-  return !!atBatResult.match(/\/S(F|H)/)
-}
-
-function handleOut(
-  batterAction: string,
-  atBatResult: string,
-  game: Scorekeeper
-) {
-  const outType = getOutType(atBatResult)
-  const atBatIsSacrifice = isSacrifice(atBatResult)
-  const defensivePositions = batterAction.split('').map(Number)
-  if (outType === 'groundout') {
-    const putoutFn = atBatIsSacrifice ? game.sacrificeBunt : game.putout
-    putoutFn(defensivePositions)
-  } else {
-    const defensivePosition = defensivePositions.pop()
-    if (!defensivePosition || defensivePositions.length > 0)
-      throw new Error(
-        'Attempted to record an out without a valid defensive player'
-      )
-
-    if (outType === 'flyout') {
-      const flyoutFn = atBatIsSacrifice ? game.sacrificeFly : game.flyout
-      flyoutFn(defensivePosition)
-    } else if (outType === 'lineout') {
-      game.lineout(defensivePosition)
-    } else if (outType === 'sacrifice-fly') {
-      game.sacrificeFly(defensivePosition)
-    }
+  console.log(matches)
+  return {
+    B: '',
+    '1': '',
+    '2': '',
+    '3': ''
   }
 }
 
@@ -57,6 +34,7 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
   const isSimpleOut = isNumber(batterAction)
   if (isSimpleOut) {
     handleOut(batterAction, atBatResult, game)
+    return
   }
 
   const multiActionOut = batterAction.match(/(\d+)\(B\)/)
@@ -65,7 +43,13 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
 
     if (isNumber(batterAction)) {
       handleOut(batterAction, atBatResult, game)
+      return
     }
+  }
+
+  const fieldersChoice = getFieldersChoice(batterAction)
+  if (fieldersChoice) {
+    game.fieldersChoice()
   }
 }
 

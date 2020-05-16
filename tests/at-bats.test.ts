@@ -298,14 +298,14 @@ describe('At Bat Events', () => {
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
-    scorekeeper.fieldersChoice([6, 4])
+    scorekeeper.fieldersChoice()
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
           type: 'fielders-choice',
-          result: { type: 'putout', result: [6, 4], display: '6-4' },
+          result: 1,
           display: 'FC'
         },
         bases: [{ advanced: true, result: undefined }]
