@@ -195,6 +195,22 @@ describe('At Bat Events', () => {
         }
       })
     )
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 2 })
+    scorekeeper.sacrificeFly(9)
+
+    expect(getAtBat(2)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        isOut: true,
+        result: {
+          type: 'flyout',
+          result: 9,
+          display: 'F9'
+        },
+        isSacrifice: true
+      })
+    )
   })
 
   it('records a put out', () => {
@@ -231,6 +247,22 @@ describe('At Bat Events', () => {
           result: [6, 4, 3],
           display: '6-4-3'
         }
+      })
+    )
+
+    scorekeeper.setCurrentAtBat({ lineupSpot: 2 })
+    scorekeeper.sacrificeBunt([1, 3])
+
+    expect(getAtBat(2)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        isOut: true,
+        result: {
+          type: 'putout',
+          result: [1, 3],
+          display: '1-3'
+        },
+        isSacrifice: true
       })
     )
   })

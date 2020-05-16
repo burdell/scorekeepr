@@ -14,7 +14,9 @@ import {
   fieldersChoice,
   advanceRunner,
   recordBasepathOut,
-  lineout
+  lineout,
+  sacrificeBunt,
+  sacrificeFly
 } from './store/gameplay'
 import * as generators from './resultGenerators'
 
@@ -67,37 +69,37 @@ export class Scorekeeper {
     return generators
   }
 
-  setLineups(lineups: LineupState) {
+  setLineups = (lineups: LineupState) => {
     this.store.dispatch(setLineups(lineups))
   }
 
-  substituteHomePlayer(lineupSpot: number, lineupEntry: LineupEntry) {
+  substituteHomePlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
     this.store.dispatch(subHome({ lineupSpot, lineupEntry }))
   }
 
-  substituteVisitingPlayer(lineupSpot: number, lineupEntry: LineupEntry) {
+  substituteVisitingPlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
     this.store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
   }
 
-  updateGameInfo(gameInfo: Partial<Game>) {
+  updateGameInfo = (gameInfo: Partial<Game>) => {
     this.store.dispatch(setGameInfo(gameInfo))
   }
 
-  startGame() {
+  startGame = () => {
     this.store.dispatch(startGame())
   }
 
-  setCurrentAtBat(options: Partial<CurrentAtBat>) {
+  setCurrentAtBat = (options: Partial<CurrentAtBat>) => {
     this.store.dispatch(setCurrentAtBat(options))
   }
 
-  nextInning() {
+  nextInning = () => {
     const { gameplay } = this.store.getState()
     const currentAtBat = gameplay.currentAtBat
     this.setCurrentAtBat({ inning: currentAtBat ? currentAtBat.inning + 1 : 0 })
   }
 
-  nextLineupSpot() {
+  nextLineupSpot = () => {
     const { gameplay } = this.store.getState()
     const currentAtBat = gameplay.currentAtBat
     const nextLineupSpot = currentAtBat ? (currentAtBat.lineupSpot + 1) % 9 : 0
@@ -105,47 +107,58 @@ export class Scorekeeper {
     this.setCurrentAtBat({ lineupSpot: nextLineupSpot })
   }
 
-  strike() {
+  strike = () => {
     this.store.dispatch(strike())
   }
 
-  ball() {
+  ball = () => {
     this.store.dispatch(ball())
   }
 
-  foul() {
+  foul = () => {
     this.store.dispatch(foul())
   }
 
-  hit(base: Base) {
+  hit = (base: Base) => {
     this.store.dispatch(hit(base))
   }
 
-  flyout(position: number) {
+  flyout = (position: number) => {
     this.store.dispatch(flyOut(position))
   }
 
-  putout(positions: number[]) {
+  sacrificeFly = (position: number) => {
+    this.store.dispatch(sacrificeFly(position))
+  }
+
+  sacrificeBunt = (defensivePositions: number[]) => {
+    this.store.dispatch(sacrificeBunt(defensivePositions))
+  }
+
+  putout = (positions: number[]) => {
     this.store.dispatch(putOut(positions))
   }
 
-  lineout(position: number) {
+  lineout = (position: number) => {
     this.store.dispatch(lineout(position))
   }
 
-  defensiveError(options: { defensivePlayer: number; baseAdvancedTo: Base }) {
+  defensiveError = (options: {
+    defensivePlayer: number
+    baseAdvancedTo: Base
+  }) => {
     this.store.dispatch(defensiveError(options))
   }
 
-  fieldersChoice(putoutPositions: number[], baseAdvancedTo: Base = 1) {
+  fieldersChoice = (putoutPositions: number[], baseAdvancedTo: Base = 1) => {
     this.store.dispatch(fieldersChoice({ putoutPositions, baseAdvancedTo }))
   }
 
-  advanceRunner(base: Base, result?: AdvanceBaseResult) {
+  advanceRunner = (base: Base, result?: AdvanceBaseResult) => {
     this.store.dispatch(advanceRunner({ base, result }))
   }
 
-  basepathOut(baseAttempted: Base, result: OutBaseResult) {
+  basepathOut = (baseAttempted: Base, result: OutBaseResult) => {
     this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
   }
 }

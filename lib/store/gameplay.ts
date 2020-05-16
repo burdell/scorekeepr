@@ -111,9 +111,25 @@ export const recordBasepathOut = createAction<{
   result: OutBaseResult
 }>('recordBasepathOut')
 
+const setAsSacrifice = createAction<boolean>('setAsSacrifice')
+
 export function startGame() {
   return (dispatch: Dispatch) => {
     dispatch(setCurrentAtBat(getDefaultAtBat()))
+  }
+}
+
+export function sacrificeBunt(defensivePositions: number[]) {
+  return (dispatch: Dispatch) => {
+    dispatch(putOut(defensivePositions))
+    dispatch(setAsSacrifice(true))
+  }
+}
+
+export function sacrificeFly(defensivePositions: number) {
+  return (dispatch: Dispatch) => {
+    dispatch(flyOut(defensivePositions))
+    dispatch(setAsSacrifice(true))
   }
 }
 
@@ -322,5 +338,22 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     state[team][inning][lineupSpot] = newFrame
+  })
+
+  builder.addCase(setAsSacrifice, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const resultType = currentFrame.result && currentFrame.result.type
+    if (resultType !== 'flyout' && resultType !== 'putout') {
+      throw new Error(
+        'Attempted to set an result as a sacrifice that cannot be a sacrifice'
+      )
+    }
+
+    state[team][inning][lineupSpot] = {
+      ...currentFrame,
+      isSacrifice: action.payload
+    }
   })
 })
