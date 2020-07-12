@@ -66,6 +66,11 @@ describe('Retrosheet gameplay', () => {
     handleAtABat('54(B)/BG25/SH.1-2', game)
 
     expect(sacrificeBunt).toHaveBeenCalledWith([5, 4])
+
+    reset(game)
+    handleAtABat('64(1)3/GDP/G6', game)
+
+    expect(putout).toHaveBeenCalledWith([3])
   })
 
   it('records flyouts and lineouts correclty', () => {

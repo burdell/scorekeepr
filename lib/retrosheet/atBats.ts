@@ -11,16 +11,39 @@ type MultiActionAtBat = {
 const isNumber = (str: string) => !isNaN(Number(str))
 const getFieldersChoice = (batterAction: string) =>
   batterAction.match(/(\d+)\(\d\)/)
-const getMultiOut = (batterAction: string): MultiActionAtBat | undefined => {
-  const matches = batterAction.matchAll(/(\d+)\(B|1|2|3\)/)
-
-  console.log(matches)
-  return {
-    B: '',
+const getMultiOut = (batterAction: string) => {
+  const putouts = {
+    batter: '',
     '1': '',
     '2': '',
     '3': ''
   }
+
+  const baseActions = batterAction.matchAll(/(\d+)\(([B|1|2|3])\)/g)
+  const batterResult = batterAction.match(/(\d+)(\(B\))?$/)
+
+  if (batterResult) {
+    putouts.batter = batterResult[1]
+  }
+
+  for (const putout of baseActions) {
+    const [_, action, base] = putout
+    switch (base) {
+      case '1': {
+        putouts['1'] = action
+        break
+      }
+      case '2': {
+        putouts['2'] = action
+        break
+      }
+      case '3': {
+        putouts['3'] = action
+      }
+    }
+  }
+
+  return putouts
 }
 
 function handleBatterAction(atBatResult: string, game: Scorekeeper) {
@@ -37,14 +60,11 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
     return
   }
 
-  const multiActionOut = batterAction.match(/(\d+)\(B\)/)
-  if (multiActionOut) {
-    const [_, batterAction] = multiActionOut
+  const { batter } = getMultiOut(batterAction)
 
-    if (isNumber(batterAction)) {
-      handleOut(batterAction, atBatResult, game)
-      return
-    }
+  if (batter && isNumber(batter)) {
+    handleOut(batter, atBatResult, game)
+    return
   }
 
   const fieldersChoice = getFieldersChoice(batterAction)
