@@ -14,6 +14,50 @@ function isSacrifice(atBatResult: string) {
   return !!atBatResult.match(/\/S(F|H)/)
 }
 
+export const getMultiActionOut = (batterAction: string) => {
+  const baseActions = batterAction.matchAll(/(\d+)\(([B|1|2|3])\)/g)
+  const batterMatch = batterAction.match(/(\d+)(\(B\))?$/)
+
+  let batterResult = batterMatch ? batterMatch[1] : ''
+  let firstBaseResult = ''
+  let secondBaseResult = ''
+  let thirdBaseResult = ''
+
+  for (const putout of baseActions) {
+    const [_, action, base] = putout
+    switch (base) {
+      case 'B': {
+        batterResult = action
+        break
+      }
+      case '1': {
+        firstBaseResult = action
+        break
+      }
+      case '2': {
+        secondBaseResult = action
+        break
+      }
+      case '3': {
+        thirdBaseResult = action
+      }
+    }
+  }
+
+  return {
+    batter: batterMatch
+      ? `${thirdBaseResult}${secondBaseResult}${firstBaseResult}${batterResult}`
+      : batterResult,
+    '1': firstBaseResult
+      ? `${thirdBaseResult}${secondBaseResult}${firstBaseResult}`
+      : '',
+    '2': secondBaseResult ? `${thirdBaseResult}${secondBaseResult}` : '',
+    '3': thirdBaseResult ? `${thirdBaseResult}` : ''
+  }
+}
+
+export function handleMultiActionOut() {}
+
 export function handleOut(
   batterAction: string,
   atBatResult: string,
