@@ -6,7 +6,7 @@ function reset(mocks: { [m: string]: jest.Mock }) {
 }
 
 describe('Retrosheet gameplay', () => {
-  it('records pitches correctly', async () => {
+  it('records pitches', async () => {
     const strike = jest.fn()
     const ball = jest.fn()
     const foul = jest.fn()
@@ -41,7 +41,7 @@ describe('Retrosheet gameplay', () => {
     expect(foul).toHaveBeenCalledTimes(0)
   })
 
-  it('records putouts correctly', () => {
+  it('records putouts', () => {
     const putout = jest.fn()
     const sacrificeBunt = jest.fn()
 
@@ -70,10 +70,15 @@ describe('Retrosheet gameplay', () => {
     reset(game)
     handleAtABat('64(1)3/GDP/G6', game)
 
-    expect(putout).toHaveBeenCalledWith([3])
+    expect(putout).toHaveBeenCalledWith([6, 4, 3])
+
+    reset(game)
+    handleAtABat('4(1)3/G4/GDP', game)
+
+    expect(putout).toHaveBeenCalledWith([4, 3])
   })
 
-  it('records flyouts and lineouts correclty', () => {
+  it('records flyouts and lineouts', () => {
     const flyout = jest.fn()
     const lineout = jest.fn()
     const sacrificeFly = jest.fn()
@@ -99,9 +104,24 @@ describe('Retrosheet gameplay', () => {
     handleAtABat('9/SF.3-H', game)
 
     expect(sacrificeFly).toHaveBeenCalledWith(9)
+
+    reset(game)
+    handleAtABat('8(B)84(2)/LDP/L8', game)
+
+    expect(lineout).toHaveBeenCalledWith(8)
+
+    reset(game)
+    handleAtABat('3(B)3(1)/LDP', game)
+
+    expect(lineout).toHaveBeenCalledWith(3)
+
+    reset(game)
+    handleAtABat('1(B)16(2)63(1)/LTP/L1', game)
+
+    expect(lineout).toHaveBeenCalledWith(1)
   })
 
-  it('records hits / fielders choices correctly', () => {
+  it('records hits / fielders choices', () => {
     const hit = jest.fn()
     const fieldersChoice = jest.fn()
 
