@@ -132,8 +132,95 @@ describe('Retrosheet gameplay', () => {
     expect(hit).toHaveBeenCalledWith(4)
 
     reset(game)
+    handleAtABat('H/L7D', game)
+
+    expect(hit).toHaveBeenCalledWith(4)
+
+    reset(game)
+    handleAtABat('HR9/F9LS.3-H;1-H', game)
+
+    expect(hit).toHaveBeenCalledWith(4)
+
+    reset(game)
     handleAtABat('54(1)/FO/G5.3-H;B-1', game)
 
     expect(fieldersChoice).toHaveBeenCalled()
+
+    reset(game)
+    handleAtABat('FC5/G5.3XH(52)', game)
+
+    expect(fieldersChoice).toHaveBeenCalled()
+
+    reset(game)
+    handleAtABat('S7', game)
+
+    expect(hit).toHaveBeenCalledWith(1)
+
+    reset(game)
+    handleAtABat('D7/G5.3-H;2-H;1-H', game)
+
+    expect(hit).toHaveBeenCalledWith(2)
+
+    reset(game)
+    handleAtABat('T9/F9LD.2-H', game)
+
+    expect(hit).toHaveBeenCalledWith(3)
+
+    reset(game)
+    handleAtABat('DGR/L9LS.2-H', game)
+
+    expect(hit).toHaveBeenCalledWith(2)
+  })
+
+  it('records errors', () => {
+    const defensiveError = jest.fn()
+
+    const game = { defensiveError } as any
+
+    handleAtABat('C/E2.1-2', game)
+
+    expect(defensiveError).toHaveBeenCalledWith({
+      defensivePlayer: 2,
+      baseAdvancedTo: 1
+    })
+
+    reset(game)
+    handleAtABat('C/E1.1-2', game)
+
+    expect(defensiveError).toHaveBeenCalledWith({
+      defensivePlayer: 1,
+      baseAdvancedTo: 1
+    })
+
+    reset(game)
+    handleAtABat('E3.1-2;B-1', game)
+
+    expect(defensiveError).toHaveBeenCalledWith({
+      defensivePlayer: 3,
+      baseAdvancedTo: 1
+    })
+
+    reset(game)
+    handleAtABat('E1/TH/BG15.1-3', game)
+
+    expect(defensiveError).toHaveBeenCalledWith({
+      defensivePlayer: 1,
+      baseAdvancedTo: 1
+    })
+  })
+
+  it('records other random things', () => {
+    const hitBatter = jest.fn()
+    const intentionalWalk = jest.fn()
+    const game = { hitBatter, intentionalWalk } as any
+
+    handleAtABat('HP.1-2', game)
+
+    expect(hitBatter).toHaveBeenCalled()
+
+    reset(game)
+    handleAtABat('IW', game)
+
+    expect(intentionalWalk).toHaveBeenCalled()
   })
 })

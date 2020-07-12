@@ -123,6 +123,10 @@ export class Scorekeeper {
     this.store.dispatch(hit(base))
   }
 
+  hitBatter = () => {}
+
+  intentionalWalk = () => {}
+
   flyout = (position: number) => {
     this.store.dispatch(flyOut(position))
   }
