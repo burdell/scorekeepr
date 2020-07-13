@@ -10,8 +10,8 @@ export async function main() {
 
   writeToFile(
     {
-      // lineups: scorekeeper.lineups,
-      // gameInfo: scorekeeper.gameInfo,
+      lineups: scorekeeper.lineups,
+      gameInfo: scorekeeper.gameInfo,
       gameplay: scorekeeper.gameplay
     },
     './'

@@ -69,11 +69,11 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
     return
   }
 
-  const { batter } = getMultiActionOut(batterAction)
+  const { batter, ...bases } = getMultiActionOut(batterAction)
   if (batter) {
     handleOut(batter, atBatResult, game)
     return
-  } else {
+  } else if (bases['1'] || bases['2'] || bases['3']) {
     game.fieldersChoice()
     return
   }
