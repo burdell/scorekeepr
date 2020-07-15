@@ -5,7 +5,7 @@ const isNumber = (str: string) => !isNaN(Number(str))
 const getFieldersChoice = (batterAction: string) => {
   return batterAction.match(/^FC\d+/)
 }
-const isError = (atBatResult: string) => atBatResult.match(/C?\/?E(\d)/)
+const isError = (atBatResult: string) => atBatResult.match(/^C?\/?E(\d)/)
 const isHomerun = (atBatResult: string) => atBatResult.match(/^HR?\d?/)
 const isHitBatter = (atBatResult: string) => atBatResult.match(/^HP/)
 const isIntentionalWalk = (atBatResult: string) => atBatResult.match(/^IW?/)
@@ -77,8 +77,11 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
     game.fieldersChoice()
     return
   }
+
+  return 'no-batter-action'
 }
 
-export function handleAtABat(result: string, game: Scorekeeper) {
-  handleBatterAction(result, game)
+export function handleAtABat(result: string, game: Scorekeeper): boolean {
+  const noBatterAction = handleBatterAction(result, game)
+  return noBatterAction ? false : true
 }

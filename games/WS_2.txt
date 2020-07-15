@@ -1,0 +1,164 @@
+id,ATL199510220
+version,1
+info,visteam,CLE
+info,hometeam,ATL
+info,date,1995/10/22
+info,site,ATL01
+info,number,0
+info,starttime,7:29
+info,daynight,night
+info,usedh,false
+info,umphome,mckej901
+info,ump1b,froeb901
+info,ump2b,hirsj901
+info,ump3b,pullf901
+info,umplf,brinj901
+info,umprf,wendh901
+info,scorer,"Percival"
+info,inputter,"Percival"
+info,howscored,tv
+info,pitches,pitches
+info,temp,65
+info,winddir,unknown
+info,windspeed,-1
+info,fieldcond,dry
+info,precip,none
+info,sky,night
+info,timeofgame,197
+info,attendance,51877
+info,wp,glavt001
+info,lp,martd001
+info,save,wohlm001
+start,loftk001,"Kenny Lofton",0,1,8
+start,vizqo001,"Omar Vizquel",0,2,6
+start,baerc001,"Carlos Baerga",0,3,4
+start,bellj002,"Albert Belle",0,4,7
+start,murre001,"Eddie Murray",0,5,3
+start,ramim002,"Manny Ramirez",0,6,9
+start,thomj002,"Jim Thome",0,7,5
+start,penat001,"Tony Pena",0,8,2
+start,martd001,"Dennis Martinez",0,9,1
+start,grism001,"Marquis Grissom",1,1,8
+start,lemkm001,"Mark Lemke",1,2,4
+start,jonec004,"Chipper Jones",1,3,5
+start,mcgrf001,"Fred McGriff",1,4,3
+start,justd001,"Dave Justice",1,5,9
+start,klesr001,"Ryan Klesko",1,6,7
+start,lopej001,"Javier Lopez",1,7,2
+start,bellr001,"Rafael Belliard",1,8,6
+start,glavt001,"Tom Glavine",1,9,1
+play,1,0,loftk001,21,BBCX,63/G6M-
+play,1,0,vizqo001,12,BCFX,53/G5S
+play,1,0,baerc001,21,BBFX,63/G6
+play,1,1,grism001,01,FX,9/F9LS
+play,1,1,lemkm001,30,BBBB,W
+play,1,1,jonec004,01,C1X,D9/L9DW+.1-3
+play,1,1,mcgrf001,10,BX,13/G13S
+play,1,1,justd001,32,CBCFFBBB,W
+play,1,1,klesr001,22,SB*SBFFX,5/P5S+
+play,2,0,bellj002,21,BFBX,S9/L34
+play,2,0,murre001,00,X,HR/F7LD.1-H
+play,2,0,ramim002,32,BCBBSX,53/G5
+play,2,0,thomj002,22,BCFBX,43/G4
+play,2,0,penat001,02,CSX,8/F8LD
+play,2,1,lopej001,00,X,53/G5L
+play,2,1,bellr001,00,X,9/F9LS!
+play,2,1,glavt001,12,CBSC,K
+play,3,0,martd001,22,BBSSX,3/L3L
+play,3,0,loftk001,10,BX,4/L4
+play,3,0,vizqo001,22,BCFFBX,5/F7LSF
+play,3,1,grism001,22,BSFFBH,HP
+play,3,1,lemkm001,01,1FX,S8/L8RS-.1-2
+play,3,1,jonec004,20,BB2,PO2(E1).2-3
+play,3,1,jonec004,20,BB2.X,7/SF/L7D.3-H
+play,3,1,mcgrf001,00,X,143/G13.1-2
+play,3,1,justd001,20,BBX,S9/L89S.2-H
+play,3,1,klesr001,32,FBSFB1B>S,K
+play,4,0,baerc001,20,BBX,7/F7LD
+play,4,0,bellj002,32,BSFBBS,K
+play,4,0,murre001,31,BBBCB,W
+play,4,0,ramim002,10,BX,S7/L56D.1-2
+play,4,0,thomj002,12,BFFC,K
+play,4,1,lopej001,11,FBX,7/F78XD
+play,4,1,bellr001,01,SX,13/G13
+play,4,1,glavt001,32,SCBBBB,W
+play,4,1,grism001,10,BX,FC6/G6.1X2(64)
+play,5,0,penat001,00,X,9/L89XD
+play,5,0,martd001,00,X,9/F9S
+play,5,0,loftk001,12,CBCX,E5/G5S+.B-1
+play,5,0,vizqo001,21,B1BFB,SB2
+play,5,0,vizqo001,31,B1BFB.B,W+WP.2-3
+play,5,0,baerc001,32,CBBFB>X,9/L89M
+play,5,1,lemkm001,00,X,43/G4M
+play,5,1,jonec004,22,FBSBX,S7/L7LM
+play,5,1,mcgrf001,30,BBBX,46(1)3/GDP/G4
+play,6,0,bellj002,31,BBBCB,W
+play,6,0,murre001,21,SB1BX,8/F8LM
+play,6,0,ramim002,32,BBS1BS1FS,K
+play,6,0,thomj002,01,FX,FC6/G6M.1X2(6)
+play,6,1,justd001,32,BBCCBX,S7/L7LD.B-2(E7)
+play,6,1,klesr001,00,X,43/G34-.2-3
+play,6,1,lopej001,12,CF*BFX,HR/L8LXD.3-H
+play,6,1,bellr001,22,BCBFL,K
+play,6,1,glavt001,00,,NP
+sub,smitd003,"Dwight Smith",1,9,11
+play,6,1,smitd003,10,.BX,S8/L6M+
+play,6,1,grism001,11,C1*B>X,S9/G34.1-3
+play,6,1,lemkm001,00,,NP
+sub,embra001,"Alan Embree",0,9,1
+play,6,1,lemkm001,20,.BBX,8/F78S+
+play,7,0,penat001,00,,NP
+sub,mcmig001,"Greg McMichael",1,9,1
+play,7,0,penat001,00,.,NP
+sub,devem001,"Mike Devereaux",1,6,7
+play,7,0,penat001,21,..CBBX,43/G6MS-!
+play,7,0,embra001,00,,NP
+sub,kirbw001,"Wayne Kirby",0,9,11
+play,7,0,kirbw001,22,.CBBLS,K
+play,7,0,loftk001,00,X,S9/G34
+play,7,0,vizqo001,10,11BB,SB2
+play,7,0,vizqo001,21,11BB.CX,E7/L7M.2-H(NR)(UR);B-2
+play,7,0,baerc001,31,BBBCB,W+WP.2-3
+play,7,0,bellj002,00,,NP
+sub,penaa001,"Alejandro Pena",1,9,1
+play,7,0,bellj002,02,.CFX,2/P2RF
+play,7,1,jonec004,00,,NP
+sub,poolj001,"Jim Poole",0,9,1
+play,7,1,jonec004,22,.BSCBX,63/G6
+play,7,1,mcgrf001,02,SCX,6/P6S+
+play,7,1,justd001,32,BBFBCX,9/F9D-
+play,8,0,murre001,21,FBBX,8/F8LD
+play,8,0,ramim002,11,CBX,S8/P6MD
+play,8,0,thomj002,32,C1B11BFB+1,PO1(23)
+play,8,0,thomj002,32,C1B11BFB+1.B,W
+play,8,0,penat001,00,,NP
+sub,sorrp001,"Paul Sorrento",0,8,11
+play,8,0,sorrp001,00,.,NP
+sub,wohlm001,"Mark Wohlers",1,5,1
+play,8,0,sorrp001,00,..,NP
+sub,polol001,"Luis Polonia",1,9,7
+play,8,0,sorrp001,00,...,NP
+sub,devem001,"Mike Devereaux",1,6,9
+play,8,0,sorrp001,01,....CX,8/F8RXD
+play,8,1,devem001,00,,NP
+sub,aloms001,"Sandy Alomar Jr.",0,8,2
+play,8,1,devem001,00,.,NP
+sub,tavaj001,"Julian Tavarez",0,9,1
+play,8,1,devem001,11,..CBX,9/F9S
+play,8,1,lopej001,00,H,HP
+play,8,1,bellr001,01,SX,64(1)3/GDP/G6
+play,9,0,tavaj001,00,,NP
+sub,amarr002,"Ruben Amaro",0,9,11
+play,9,0,amarr002,22,.BBCFS,K
+play,9,0,loftk001,00,X,53/G56S-
+play,9,0,vizqo001,01,CX,S18/G6M
+play,9,0,baerc001,11,B1FB,SB2
+play,9,0,baerc001,32,B1FB.BFFX,5/P56
+data,er,martd001,4
+data,er,embra001,0
+data,er,poolj001,0
+data,er,tavaj001,0
+data,er,glavt001,2
+data,er,mcmig001,0
+data,er,penaa001,0
+data,er,wohlm001,0

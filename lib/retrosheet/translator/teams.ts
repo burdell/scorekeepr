@@ -13,6 +13,10 @@ const teams: TeamMap = {
   ATL: {
     abbreviation: 'ATL',
     fullName: 'Atlanta Braves'
+  },
+  CLE: {
+    abbreviation: 'CLE',
+    fullName: 'Cleveland Indians'
   }
 }
 

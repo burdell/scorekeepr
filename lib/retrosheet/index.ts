@@ -4,15 +4,42 @@ import { Scorekeeper } from '../Scorekeeper'
 import { getStadium, getTeam, getLineup } from './translator'
 import { handlePitchSequence } from './pitches'
 import { handleAtABat } from './atBats'
+import { stringify } from 'querystring'
+
+const isBalk = (str: string) => str.match(/^BK/)
+const isCaughtStealing = (str: string) => str.match(/^CS/)
+const isDefensiveIndifference = (str: string) => str.match(/^DI/)
+const isBaseAdvancement = (str: string) => str.match(/^OA/)
+const isPassedBall = (str: string) => str.match(/^PB/)
+const isWildPitch = (str: string) => str.match(/^WP/)
+const isPickOff = (str: string) => str.match(/^PO/)
+const isPickOffOffBase = (str: string) => str.match(/^POCSH/)
+const isStolenBase = (str: string) => str.match(/^SB/)
+
+function isBatterResult(action: string) {
+  return !(
+    action === 'NP' ||
+    isBalk(action) ||
+    isCaughtStealing(action) ||
+    isDefensiveIndifference(action) ||
+    isBaseAdvancement(action) ||
+    isPassedBall(action) ||
+    isWildPitch(action) ||
+    isPickOff(action) ||
+    isPickOffOffBase(action) ||
+    isStolenBase(action)
+  )
+}
 
 function handleGameplay(gameplayEvents: GameplayEvent[], game: Scorekeeper) {
   gameplayEvents.forEach((gameplayEvent) => {
     if (gameplayEvent.type === 'comment') return
 
-    handlePitchSequence(gameplayEvent.pitchSequence, game)
-    handleAtABat(gameplayEvent.result, game)
-
-    game.nextLineupSpot()
+    if (isBatterResult(gameplayEvent.result)) {
+      handlePitchSequence(gameplayEvent.pitchSequence, game)
+      handleAtABat(gameplayEvent.result, game)
+      game.nextLineupSpot()
+    }
   })
 }
 
