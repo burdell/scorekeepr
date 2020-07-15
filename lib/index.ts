@@ -1,2 +1,2 @@
 export { Scorekeeper } from './Scorekeeper'
-export { getRetrosheetScorekeeper } from './retrosheet'
+export { getRetrosheetScorekeepers } from './retrosheet'

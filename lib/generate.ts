@@ -3,23 +3,30 @@ import { resolve, join } from 'path'
 
 import { readFiles } from '../server/readFolderFiles'
 
-import { getRetrosheetScorekeeper } from './index'
+import { getRetrosheetScorekeepers } from './index'
+
+async function processRetrosheetFile(pathToFile: string) {
+  const scorekeepers = await getRetrosheetScorekeepers(
+    join(__dirname, pathToFile)
+  )
+  return scorekeepers
+}
 
 export async function main() {
-  const scorekeeper = await getRetrosheetScorekeeper(
-    join(__dirname, '../games/WS_6.txt')
-  )
+  const scorekeepers = await processRetrosheetFile('../games/1995_WS.txt')
   const currentGames = (await readFiles()) as any
 
-  writeToFile(
-    {
-      lineups: scorekeeper.lineups,
-      gameInfo: scorekeeper.gameInfo,
-      gameplay: scorekeeper.gameplay
-    },
-    './server/games',
-    `${currentGames.length + 1}.json`
-  )
+  scorekeepers.forEach((scorekeeper, index) => {
+    writeToFile(
+      {
+        lineups: scorekeeper.lineups,
+        gameInfo: scorekeeper.gameInfo,
+        gameplay: scorekeeper.gameplay
+      },
+      './server/games',
+      `${currentGames.length + (index + 1)}.json`
+    )
+  })
 }
 
 export function writeToFile(

@@ -1,10 +1,9 @@
-import { parseGames, GameplayEvent } from 'retrosheet-parse'
+import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
 import { Scorekeeper } from '../Scorekeeper'
 import { getStadium, getTeam, getLineup } from './translator'
 import { handlePitchSequence } from './pitches'
 import { handleAtABat } from './atBats'
-import { stringify } from 'querystring'
 
 const isBalk = (str: string) => str.match(/^BK/)
 const isCaughtStealing = (str: string) => str.match(/^CS/)
@@ -43,15 +42,7 @@ function handleGameplay(gameplayEvents: GameplayEvent[], game: Scorekeeper) {
   })
 }
 
-export async function getRetrosheetScorekeeper(
-  gamefile: string,
-  gameIndex = 0
-) {
-  const gameList = await parseGames(gamefile)
-  const game = gameList[gameIndex]
-
-  if (!game) throw new Error('I could not find the game in the file!')
-
+function getScorebook(game: Game) {
   const { info, lineup, play } = game
   const scorebook = new Scorekeeper({
     date: info.date,
@@ -81,6 +72,11 @@ export async function getRetrosheetScorekeeper(
   })
 
   return scorebook
+}
+
+export async function getRetrosheetScorekeepers(gamefile: string) {
+  const gameList = await parseGames(gamefile)
+  return gameList.map(getScorebook)
 }
 
 export { Scorekeeper }
