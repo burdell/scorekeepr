@@ -50,41 +50,48 @@
         {
           "inning": 1,
           "player": {
-            "name": "Jim Thome"
+            "name": "Manny Ramirez"
           },
-          "position": 5
+          "position": 9
         }
       ],
       [
         {
           "inning": 1,
-          "player": {
-            "name": "Manny Ramirez"
-          },
-          "position": 9
-        },
-        {
-          "inning": 6,
           "player": {
             "name": "Herb Perry"
           },
           "position": 3
+        },
+        {
+          "inning": 9,
+          "player": {
+            "name": "Paul Sorrento"
+          },
+          "position": 11
         }
       ],
       [
         {
           "inning": 1,
           "player": {
-            "name": "Paul Sorrento"
+            "name": "Alvaro Espinoza"
           },
-          "position": 3
+          "position": 5
         },
         {
-          "inning": 6,
+          "inning": 7,
           "player": {
-            "name": "Wayne Kirby"
+            "name": "Jim Thome"
           },
-          "position": 9
+          "position": 11
+        },
+        {
+          "inning": 7,
+          "player": {
+            "name": "Jim Thome"
+          },
+          "position": 5
         }
       ],
       [
@@ -112,6 +119,13 @@
           "inning": 1,
           "player": {
             "name": "Luis Polonia"
+          },
+          "position": 7
+        },
+        {
+          "inning": 7,
+          "player": {
+            "name": "Mike Devereaux"
           },
           "position": 7
         }
@@ -150,6 +164,22 @@
             "name": "Ryan Klesko"
           },
           "position": 10
+        },
+        {
+          "inning": 9,
+          "player": {
+            "name": "Mike Mordecai"
+          },
+          "position": 11
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Javier Lopez"
+          },
+          "position": 2
         }
       ],
       [
@@ -165,44 +195,7 @@
         {
           "inning": 1,
           "player": {
-            "name": "Charlie OBrien"
-          },
-          "position": 2
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Javier Lopez"
-          },
-          "position": 11
-        },
-        {
-          "inning": 7,
-          "player": {
-            "name": "Javier Lopez"
-          },
-          "position": 2
-        }
-      ],
-      [
-        {
-          "inning": 1,
-          "player": {
             "name": "Rafael Belliard"
-          },
-          "position": 6
-        },
-        {
-          "inning": 5,
-          "player": {
-            "name": "Dwight Smith"
-          },
-          "position": 11
-        },
-        {
-          "inning": 5,
-          "player": {
-            "name": "Mike Mordecai"
           },
           "position": 6
         }
@@ -212,29 +205,223 @@
   "gameInfo": {
     "homeTeam": "Cleveland Indians",
     "visitingTeam": "Atlanta Braves",
-    "date": "1995/10/26",
+    "date": "1995/10/25",
     "location": "Jacobs Field",
-    "startTime": "8:21"
+    "startTime": "8:23"
   },
   "gameplay": {
     "home": [
       [
         {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 9,
+            "display": "L9"
+          },
+          "bases": []
+        },
+        {
           "balls": 2,
+          "strikes": 1,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 4,
+            "display": "L4"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 4,
+          "strikes": 2,
+          "pitchCount": 6,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "fielders-choice",
+            "result": 1,
+            "display": "FC"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              6,
+              3
+            ],
+            "display": "6-3"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 3,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 7,
+            "display": "L7"
+          },
+          "bases": []
+        },
+        {
+          "balls": 0,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "fielders-choice",
+            "result": 1,
+            "display": "FC"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 2,
+          "strikes": 1,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              5,
+              3
+            ],
+            "display": "5-3"
+          },
+          "bases": []
+        },
+        {
+          "balls": 3,
           "strikes": 2,
           "pitchCount": 6,
           "isOut": true,
           "result": {
-            "type": "flyout",
+            "type": "lineout",
             "result": 9,
-            "display": "F9"
+            "display": "L9"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
           },
           "bases": []
         },
         {
           "balls": 4,
-          "strikes": 1,
-          "pitchCount": 5,
+          "strikes": 0,
+          "pitchCount": 4,
           "isOut": false,
           "result": {
             "type": "pitcher-result",
@@ -249,23 +436,120 @@
         },
         {
           "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
+          "strikes": 0,
+          "pitchCount": 1,
           "isOut": true,
           "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
+            "type": "flyout",
+            "result": 8,
+            "display": "F8"
           },
           "bases": []
         },
         {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
+          "balls": 3,
+          "strikes": 2,
+          "pitchCount": 9,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 7,
+            "display": "F7"
+          },
+          "bases": []
+        },
+        null,
+        null
+      ],
+      [
+        {
+          "balls": 3,
+          "strikes": 1,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              6,
+              3
+            ],
+            "display": "6-3"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "defensive-error",
+            "result": 4,
+            "display": "E4"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 9,
+            "display": "F9"
+          },
+          "bases": []
+        }
+      ],
+      [
+        null,
+        {
+          "balls": 4,
+          "strikes": 2,
+          "pitchCount": 6,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 1,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              5,
+              4,
+              3
+            ],
+            "display": "5-4-3"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
           "isOut": false,
           "result": {
             "type": "hit",
@@ -290,7 +574,7 @@
         {
           "balls": 4,
           "strikes": 2,
-          "pitchCount": 7,
+          "pitchCount": 6,
           "isOut": false,
           "result": {
             "type": "pitcher-result",
@@ -303,12 +587,67 @@
             }
           ]
         },
-        null,
-        null,
+        {
+          "balls": 4,
+          "strikes": 0,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
         null,
         null
       ],
       [
+        {
+          "balls": 0,
+          "strikes": 0,
+          "pitchCount": 1,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              3
+            ],
+            "display": "3u"
+          },
+          "bases": []
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              5,
+              3
+            ],
+            "display": "5-3"
+          },
+          "bases": []
+        },
         null,
         null,
         null,
@@ -316,8 +655,60 @@
         null,
         {
           "balls": 1,
+          "strikes": 1,
+          "pitchCount": 3,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 2,
+            "display": "2B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            },
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
           "strikes": 0,
           "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              4,
+              3
+            ],
+            "display": "4-3"
+          },
+          "bases": []
+        }
+      ],
+      [
+        null,
+        null,
+        {
+          "balls": 0,
+          "strikes": 2,
+          "pitchCount": 3,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              3
+            ],
+            "display": "3u"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 3,
           "isOut": true,
           "result": {
             "type": "putout",
@@ -330,81 +721,6 @@
           "bases": []
         },
         {
-          "balls": 3,
-          "strikes": 3,
-          "pitchCount": 6,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        {
-          "balls": 1,
-          "strikes": 3,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        null
-      ],
-      [
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "flyout",
-            "result": 9,
-            "display": "F9"
-          },
-          "bases": []
-        },
-        {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        null,
-        null,
-        {
           "balls": 0,
           "strikes": 1,
           "pitchCount": 2,
@@ -418,173 +734,17 @@
             "display": "6-3"
           },
           "bases": []
-        }
-      ],
-      [
-        null,
-        null,
-        null,
-        {
-          "balls": 3,
-          "strikes": 3,
-          "pitchCount": 6,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
         },
-        {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5,
-          "isOut": true,
-          "result": {
-            "type": "lineout",
-            "result": 1,
-            "display": "L1"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "flyout",
-            "result": 5,
-            "display": "P5"
-          },
-          "bases": []
-        },
+        null,
         null,
         null,
         null
       ],
       [
         {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "lineout",
-            "result": 9,
-            "display": "L9"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        null,
-        null,
-        {
-          "balls": 2,
-          "strikes": 1,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              6,
-              3
-            ],
-            "display": "6-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5,
-          "isOut": true,
-          "result": {
-            "type": "lineout",
-            "result": 9,
-            "display": "L9"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 2,
-            "display": "2B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            },
-            {
-              "advanced": true
-            }
-          ]
-        }
-      ],
-      [
-        null,
-        {
-          "balls": 0,
-          "strikes": 2,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              6,
-              3
-            ],
-            "display": "6-3"
-          },
-          "bases": []
-        },
-        {
           "balls": 1,
-          "strikes": 1,
-          "pitchCount": 3,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 2,
-            "display": "2B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            },
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 4,
           "strikes": 0,
-          "pitchCount": 4,
-          "isOut": false,
-          "result": {
-            "type": "pitcher-result",
-            "result": "BB",
-            "display": "BB"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3,
+          "pitchCount": 2,
           "isOut": true,
           "result": {
             "type": "lineout",
@@ -593,149 +753,14 @@
           },
           "bases": []
         },
-        {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "flyout",
-            "result": 5,
-            "display": "P5"
-          },
-          "bases": []
-        },
-        null
-      ],
-      [
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": true,
-          "result": {
-            "type": "lineout",
-            "result": 8,
-            "display": "L8"
-          },
-          "bases": []
-        },
-        {
-          "balls": 2,
-          "strikes": 3,
-          "pitchCount": 5,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
-          },
-          "bases": []
-        },
         null,
         null,
         null,
         null,
-        null,
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        }
-      ],
-      [
-        null,
-        null,
-        null,
-        {
-          "balls": 0,
-          "strikes": 3,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
         {
           "balls": 2,
           "strikes": 2,
           "pitchCount": 5,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 8,
           "isOut": false,
           "result": {
             "type": "hit",
@@ -758,135 +783,67 @@
           ]
         },
         {
-          "balls": 1,
-          "strikes": 1,
-          "pitchCount": 3,
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 2,
+            "display": "2B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            },
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 5,
           "isOut": true,
           "result": {
-            "type": "putout",
-            "result": [
-              6,
-              3
-            ],
-            "display": "6-3"
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
           },
           "bases": []
         },
-        null,
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "balls": 1,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
       ]
     ],
     "visiting": [
       [
         {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              1,
-              3
-            ],
-            "display": "1-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 1,
-          "strikes": 0,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              1,
-              3
-            ],
-            "display": "1-3"
-          },
-          "bases": []
-        },
-        {
           "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
+          "strikes": 0,
+          "pitchCount": 1,
           "isOut": false,
           "result": {
             "type": "hit",
-            "result": 2,
-            "display": "2B"
+            "result": 1,
+            "display": "1B"
           },
           "bases": [
             {
               "advanced": true
-            },
-            {
-              "advanced": true
             }
           ]
-        },
-        {
-          "balls": 3,
-          "strikes": 3,
-          "pitchCount": 7,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      [
-        null,
-        null,
-        null,
-        null,
-        {
-          "balls": 1,
-          "strikes": 3,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
-          },
-          "bases": []
         },
         {
           "balls": 1,
@@ -900,140 +857,27 @@
           },
           "bases": []
         },
-        null,
-        null
-      ],
-      [
         {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5,
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 3,
           "isOut": true,
           "result": {
             "type": "lineout",
-            "result": 9,
-            "display": "L9"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 7,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              6,
-              3
-            ],
-            "display": "6-3"
+            "result": 8,
+            "display": "L8"
           },
           "bases": []
         },
         {
-          "balls": 2,
-          "strikes": 3,
-          "pitchCount": 5,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        }
-      ],
-      [
-        null,
-        {
-          "balls": 2,
-          "strikes": 2,
+          "balls": 4,
+          "strikes": 1,
           "pitchCount": 5,
           "isOut": false,
           "result": {
-            "type": "hit",
-            "result": 4,
-            "display": "HR"
-          },
-          "bases": [
-            {
-              "advanced": true
-            },
-            {
-              "advanced": true
-            },
-            {
-              "advanced": true
-            },
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 2,
-          "strikes": 1,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              6,
-              3
-            ],
-            "display": "6-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 3,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
             "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              1,
-              3
-            ],
-            "display": "1-3"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        null
-      ],
-      [
-        {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
+            "result": "BB",
+            "display": "BB"
           },
           "bases": [
             {
@@ -1042,43 +886,8 @@
           ]
         },
         {
-          "balls": 2,
-          "strikes": 1,
-          "pitchCount": 4,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              6,
-              4,
-              3
-            ],
-            "display": "6-4-3"
-          },
-          "bases": []
-        },
-        null,
-        null,
-        null,
-        {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        },
-        {
-          "balls": 2,
-          "strikes": 1,
+          "balls": 1,
+          "strikes": 2,
           "pitchCount": 4,
           "isOut": false,
           "result": {
@@ -1092,81 +901,6 @@
             }
           ]
         },
-        {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              3,
-              4
-            ],
-            "display": "3-4"
-          },
-          "bases": [],
-          "isSacrifice": true
-        },
-        {
-          "balls": 4,
-          "strikes": 0,
-          "pitchCount": 4,
-          "isOut": false,
-          "result": {
-            "type": "pitcher-result",
-            "result": "BB",
-            "display": "BB"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        }
-      ],
-      [
-        null,
-        null,
-        {
-          "balls": 0,
-          "strikes": 3,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
-            "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
-          },
-          "bases": []
-        },
-        {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              1,
-              3
-            ],
-            "display": "1-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
-            "type": "flyout",
-            "result": 7,
-            "display": "F7"
-          },
-          "bases": []
-        },
         null,
         null,
         null,
@@ -1179,9 +913,86 @@
         null,
         null,
         {
-          "balls": 2,
+          "balls": 4,
           "strikes": 1,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": false,
+          "result": {
+            "type": "fielders-choice",
+            "result": 1,
+            "display": "FC"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
           "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 7,
+            "display": "F7"
+          },
+          "bases": []
+        },
+        {
+          "balls": 0,
+          "strikes": 0,
+          "pitchCount": 1,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              1,
+              3
+            ],
+            "display": "1-3"
+          },
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 0,
+          "strikes": 0,
+          "pitchCount": 1,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 1,
+          "pitchCount": 3,
           "isOut": true,
           "result": {
             "type": "putout",
@@ -1195,61 +1006,55 @@
         },
         {
           "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              4,
-              3
-            ],
-            "display": "4-3"
-          },
-          "bases": []
-        },
-        {
-          "balls": 1,
           "strikes": 1,
-          "pitchCount": 3,
-          "isOut": true,
-          "result": {
-            "type": "putout",
-            "result": [
-              2
-            ],
-            "display": "2u"
-          },
-          "bases": []
-        },
-        null
-      ],
-      [
-        {
-          "balls": 1,
-          "strikes": 0,
           "pitchCount": 2,
           "isOut": true,
           "result": {
-            "type": "lineout",
-            "result": 1,
-            "display": "L1"
+            "type": "putout",
+            "result": [
+              3,
+              1
+            ],
+            "display": "3-1"
           },
           "bases": []
         },
         {
-          "balls": 2,
-          "strikes": 3,
+          "balls": 4,
+          "strikes": 2,
           "pitchCount": 6,
-          "isOut": true,
+          "isOut": false,
           "result": {
             "type": "pitcher-result",
-            "result": "K",
-            "display": "K"
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              3
+            ],
+            "display": "3u"
           },
           "bases": []
         },
         null,
+        null,
+        null,
+        null
+      ],
+      [
         null,
         null,
         null,
@@ -1259,31 +1064,11 @@
           "balls": 3,
           "strikes": 1,
           "pitchCount": 5,
-          "isOut": false,
-          "result": {
-            "type": "hit",
-            "result": 1,
-            "display": "1B"
-          },
-          "bases": [
-            {
-              "advanced": true
-            }
-          ]
-        }
-      ],
-      [
-        null,
-        null,
-        {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5,
           "isOut": true,
           "result": {
-            "type": "lineout",
-            "result": 9,
-            "display": "L9"
+            "type": "flyout",
+            "result": 5,
+            "display": "P5"
           },
           "bases": []
         },
@@ -1323,8 +1108,100 @@
         },
         {
           "balls": 0,
-          "strikes": 2,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 4,
+            "display": "L4"
+          },
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 8,
+            "display": "L8"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 1,
           "pitchCount": 3,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              1,
+              3
+            ],
+            "display": "1-3"
+          },
+          "bases": []
+        },
+        {
+          "balls": 3,
+          "strikes": 1,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 8,
+            "display": "F8"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        {
+          "balls": 2,
+          "strikes": 1,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 8,
+            "display": "F8"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
           "isOut": false,
           "result": {
             "type": "hit",
@@ -1348,6 +1225,187 @@
         },
         {
           "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 8,
+            "display": "F8"
+          },
+          "bases": []
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 8,
+            "display": "L8"
+          },
+          "bases": []
+        },
+        null
+      ],
+      [
+        {
+          "balls": 4,
+          "strikes": 2,
+          "pitchCount": 7,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 0,
+          "pitchCount": 1,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 2,
+            "display": "2B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            },
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 4,
+          "strikes": 0,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 3,
+          "pitchCount": 5,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 3,
+          "pitchCount": 3,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        {
+          "balls": 0,
+          "strikes": 3,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "pitcher-result",
+            "result": "K",
+            "display": "K"
+          },
+          "bases": []
+        }
+      ],
+      [
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 4,
+          "strikes": 1,
+          "pitchCount": 5,
+          "isOut": false,
+          "result": {
+            "type": "pitcher-result",
+            "result": "BB",
+            "display": "BB"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 9,
+            "display": "F9"
+          },
+          "bases": []
+        },
+        null,
+        null,
+        null,
+        {
+          "balls": 1,
           "strikes": 3,
           "pitchCount": 4,
           "isOut": true,
@@ -1358,13 +1416,122 @@
           },
           "bases": []
         },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 1,
+            "display": "1B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "putout",
+            "result": [
+              3
+            ],
+            "display": "3u"
+          },
+          "bases": [],
+          "isSacrifice": true
+        }
+      ],
+      [
         null,
+        null,
+        null,
+        {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 2,
+            "display": "2B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            },
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 0,
+          "pitchCount": 2,
+          "isOut": true,
+          "result": {
+            "type": "flyout",
+            "result": 5,
+            "display": "P5"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 6,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 7,
+            "display": "L7"
+          },
+          "bases": []
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": false,
+          "result": {
+            "type": "hit",
+            "result": 2,
+            "display": "2B"
+          },
+          "bases": [
+            {
+              "advanced": true
+            },
+            {
+              "advanced": true
+            }
+          ]
+        },
+        {
+          "balls": 1,
+          "strikes": 2,
+          "pitchCount": 4,
+          "isOut": true,
+          "result": {
+            "type": "lineout",
+            "result": 8,
+            "display": "L8"
+          },
+          "bases": []
+        },
         null
       ]
     ],
     "currentAtBat": {
-      "inning": 8,
-      "lineupSpot": 7,
+      "inning": 9,
+      "lineupSpot": 1,
       "team": "home"
     }
   }
