@@ -207,6 +207,11 @@ describe('Retrosheet gameplay', () => {
       defensivePlayer: 1,
       baseAdvancedTo: 1
     })
+
+    reset(game)
+    handleAtABat('PO1(E1).1-2', game)
+
+    expect(defensiveError).not.toHaveBeenCalled()
   })
 
   it('records other random things', () => {

@@ -1,12 +1,15 @@
 import { writeFileSync } from 'fs'
 import { resolve, join } from 'path'
 
+import { readFiles } from '../server/readFolderFiles'
+
 import { getRetrosheetScorekeeper } from './index'
 
 export async function main() {
   const scorekeeper = await getRetrosheetScorekeeper(
-    join(__dirname, '../tests/test_game.txt')
+    join(__dirname, '../games/WS_6.txt')
   )
+  const currentGames = (await readFiles()) as any
 
   writeToFile(
     {
@@ -14,7 +17,8 @@ export async function main() {
       gameInfo: scorekeeper.gameInfo,
       gameplay: scorekeeper.gameplay
     },
-    './'
+    './server/games',
+    `${currentGames.length + 1}.json`
   )
 }
 

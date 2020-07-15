@@ -14,8 +14,8 @@ import {
 import * as resultGenerators from '../resultGenerators'
 
 const initialState: Gameplay = {
-  home: Array(9).fill([]),
-  visiting: Array(9).fill([]),
+  home: Array(9).fill(Array(9).fill(null)),
+  visiting: Array(9).fill(Array(9).fill(null)),
   currentAtBat: undefined
 }
 
