@@ -1,8 +1,6 @@
 import { writeFileSync } from 'fs'
 import { resolve, join } from 'path'
 
-import { readFiles } from '../server/readFolderFiles'
-
 import { getRetrosheetScorekeepers } from './index'
 
 async function processRetrosheetFile(pathToFile: string) {
@@ -14,18 +12,9 @@ async function processRetrosheetFile(pathToFile: string) {
 
 export async function main() {
   const scorekeepers = await processRetrosheetFile('../games/CHI_ATL.txt')
-  const currentGames = (await readFiles()) as any
-
   scorekeepers.forEach((scorekeeper, index) => {
-    writeToFile(
-      {
-        lineups: scorekeeper.lineups,
-        gameInfo: scorekeeper.gameInfo,
-        gameplay: scorekeeper.gameplay
-      },
-      './server/games',
-      `${currentGames.length + (index + 1)}.json`
-    )
+    const game = scorekeeper.getOutput()
+    writeToFile(game, './server/games', `${game.gameInfo.id}.json`)
   })
 }
 

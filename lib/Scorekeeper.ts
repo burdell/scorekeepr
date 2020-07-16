@@ -16,7 +16,9 @@ import {
   recordBasepathOut,
   lineout,
   sacrificeBunt,
-  sacrificeFly
+  sacrificeFly,
+  intentionalWalk,
+  hitBatter
 } from './store/gameplay'
 import * as generators from './resultGenerators'
 
@@ -27,7 +29,8 @@ import {
   CurrentAtBat,
   Base,
   AdvanceBaseResult,
-  OutBaseResult
+  OutBaseResult,
+  GameOutput
 } from './types'
 
 export class Scorekeeper {
@@ -123,9 +126,13 @@ export class Scorekeeper {
     this.store.dispatch(hit(base))
   }
 
-  hitBatter = () => {}
+  hitBatter = () => {
+    this.store.dispatch(hitBatter())
+  }
 
-  intentionalWalk = () => {}
+  intentionalWalk = () => {
+    this.store.dispatch(intentionalWalk())
+  }
 
   flyout = (position: number) => {
     this.store.dispatch(flyOut(position))
@@ -164,5 +171,14 @@ export class Scorekeeper {
 
   basepathOut = (baseAttempted: Base, result: OutBaseResult) => {
     this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
+  }
+
+  getOutput = (): GameOutput => {
+    return {
+      id: this.gameInfo.id,
+      lineups: this.lineups,
+      gameInfo: this.gameInfo,
+      gameplay: this.gameplay
+    }
   }
 }
