@@ -49,7 +49,8 @@ function getScorebook(game: Game) {
     homeTeam: getTeam(info.hometeam).fullName,
     visitingTeam: getTeam(info.visteam).fullName,
     location: getStadium(info.site).fullName,
-    startTime: info.starttime
+    startTime: info.starttime,
+    id: game.id
   })
 
   scorebook.setLineups({

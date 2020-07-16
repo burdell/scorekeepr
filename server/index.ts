@@ -12,9 +12,8 @@ app.get('/games', async (req, res, next) => {
   try {
     const gameFiles = (await readFiles()) as any[]
     const games = gameFiles.map((file) => {
-      const id = Number(file.filename.split('.json').shift())
-      const gameInfo = JSON.parse(file.contents).gameInfo
-      return { id, gameInfo }
+      const game = JSON.parse(file.contents)
+      return { id: game.id, gameInfo: game.gameInfo }
     })
     res.json(games)
   } catch (e) {

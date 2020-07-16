@@ -1,3 +1,5 @@
+import { LineupState } from './store/lineup'
+
 type Team = string
 export type Player = {
   name: string
@@ -25,7 +27,7 @@ export type FlyOut = {
 }
 export type LineOut = { type: 'lineout'; result: number; display: string }
 export type Hit = { type: 'hit'; result: Base; display: string }
-export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'HBP'
+export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'IBB' | 'HBP'
 export type PitcherResult = {
   type: 'pitcher-result'
   result: PitcherResultString
@@ -94,4 +96,12 @@ export type Game = {
   date: string
   location: string
   startTime: string
+  id: string
+}
+
+export type GameOutput = {
+  id: string
+  lineups: LineupState
+  gameplay: Gameplay
+  gameInfo: Game
 }

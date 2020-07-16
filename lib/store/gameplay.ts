@@ -99,6 +99,8 @@ export const hit = createAction<Base>('hit')
 export const flyOut = createAction<number>('flyOut')
 export const lineout = createAction<number>('lineOut')
 export const putOut = createAction<number[]>('putOut')
+export const intentionalWalk = createAction('intentionalWalk')
+export const hitBatter = createAction('hitBatter')
 export const fieldersChoice = createAction<{
   baseAdvancedTo: Base
 }>('fieldersChoice')
@@ -135,6 +137,10 @@ export function sacrificeFly(defensivePositions: number) {
     dispatch(flyOut(defensivePositions))
     dispatch(setAsSacrifice(true))
   }
+}
+
+export function walk({ isIntentional } = { isIntentional: false }) {
+  return (dispatch: Dispatch) => {}
 }
 
 export const gameplayReducer = createReducer(initialState, (builder) => {
@@ -366,5 +372,40 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       ...currentFrame,
       isSacrifice: action.payload
     }
+  })
+
+  builder.addCase(intentionalWalk, (state) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      result: resultGenerators.pitcherResult('IBB'),
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: 1,
+        isAtBatResult: true
+      })
+    }
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
+  })
+
+  builder.addCase(hitBatter, (state) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const currentFrame = state[team][inning][lineupSpot]
+
+    const newFrame = {
+      ...currentFrame,
+      pitchCount: currentFrame.pitchCount + 1,
+      result: resultGenerators.pitcherResult('HBP'),
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: 1,
+        isAtBatResult: true
+      })
+    }
+    state[team][inning][lineupSpot] = newFrame
+
+    return state
   })
 })

@@ -425,4 +425,52 @@ describe('At Bat Events', () => {
       })
     )
   })
+
+  it('records an intentional walk', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.intentionalWalk()
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 0,
+        isOut: false,
+        result: {
+          type: 'pitcher-result',
+          result: 'IBB',
+          display: 'IBB'
+        },
+        bases: [{ advanced: true, isAtBatResult: true, result: undefined }]
+      })
+    )
+  })
+
+  it('records a hit batter', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.hitBatter()
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        isOut: false,
+        result: {
+          type: 'pitcher-result',
+          result: 'HBP',
+          display: 'HBP'
+        },
+        bases: [{ advanced: true, isAtBatResult: true, result: undefined }]
+      })
+    )
+  })
 })
