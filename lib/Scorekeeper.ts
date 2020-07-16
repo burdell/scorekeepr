@@ -12,13 +12,14 @@ import {
   defensiveError,
   putOut,
   fieldersChoice,
-  advanceRunner,
+  advanceCurrentRunner,
   recordBasepathOut,
   lineout,
   sacrificeBunt,
   sacrificeFly,
   intentionalWalk,
-  hitBatter
+  hitBatter,
+  advanceRunners
 } from './store/gameplay'
 import * as generators from './resultGenerators'
 
@@ -30,7 +31,8 @@ import {
   Base,
   AdvanceBaseResult,
   OutBaseResult,
-  GameOutput
+  GameOutput,
+  RunnerAdvancement
 } from './types'
 
 export class Scorekeeper {
@@ -165,8 +167,12 @@ export class Scorekeeper {
     this.store.dispatch(fieldersChoice({ baseAdvancedTo }))
   }
 
-  advanceRunner = (base: Base, result?: AdvanceBaseResult) => {
-    this.store.dispatch(advanceRunner({ base, result }))
+  advanceCurrentRunner = (base: Base, result?: AdvanceBaseResult) => {
+    this.store.dispatch(advanceCurrentRunner({ base, result }))
+  }
+
+  advanceRunners = (runnerAdvancements: RunnerAdvancement[]) => {
+    this.store.dispatch(advanceRunners(runnerAdvancements))
   }
 
   basepathOut = (baseAttempted: Base, result: OutBaseResult) => {

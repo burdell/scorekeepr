@@ -8,7 +8,8 @@ import {
   BaseResult,
   BaseResultResult,
   AdvanceBaseResult,
-  OutBaseResult
+  OutBaseResult,
+  RunnerAdvancement
 } from '../types'
 
 import * as resultGenerators from '../resultGenerators'
@@ -108,14 +109,17 @@ export const defensiveError = createAction<{
   defensivePlayer: number
   baseAdvancedTo: Base
 }>('defensiveError')
-export const advanceRunner = createAction<{
-  base: Base
-  result: AdvanceBaseResult | undefined
-}>('advanceRunner')
 export const recordBasepathOut = createAction<{
   baseAttempted: Base
   result: OutBaseResult
 }>('recordBasepathOut')
+export const advanceCurrentRunner = createAction<{
+  base: Base
+  result: AdvanceBaseResult | undefined
+}>('advanceCurrentRunner')
+export const advanceRunners = createAction<RunnerAdvancement[]>(
+  'advanceRunners'
+)
 
 const setAsSacrifice = createAction<boolean>('setAsSacrifice')
 
@@ -137,10 +141,6 @@ export function sacrificeFly(defensivePositions: number) {
     dispatch(flyOut(defensivePositions))
     dispatch(setAsSacrifice(true))
   }
-}
-
-export function walk({ isIntentional } = { isIntentional: false }) {
-  return (dispatch: Dispatch) => {}
 }
 
 export const gameplayReducer = createReducer(initialState, (builder) => {
@@ -323,7 +323,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     state[team][inning][lineupSpot] = newFrame
   })
 
-  builder.addCase(advanceRunner, (state, action) => {
+  builder.addCase(advanceCurrentRunner, (state, action) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 
@@ -337,6 +337,33 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     state[team][inning][lineupSpot] = newFrame
+  })
+
+  builder.addCase(advanceRunners, (state, action) => {
+    const { team, inning } = ensureCurrentAtBat(state)
+    const advances = action.payload
+    const newInning = [...state[team][inning]]
+    const currentInning = state[team][inning]
+
+    advances.forEach((a) => {
+      const baseRunnerIndex = currentInning.findIndex(
+        (i) => i.bases.length === a.startBase
+      )
+      const atBat = currentInning[baseRunnerIndex]
+
+      if (atBat) {
+        newInning[baseRunnerIndex] = {
+          ...atBat,
+          bases: advanceRunnerHelper({
+            baseAdvancedTo: a.endBase,
+            existingBases: atBat.bases,
+            result: a.result
+          })
+        }
+      }
+    })
+
+    state[team][inning] = newInning
   })
 
   builder.addCase(recordBasepathOut, (state, action) => {

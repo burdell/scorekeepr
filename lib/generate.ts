@@ -11,7 +11,7 @@ async function processRetrosheetFile(pathToFile: string) {
 }
 
 export async function main() {
-  const scorekeepers = await processRetrosheetFile('../games/CHI_ATL.txt')
+  const scorekeepers = await processRetrosheetFile('../games/1995_WS.txt')
   scorekeepers.forEach((scorekeeper, index) => {
     const game = scorekeeper.getOutput()
     writeToFile(game, './server/games', `${game.gameInfo.id}.json`)
