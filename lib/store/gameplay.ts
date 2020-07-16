@@ -60,6 +60,7 @@ function ensureCurrentAtBat(gameplay: Gameplay) {
 
 function advanceRunnerHelper({
   baseAdvancedTo,
+  isAtBatResult,
   existingBases = [],
   result = undefined,
   isOut = false
@@ -68,6 +69,7 @@ function advanceRunnerHelper({
   existingBases?: BaseResult[]
   result?: BaseResultResult
   isOut?: boolean
+  isAtBatResult?: boolean
 }) {
   return new Array<BaseResult>(baseAdvancedTo)
     .fill({ advanced: true, result: undefined })
@@ -77,10 +79,13 @@ function advanceRunnerHelper({
       if (isAdvancedToBase) {
         newResult.result = result
         newResult.advanced = !isOut
-        return newResult
+        if (isAtBatResult) {
+          newResult.isAtBatResult = isAtBatResult
+        }
+        return { ...newResult }
       }
 
-      return existingResult || newResult
+      return existingResult || { ...newResult }
     })
 }
 
@@ -156,7 +161,10 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     if (newFrame.balls === 4) {
       newFrame.result = resultGenerators.pitcherResult('BB')
-      newFrame.bases = advanceRunnerHelper({ baseAdvancedTo: 1 })
+      newFrame.bases = advanceRunnerHelper({
+        baseAdvancedTo: 1,
+        isAtBatResult: true
+      })
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -214,7 +222,10 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
       result: resultGenerators.hit(action.payload),
-      bases: advanceRunnerHelper({ baseAdvancedTo: action.payload })
+      bases: advanceRunnerHelper({
+        baseAdvancedTo: action.payload,
+        isAtBatResult: true
+      })
     }
 
     state[team][inning][lineupSpot] = newFrame
@@ -279,7 +290,8 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       pitchCount: currentFrame.pitchCount + 1,
       result: resultGenerators.error(action.payload.defensivePlayer),
       bases: advanceRunnerHelper({
-        baseAdvancedTo: action.payload.baseAdvancedTo
+        baseAdvancedTo: action.payload.baseAdvancedTo,
+        isAtBatResult: true
       })
     }
 
@@ -297,7 +309,8 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       pitchCount: currentFrame.pitchCount + 1,
       result: resultGenerators.fieldersChoice(action.payload.baseAdvancedTo),
       bases: advanceRunnerHelper({
-        baseAdvancedTo: action.payload.baseAdvancedTo
+        baseAdvancedTo: action.payload.baseAdvancedTo,
+        isAtBatResult: true
       })
     }
 

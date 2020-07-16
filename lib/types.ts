@@ -58,6 +58,7 @@ export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
 export type BaseResult = {
   advanced: boolean
   result: BaseResultResult
+  isAtBatResult?: boolean
 }
 
 export type AtBat = {
