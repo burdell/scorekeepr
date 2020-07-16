@@ -1,6 +1,8 @@
 import { Scorekeeper } from '../lib'
 import { AtBat } from '../lib/types'
 
+import * as resultGenerators from '../lib/resultGenerators'
+
 function atBatWithDefaults(overrides: Partial<AtBat>): AtBat {
   return {
     balls: 0,
@@ -321,7 +323,7 @@ describe('At Bat Events', () => {
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
-    scorekeeper.advanceRunner(1)
+    scorekeeper.advanceCurrentRunner(1)
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({
@@ -329,7 +331,7 @@ describe('At Bat Events', () => {
       })
     )
 
-    scorekeeper.advanceRunner(2)
+    scorekeeper.advanceCurrentRunner(2)
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({
@@ -343,7 +345,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
 
     scorekeeper.hit(1)
-    scorekeeper.advanceRunner(2, scorekeeper.resultGenerators.error(6))
+    scorekeeper.advanceCurrentRunner(2, scorekeeper.resultGenerators.error(6))
 
     expect(getAtBat(1)).toEqual(
       atBatWithDefaults({
@@ -470,6 +472,66 @@ describe('At Bat Events', () => {
           display: 'HBP'
         },
         bases: [{ advanced: true, isAtBatResult: true, result: undefined }]
+      })
+    )
+  })
+
+  it('advances runners', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.hit(1)
+
+    scorekeeper.advanceRunners([
+      { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
+    ])
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        result: resultGenerators.hit(1),
+        pitchCount: 1,
+        bases: [
+          { advanced: true, isAtBatResult: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: resultGenerators.error(5) }
+        ]
+      })
+    )
+
+    scorekeeper.nextLineupSpot()
+    scorekeeper.intentionalWalk()
+    scorekeeper.nextLineupSpot()
+    scorekeeper.hit(2)
+    scorekeeper.advanceRunners([
+      { startBase: 3, endBase: 4, result: undefined },
+      { startBase: 1, endBase: 3, result: undefined }
+    ])
+
+    expect(getAtBat(0)).toEqual(
+      atBatWithDefaults({
+        result: resultGenerators.hit(1),
+        pitchCount: 1,
+        bases: [
+          { advanced: true, isAtBatResult: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: resultGenerators.error(5) },
+          { advanced: true, result: undefined }
+        ]
+      })
+    )
+
+    expect(getAtBat(1)).toEqual(
+      atBatWithDefaults({
+        result: resultGenerators.pitcherResult('IBB'),
+        bases: [
+          { advanced: true, isAtBatResult: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined }
+        ]
       })
     )
   })

@@ -14,13 +14,14 @@ describe('Scorekeeper', () => {
     expect(visiting).toEqual([])
   })
 
-  it('intializes a game with some data', () => {
+  it('initializes a game with some data', () => {
     const initialGameInfo = {
       date: '2020-08-09',
       homeTeam: 'Atlanta Braves',
       visitingTeam: 'Washington Nationals',
       startTime: '7:00pm',
-      location: 'Truist Park'
+      location: 'Truist Park',
+      id: 'GAMEID'
     }
     const initialLineups = {
       homeLineup: [

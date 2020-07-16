@@ -105,3 +105,9 @@ export type GameOutput = {
   gameplay: Gameplay
   gameInfo: Game
 }
+
+export type RunnerAdvancement = {
+  startBase: Base
+  endBase: Base
+  result: AdvanceBaseResult | undefined
+}
