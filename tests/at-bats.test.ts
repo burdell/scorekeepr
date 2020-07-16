@@ -43,7 +43,7 @@ describe('At Bat Events', () => {
           result: 'BB',
           display: 'BB'
         },
-        bases: [{ advanced: true, result: undefined }]
+        bases: [{ advanced: true, result: undefined, isAtBatResult: true }]
       })
     )
 
@@ -134,7 +134,7 @@ describe('At Bat Events', () => {
           result: 1,
           display: '1B'
         },
-        bases: [{ advanced: true, result: undefined }]
+        bases: [{ advanced: true, result: undefined, isAtBatResult: true }]
       })
     )
 
@@ -153,7 +153,7 @@ describe('At Bat Events', () => {
           { advanced: true, result: undefined },
           { advanced: true, result: undefined },
           { advanced: true, result: undefined },
-          { advanced: true, result: undefined }
+          { advanced: true, result: undefined, isAtBatResult: true }
         ]
       })
     )
@@ -285,7 +285,7 @@ describe('At Bat Events', () => {
           result: 3,
           display: 'E3'
         },
-        bases: [{ advanced: true, result: undefined }]
+        bases: [{ advanced: true, result: undefined, isAtBatResult: true }]
       })
     )
   })
@@ -308,7 +308,7 @@ describe('At Bat Events', () => {
           result: 1,
           display: 'FC'
         },
-        bases: [{ advanced: true, result: undefined }]
+        bases: [{ advanced: true, result: undefined, isAtBatResult: true }]
       })
     )
   })
@@ -354,7 +354,7 @@ describe('At Bat Events', () => {
           display: '1B'
         },
         bases: [
-          { advanced: true, result: undefined },
+          { advanced: true, result: undefined, isAtBatResult: true },
           {
             advanced: true,
             result: {
@@ -389,7 +389,7 @@ describe('At Bat Events', () => {
         },
         isOut: true,
         bases: [
-          { advanced: true, result: undefined },
+          { advanced: true, result: undefined, isAtBatResult: true },
           {
             advanced: false,
             result: {

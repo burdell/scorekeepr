@@ -1,13 +1,13 @@
 import { join } from 'path'
 
-import { getRetrosheetScorekeeper } from '../lib'
+import { getRetrosheetScorekeepers } from '../lib'
 
 describe('Retrosheet Parser', () => {
   it('it parses Retrosheet game data', async () => {
-    const scorekeeper = await getRetrosheetScorekeeper(
+    const scorekeeper = await getRetrosheetScorekeepers(
       join(__dirname, './test_game.txt')
     )
-    const { gameInfo } = scorekeeper
+    const { gameInfo } = scorekeeper[0]
 
     expect(gameInfo.homeTeam).toEqual('Chicago Cubs')
     expect(gameInfo.visitingTeam).toEqual('Atlanta Braves')
@@ -17,10 +17,10 @@ describe('Retrosheet Parser', () => {
   })
 
   it('sets the lineups', async () => {
-    const scorekeeper = await getRetrosheetScorekeeper(
+    const scorekeeper = await getRetrosheetScorekeepers(
       join(__dirname, './test_game.txt')
     )
-    const { gameInfo, lineups } = scorekeeper
+    const { gameInfo, lineups } = scorekeeper[0]
 
     expect(lineups.home).toEqual([
       [

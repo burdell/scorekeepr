@@ -13,7 +13,7 @@ async function processRetrosheetFile(pathToFile: string) {
 }
 
 export async function main() {
-  const scorekeepers = await processRetrosheetFile('../games/1995_WS.txt')
+  const scorekeepers = await processRetrosheetFile('../games/CHI_ATL.txt')
   const currentGames = (await readFiles()) as any
 
   scorekeepers.forEach((scorekeeper, index) => {
