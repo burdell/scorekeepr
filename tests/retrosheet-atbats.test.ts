@@ -1,11 +1,16 @@
-import { handlePitchSequence } from '../lib/retrosheet/pitches'
-import { handleAtABat } from '../lib/retrosheet/atBats'
+import { handlePitchSequence } from '../lib/retrosheet/gameplay/pitches'
+import { handleAtABat } from '../lib/retrosheet/gameplay/atBats'
+import {
+  handleBaserunnerAction,
+  getBaserunnerAction,
+  BaserunnerAction
+} from '../lib/retrosheet/gameplay/baserunners'
 
 function reset(mocks: { [m: string]: jest.Mock }) {
   Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())
 }
 
-describe('Retrosheet gameplay', () => {
+describe('Retrosheet at-bats', () => {
   it('records pitches', async () => {
     const strike = jest.fn()
     const ball = jest.fn()

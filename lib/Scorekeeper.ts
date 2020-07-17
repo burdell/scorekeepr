@@ -124,8 +124,8 @@ export class Scorekeeper {
     this.store.dispatch(foul())
   }
 
-  hit = (base: Base) => {
-    this.store.dispatch(hit(base))
+  hit = (base: Base, baseAdvancedTo?: Base) => {
+    this.store.dispatch(hit({ base, baseAdvancedTo }))
   }
 
   hitBatter = () => {
@@ -171,13 +171,33 @@ export class Scorekeeper {
     this.store.dispatch(advanceCurrentRunner({ base, result }))
   }
 
+  basepathOut = (baseAttempted: Base, result: OutBaseResult) => {
+    this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
+  }
+
   advanceRunners = (runnerAdvancements: RunnerAdvancement[]) => {
     this.store.dispatch(advanceRunners(runnerAdvancements))
   }
 
-  basepathOut = (baseAttempted: Base, result: OutBaseResult) => {
-    this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
+  advanceCurrentAtBat = (endBase: Base, result?: AdvanceBaseResult) => {
+    this.advanceRunners([{ startBase: 'B', endBase, result }])
   }
+
+  balk() {}
+
+  caughtStealing() {}
+
+  defensiveIndifference() {}
+
+  passedBall() {}
+
+  wildPitch() {}
+
+  pickOff() {}
+
+  pickOffOffBase() {}
+
+  stolenBase() {}
 
   getOutput = (): GameOutput => {
     return {

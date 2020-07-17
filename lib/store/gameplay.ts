@@ -96,7 +96,7 @@ export const setCurrentAtBat = createAction<Partial<CurrentAtBat>>(
 export const ball = createAction('ball')
 export const strike = createAction('strike')
 export const foul = createAction('foul')
-export const hit = createAction<Base>('hit')
+export const hit = createAction<{ base: Base; baseAdvancedTo?: Base }>('hit')
 export const flyOut = createAction<number>('flyOut')
 export const lineout = createAction<number>('lineOut')
 export const putOut = createAction<number[]>('putOut')
@@ -224,12 +224,14 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const currentFrame = state[team][inning][lineupSpot]
 
+    const payload = action.payload
+
     const newFrame = {
       ...currentFrame,
       pitchCount: currentFrame.pitchCount + 1,
-      result: resultGenerators.hit(action.payload),
+      result: resultGenerators.hit(payload.base),
       bases: advanceRunnerHelper({
-        baseAdvancedTo: action.payload,
+        baseAdvancedTo: payload.baseAdvancedTo || payload.base,
         isAtBatResult: true
       })
     }
@@ -340,16 +342,33 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
   })
 
   builder.addCase(advanceRunners, (state, action) => {
-    const { team, inning } = ensureCurrentAtBat(state)
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const advances = action.payload
     const newInning = [...state[team][inning]]
     const currentInning = state[team][inning]
 
-    advances.forEach((a) => {
+    function getAtBatForAdvance(a: RunnerAdvancement) {
+      if (a.startBase === 'B') {
+        return {
+          atBat: state[team][inning][lineupSpot],
+          baseRunnerIndex: lineupSpot
+        }
+      }
+
       const baseRunnerIndex = currentInning.findIndex(
-        (i) => i.bases.length === a.startBase
+        (atBat, atBatIndex) =>
+          atBat &&
+          atBatIndex !== lineupSpot &&
+          atBat.bases.length === a.startBase
       )
-      const atBat = currentInning[baseRunnerIndex]
+      return {
+        atBat: currentInning[baseRunnerIndex],
+        baseRunnerIndex: baseRunnerIndex
+      }
+    }
+
+    advances.forEach((a) => {
+      const { atBat, baseRunnerIndex } = getAtBatForAdvance(a)
 
       if (atBat) {
         newInning[baseRunnerIndex] = {

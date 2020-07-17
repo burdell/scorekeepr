@@ -1,4 +1,4 @@
-import { Scorekeeper } from '../Scorekeeper'
+import { Scorekeeper } from '../'
 import { handleOut, getMultiActionOut } from './outs'
 
 const isNumber = (str: string) => !isNaN(Number(str))

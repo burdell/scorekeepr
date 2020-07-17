@@ -1,4 +1,4 @@
-import { Scorekeeper } from '../Scorekeeper'
+import { Scorekeeper } from '../'
 
 function getOutType(
   modifier: string

@@ -485,10 +485,7 @@ describe('At Bat Events', () => {
     scorekeeper.startGame()
 
     scorekeeper.hit(1)
-
-    scorekeeper.advanceRunners([
-      { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
-    ])
+    scorekeeper.advanceCurrentAtBat(3, resultGenerators.error(5))
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({
