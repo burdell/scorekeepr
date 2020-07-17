@@ -12,5 +12,5 @@
     "lib": ["es2020.string"]
   },
   "exclude": ["node_modules"],
-  "include": ["lib/*", "server/*"]
+  "include": ["lib/*", "dev*"]
 }

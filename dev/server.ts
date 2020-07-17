@@ -28,9 +28,7 @@ app.get('/games/:id', async (req, res, next) => {
       const id = file.filename.split('.json').shift()
       return req.params.id === id
     })
-
     if (!game) throw new Error('not found')
-
     res.json(JSON.parse(game.contents))
   } catch (e) {
     next(e)
@@ -38,5 +36,5 @@ app.get('/games/:id', async (req, res, next) => {
 })
 
 app.listen(port, () =>
-  console.log(`Scorekeeper app listening on port ${port}!`)
+  console.log(`📒 Scorekeeper app listening on port ${port}!`)
 )

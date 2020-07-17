@@ -2,4 +2,4 @@ node_modules
 .DS_Store
 coverage
 dist
-server/games/*.json
+dev/output/
