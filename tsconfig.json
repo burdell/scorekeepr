@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "types": ["jest", "node"],
     "declaration": true,
-    "lib": ["es2020.string"]
+    "lib": ["es2020.string", "dom"]
   },
   "exclude": ["node_modules"],
   "include": ["lib/*", "dev*"]
