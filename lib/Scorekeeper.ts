@@ -1,27 +1,26 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
+import { startGame, setCurrentAtBat } from './store/gameplay'
+import * as generators from './resultGenerators'
+import { ball, strike, foul } from './store/gameplay/pitches'
 import {
-  ball,
-  strike,
-  startGame,
-  foul,
-  setCurrentAtBat,
   hit,
   flyOut,
   defensiveError,
   putOut,
   fieldersChoice,
-  advanceCurrentRunner,
-  recordBasepathOut,
   lineout,
   sacrificeBunt,
   sacrificeFly,
   intentionalWalk,
-  hitBatter,
+  hitBatter
+} from './store/gameplay/at-bats'
+import {
+  advanceCurrentRunner,
+  recordBasepathOut,
   advanceRunners
-} from './store/gameplay'
-import * as generators from './resultGenerators'
+} from './store/gameplay/baserunners'
 
 import {
   Game,

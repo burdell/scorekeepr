@@ -174,5 +174,13 @@ describe('Retrosheet bsaerunners', () => {
     expect(advanceRunners).toHaveBeenCalledWith([
       { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
     ])
+
+    reset(game)
+    handleBaserunnerMovement('W+PB.3-H(NR);1-3', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      { startBase: 3, endBase: 4, result: undefined },
+      { startBase: 1, endBase: 3, result: undefined }
+    ])
   })
 })
