@@ -4,6 +4,7 @@ import {
   BaserunnerAction,
   handleBaserunnerAction
 } from '../lib/retrosheet/gameplay/baserunners'
+import * as resultGenerators from '../lib/resultGenerators'
 
 function reset(mocks: { [m: string]: jest.Mock }) {
   Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())
@@ -138,7 +139,7 @@ describe('Retrosheet bsaerunners', () => {
     expect(stolenBase).toHaveBeenCalled()
   })
 
-  it('records basic advancement', async () => {
+  it('records runner advancement', async () => {
     const advanceRunners = jest.fn()
 
     const game = { advanceRunners } as any
@@ -156,6 +157,22 @@ describe('Retrosheet bsaerunners', () => {
     expect(advanceRunners).toHaveBeenCalledWith([
       { startBase: 2, endBase: 4, result: undefined },
       { startBase: 'B', endBase: 2, result: undefined }
+    ])
+
+    reset(game)
+    handleBaserunnerMovement('E6/G6.3-H(RBI);2-3;B-1', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      { startBase: 3, endBase: 4, result: undefined },
+      { startBase: 2, endBase: 3, result: undefined },
+      { startBase: 'B', endBase: 1, result: undefined }
+    ])
+
+    reset(game)
+    handleBaserunnerMovement('G5.1-3(E5/TH)', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
     ])
   })
 })

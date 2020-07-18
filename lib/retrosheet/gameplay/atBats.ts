@@ -5,7 +5,7 @@ const isNumber = (str: string) => !isNaN(Number(str))
 const getFieldersChoice = (batterAction: string) => {
   return batterAction.match(/^FC\d+/)
 }
-const isError = (atBatResult: string) => atBatResult.match(/^C?\/?E(\d)/)
+export const isError = (atBatResult: string) => atBatResult.match(/^C?\/?E(\d)/)
 const isHomerun = (atBatResult: string) => atBatResult.match(/^HR?\d?/)
 const isHitBatter = (atBatResult: string) => atBatResult.match(/^HP/)
 const isIntentionalWalk = (atBatResult: string) => atBatResult.match(/^IW?/)

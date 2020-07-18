@@ -1,5 +1,8 @@
 import { Scorekeeper } from '../'
 import { RunnerAdvancement, Base } from '../../types'
+import * as resultGenerators from '../../resultGenerators'
+
+import { isError } from './atBats'
 
 const isBalk = (str: string) => str.match(/^BK/)
 const isCaughtStealing = (str: string) => str.match(/^CS/)
@@ -80,6 +83,16 @@ export function handleBaserunnerAction(
 const isAdvancement = (indicator: string) => indicator === '-'
 const isOut = (indicator: string) => indicator === 'X'
 
+function getBaseAdvancementResult(result: string | undefined) {
+  if (!result) return
+
+  const errorMatch = isError(result)
+  if (errorMatch) {
+    const [_, defensivePosition] = errorMatch
+    return resultGenerators.error(Number(defensivePosition))
+  }
+}
+
 export function handleBaserunnerMovement(
   advancesString: string,
   game: Scorekeeper
@@ -88,16 +101,24 @@ export function handleBaserunnerMovement(
   if (!baseRunnerMovementString) return
 
   const baseRunnerMovements = baseRunnerMovementString.matchAll(
-    /([\d|B])+([-|x])([\d+H])/g
+    /([\d|B])+([-|x])([\d+H])(\((.+)\))?/g
   )
   const baseAdvancements: RunnerAdvancement[] = []
   for (const movement of baseRunnerMovements) {
-    const [_, startBase, result, endBase] = movement
-    if (isAdvancement(result)) {
+    const [
+      fullGroup,
+      startBase,
+      advanceOrOut,
+      endBase,
+      resultGroup,
+      result
+    ] = movement
+
+    if (isAdvancement(advanceOrOut)) {
       baseAdvancements.push({
         startBase: startBase === 'B' ? startBase : (Number(startBase) as Base),
         endBase: endBase === 'H' ? 4 : (Number(endBase) as Base),
-        result: undefined
+        result: getBaseAdvancementResult(result)
       })
     }
   }
