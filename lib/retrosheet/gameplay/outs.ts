@@ -56,7 +56,9 @@ export const getMultiActionOut = (batterAction: string) => {
   }
 }
 
-export function handleMultiActionOut() {}
+export function getPutoutPositions(putout: string) {
+  return putout.split('').map(Number)
+}
 
 export function handleOut(
   batterAction: string,
@@ -65,7 +67,7 @@ export function handleOut(
 ) {
   const outType = getOutType(atBatResult)
   const atBatIsSacrifice = isSacrifice(atBatResult)
-  const defensivePositions = batterAction.split('').map(Number)
+  const defensivePositions = getPutoutPositions(batterAction)
   if (outType === 'groundout') {
     const putoutFn = atBatIsSacrifice ? game.sacrificeBunt : game.putout
     putoutFn(defensivePositions)

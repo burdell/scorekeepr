@@ -106,8 +106,9 @@ export type GameOutput = {
   gameInfo: Game
 }
 
-export type RunnerAdvancement = {
+export type RunnerMovement = {
   startBase: Base | 'B'
   endBase: Base
-  result: AdvanceBaseResult | undefined
+  result: AdvanceBaseResult | OutBaseResult | undefined
+  isOut?: boolean
 }

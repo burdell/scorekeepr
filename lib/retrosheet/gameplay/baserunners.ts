@@ -1,8 +1,9 @@
 import { Scorekeeper } from '../'
-import { RunnerAdvancement, Base } from '../../types'
+import { RunnerMovement, Base } from '../../types'
 import * as resultGenerators from '../../resultGenerators'
 
 import { isError } from './atBats'
+import { getPutoutPositions } from './outs'
 
 const isBalk = (str: string) => str.match(/^BK/)
 const isCaughtStealing = (str: string) => str.match(/^CS/)
@@ -101,27 +102,47 @@ export function handleBaserunnerMovement(
   if (!baseRunnerMovementString) return
 
   const baseRunnerMovements = baseRunnerMovementString.matchAll(
-    /([\d|B])+([-|x])([\d+H])(\((.+)\))?/g
+    /([\d|B])+([-X])([\d+H])(\((.+)\))?/g
   )
-  const baseAdvancements: RunnerAdvancement[] = []
+  const runnerMovements: RunnerMovement[] = []
   for (const movement of baseRunnerMovements) {
     const [
       fullGroup,
-      startBase,
+      rawStartBase,
       advanceOrOut,
-      endBase,
+      rawEndBase,
       resultGroup,
       result
     ] = movement
 
-    if (isAdvancement(advanceOrOut)) {
-      baseAdvancements.push({
-        startBase: startBase === 'B' ? startBase : (Number(startBase) as Base),
-        endBase: endBase === 'H' ? 4 : (Number(endBase) as Base),
+    const movementIsOut = isOut(advanceOrOut)
+    const errorOnOut = movementIsOut && result && result.match(/E(\d+)/)
+
+    const startBase =
+      rawStartBase === 'B' ? rawStartBase : (Number(rawStartBase) as Base)
+    const endBase = rawEndBase === 'H' ? 4 : (Number(rawEndBase) as Base)
+    if (errorOnOut) {
+      const [errorGroup, errorPosition] = errorOnOut
+      runnerMovements.push({
+        startBase,
+        endBase,
+        result: resultGenerators.error(Number(errorPosition))
+      })
+    } else if (isAdvancement(advanceOrOut)) {
+      runnerMovements.push({
+        startBase,
+        endBase,
         result: getBaseAdvancementResult(result)
+      })
+    } else if (movementIsOut) {
+      runnerMovements.push({
+        startBase,
+        endBase,
+        isOut: true,
+        result: resultGenerators.putout(getPutoutPositions(result))
       })
     }
   }
 
-  game.advanceRunners(baseAdvancements)
+  game.advanceRunners(runnerMovements)
 }

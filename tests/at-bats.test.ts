@@ -379,7 +379,10 @@ describe('At Bat Events', () => {
     scorekeeper.startGame()
 
     scorekeeper.hit(1)
-    scorekeeper.basepathOut(2, scorekeeper.resultGenerators.putout([4, 6]))
+    scorekeeper.currentFrameBasepathOut(
+      2,
+      scorekeeper.resultGenerators.putout([4, 6])
+    )
 
     expect(getAtBat(0)).toEqual(
       atBatWithDefaults({

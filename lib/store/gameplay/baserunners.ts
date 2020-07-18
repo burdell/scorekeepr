@@ -4,7 +4,8 @@ import {
   Base,
   OutBaseResult,
   AdvanceBaseResult,
-  RunnerAdvancement
+  RunnerMovement,
+  AtBat
 } from '../../types'
 import { ensureCurrentAtBat, advanceRunnerHelper } from './utilities'
 
@@ -16,9 +17,7 @@ export const advanceCurrentRunner = createAction<{
   base: Base
   result: AdvanceBaseResult | undefined
 }>('advanceCurrentRunner')
-export const advanceRunners = createAction<RunnerAdvancement[]>(
-  'advanceRunners'
-)
+export const advanceRunners = createAction<RunnerMovement[]>('advanceRunners')
 
 export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
   builder.addCase(advanceCurrentRunner, (state, action) => {
@@ -37,13 +36,28 @@ export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
     state[team][inning][lineupSpot] = newFrame
   })
 
+  function getFrameForBaseRunner(
+    base: Base,
+    currentFrame: number,
+    currentInning: AtBat[]
+  ) {
+    const baseRunnerIndex = currentInning.findIndex(
+      (atBat, atBatIndex) =>
+        atBat && atBatIndex !== currentFrame && atBat.bases.length === base
+    )
+    return {
+      atBat: currentInning[baseRunnerIndex],
+      baseRunnerIndex: baseRunnerIndex
+    }
+  }
+
   builder.addCase(advanceRunners, (state, action) => {
     const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
     const advances = action.payload
     const newInning = [...state[team][inning]]
     const currentInning = state[team][inning]
 
-    function getAtBatForAdvance(a: RunnerAdvancement) {
+    function getAtBatForAdvance(a: RunnerMovement) {
       if (a.startBase === 'B') {
         return {
           atBat: state[team][inning][lineupSpot],
@@ -51,16 +65,7 @@ export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
         }
       }
 
-      const baseRunnerIndex = currentInning.findIndex(
-        (atBat, atBatIndex) =>
-          atBat &&
-          atBatIndex !== lineupSpot &&
-          atBat.bases.length === a.startBase
-      )
-      return {
-        atBat: currentInning[baseRunnerIndex],
-        baseRunnerIndex: baseRunnerIndex
-      }
+      return getFrameForBaseRunner(a.startBase, lineupSpot, currentInning)
     }
 
     advances.forEach((a) => {
@@ -72,7 +77,8 @@ export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
           bases: advanceRunnerHelper({
             baseAdvancedTo: a.endBase,
             existingBases: atBat.bases,
-            result: a.result
+            result: a.result,
+            isOut: a.isOut
           })
         }
       }

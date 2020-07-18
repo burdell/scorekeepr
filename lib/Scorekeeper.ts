@@ -31,7 +31,7 @@ import {
   AdvanceBaseResult,
   OutBaseResult,
   GameOutput,
-  RunnerAdvancement
+  RunnerMovement
 } from './types'
 
 export class Scorekeeper {
@@ -170,11 +170,11 @@ export class Scorekeeper {
     this.store.dispatch(advanceCurrentRunner({ base, result }))
   }
 
-  basepathOut = (baseAttempted: Base, result: OutBaseResult) => {
+  currentFrameBasepathOut = (baseAttempted: Base, result: OutBaseResult) => {
     this.store.dispatch(recordBasepathOut({ baseAttempted, result }))
   }
 
-  advanceRunners = (runnerAdvancements: RunnerAdvancement[]) => {
+  advanceRunners = (runnerAdvancements: RunnerMovement[]) => {
     this.store.dispatch(advanceRunners(runnerAdvancements))
   }
 

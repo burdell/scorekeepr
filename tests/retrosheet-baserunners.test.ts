@@ -169,7 +169,7 @@ describe('Retrosheet bsaerunners', () => {
     ])
 
     reset(game)
-    handleBaserunnerMovement('G5.1-3(E5/TH)', game)
+    handleBaserunnerMovement('S5/G5.1-3(E5/TH)', game)
 
     expect(advanceRunners).toHaveBeenCalledWith([
       { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
@@ -181,6 +181,68 @@ describe('Retrosheet bsaerunners', () => {
     expect(advanceRunners).toHaveBeenCalledWith([
       { startBase: 3, endBase: 4, result: undefined },
       { startBase: 1, endBase: 3, result: undefined }
+    ])
+  })
+
+  it('records runner outs', () => {
+    const advanceRunners = jest.fn()
+
+    const game = { advanceRunners } as any
+
+    handleBaserunnerMovement('K/DP.1X2(26)', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      {
+        startBase: 1,
+        endBase: 2,
+        result: resultGenerators.putout([2, 6]),
+        isOut: true
+      }
+    ])
+
+    reset(game)
+    handleBaserunnerMovement('9/F9LS/FDP.3XH(92)', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      {
+        startBase: 3,
+        endBase: 4,
+        result: resultGenerators.putout([9, 2]),
+        isOut: true
+      }
+    ])
+
+    reset(game)
+    handleBaserunnerMovement('S8/L78.BX2(8434)', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      {
+        startBase: 'B',
+        endBase: 2,
+        result: resultGenerators.putout([8, 4, 3, 4]),
+        isOut: true
+      }
+    ])
+
+    reset(game)
+    handleBaserunnerMovement('S7/L7LD.3-H;2-H;BX2(7E4)', game)
+
+    expect(advanceRunners).toHaveBeenCalledWith([
+      {
+        startBase: 3,
+        endBase: 4,
+        result: undefined
+      },
+      {
+        startBase: 2,
+        endBase: 4,
+        result: undefined
+      },
+      {
+        startBase: 'B',
+        endBase: 2,
+        result: resultGenerators.error(4)
+      }
     ])
   })
 })
