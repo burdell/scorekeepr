@@ -2,7 +2,6 @@ import { Base, AdvanceableBase } from './types'
 
 export function getBase(rawBase: string | number): Base {
   if (rawBase === 'H') return 4
-  if (rawBase === 'B') return 1
 
   const base = Number(rawBase)
   if (base === 1) return 1

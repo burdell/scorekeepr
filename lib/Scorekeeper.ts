@@ -36,6 +36,7 @@ import {
   AdvanceableBase
 } from './types'
 import * as resultGenerators from './resultGenerators'
+import { getBase } from './utilities'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -197,7 +198,7 @@ export class Scorekeeper {
     const startBase = attemptedBase - 1
     this.advanceRunners([
       {
-        startBase: startBase as Base,
+        startBase: getBase(startBase),
         endBase: attemptedBase,
         isOut: true,
         result: resultGenerators.caughtStealing(putOut)
@@ -208,7 +209,7 @@ export class Scorekeeper {
   stolenBase = (attemptedBases: AdvanceableBase[]) => {
     this.advanceRunners(
       attemptedBases.map((attemptedBase) => ({
-        startBase: (attemptedBase - 1) as Base,
+        startBase: getBase(attemptedBase - 1),
         endBase: attemptedBase,
         result: resultGenerators.stolenBase(attemptedBase)
       }))
@@ -218,7 +219,7 @@ export class Scorekeeper {
   defensiveIndifference = (base: AdvanceableBase) => {
     this.advanceRunners([
       {
-        startBase: (base - 1) as Base,
+        startBase: getBase(base - 1),
         endBase: base,
         result: resultGenerators.defensiveIndifference(base)
       }
@@ -228,7 +229,7 @@ export class Scorekeeper {
   passedBall = (attemptedBases: Base[]) => {
     this.advanceRunners(
       attemptedBases.map((attemptedBase) => ({
-        startBase: (attemptedBase - 1) as Base,
+        startBase: getBase(attemptedBase - 1),
         endBase: attemptedBase,
         result: resultGenerators.passedBall(attemptedBase)
       }))
@@ -238,7 +239,7 @@ export class Scorekeeper {
   wildPitch = (attemptedBases: Base[]) => {
     this.advanceRunners(
       attemptedBases.map((attemptedBase) => ({
-        startBase: (attemptedBase - 1) as Base,
+        startBase: getBase(attemptedBase - 1),
         endBase: attemptedBase,
         result: resultGenerators.wildPitch(attemptedBase)
       }))
@@ -247,14 +248,5 @@ export class Scorekeeper {
 
   pickOff = (base: Base, putout: number[]) => {
     this.store.dispatch(pickOff({ base, putout }))
-  }
-
-  getOutput = (): GameOutput => {
-    return {
-      id: this.gameInfo.id,
-      lineups: this.lineups,
-      gameInfo: this.gameInfo,
-      gameplay: this.gameplay
-    }
   }
 }

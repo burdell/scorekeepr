@@ -49,7 +49,7 @@ export function handleBaserunnerAction(
 
   if (type === 'pick-off') {
     const [_, rawBase, putoutString] = match
-    const base = Number(rawBase) as Base
+    const base = getBase(rawBase)
     if (putoutString.indexOf('E') >= 0) {
       const allRunnerMovements = getErrorMovements(base, action, putoutString)
       moveRunners(allRunnerMovements, game)

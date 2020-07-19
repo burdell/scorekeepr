@@ -111,7 +111,7 @@ describe('At Bat Events', () => {
       })
     )
 
-    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
+    scorekeeper.nextLineupSpot()
     scorekeeper.hit(4)
 
     expect(getAtBat(scorekeeper, 1)).toEqual(
@@ -124,6 +124,43 @@ describe('At Bat Events', () => {
         },
         bases: [
           { advanced: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined, isAtBatResult: true }
+        ]
+      })
+    )
+
+    scorekeeper.nextLineupSpot()
+    scorekeeper.hit(2)
+
+    expect(getAtBat(scorekeeper, 2)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        result: {
+          type: 'hit',
+          result: 2,
+          display: '2B'
+        },
+        bases: [
+          { advanced: true, result: undefined },
+          { advanced: true, result: undefined, isAtBatResult: true }
+        ]
+      })
+    )
+
+    scorekeeper.nextLineupSpot()
+    scorekeeper.hit(3)
+
+    expect(getAtBat(scorekeeper, 3)).toEqual(
+      atBatWithDefaults({
+        pitchCount: 1,
+        result: {
+          type: 'hit',
+          result: 3,
+          display: '3B'
+        },
+        bases: [
           { advanced: true, result: undefined },
           { advanced: true, result: undefined },
           { advanced: true, result: undefined, isAtBatResult: true }

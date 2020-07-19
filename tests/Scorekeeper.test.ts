@@ -99,4 +99,26 @@ describe('Scorekeeper', () => {
 
     expect(scorekeeper.lineups.home[0][1]).toEqual(anotherHomePlayer)
   })
+
+  it('goes to the next inning', () => {
+    const scorekeeper = new Scorekeeper()
+
+    scorekeeper.startGame()
+    expect(scorekeeper.gameplay.currentAtBat!.inning).toBe(0)
+
+    scorekeeper.nextInning()
+
+    expect(scorekeeper.gameplay.currentAtBat!.inning).toBe(1)
+  })
+
+  it('goes to the next lineup spot', () => {
+    const scorekeeper = new Scorekeeper()
+
+    scorekeeper.startGame()
+    expect(scorekeeper.gameplay.currentAtBat!.lineupSpot).toBe(0)
+
+    scorekeeper.nextLineupSpot()
+
+    expect(scorekeeper.gameplay.currentAtBat!.lineupSpot).toBe(1)
+  })
 })

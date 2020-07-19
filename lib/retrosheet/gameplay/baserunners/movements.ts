@@ -29,7 +29,7 @@ export const getBaserunnerMovements = (str: string) => {
     const errorPosition = errorOnOut ? Number(errorOnOut[1]) : undefined
 
     const startBase =
-      rawStartBase === 'B' ? rawStartBase : (Number(rawStartBase) as Base)
+      rawStartBase === 'B' ? rawStartBase : getBase(rawStartBase)
     const endBase = getBase(rawEndBase)
     runnerMovements.push({
       startBase,

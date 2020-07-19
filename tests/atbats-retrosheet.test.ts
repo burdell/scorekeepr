@@ -1,10 +1,5 @@
 import { handlePitchSequence } from '../lib/retrosheet/gameplay/pitches'
 import { handleAtABat } from '../lib/retrosheet/gameplay/atBats'
-import {
-  handleBaserunnerAction,
-  getBaserunnerAction,
-  BaserunnerAction
-} from '../lib/retrosheet/gameplay/baserunners'
 
 function reset(mocks: { [m: string]: jest.Mock }) {
   Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())

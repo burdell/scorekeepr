@@ -3,6 +3,7 @@ import { resolve } from 'path'
 
 import { getRetrosheetScorekeepers } from '../lib/index'
 import { getFilenames, sourceFolder, outputFolder } from './readFolderFiles'
+import { GameOutput } from '../lib/types'
 
 function regenOutputFolder() {
   if (existsSync(outputFolder)) {
@@ -17,7 +18,12 @@ function writeToFile(data: unknown, dir: string, filename: string) {
 async function generateGame(filePath: string) {
   const scorekeepers = await getRetrosheetScorekeepers(filePath)
   scorekeepers.forEach((scorekeeper) => {
-    const game = scorekeeper.getOutput()
+    const game: GameOutput = {
+      id: scorekeeper.gameInfo.id,
+      lineups: scorekeeper.lineups,
+      gameplay: scorekeeper.gameplay,
+      gameInfo: scorekeeper.gameInfo
+    }
     writeToFile(game, outputFolder, `${game.gameInfo.id}.json`)
   })
 }
