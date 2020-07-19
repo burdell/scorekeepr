@@ -1,26 +1,9 @@
 import { Scorekeeper } from '../lib'
-import { AtBat } from '../lib/types'
 
-import * as resultGenerators from '../lib/resultGenerators'
-
-function atBatWithDefaults(overrides: Partial<AtBat>): AtBat {
-  return {
-    balls: 0,
-    strikes: 0,
-    pitchCount: 0,
-    isOut: false,
-    result: undefined,
-    bases: [],
-    ...overrides
-  }
-}
+import { getAtBat, atBatWithDefaults } from './test-utils'
 
 describe('At Bat Events', () => {
   it('records a walk', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
@@ -35,7 +18,7 @@ describe('At Bat Events', () => {
     const expectedStrikes = 2
     const expectedPitches = expectedBalls + expectedStrikes
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         balls: expectedBalls,
         strikes: expectedStrikes,
@@ -51,15 +34,11 @@ describe('At Bat Events', () => {
 
     scorekeeper.ball()
 
-    expect(getAtBat(0).balls).toEqual(expectedBalls)
-    expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
+    expect(getAtBat(scorekeeper, 0).balls).toEqual(expectedBalls)
+    expect(getAtBat(scorekeeper, 0).pitchCount).toEqual(expectedPitches)
   })
 
   it('records a strikeout', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
@@ -73,7 +52,7 @@ describe('At Bat Events', () => {
     const expectedStrikes = 3
     const expectedPitches = expectedBalls + expectedStrikes
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         balls: expectedBalls,
         strikes: expectedStrikes,
@@ -89,46 +68,38 @@ describe('At Bat Events', () => {
 
     scorekeeper.strike()
 
-    expect(getAtBat(0).strikes).toEqual(expectedStrikes)
-    expect(getAtBat(0).pitchCount).toEqual(expectedPitches)
+    expect(getAtBat(scorekeeper, 0).strikes).toEqual(expectedStrikes)
+    expect(getAtBat(scorekeeper, 0).pitchCount).toEqual(expectedPitches)
   })
 
   it('handles foul tips', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.strike()
     scorekeeper.foul()
 
-    expect(getAtBat(0).strikes).toEqual(2)
-    expect(getAtBat(0).pitchCount).toEqual(2)
+    expect(getAtBat(scorekeeper, 0).strikes).toEqual(2)
+    expect(getAtBat(scorekeeper, 0).pitchCount).toEqual(2)
 
     scorekeeper.foul()
 
-    expect(getAtBat(0).strikes).toEqual(2)
-    expect(getAtBat(0).pitchCount).toEqual(3)
+    expect(getAtBat(scorekeeper, 0).strikes).toEqual(2)
+    expect(getAtBat(scorekeeper, 0).pitchCount).toEqual(3)
 
     scorekeeper.foul()
 
-    expect(getAtBat(0).strikes).toEqual(2)
-    expect(getAtBat(0).pitchCount).toEqual(4)
+    expect(getAtBat(scorekeeper, 0).strikes).toEqual(2)
+    expect(getAtBat(scorekeeper, 0).pitchCount).toEqual(4)
   })
 
   it('records a hit', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.hit(1)
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
@@ -143,7 +114,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
     scorekeeper.hit(4)
 
-    expect(getAtBat(1)).toEqual(
+    expect(getAtBat(scorekeeper, 1)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
@@ -162,16 +133,12 @@ describe('At Bat Events', () => {
   })
 
   it('records a fly out', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.flyout(3)
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -186,7 +153,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
     scorekeeper.flyout(8)
 
-    expect(getAtBat(1)).toEqual(
+    expect(getAtBat(scorekeeper, 1)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -201,7 +168,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 2 })
     scorekeeper.sacrificeFly(9)
 
-    expect(getAtBat(2)).toEqual(
+    expect(getAtBat(scorekeeper, 2)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -216,16 +183,12 @@ describe('At Bat Events', () => {
   })
 
   it('records a put out', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.putout([3])
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -240,7 +203,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
     scorekeeper.putout([6, 4, 3])
 
-    expect(getAtBat(1)).toEqual(
+    expect(getAtBat(scorekeeper, 1)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -255,7 +218,7 @@ describe('At Bat Events', () => {
     scorekeeper.setCurrentAtBat({ lineupSpot: 2 })
     scorekeeper.sacrificeBunt([1, 3])
 
-    expect(getAtBat(2)).toEqual(
+    expect(getAtBat(scorekeeper, 2)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -270,16 +233,12 @@ describe('At Bat Events', () => {
   })
 
   it('records an error', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.defensiveError({ defensivePlayer: 3, baseAdvancedTo: 1 })
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
@@ -293,16 +252,12 @@ describe('At Bat Events', () => {
   })
 
   it('records a fielders choice', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.fieldersChoice()
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
@@ -315,66 +270,7 @@ describe('At Bat Events', () => {
     )
   })
 
-  it('advances a runner', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
-    const scorekeeper = new Scorekeeper()
-    scorekeeper.startGame()
-
-    scorekeeper.advanceCurrentRunner(1)
-
-    expect(getAtBat(0)).toEqual(
-      atBatWithDefaults({
-        bases: [{ advanced: true, result: undefined }]
-      })
-    )
-
-    scorekeeper.advanceCurrentRunner(2)
-
-    expect(getAtBat(0)).toEqual(
-      atBatWithDefaults({
-        bases: [
-          { advanced: true, result: undefined },
-          { advanced: true, result: undefined }
-        ]
-      })
-    )
-
-    scorekeeper.setCurrentAtBat({ lineupSpot: 1 })
-
-    scorekeeper.hit(1)
-    scorekeeper.advanceCurrentRunner(2, scorekeeper.resultGenerators.error(6))
-
-    expect(getAtBat(1)).toEqual(
-      atBatWithDefaults({
-        pitchCount: 1,
-        result: {
-          type: 'hit',
-          result: 1,
-          display: '1B'
-        },
-        bases: [
-          { advanced: true, result: undefined, isAtBatResult: true },
-          {
-            advanced: true,
-            result: {
-              type: 'defensive-error',
-              result: 6,
-              display: 'E6'
-            }
-          }
-        ]
-      })
-    )
-  })
-
   it('records an out on the basepaths', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
@@ -384,7 +280,7 @@ describe('At Bat Events', () => {
       scorekeeper.resultGenerators.putout([4, 6])
     )
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         result: {
@@ -409,16 +305,12 @@ describe('At Bat Events', () => {
   })
 
   it('records a lineout', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.lineout(6)
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: true,
@@ -432,16 +324,12 @@ describe('At Bat Events', () => {
   })
 
   it('records an intentional walk', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.intentionalWalk()
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 0,
         isOut: false,
@@ -456,16 +344,12 @@ describe('At Bat Events', () => {
   })
 
   it('records a hit batter', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
     const scorekeeper = new Scorekeeper()
     scorekeeper.startGame()
 
     scorekeeper.hitBatter()
 
-    expect(getAtBat(0)).toEqual(
+    expect(getAtBat(scorekeeper, 0)).toEqual(
       atBatWithDefaults({
         pitchCount: 1,
         isOut: false,
@@ -475,86 +359,6 @@ describe('At Bat Events', () => {
           display: 'HBP'
         },
         bases: [{ advanced: true, isAtBatResult: true, result: undefined }]
-      })
-    )
-  })
-
-  it('records a balk', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
-    const scorekeeper = new Scorekeeper()
-    scorekeeper.startGame()
-
-    scorekeeper.hitBatter()
-    scorekeeper.nextLineupSpot()
-    scorekeeper.balk()
-
-    const atBat = getAtBat(0)
-    expect(atBat.bases[1]).toEqual({
-      advanced: true,
-      result: {
-        display: 'BK',
-        result: 'BK',
-        type: 'balk'
-      }
-    })
-  })
-
-  it('advances runners', () => {
-    function getAtBat(lineupSpot: number) {
-      return scorekeeper.gameplay.visiting[0][lineupSpot]
-    }
-
-    const scorekeeper = new Scorekeeper()
-    scorekeeper.startGame()
-
-    scorekeeper.hit(1)
-    scorekeeper.advanceCurrentAtBat(3, resultGenerators.error(5))
-
-    expect(getAtBat(0)).toEqual(
-      atBatWithDefaults({
-        result: resultGenerators.hit(1),
-        pitchCount: 1,
-        bases: [
-          { advanced: true, isAtBatResult: true, result: undefined },
-          { advanced: true, result: undefined },
-          { advanced: true, result: resultGenerators.error(5) }
-        ]
-      })
-    )
-
-    scorekeeper.nextLineupSpot()
-    scorekeeper.intentionalWalk()
-    scorekeeper.nextLineupSpot()
-    scorekeeper.hit(2)
-    scorekeeper.advanceRunners([
-      { startBase: 3, endBase: 4, result: undefined },
-      { startBase: 1, endBase: 3, result: undefined }
-    ])
-
-    expect(getAtBat(0)).toEqual(
-      atBatWithDefaults({
-        result: resultGenerators.hit(1),
-        pitchCount: 1,
-        bases: [
-          { advanced: true, isAtBatResult: true, result: undefined },
-          { advanced: true, result: undefined },
-          { advanced: true, result: resultGenerators.error(5) },
-          { advanced: true, result: undefined }
-        ]
-      })
-    )
-
-    expect(getAtBat(1)).toEqual(
-      atBatWithDefaults({
-        result: resultGenerators.pitcherResult('IBB'),
-        bases: [
-          { advanced: true, isAtBatResult: true, result: undefined },
-          { advanced: true, result: undefined },
-          { advanced: true, result: undefined }
-        ]
       })
     )
   })

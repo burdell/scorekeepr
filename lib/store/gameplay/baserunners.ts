@@ -8,6 +8,8 @@ import {
   AtBat
 } from '../../types'
 import { ensureCurrentAtBat, advanceRunnerHelper } from './utilities'
+import * as resultGenerators from '../../resultGenerators'
+import { putOut } from './at-bats'
 
 export const recordBasepathOut = createAction<{
   baseAttempted: Base
@@ -18,6 +20,7 @@ export const advanceCurrentRunner = createAction<{
   result: AdvanceBaseResult | undefined
 }>('advanceCurrentRunner')
 export const advanceRunners = createAction<RunnerMovement[]>('advanceRunners')
+export const pickOff = createAction<{ base: Base; putout: number[] }>('pickOff')
 
 export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
   builder.addCase(advanceCurrentRunner, (state, action) => {
@@ -103,5 +106,21 @@ export function setupBaserunners(builder: ActionReducerMapBuilder<Gameplay>) {
     }
 
     state[team][inning][lineupSpot] = newFrame
+  })
+
+  builder.addCase(pickOff, (state, action) => {
+    const { team, inning, lineupSpot } = ensureCurrentAtBat(state)
+    const { base, putout } = action.payload
+
+    const runnerFrame = getFrameForBaseRunner(
+      base,
+      lineupSpot,
+      state[team][inning]
+    )
+    const runnerBase =
+      runnerFrame && runnerFrame.atBat && runnerFrame.atBat.bases[base - 1]
+    if (runnerBase) {
+      runnerBase.pickOff = resultGenerators.putout(putout)
+    }
   })
 }

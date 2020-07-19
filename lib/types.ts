@@ -58,11 +58,30 @@ export type StolenBase = {
   display: 'SB'
 }
 
+export type DefensiveIndifference = {
+  type: 'defensive-indifference'
+  result: AdvanceableBase
+  display: 'DI'
+}
+
 export type FieldersChoice = {
   type: 'fielders-choice'
   result: Base
   display: 'FC'
 }
+
+export type PassedBall = {
+  type: 'passed-ball'
+  result: Base
+  display: 'PB'
+}
+
+export type WildPitch = {
+  type: 'wild-pitch'
+  result: Base
+  display: 'WP'
+}
+
 export type AtBatResult =
   | PutOut
   | FlyOut
@@ -77,6 +96,10 @@ export type AdvanceBaseResult =
   | FieldersChoice
   | Balk
   | StolenBase
+  | DefensiveIndifference
+  | PassedBall
+  | WildPitch
+
 export type OutBaseResult = PutOut | CaughtStealing
 export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
 
@@ -84,6 +107,7 @@ export type BaseResult = {
   advanced: boolean
   result: BaseResultResult
   isAtBatResult?: boolean
+  pickOff?: PutOut
 }
 
 export type AtBat = {

@@ -19,7 +19,8 @@ import {
 import {
   advanceCurrentRunner,
   recordBasepathOut,
-  advanceRunners
+  advanceRunners,
+  pickOff
 } from './store/gameplay/baserunners'
 
 import {
@@ -184,7 +185,7 @@ export class Scorekeeper {
     this.advanceRunners([{ startBase: 'B', endBase, result }])
   }
 
-  balk() {
+  balk = () => {
     this.advanceRunners([
       { startBase: 1, endBase: 2, result: this.resultGenerators.balk() },
       { startBase: 2, endBase: 3, result: this.resultGenerators.balk() },
@@ -192,7 +193,7 @@ export class Scorekeeper {
     ])
   }
 
-  caughtStealing(attemptedBase: AdvanceableBase, putOut: number[]) {
+  caughtStealing = (attemptedBase: AdvanceableBase, putOut: number[]) => {
     const startBase = attemptedBase - 1
     this.advanceRunners([
       {
@@ -204,25 +205,49 @@ export class Scorekeeper {
     ])
   }
 
-  stolenBase(attemptedBase: AdvanceableBase) {
-    this.advanceRunners([
-      {
+  stolenBase = (attemptedBases: AdvanceableBase[]) => {
+    this.advanceRunners(
+      attemptedBases.map((attemptedBase) => ({
         startBase: (attemptedBase - 1) as Base,
         endBase: attemptedBase,
         result: resultGenerators.stolenBase(attemptedBase)
+      }))
+    )
+  }
+
+  defensiveIndifference = (base: AdvanceableBase) => {
+    this.advanceRunners([
+      {
+        startBase: (base - 1) as Base,
+        endBase: base,
+        result: resultGenerators.defensiveIndifference(base)
       }
     ])
   }
 
-  defensiveIndifference() {}
+  passedBall = (attemptedBases: Base[]) => {
+    this.advanceRunners(
+      attemptedBases.map((attemptedBase) => ({
+        startBase: (attemptedBase - 1) as Base,
+        endBase: attemptedBase,
+        result: resultGenerators.passedBall(attemptedBase)
+      }))
+    )
+  }
 
-  passedBall() {}
+  wildPitch = (attemptedBases: Base[]) => {
+    this.advanceRunners(
+      attemptedBases.map((attemptedBase) => ({
+        startBase: (attemptedBase - 1) as Base,
+        endBase: attemptedBase,
+        result: resultGenerators.wildPitch(attemptedBase)
+      }))
+    )
+  }
 
-  wildPitch() {}
-
-  pickOff() {}
-
-  pickOffOffBase() {}
+  pickOff = (base: Base, putout: number[]) => {
+    this.store.dispatch(pickOff({ base, putout }))
+  }
 
   getOutput = (): GameOutput => {
     return {

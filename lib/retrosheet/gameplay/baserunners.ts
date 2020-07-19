@@ -34,7 +34,7 @@ const getBaserunnerMovements = (str: string) => {
 
     const startBase =
       rawStartBase === 'B' ? rawStartBase : (Number(rawStartBase) as Base)
-    const endBase = rawEndBase === 'H' ? 4 : (Number(rawEndBase) as Base)
+    const endBase = getBase(rawEndBase)
     runnerMovements.push({
       startBase,
       endBase,
@@ -55,7 +55,7 @@ export type BaserunnerAction =
   | 'passed-ball'
   | 'wild-pitch'
   | 'pick-off'
-  | 'pick-off-off-base'
+  | 'pick-off-caught-stealing'
   | 'stolen-base'
 
 export function getBaserunnerAction(action: string) {
@@ -70,7 +70,7 @@ export function getBaserunnerAction(action: string) {
       action
     }
 
-  const isDefensiveIndifferenceRegexp = action.match(/^DI/)
+  const isDefensiveIndifferenceRegexp = action.match(/^DI.\d-(\d)/)
   if (isDefensiveIndifferenceRegexp)
     return {
       type: 'defensive-indifference',
@@ -82,36 +82,60 @@ export function getBaserunnerAction(action: string) {
   if (isBaseAdvancementRegexp)
     return { type: 'base-advancement', match: isBaseAdvancementRegexp, action }
 
-  const isPassedBallRegexp = action.match(/^PB/)
-  if (isPassedBallRegexp)
-    return { type: 'passed-ball', match: isPassedBallRegexp, action }
+  const pbOrWpRegexp = action.match(/^(WP|PB)/)
+  if (pbOrWpRegexp) return { type: 'pb-or-wp', match: pbOrWpRegexp, action }
 
-  const isWildPitchRegexp = action.match(/^WP/)
-  if (isWildPitchRegexp)
-    return { type: 'wild-pitch', match: isWildPitchRegexp, action }
+  const pickOffCaughtStealing = action.match(/^POCS([23H])\((\d+)\)/)
+  if (pickOffCaughtStealing)
+    return {
+      type: 'pick-off-caught-stealing',
+      match: pickOffCaughtStealing,
+      action
+    }
 
-  const isPickOffOffBaseRegexp = action.match(/^POCS/)
-  if (isPickOffOffBaseRegexp)
-    return { type: 'pick-off-off-base', match: isPickOffOffBaseRegexp, action }
-
-  const isPickOffRegexp = action.match(/^PO/)
+  const isPickOffRegexp = action.match(/^PO([123])\((E?\d+)\)/)
   if (isPickOffRegexp)
     return { type: 'pick-off', match: isPickOffRegexp, action }
 
-  const isStolenBaseRegexp = action.match(/^SB/)
+  const isStolenBaseRegexp = action.match(/^SB([23H])/)
   if (isStolenBaseRegexp)
     return { type: 'stolen-base', match: isStolenBaseRegexp, action }
 
   return
 }
 
-function getAdvanceableBase(rawBase: string): AdvanceableBase {
+function getBase(rawBase: string | number): Base {
   if (rawBase === 'H') return 4
+  if (rawBase === 'B') return 1
+
+  const base = Number(rawBase)
+  if (base === 1) return 1
+  if (base === 2) return 2
+  if (base === 3) return 3
+  if (base === 4) return 4
+
+  throw new Error('Attempted to use an invalid base')
+}
+
+function getAdvanceableBase(rawBase: string | number): AdvanceableBase {
+  if (rawBase === 'H') return 4
+
   const base = Number(rawBase)
   if (base === 2) return 2
   if (base === 3) return 3
+  if (base === 4) return 4
 
-  throw new Error('Attempted to advance to an invalid base')
+  throw new Error('Attempted to use an invalid advanceable base')
+}
+
+function getErrorMovements(base: Base, action: string, putoutString: string) {
+  return getBaserunnerMovements(action).map((movement) => {
+    if (movement.endBase !== base + 1) return movement
+    return {
+      ...movement,
+      errorPosition: Number(putoutString.split('E').pop())
+    }
+  })
 }
 
 export function handleBaserunnerAction(
@@ -124,49 +148,60 @@ export function handleBaserunnerAction(
 
   if (type === 'caught-stealing' && match) {
     const [fullResult, rawBase, putoutString] = match
-    const base = getAdvanceableBase(rawBase)
+    const base = getBase(rawBase)
     if (putoutString.indexOf('E') >= 0) {
-      const allRunnerMovements = getBaserunnerMovements(action).map(
-        (movement) => {
-          if (movement.endBase !== base + 1) return movement
-          return {
-            ...movement,
-            errorPosition: Number(putoutString.split('E').pop())
-          }
-        }
-      )
+      const allRunnerMovements = getErrorMovements(base, action, putoutString)
       moveRunners(allRunnerMovements, game)
     } else {
-      game.caughtStealing(base, putoutString.split('').map(Number))
+      game.caughtStealing(
+        getAdvanceableBase(base),
+        putoutString.split('').map(Number)
+      )
     }
   }
 
   if (type === 'defensive-indifference') {
-    game.defensiveIndifference()
+    game.defensiveIndifference(getAdvanceableBase(match[1]))
   }
 
   if (type === 'base-advancement') {
-    // game.advanceRunners()
+    handleBaserunnerMovement(action, game)
   }
 
-  if (type === 'passed-ball') {
-    game.passedBall()
-  }
-
-  if (type === 'wild-pitch') {
-    game.wildPitch()
+  if (type === 'pb-or-wp') {
+    const movements = getBaserunnerMovements(action)
+    const movedBases = movements.map((m) => m.endBase)
+    const resultFn = match[0] === 'PB' ? game.passedBall : game.wildPitch
+    resultFn(movedBases)
   }
 
   if (type === 'pick-off') {
-    game.pickOff()
+    const [_, rawBase, putoutString] = match
+    const base = Number(rawBase) as Base
+    if (putoutString.indexOf('E') >= 0) {
+      const allRunnerMovements = getErrorMovements(base, action, putoutString)
+      moveRunners(allRunnerMovements, game)
+    } else {
+      game.pickOff(base, putoutString.split('').map(Number))
+    }
   }
 
-  if (type === 'pick-off-off-base') {
-    game.pickOffOffBase()
+  if (type === 'pick-off-caught-stealing') {
+    const [fullMatch, attemptedBase, putoutString] = match
+    game.caughtStealing(
+      getAdvanceableBase(attemptedBase),
+      putoutString.split('').map(Number)
+    )
   }
 
   if (type === 'stolen-base') {
-    // game.stolenBase()
+    const allBases = action.matchAll(/(SB([23H]))+/g)
+    const baseList: AdvanceableBase[] = Array.from(
+      allBases
+    ).map(([fullGroup, repeatGroup, attemptedBase]) =>
+      getAdvanceableBase(attemptedBase)
+    )
+    game.stolenBase(baseList)
   }
 }
 

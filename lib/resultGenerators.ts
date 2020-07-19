@@ -11,7 +11,11 @@ import {
   Balk,
   CaughtStealing,
   StolenBase,
-  AdvanceableBase
+  AdvanceableBase,
+  AdvanceBaseResult,
+  DefensiveIndifference,
+  PassedBall,
+  WildPitch
 } from './types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
@@ -95,5 +99,31 @@ export function stolenBase(base: AdvanceableBase): StolenBase {
     type: 'stolen-base',
     result: base,
     display: 'SB'
+  }
+}
+
+export function defensiveIndifference(
+  base: AdvanceableBase
+): DefensiveIndifference {
+  return {
+    type: 'defensive-indifference',
+    result: base,
+    display: 'DI'
+  }
+}
+
+export function passedBall(base: Base): PassedBall {
+  return {
+    type: 'passed-ball',
+    result: base,
+    display: 'PB'
+  }
+}
+
+export function wildPitch(base: Base): WildPitch {
+  return {
+    type: 'wild-pitch',
+    result: base,
+    display: 'WP'
   }
 }
