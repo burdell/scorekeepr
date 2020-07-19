@@ -1,197 +1,63 @@
-import { join } from 'path'
+import { GameplayEvent, AtBat, Comment } from 'retrosheet-parse'
 
-import { getRetrosheetScorekeepers } from '../lib'
+import { handleGameplay } from '../lib/retrosheet/gameplay'
+import { reset, getAtBat } from '../tests/test-utils'
+import { Scorekeeper } from '../lib'
 
-describe('Retrosheet Parser', () => {
-  it('it parses Retrosheet game data', async () => {
-    const scorekeeper = await getRetrosheetScorekeepers(
-      join(__dirname, './test_game.txt')
+function generateAtBat(event: Partial<AtBat>): AtBat {
+  return {
+    count: '',
+    pitchSequence: '',
+    playerId: '',
+    type: 'at-bat',
+    result: '',
+    ...event
+  }
+}
+
+function getComment(comment: Partial<Comment>): Comment {
+  return {
+    type: 'comment',
+    text: '',
+    ...comment
+  }
+}
+
+function getScorekeeper() {
+  const scorekeeper = new Scorekeeper()
+  scorekeeper.startGame()
+  return scorekeeper
+}
+
+xdescribe('Retrosheet gameplay', () => {
+  it('moves runners after at bats', () => {
+    const game = getScorekeeper()
+
+    // albio001,32,BSFBBFB,W
+    handleGameplay(
+      [
+        generateAtBat({
+          playerId: 'albio001',
+          count: '32',
+          pitchSequence: 'BSFBBFB',
+          result: 'W'
+        }),
+        generateAtBat({
+          playerId: 'friem001',
+          count: '01',
+          pitchSequence: 'LX',
+          result: '16(1)/FO/G-'
+        })
+      ],
+      game
     )
-    const { gameInfo } = scorekeeper[0]
-
-    expect(gameInfo.homeTeam).toEqual('Chicago Cubs')
-    expect(gameInfo.visitingTeam).toEqual('Atlanta Braves')
-    expect(gameInfo.date).toEqual('2019/06/25')
-    expect(gameInfo.location).toEqual('Wrigley Field')
-    expect(gameInfo.startTime).toEqual('7:05PM')
-  })
-
-  it('sets the lineups', async () => {
-    const scorekeeper = await getRetrosheetScorekeepers(
-      join(__dirname, './test_game.txt')
-    )
-    const { gameInfo, lineups } = scorekeeper[0]
-
-    expect(lineups.home).toEqual([
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Kyle Schwarber' },
-          position: 7
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Kris Bryant' },
-          position: 9
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Anthony Rizzo' },
-          position: 3
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Javier Baez' },
-          position: 6
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Willson Contreras' },
-          position: 2
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'David Bote' },
-          position: 5
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Addison Russell' },
-          position: 4
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Adbert Alzolay' },
-          position: 1
-        },
-        {
-          inning: 4,
-          player: { number: undefined, name: 'Mike Montgomery' },
-          position: 1
-        },
-        {
-          inning: 7,
-          player: { number: undefined, name: 'Jason Heyward' },
-          position: 11
-        },
-        {
-          inning: 7,
-          player: { number: undefined, name: 'Brad Brach' },
-          position: 1
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Albert Almora' },
-          position: 8
-        }
-      ]
-    ])
-
-    expect(lineups.visiting).toEqual([
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Ronald Acuna' },
-          position: 8
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Dansby Swanson' },
-          position: 6
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Freddie Freeman' },
-          position: 3
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Josh Donaldson' },
-          position: 5
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Nick Markakis' },
-          position: 9
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Austin Riley' },
-          position: 7
-        },
-        {
-          inning: 9,
-          player: { number: undefined, name: 'Charlie Culberson' },
-          position: 7
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Brian McCann' },
-          position: 2
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Ozzie Albies' },
-          position: 4
-        }
-      ],
-      [
-        {
-          inning: 1,
-          player: { number: undefined, name: 'Max Fried' },
-          position: 1
-        },
-        {
-          inning: 7,
-          player: { number: undefined, name: 'Johan Camargo' },
-          position: 11
-        },
-        {
-          inning: 7,
-          player: { number: undefined, name: 'Sean Newcomb' },
-          position: 1
-        },
-        {
-          inning: 8,
-          player: { number: undefined, name: 'Anthony Swarzak' },
-          position: 1
-        },
-        {
-          inning: 9,
-          player: { number: undefined, name: 'Luke Jackson' },
-          position: 1
-        }
-      ]
-    ])
+    expect((getAtBat(game, 0) as any)[1]).toEqual({
+      advanced: false,
+      result: {
+        type: 'putout',
+        result: [1, 6],
+        display: '1-6'
+      }
+    })
   })
 })

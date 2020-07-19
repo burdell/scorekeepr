@@ -21,3 +21,7 @@ export function atBatWithDefaults(overrides: Partial<AtBat>): AtBat {
     ...overrides
   }
 }
+
+export function reset(mocks: { [m: string]: jest.Mock }) {
+  Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())
+}

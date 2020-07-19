@@ -1,5 +1,8 @@
 import { Scorekeeper } from '../'
 import { handleOut, getMultiActionOut } from './outs'
+import { getBase } from '../../utilities'
+import * as resultGenerators from '../../resultGenerators'
+import { RunnerMovement } from '../../types'
 
 const isNumber = (str: string) => !isNaN(Number(str))
 const getFieldersChoice = (batterAction: string) => {
@@ -75,7 +78,18 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
     return
   } else if (bases['1'] || bases['2'] || bases['3']) {
     game.fieldersChoice()
-    return
+    const baseResults: RunnerMovement[] = []
+    Object.values(bases).forEach((result: string, index) => {
+      if (!result) return
+
+      baseResults.push({
+        startBase: getBase(index + 1),
+        endBase: getBase(index + 2),
+        result: resultGenerators.putout(result.split('').map(Number)),
+        isOut: true
+      })
+    })
+    game.advanceRunners(baseResults)
   }
 
   return 'no-batter-action'

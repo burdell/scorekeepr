@@ -124,8 +124,9 @@ describe('Retrosheet at-bats', () => {
   it('records hits / fielders choices', () => {
     const hit = jest.fn()
     const fieldersChoice = jest.fn()
+    const advanceRunners = jest.fn()
 
-    const game = { hit, fieldersChoice } as any
+    const game = { hit, fieldersChoice, advanceRunners } as any
 
     handleAtABat('HR/78/F', game)
 
@@ -145,6 +146,18 @@ describe('Retrosheet at-bats', () => {
     handleAtABat('54(1)/FO/G5.3-H;B-1', game)
 
     expect(fieldersChoice).toHaveBeenCalled()
+    expect(advanceRunners).toBeCalledWith([
+      {
+        startBase: 1,
+        endBase: 2,
+        isOut: true,
+        result: {
+          display: '5-4',
+          result: [5, 4],
+          type: 'putout'
+        }
+      }
+    ])
 
     reset(game)
     handleAtABat('FC5/G5.3XH(52)', game)

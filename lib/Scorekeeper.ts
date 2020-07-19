@@ -31,7 +31,6 @@ import {
   Base,
   AdvanceBaseResult,
   OutBaseResult,
-  GameOutput,
   RunnerMovement,
   AdvanceableBase
 } from './types'
