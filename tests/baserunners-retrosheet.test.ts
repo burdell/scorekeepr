@@ -1,10 +1,9 @@
 import {
   handleBaserunnerMovement,
-  getBaserunnerAction as realGetBaserunnerAction,
   handleBaserunnerAction
 } from '../lib/retrosheet/gameplay/baserunners'
+import { getBaserunnerAction as realGetBaserunnerAction } from '../lib/retrosheet/gameplay/baserunners/actions'
 import * as resultGenerators from '../lib/resultGenerators'
-import { advanceRunnerHelper } from '../lib/store/gameplay/utilities'
 
 function reset(mocks: { [m: string]: jest.Mock }) {
   Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())

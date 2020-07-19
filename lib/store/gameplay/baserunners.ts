@@ -9,7 +9,6 @@ import {
 } from '../../types'
 import { ensureCurrentAtBat, advanceRunnerHelper } from './utilities'
 import * as resultGenerators from '../../resultGenerators'
-import { putOut } from './at-bats'
 
 export const recordBasepathOut = createAction<{
   baseAttempted: Base

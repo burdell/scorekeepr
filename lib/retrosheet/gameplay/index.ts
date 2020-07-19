@@ -2,11 +2,8 @@ import { GameplayEvent } from 'retrosheet-parse'
 
 import { Scorekeeper } from '../../Scorekeeper'
 
-import {
-  getBaserunnerAction,
-  handleBaserunnerAction,
-  handleBaserunnerMovement
-} from './baserunners'
+import { handleBaserunnerAction, handleBaserunnerMovement } from './baserunners'
+import { getBaserunnerAction } from './baserunners/actions'
 import { handlePitchSequence } from './pitches'
 import { handleAtABat } from './atBats'
 
