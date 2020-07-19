@@ -31,8 +31,10 @@ import {
   AdvanceBaseResult,
   OutBaseResult,
   GameOutput,
-  RunnerMovement
+  RunnerMovement,
+  AdvanceableBase
 } from './types'
+import * as resultGenerators from './resultGenerators'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -182,9 +184,35 @@ export class Scorekeeper {
     this.advanceRunners([{ startBase: 'B', endBase, result }])
   }
 
-  balk() {}
+  balk() {
+    this.advanceRunners([
+      { startBase: 1, endBase: 2, result: this.resultGenerators.balk() },
+      { startBase: 2, endBase: 3, result: this.resultGenerators.balk() },
+      { startBase: 3, endBase: 4, result: this.resultGenerators.balk() }
+    ])
+  }
 
-  caughtStealing() {}
+  caughtStealing(attemptedBase: AdvanceableBase, putOut: number[]) {
+    const startBase = attemptedBase - 1
+    this.advanceRunners([
+      {
+        startBase: startBase as Base,
+        endBase: attemptedBase,
+        isOut: true,
+        result: resultGenerators.caughtStealing(putOut)
+      }
+    ])
+  }
+
+  stolenBase(attemptedBase: AdvanceableBase) {
+    this.advanceRunners([
+      {
+        startBase: (attemptedBase - 1) as Base,
+        endBase: attemptedBase,
+        result: resultGenerators.stolenBase(attemptedBase)
+      }
+    ])
+  }
 
   defensiveIndifference() {}
 
@@ -195,8 +223,6 @@ export class Scorekeeper {
   pickOff() {}
 
   pickOffOffBase() {}
-
-  stolenBase() {}
 
   getOutput = (): GameOutput => {
     return {

@@ -479,6 +479,29 @@ describe('At Bat Events', () => {
     )
   })
 
+  it('records a balk', () => {
+    function getAtBat(lineupSpot: number) {
+      return scorekeeper.gameplay.visiting[0][lineupSpot]
+    }
+
+    const scorekeeper = new Scorekeeper()
+    scorekeeper.startGame()
+
+    scorekeeper.hitBatter()
+    scorekeeper.nextLineupSpot()
+    scorekeeper.balk()
+
+    const atBat = getAtBat(0)
+    expect(atBat.bases[1]).toEqual({
+      advanced: true,
+      result: {
+        display: 'BK',
+        result: 'BK',
+        type: 'balk'
+      }
+    })
+  })
+
   it('advances runners', () => {
     function getAtBat(lineupSpot: number) {
       return scorekeeper.gameplay.visiting[0][lineupSpot]

@@ -19,6 +19,7 @@ export type Lineup = LineupEntry[][]
 export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
 
 export type Base = 1 | 2 | 3 | 4
+export type AdvanceableBase = 2 | 3 | 4
 export type PutOut = { type: 'putout'; result: number[]; display: string }
 export type FlyOut = {
   type: 'flyout'
@@ -39,6 +40,24 @@ export type DefensiveError = {
   display: string
 }
 
+export type Balk = {
+  type: 'balk'
+  result: 'BK'
+  display: 'BK'
+}
+
+export type CaughtStealing = {
+  type: 'caught-stealing'
+  result: PutOut
+  display: string
+}
+
+export type StolenBase = {
+  type: 'stolen-base'
+  result: AdvanceableBase
+  display: 'SB'
+}
+
 export type FieldersChoice = {
   type: 'fielders-choice'
   result: Base
@@ -53,8 +72,12 @@ export type AtBatResult =
   | DefensiveError
   | FieldersChoice
 
-export type AdvanceBaseResult = DefensiveError | FieldersChoice
-export type OutBaseResult = PutOut
+export type AdvanceBaseResult =
+  | DefensiveError
+  | FieldersChoice
+  | Balk
+  | StolenBase
+export type OutBaseResult = PutOut | CaughtStealing
 export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
 
 export type BaseResult = {

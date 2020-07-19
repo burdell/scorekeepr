@@ -7,7 +7,11 @@ import {
   Hit,
   DefensiveError,
   FieldersChoice,
-  Base
+  Base,
+  Balk,
+  CaughtStealing,
+  StolenBase,
+  AdvanceableBase
 } from './types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
@@ -45,7 +49,7 @@ export function lineOut(defensivePlayer: number): LineOut {
   }
 }
 
-export function hit(base: 1 | 2 | 3 | 4): Hit {
+export function hit(base: Base): Hit {
   return {
     type: 'hit',
     result: base,
@@ -66,5 +70,30 @@ export function fieldersChoice(baseAdvancedTo: Base): FieldersChoice {
     type: 'fielders-choice',
     result: baseAdvancedTo,
     display: 'FC'
+  }
+}
+
+export function balk(): Balk {
+  return {
+    type: 'balk',
+    result: 'BK',
+    display: 'BK'
+  }
+}
+
+export function caughtStealing(putoutPositions: number[]): CaughtStealing {
+  const result = putout(putoutPositions)
+  return {
+    type: 'caught-stealing',
+    result,
+    display: `CS ${result.display}`
+  }
+}
+
+export function stolenBase(base: AdvanceableBase): StolenBase {
+  return {
+    type: 'stolen-base',
+    result: base,
+    display: 'SB'
   }
 }
