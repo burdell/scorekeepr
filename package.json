@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "generate": "ts-node ./dev/generate",
     "server": "ts-node ./dev/server.ts",
-    "dev": "npm run generate && npm run server"
+    "dev": "npm run generate && npm run server",
+    "refactor": "ts-node ./dev/refactor.ts"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +32,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
-    "retrosheet-parse": "^0.4.0"
+    "retrosheet-parse": "^0.5.0"
   }
 }

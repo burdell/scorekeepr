@@ -64,6 +64,7 @@ export function handleBaserunnerAction(
       getAdvanceableBase(attemptedBase),
       putoutString.split('').map(Number)
     )
+    handleBaserunnerMovement(action, game)
   }
 
   if (type === 'stolen-base') {

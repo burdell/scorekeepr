@@ -1,9 +1,6 @@
 import { handlePitchSequence } from '../lib/retrosheet/gameplay/pitches'
 import { handleAtABat } from '../lib/retrosheet/gameplay/atBats'
-
-function reset(mocks: { [m: string]: jest.Mock }) {
-  Object.keys(mocks).forEach((mock) => mocks[mock].mockClear())
-}
+import { reset } from '../tests/test-utils'
 
 describe('Retrosheet at-bats', () => {
   it('records pitches', async () => {
@@ -44,8 +41,9 @@ describe('Retrosheet at-bats', () => {
   it('records putouts', () => {
     const putout = jest.fn()
     const sacrificeBunt = jest.fn()
+    const advanceRunners = jest.fn()
 
-    const game = { putout, sacrificeBunt } as any
+    const game = { putout, sacrificeBunt, advanceRunners } as any
 
     reset(game)
     handleAtABat('13/G-', game)
@@ -143,23 +141,6 @@ describe('Retrosheet at-bats', () => {
     expect(hit).toHaveBeenCalledWith(4)
 
     reset(game)
-    handleAtABat('54(1)/FO/G5.3-H;B-1', game)
-
-    expect(fieldersChoice).toHaveBeenCalled()
-    expect(advanceRunners).toBeCalledWith([
-      {
-        startBase: 1,
-        endBase: 2,
-        isOut: true,
-        result: {
-          display: '5-4',
-          result: [5, 4],
-          type: 'putout'
-        }
-      }
-    ])
-
-    reset(game)
     handleAtABat('FC5/G5.3XH(52)', game)
 
     expect(fieldersChoice).toHaveBeenCalled()
@@ -183,6 +164,31 @@ describe('Retrosheet at-bats', () => {
     handleAtABat('DGR/L9LS.2-H', game)
 
     expect(hit).toHaveBeenCalledWith(2)
+  })
+
+  it('records multi-action fielders choices', () => {
+    const hit = jest.fn()
+    const fieldersChoice = jest.fn()
+    const advanceRunners = jest.fn()
+
+    const game = { hit, fieldersChoice, advanceRunners } as any
+
+    reset(game)
+    handleAtABat('54(1)/FO/G5.3-H;B-1', game)
+
+    expect(fieldersChoice).toHaveBeenCalled()
+    expect(advanceRunners).toBeCalledWith([
+      {
+        startBase: 1,
+        endBase: 2,
+        isOut: true,
+        result: {
+          display: '5-4',
+          result: [5, 4],
+          type: 'putout'
+        }
+      }
+    ])
   })
 
   it('records errors', () => {

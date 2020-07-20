@@ -170,11 +170,13 @@ describe('Retrosheet bsaerunners', () => {
 
   it('records pick offs caught stealing', () => {
     const caughtStealing = jest.fn()
-    const game = { caughtStealing } as any
+    const advanceRunners = jest.fn()
+    const game = { caughtStealing, advanceRunners } as any
 
     handleBaserunnerAction(getBaserunnerAction('POCS2(1361)'), game)
 
     expect(caughtStealing).toHaveBeenCalledWith(2, [1, 3, 6, 1])
+    expect(advanceRunners).toHaveBeenCalled()
   })
 
   it('records runner advancement', async () => {
@@ -206,20 +208,20 @@ describe('Retrosheet bsaerunners', () => {
       { startBase: 'B', endBase: 1, result: undefined }
     ])
 
-    // reset(game)
-    // handleBaserunnerMovement('S5/G5.1-3(E5/TH)', game)
+    reset(game)
+    handleBaserunnerMovement('S5/G5.1-3(E5/TH)', game)
 
-    // expect(advanceRunners).toHaveBeenCalledWith([
-    //   { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
-    // ])
+    expect(advanceRunners).toHaveBeenCalledWith([
+      { startBase: 1, endBase: 3, result: resultGenerators.error(5) }
+    ])
 
-    // reset(game)
-    // handleBaserunnerMovement('W+PB.3-H(NR);1-3', game)
+    reset(game)
+    handleBaserunnerMovement('W+PB.3-H(NR);1-3', game)
 
-    // expect(advanceRunners).toHaveBeenCalledWith([
-    //   { startBase: 3, endBase: 4, result: undefined },
-    //   { startBase: 1, endBase: 3, result: undefined }
-    // ])
+    expect(advanceRunners).toHaveBeenCalledWith([
+      { startBase: 3, endBase: 4, result: undefined },
+      { startBase: 1, endBase: 3, result: undefined }
+    ])
   })
 
   it('records runner outs', () => {

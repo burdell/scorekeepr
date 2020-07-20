@@ -78,17 +78,20 @@ function handleBatterAction(atBatResult: string, game: Scorekeeper) {
     return
   } else if (bases['1'] || bases['2'] || bases['3']) {
     game.fieldersChoice()
-    const baseResults: RunnerMovement[] = []
-    Object.values(bases).forEach((result: string, index) => {
-      if (!result) return
+  }
 
-      baseResults.push({
-        startBase: getBase(index + 1),
-        endBase: getBase(index + 2),
-        result: resultGenerators.putout(result.split('').map(Number)),
-        isOut: true
-      })
+  const baseResults: RunnerMovement[] = []
+  Object.values(bases).forEach((result: string, index) => {
+    if (!result) return
+
+    baseResults.push({
+      startBase: getBase(index + 1),
+      endBase: getBase(index + 2),
+      result: resultGenerators.putout(result.split('').map(Number)),
+      isOut: true
     })
+  })
+  if (baseResults.length) {
     game.advanceRunners(baseResults)
   }
 
