@@ -1,18 +1,4 @@
-import { AtBat as RetrosheetAtBat } from 'retrosheet-parse'
-
-export type PitchData = {
-  balls: number
-  strikes: number
-  pitchCount: number
-}
-
-export type GameEvent = {
-  pitches: PitchData | undefined
-  isOut: boolean
-  result: AtBatResult | undefined
-  bases: BaseResult[]
-  isSacrifice?: boolean
-}
+import { LineupState } from './store/lineup'
 
 type Team = string
 export type Player = {
@@ -160,12 +146,12 @@ export type Game = {
   id: string
 }
 
-// export type GameOutput = {
-//   id: string
-//   lineups: LineupState
-//   gameplay: Gameplay
-//   gameInfo: Game
-// }
+export type GameOutput = {
+  id: string
+  lineups: LineupState
+  gameplay: Gameplay
+  gameInfo: Game
+}
 
 export type RunnerMovement = {
   startBase: Base | 'B'

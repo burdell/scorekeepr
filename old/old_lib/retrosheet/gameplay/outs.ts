@@ -1,6 +1,6 @@
 import { Scorekeeper } from '../'
 
-function getOutType(
+export function getOutType(
   modifier: string
 ): 'groundout' | 'lineout' | 'flyout' | 'sacrifice-fly' | undefined {
   if (modifier.match(/\/(B*)G/)) return 'groundout'
@@ -10,7 +10,7 @@ function getOutType(
   if (modifier.indexOf('/SF') >= 0) return 'sacrifice-fly'
 }
 
-function isSacrifice(atBatResult: string) {
+export function isSacrifice(atBatResult: string) {
   return !!atBatResult.match(/\/S(F|H)/)
 }
 

@@ -18,6 +18,21 @@ export function handlePitch(pitch: string, game: PitchRecorder) {
   }
 }
 
+export function countPitches(pitch: string) {
+  let pitchCount = 0
+  pitch.split('').forEach((pitch) => {
+    if (
+      strikes.includes(pitch) ||
+      balls.includes(pitch) ||
+      fouls.includes(pitch)
+    ) {
+      pitchCount += 1
+    }
+  })
+
+  return pitchCount
+}
+
 export function handlePitchSequence(pitch: string, game: PitchRecorder) {
   pitch.split('').forEach((pitch) => handlePitch(pitch, game))
 }

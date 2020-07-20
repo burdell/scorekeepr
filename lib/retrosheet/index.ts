@@ -1,45 +1,46 @@
-import { parseGames, Game } from 'retrosheet-parse'
+import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { Scorekeeper } from '../Scorekeeper'
-import { getStadium, getTeam, getLineup } from './translator'
-import { handleGameplay } from './gameplay'
+import { getAction, Action } from './getAction'
+import { getPitchData } from './pitches'
+import { GameEvent } from '../types'
 
-function getScorebook(game: Game) {
-  const { info, lineup, play } = game
-  const scorebook = new Scorekeeper({
-    date: info.date,
-    homeTeam: getTeam(info.hometeam).fullName,
-    visitingTeam: getTeam(info.visteam).fullName,
-    location: getStadium(info.site).fullName,
-    startTime: info.starttime,
-    id: game.id
-  })
+export function parseAction(gameplayEvent: GameplayEvent) {
+  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
+    return
+  }
 
-  scorebook.setLineups({
-    home: getLineup(lineup.home),
-    visiting: getLineup(lineup.visiting)
-  })
+  const action = getAction(gameplayEvent.result)
 
-  scorebook.startGame()
+  if (!action) {
+    console.log(`Unhandled event: ${gameplayEvent.result}`)
+    return
+  }
 
-  scorebook.setCurrentAtBat({ team: 'visiting', inning: 0, lineupSpot: 0 })
-  play.visiting.map((inning) => {
-    handleGameplay(inning, scorebook)
-    scorebook.nextInning()
-  })
+  let event: GameEvent | undefined = undefined
+  switch (action.actionType) {
+    case 'batter':
+      event = handleBatterAction(action, gameplayEvent)
+      break
+    case 'baserunner':
+      event = handleRunnerAction(action, gameplayEvent)
+      break
+  }
 
-  scorebook.setCurrentAtBat({ team: 'home', inning: 0, lineupSpot: 0 })
-  play.home.map((inning) => {
-    handleGameplay(inning, scorebook)
-    scorebook.nextInning()
-  })
-
-  return scorebook
+  return event
 }
 
-export async function getRetrosheetScorekeepers(gamefile: string) {
-  const gameList = await parseGames(gamefile)
-  return gameList.map(getScorebook)
+function handleBatterAction(action: Action, gameplayEvent: AtBat) {
+  const parsedEvent = action.handler(gameplayEvent, action.match)
+  if (parsedEvent) {
+    parsedEvent.pitches = getPitchData(gameplayEvent)
+  }
+
+  return parsedEvent
 }
 
-export { Scorekeeper }
+function handleRunnerAction(
+  action: Action,
+  gameplayEvent: GameplayEvent
+): undefined {
+  return undefined
+}
