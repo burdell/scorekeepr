@@ -113,4 +113,6 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({ result: resultGenerators.hit(4) })
     )
   })
+
+  it('parses steals and steal attemps', () => {})
 })
