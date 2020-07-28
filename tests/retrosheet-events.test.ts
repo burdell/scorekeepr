@@ -34,6 +34,10 @@ function parseAction(gameplayEvent: GameplayEvent) {
   return requireExistence(realParseAction(gameplayEvent))
 }
 
+function getResult(result: string) {
+  return parseAction(getAtBat({ result }))
+}
+
 function requireExistence<T>(thing: T) {
   if (!thing) throw new Error('The thing does not exist 🧐')
 
@@ -114,5 +118,31 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses steals and steal attemps', () => {})
+  it('parses hit batters', () => {
+    const hbp = parseAction(getAtBat({ result: 'HP' }))
+
+    expect(hbp).toEqual(
+      getEventWithDefaults({ result: resultGenerators.pitcherResult('HBP') })
+    )
+  })
+
+  it('parses walks', () => {
+    expect(parseAction(getAtBat({ result: 'W' }))).toEqual(
+      getEventWithDefaults({ result: resultGenerators.pitcherResult('BB') })
+    )
+
+    expect(parseAction(getAtBat({ result: 'IW' }))).toEqual(
+      getEventWithDefaults({ result: resultGenerators.pitcherResult('IBB') })
+    )
+  })
+
+  it('parses errors', () => {
+    expect(getResult('E6/G6+')).toEqual(
+      getEventWithDefaults({ result: resultGenerators.error(6) })
+    )
+
+    expect(getResult('CE2/G6+')).toEqual(
+      getEventWithDefaults({ result: resultGenerators.error(2) })
+    )
+  })
 })

@@ -12,7 +12,7 @@ function getHitType(hit: string) {
   throw new Error('Attempted to record an invalid hit')
 }
 
-const hitIdentifier: ActionConfig = {
+const hit: ActionConfig = {
   actionType: 'batter',
   regexp: /^(HR)|([SDT])\d+|(DGR)/,
   handler: (gameplayEvent, match) => {
@@ -24,4 +24,39 @@ const hitIdentifier: ActionConfig = {
   }
 }
 
-export const atBatConfigs = [hitIdentifier]
+const hitBatter: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^HP/,
+  handler: () => {
+    return getAction({
+      result: resultGenerators.pitcherResult('HBP')
+    })
+  }
+}
+
+const walk: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^(I)?W/,
+  handler: (gameplayEvent, match) => {
+    const [fullMatch, intentionalGroup] = match
+    const isIntentional = intentionalGroup === 'I'
+    return getAction({
+      result: isIntentional
+        ? resultGenerators.pitcherResult('IBB')
+        : resultGenerators.pitcherResult('BB')
+    })
+  }
+}
+
+const error: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^C?\/?E(\d)/,
+  handler: (gameplayEvent, match) => {
+    const [fullMatch, fielder] = match
+    return getAction({
+      result: resultGenerators.error(Number(fielder))
+    })
+  }
+}
+
+export const atBatConfigs = [hit, hitBatter, walk, error]
