@@ -1,7 +1,7 @@
-import { writeFileSync, mkdirSync, rmdirSync, existsSync } from 'fs'
+import { writeFileSync, mkdirSync, rmdirSync, existsSync, writeFile } from 'fs'
 import { resolve, join } from 'path'
 
-import { handler } from '../refactor'
+import { handler } from '../lib'
 import { getFilenames, sourceFolder, outputFolder } from './readFolderFiles'
 
 function writeToFile(data: unknown, dir: string, filename: string) {
@@ -13,6 +13,7 @@ async function generateGames(retrosheetFiles: string[]) {
     await Promise.all(
       retrosheetFiles.map(async (filename) => {
         const output = await handler(join(__dirname, `./refactor/${filename}`))
+        writeToFile(output, './', 'result.json')
       })
     )
   } catch (e) {

@@ -91,6 +91,10 @@ describe('Retrosheet parsing', () => {
     )
   })
 
+  // it('double plays and fielders choices', () => {
+  //   expect(getResult())
+  // })
+
   it('parses hits', () => {
     const single = parseAction(getAtBat({ result: 'S8/L' }))
     expect(single).toEqual(

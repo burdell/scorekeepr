@@ -84,7 +84,7 @@ const strikeout: ActionConfig = {
 
 const simpleOut: ActionConfig = {
   actionType: 'batter',
-  regexp: /^\d+/,
+  regexp: /^\d+\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
     const atBatResult = gameplayEvent.result
     const batterAction = getBatterAction(atBatResult)

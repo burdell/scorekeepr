@@ -8,12 +8,13 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
     return
   }
-
   const action = getAction(gameplayEvent.result)
 
   if (!action) {
     console.log(`Unhandled event: ${gameplayEvent.result}`)
     return
+  } else {
+    console.log(action.actionType, gameplayEvent.result)
   }
 
   let event: GameEvent | undefined = undefined
