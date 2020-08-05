@@ -6,7 +6,12 @@ export function getAction(overrides: Partial<GameEvent> = {}): GameEvent {
     isOut: false,
     pitches: undefined,
     isSacrifice: false,
-    bases: [],
+    bases: {
+      B: undefined,
+      1: undefined,
+      2: undefined,
+      3: undefined
+    },
     ...overrides
   }
 }

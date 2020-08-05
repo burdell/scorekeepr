@@ -14,7 +14,11 @@ function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
       strikes: 0
     },
     isSacrifice: false,
-    bases: [],
+    bases: {
+      1: undefined,
+      2: undefined,
+      3: undefined
+    },
     ...overrides
   }
 }

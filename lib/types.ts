@@ -10,7 +10,12 @@ export type GameEvent = {
   pitches: PitchData | undefined
   isOut: boolean
   result: AtBatResult | undefined
-  bases: BaseResult[]
+  bases: {
+    B: BaseResult | undefined
+    1: BaseResult | undefined
+    2: BaseResult | undefined
+    3: BaseResult | undefined
+  }
   isSacrifice?: boolean
 }
 

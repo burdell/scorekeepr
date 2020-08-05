@@ -181,6 +181,16 @@
         "bases": []
       },
       {
+        "isOut": false,
+        "pitches": {
+          "balls": 2,
+          "strikes": 2,
+          "pitchCount": 5
+        },
+        "isSacrifice": false,
+        "bases": []
+      },
+      {
         "result": {
           "type": "hit",
           "result": 1,
@@ -438,6 +448,16 @@
         "bases": []
       },
       {
+        "isOut": false,
+        "pitches": {
+          "balls": 0,
+          "strikes": 0,
+          "pitchCount": 1
+        },
+        "isSacrifice": false,
+        "bases": []
+      },
+      {
         "result": {
           "type": "pitcher-result",
           "result": "K",
@@ -626,6 +646,16 @@
           "balls": 3,
           "strikes": 2,
           "pitchCount": 7
+        },
+        "isSacrifice": false,
+        "bases": []
+      },
+      {
+        "isOut": false,
+        "pitches": {
+          "balls": 0,
+          "strikes": 1,
+          "pitchCount": 2
         },
         "isSacrifice": false,
         "bases": []

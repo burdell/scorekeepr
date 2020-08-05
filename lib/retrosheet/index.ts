@@ -14,7 +14,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     console.log(`Unhandled event: ${gameplayEvent.result}`)
     return
   } else {
-    console.log(action.actionType, gameplayEvent.result)
+    // console.log(action.actionType, gameplayEvent.result)
   }
 
   let event: GameEvent | undefined = undefined
