@@ -13,16 +13,18 @@ export type RetrosheetBaseResult = {
   pickOff?: PutOut
 }
 
+export type Bases = {
+  B: RetrosheetBaseResult | undefined
+  1: RetrosheetBaseResult | undefined
+  2: RetrosheetBaseResult | undefined
+  3: RetrosheetBaseResult | undefined
+}
+
 export type RetrosheetEvent = {
   pitches: PitchData | undefined
   isOut: boolean
   result: AtBatResult | undefined
-  bases: {
-    B: RetrosheetBaseResult | undefined
-    1: RetrosheetBaseResult | undefined
-    2: RetrosheetBaseResult | undefined
-    3: RetrosheetBaseResult | undefined
-  }
+  bases: Bases
   isSacrifice?: boolean
 }
 

@@ -187,4 +187,89 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({ result: resultGenerators.error(2) })
     )
   })
+
+  it('parses pickoffs', () => {
+    expect(getResult('PO2(E1).2-3')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: undefined,
+          2: {
+            result: resultGenerators.error(1),
+            endBase: 3
+          },
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('PO1(23)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            result: undefined,
+            endBase: 1,
+            pickOff: resultGenerators.putout([2, 3])
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+  })
+
+  it.only('parses caught stealing', () => {
+    expect(getResult('CS2(26!)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            result: resultGenerators.putout([2, 6]),
+            endBase: 2
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('CS3(25)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: undefined,
+          2: {
+            result: resultGenerators.putout([2, 5]),
+            endBase: 3
+          },
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('POCSH(25)/DP.2X3(56)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: undefined,
+          2: undefined,
+          3: {
+            result: resultGenerators.putout([2, 5]),
+            endBase: 4
+          }
+        }
+      })
+    )
+  })
 })

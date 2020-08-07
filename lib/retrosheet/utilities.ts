@@ -1,4 +1,10 @@
-import { RetrosheetEvent, Base, BaseResult, BaseResultResult } from '../types'
+import {
+  RetrosheetEvent,
+  Base,
+  BaseResult,
+  BaseResultResult,
+  Bases
+} from '../types'
 
 export function getAction(
   overrides: Partial<RetrosheetEvent> = {}
@@ -8,12 +14,17 @@ export function getAction(
     isOut: false,
     pitches: undefined,
     isSacrifice: false,
-    bases: {
-      B: undefined,
-      1: undefined,
-      2: undefined,
-      3: undefined
-    },
+    bases: getBases(),
+    ...overrides
+  }
+}
+
+export function getBases(overrides: Partial<Bases> = {}) {
+  return {
+    B: undefined,
+    1: undefined,
+    2: undefined,
+    3: undefined,
     ...overrides
   }
 }
@@ -55,4 +66,24 @@ export function getNextBase(base: Base): Base {
   if (base === 3) return 4
 
   throw new Error(`Attempted to get next base of invalid base ${base}`)
+}
+
+export function getPreviousBase(base: Base): Base {
+  if (base === 2) return 1
+  if (base === 3) return 2
+  if (base === 4) return 3
+
+  throw new Error(`Attempted to get previous base of invalid base ${base}`)
+}
+
+export function getBase(rawBase: string | number): Base {
+  if (rawBase === 'H') return 4
+
+  const base = Number(rawBase)
+  if (base === 1) return 1
+  if (base === 2) return 2
+  if (base === 3) return 3
+  if (base === 4) return 4
+
+  throw new Error('Attempted to use an invalid base')
 }

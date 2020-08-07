@@ -14,10 +14,9 @@ function getHitType(hit: string) {
 
 const hit: ActionConfig = {
   actionType: 'batter',
-  regexp: /^(HR)|([SDT])\d+|(DGR)/,
+  regexp: /^(HR)|^([SDT])\d+|^(DGR)/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup] = match
-
     return getAction({
       result: resultGenerators.hit(getHitType(hrGroup || hitGroup || grdGroup))
     })

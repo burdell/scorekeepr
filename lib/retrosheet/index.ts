@@ -39,9 +39,8 @@ function handleBatterAction(action: Action, gameplayEvent: AtBat) {
   return parsedEvent
 }
 
-function handleRunnerAction(
-  action: Action,
-  gameplayEvent: GameplayEvent
-): undefined {
-  return undefined
+function handleRunnerAction(action: Action, gameplayEvent: AtBat) {
+  const parsedEvent = action.handler(gameplayEvent, action.match)
+
+  return parsedEvent
 }
