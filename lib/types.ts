@@ -6,15 +6,22 @@ export type PitchData = {
   pitchCount: number
 }
 
-export type GameEvent = {
+export type RetrosheetBaseResult = {
+  endBase: Base
+  result: BaseResultResult
+  isAtBatResult?: boolean
+  pickOff?: PutOut
+}
+
+export type RetrosheetEvent = {
   pitches: PitchData | undefined
   isOut: boolean
   result: AtBatResult | undefined
   bases: {
-    B: BaseResult | undefined
-    1: BaseResult | undefined
-    2: BaseResult | undefined
-    3: BaseResult | undefined
+    B: RetrosheetBaseResult | undefined
+    1: RetrosheetBaseResult | undefined
+    2: RetrosheetBaseResult | undefined
+    3: RetrosheetBaseResult | undefined
   }
   isSacrifice?: boolean
 }

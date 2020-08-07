@@ -2,7 +2,7 @@ import { AtBat } from 'retrosheet-parse'
 
 import * as resultGenerators from '../../resultGenerators'
 
-import { GameEvent, AtBatResult } from '../../types'
+import { RetrosheetEvent, AtBatResult } from '../../types'
 import { getAction } from '../utilities'
 import { ActionConfig } from '../retrosheet.types'
 
@@ -22,6 +22,10 @@ export function isSacrifice(atBatResult: string) {
 
 export function getPutoutPositions(putout: string) {
   return putout.split('').map(Number)
+}
+
+function getPutoutFromString(putout: string) {
+  return resultGenerators.putout(getPutoutPositions(putout))
 }
 
 function getBatterAction(atBatResult: string) {
@@ -51,7 +55,7 @@ const simpleOut: ActionConfig = {
     const atBatIsSacrifice = isSacrifice(atBatResult)
     const defensivePositions = getPutoutPositions(batterAction)
 
-    const outData: Partial<GameEvent> = {
+    const outData: Partial<RetrosheetEvent> = {
       isSacrifice: atBatIsSacrifice,
       isOut: true
     }
@@ -85,9 +89,9 @@ const multiActionOut: ActionConfig = {
   regexp: /(\d+)\(([B|1|2|3])\)/g,
   handler: ({ result }, match) => {
     const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
-    const batterMatch = result.match(/(\d+)(\(B\))?$/)
+    const batterMatch = result.match(/(\d+)(\(B\))?\//)
 
-    let batterResult = batterMatch ? batterMatch[1] : ''
+    let batterAction = batterMatch ? batterMatch[1] : ''
     let firstBaseResult = ''
     let secondBaseResult = ''
     let thirdBaseResult = ''
@@ -96,7 +100,7 @@ const multiActionOut: ActionConfig = {
       const [_, action, base] = putout
       switch (base) {
         case 'B': {
-          batterResult = action
+          batterAction = action
           break
         }
         case '1': {
@@ -113,21 +117,35 @@ const multiActionOut: ActionConfig = {
       }
     }
 
-    const results = {
-      batter: batterMatch
-        ? `${thirdBaseResult}${secondBaseResult}${firstBaseResult}${batterResult}`
-        : batterResult,
+    const batterResult = batterMatch
+      ? `${thirdBaseResult}${secondBaseResult}${firstBaseResult}${batterAction}`
+      : batterAction
+    const baseResults = {
       '1': firstBaseResult
         ? `${thirdBaseResult}${secondBaseResult}${firstBaseResult}`
-        : '',
-      '2': secondBaseResult ? `${thirdBaseResult}${secondBaseResult}` : '',
-      '3': thirdBaseResult ? `${thirdBaseResult}` : ''
+        : undefined,
+      '2': secondBaseResult
+        ? `${thirdBaseResult}${secondBaseResult}`
+        : undefined,
+      '3': thirdBaseResult ? `${thirdBaseResult}` : undefined
     }
 
     return getAction({
-      result: results.batter
-        ? resultGenerators.putout(getPutoutPositions(results.batter))
-        : undefined
+      result: batterResult
+        ? resultGenerators.putout(getPutoutPositions(batterResult))
+        : resultGenerators.fieldersChoice(1),
+      bases: {
+        B: undefined,
+        1: baseResults[1]
+          ? { endBase: 2, result: getPutoutFromString(baseResults[1]) }
+          : undefined,
+        2: baseResults[2]
+          ? { endBase: 3, result: getPutoutFromString(baseResults[2]) }
+          : undefined,
+        3: baseResults[3]
+          ? { endBase: 4, result: getPutoutFromString(baseResults[3]) }
+          : undefined
+      }
     })
   }
 }

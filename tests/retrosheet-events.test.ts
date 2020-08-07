@@ -1,10 +1,12 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
 import { parseAction as realParseAction } from '../lib/retrosheet'
-import { GameEvent } from '../lib/types'
+import { RetrosheetEvent } from '../lib/types'
 import * as resultGenerators from '../lib/resultGenerators'
 
-function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
+function getEventWithDefaults(
+  overrides: Partial<RetrosheetEvent> = {}
+): RetrosheetEvent {
   return {
     result: undefined,
     isOut: false,
@@ -15,6 +17,7 @@ function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
     },
     isSacrifice: false,
     bases: {
+      B: undefined,
       1: undefined,
       2: undefined,
       3: undefined
@@ -95,9 +98,40 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  // it('double plays and fielders choices', () => {
-  //   expect(getResult())
-  // })
+  it('parses double/triple plays and fielders choices', () => {
+    expect(getResult('64(1)3/GDP')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.putout([6, 4, 3]),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([6, 4])
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('5(2)4(1)3/GDP')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.putout([5, 4, 3]),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([5, 4])
+          },
+          2: {
+            endBase: 3,
+            result: resultGenerators.putout([5])
+          },
+          3: undefined
+        }
+      })
+    )
+  })
 
   it('parses hits', () => {
     const single = parseAction(getAtBat({ result: 'S8/L' }))

@@ -1,15 +1,15 @@
 import { parseGames, GameplayEvent } from 'retrosheet-parse'
 
 import { parseAction } from './retrosheet'
-import { GameEvent } from './types'
+import { RetrosheetEvent } from './types'
 
-type InningList = GameEvent[][]
+type InningList = RetrosheetEvent[][]
 
 function getInnings(gameplayEvents: GameplayEvent[][]) {
   const inningList: InningList = []
 
   gameplayEvents.forEach((events) => {
-    const inning: GameEvent[] = []
+    const inning: RetrosheetEvent[] = []
     events.forEach((event) => {
       const gameplayEvent = parseAction(event)
       if (gameplayEvent) inning.push(gameplayEvent)

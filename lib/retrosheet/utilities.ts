@@ -1,6 +1,8 @@
-import { GameEvent, Base, BaseResult, BaseResultResult } from '../types'
+import { RetrosheetEvent, Base, BaseResult, BaseResultResult } from '../types'
 
-export function getAction(overrides: Partial<GameEvent> = {}): GameEvent {
+export function getAction(
+  overrides: Partial<RetrosheetEvent> = {}
+): RetrosheetEvent {
   return {
     result: undefined,
     isOut: false,
@@ -45,4 +47,12 @@ export function advanceRunnerHelper({
 
       return existingResult || { ...newResult }
     })
+}
+
+export function getNextBase(base: Base): Base {
+  if (base === 1) return 2
+  if (base === 2) return 3
+  if (base === 3) return 4
+
+  throw new Error(`Attempted to get next base of invalid base ${base}`)
 }

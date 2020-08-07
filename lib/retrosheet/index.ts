@@ -2,7 +2,7 @@ import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
-import { GameEvent } from '../types'
+import { RetrosheetEvent } from '../types'
 
 export function parseAction(gameplayEvent: GameplayEvent) {
   if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
@@ -17,7 +17,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     // console.log(action.actionType, gameplayEvent.result)
   }
 
-  let event: GameEvent | undefined = undefined
+  let event: RetrosheetEvent | undefined = undefined
   switch (action.actionType) {
     case 'batter':
       event = handleBatterAction(action, gameplayEvent)
