@@ -44,52 +44,61 @@ const strikeout: ActionConfig = {
   }
 }
 
+function getOut(atBatResult: string) {
+  const batterAction = getBatterAction(atBatResult)
+
+  const outType = getOutType(atBatResult)
+  const atBatIsSacrifice = isSacrifice(atBatResult)
+  const defensivePositions = getPutoutPositions(batterAction)
+
+  console.log(outType, defensivePositions)
+
+  const outData: Partial<RetrosheetEvent> = {
+    isSacrifice: atBatIsSacrifice,
+    isOut: true
+  }
+
+  let result: AtBatResult | undefined = undefined
+  if (outType === 'groundout') {
+    result = resultGenerators.putout(defensivePositions)
+  } else {
+    const defensivePosition = defensivePositions.pop()
+    if (!defensivePosition || defensivePositions.length > 0)
+      throw new Error(
+        'Attempted to record an out without a valid defensive player'
+      )
+
+    if (outType === 'flyout') {
+      result = resultGenerators.flyOut(defensivePosition)
+    } else if (outType === 'lineout') {
+      result = resultGenerators.lineOut(defensivePosition)
+    } else if (outType === 'sacrifice-fly') {
+      result = resultGenerators.flyOut(defensivePosition)
+    }
+  }
+
+  outData.result = result
+  return outData
+}
+
 const simpleOut: ActionConfig = {
   actionType: 'batter',
   regexp: /^\d+\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
-    const atBatResult = gameplayEvent.result
-    const batterAction = getBatterAction(atBatResult)
-
-    const outType = getOutType(atBatResult)
-    const atBatIsSacrifice = isSacrifice(atBatResult)
-    const defensivePositions = getPutoutPositions(batterAction)
-
-    const outData: Partial<RetrosheetEvent> = {
-      isSacrifice: atBatIsSacrifice,
-      isOut: true
-    }
-
-    let result: AtBatResult | undefined = undefined
-    if (outType === 'groundout') {
-      result = resultGenerators.putout(defensivePositions)
-    } else {
-      const defensivePosition = defensivePositions.pop()
-      if (!defensivePosition || defensivePositions.length > 0)
-        throw new Error(
-          'Attempted to record an out without a valid defensive player'
-        )
-
-      if (outType === 'flyout') {
-        result = resultGenerators.flyOut(defensivePosition)
-      } else if (outType === 'lineout') {
-        result = resultGenerators.lineOut(defensivePosition)
-      } else if (outType === 'sacrifice-fly') {
-        result = resultGenerators.flyOut(defensivePosition)
-      }
-    }
-
-    outData.result = result
-    return getAction(outData)
+    return getAction(getOut(gameplayEvent.result))
   }
 }
 
 const multiActionOut: ActionConfig = {
   actionType: 'batter',
   regexp: /(\d+)\(([B|1|2|3])\)/g,
-  handler: ({ result }, match) => {
+  handler: (gameplayEvent, match) => {
+    const { result } = gameplayEvent
     const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
     const batterMatch = result.match(/(\d+)(\(B\))?\//)
+    const batterOut = getOut(gameplayEvent.result.split('/').pop() || '')
+
+    // console.log(batterOut)
 
     let batterAction = batterMatch ? batterMatch[1] : ''
     let firstBaseResult = ''
