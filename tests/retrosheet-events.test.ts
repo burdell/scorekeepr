@@ -99,39 +99,37 @@ describe('Retrosheet parsing', () => {
   })
 
   it.only('parses double/triple plays and fielders choices', () => {
-    // expect(getResult('64(1)3/GDP')).toEqual(
-    //   getEventWithDefaults({
-    //     result: resultGenerators.putout([6, 4, 3]),
-    //     bases: {
-    //       B: undefined,
-    //       1: {
-    //         endBase: 2,
-    //         result: resultGenerators.putout([6, 4])
-    //       },
-    //       2: undefined,
-    //       3: undefined
-    //     }
-    //   })
-    // )
-
-    // expect(getResult('5(2)4(1)3/GDP')).toEqual(
-    //   getEventWithDefaults({
-    //     result: resultGenerators.putout([5, 4, 3]),
-    //     bases: {
-    //       B: undefined,
-    //       1: {
-    //         endBase: 2,
-    //         result: resultGenerators.putout([5, 4])
-    //       },
-    //       2: {
-    //         endBase: 3,
-    //         result: resultGenerators.putout([5])
-    //       },
-    //       3: undefined
-    //     }
-    //   })
-    // )
-
+    expect(getResult('64(1)3/GDP')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.putout([6, 4, 3]),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([6, 4])
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+    expect(getResult('5(2)4(1)3/GDP')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.putout([5, 4, 3]),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([5, 4])
+          },
+          2: {
+            endBase: 3,
+            result: resultGenerators.putout([5])
+          },
+          3: undefined
+        }
+      })
+    )
     // TODO: make this work
     expect(getResult('1(B)16(2)63(1)/LTP/L1')).toEqual(
       getEventWithDefaults({

@@ -21,7 +21,10 @@ export function isSacrifice(atBatResult: string) {
 }
 
 export function getPutoutPositions(putout: string) {
-  return putout.split('').map(Number)
+  return putout
+    .split('')
+    .map(Number)
+    .filter((p) => !!p)
 }
 
 function getPutoutFromString(putout: string) {
@@ -44,17 +47,27 @@ const strikeout: ActionConfig = {
   }
 }
 
-function getOut(atBatResult: string) {
+function getOutInfo(atBatResult: string) {
   const batterAction = getBatterAction(atBatResult)
 
-  const outType = getOutType(atBatResult)
-  const atBatIsSacrifice = isSacrifice(atBatResult)
-  const defensivePositions = getPutoutPositions(batterAction)
+  return {
+    outType: getOutType(atBatResult),
+    isSacrifice: isSacrifice(atBatResult),
+    defensivePositions: getPutoutPositions(batterAction)
+  }
+}
 
-  console.log(outType, defensivePositions)
-
+function getOut({
+  outType,
+  isSacrifice,
+  defensivePositions
+}: {
+  outType: ReturnType<typeof getOutType>
+  isSacrifice: boolean
+  defensivePositions: number[]
+}) {
   const outData: Partial<RetrosheetEvent> = {
-    isSacrifice: atBatIsSacrifice,
+    isSacrifice,
     isOut: true
   }
 
@@ -85,7 +98,9 @@ const simpleOut: ActionConfig = {
   actionType: 'batter',
   regexp: /^\d+\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
-    return getAction(getOut(gameplayEvent.result))
+    const outInfo = getOutInfo(gameplayEvent.result)
+    const out = getOut(outInfo)
+    return getAction(out)
   }
 }
 
@@ -96,9 +111,6 @@ const multiActionOut: ActionConfig = {
     const { result } = gameplayEvent
     const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
     const batterMatch = result.match(/(\d+)(\(B\))?\//)
-    const batterOut = getOut(gameplayEvent.result.split('/').pop() || '')
-
-    // console.log(batterOut)
 
     let batterAction = batterMatch ? batterMatch[1] : ''
     let firstBaseResult = ''
@@ -137,6 +149,12 @@ const multiActionOut: ActionConfig = {
         ? `${thirdBaseResult}${secondBaseResult}`
         : undefined,
       '3': thirdBaseResult ? `${thirdBaseResult}` : undefined
+    }
+
+    const outType = getOutType(gameplayEvent.result)
+    console.log(result, outType)
+    let atBatResult: any
+    if (outType !== 'groundout') {
     }
 
     return getAction({
