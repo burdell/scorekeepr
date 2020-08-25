@@ -87,3 +87,10 @@ export function getBase(rawBase: string | number): Base {
 
   throw new Error('Attempted to use an invalid base')
 }
+
+export function getPutoutPositions(putout: string) {
+  return putout
+    .split('')
+    .map(Number)
+    .filter((p) => !!p)
+}

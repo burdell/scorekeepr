@@ -1,8 +1,12 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
+import { RetrosheetEvent } from '../types'
+
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
-import { RetrosheetEvent } from '../types'
+import { getBaserunnerMovements } from './baseMovements'
+import { getPutoutPositions } from './utilities'
+import * as resultGenerators from '../resultGenerators'
 
 export function parseAction(gameplayEvent: GameplayEvent) {
   if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
@@ -11,10 +15,8 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   const action = getAction(gameplayEvent.result)
 
   if (!action) {
-    console.log(`Unhandled event: ${gameplayEvent.result}`)
+    console.log(`Unhandled actiont: ${gameplayEvent.result}`)
     return
-  } else {
-    // console.log(action.actionType, gameplayEvent.result)
   }
 
   let event: RetrosheetEvent | undefined = undefined
@@ -26,6 +28,27 @@ export function parseAction(gameplayEvent: GameplayEvent) {
       event = handleRunnerAction(action, gameplayEvent)
       break
   }
+
+  if (!event) {
+    console.log(`Unhandled event: `, gameplayEvent.result)
+    return
+  }
+
+  getBaserunnerMovements(gameplayEvent.result).forEach(
+    ({ startBase, endBase, isOut, isAdvancement, result }) => {
+      if (startBase === 4 || !event) return
+
+      const base = event.bases[startBase]
+      if (base) return
+
+      event.bases[startBase] = {
+        endBase,
+        result: isOut
+          ? resultGenerators.putout(getPutoutPositions(result))
+          : undefined
+      }
+    }
+  )
 
   return event
 }

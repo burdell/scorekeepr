@@ -81,7 +81,11 @@
           "pitchCount": 5
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 2
+          }
+        }
       },
       {
         "result": {
@@ -111,7 +115,42 @@
           "pitchCount": 4
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 2
+          },
+          "2": {
+            "endBase": 3
+          }
+        }
+      },
+      {
+        "isOut": true,
+        "isSacrifice": false,
+        "bases": {
+          "2": {
+            "endBase": 3,
+            "result": {
+              "type": "putout",
+              "result": [
+                5,
+                6
+              ],
+              "display": "5-6"
+            }
+          },
+          "3": {
+            "endBase": 4,
+            "result": {
+              "type": "putout",
+              "result": [
+                2,
+                5
+              ],
+              "display": "2-5"
+            }
+          }
+        }
       }
     ],
     [
@@ -204,6 +243,10 @@
               ],
               "display": "4-5"
             }
+          },
+          "B": {
+            "endBase": 1,
+            "isAtBatResult": true
           }
         }
       },
@@ -220,7 +263,11 @@
           "pitchCount": 1
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 2
+          }
+        }
       },
       {
         "result": {
@@ -235,7 +282,14 @@
           "pitchCount": 3
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 4
+          },
+          "2": {
+            "endBase": 4
+          }
+        }
       },
       {
         "result": {
@@ -462,7 +516,11 @@
           "pitchCount": 3
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 2
+          }
+        }
       },
       {
         "result": {
@@ -481,6 +539,9 @@
         },
         "isSacrifice": false,
         "bases": {
+          "1": {
+            "endBase": 2
+          },
           "2": {
             "endBase": 3,
             "result": {
@@ -710,6 +771,10 @@
               ],
               "display": "1-6"
             }
+          },
+          "B": {
+            "endBase": 1,
+            "isAtBatResult": true
           }
         }
       },
@@ -814,6 +879,20 @@
         "bases": {}
       },
       {
+        "isOut": false,
+        "isSacrifice": false,
+        "bases": {
+          "1": {
+            "endBase": 2,
+            "result": {
+              "type": "defensive-error",
+              "result": 1,
+              "display": "E1"
+            }
+          }
+        }
+      },
+      {
         "result": {
           "type": "flyout",
           "result": 7,
@@ -841,7 +920,11 @@
           "pitchCount": 3
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "2": {
+            "endBase": 3
+          }
+        }
       },
       {
         "result": {
@@ -871,7 +954,11 @@
           "pitchCount": 5
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 2
+          }
+        }
       },
       {
         "result": {
@@ -986,7 +1073,11 @@
           "pitchCount": 1
         },
         "isSacrifice": false,
-        "bases": {}
+        "bases": {
+          "1": {
+            "endBase": 4
+          }
+        }
       },
       {
         "result": {

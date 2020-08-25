@@ -118,7 +118,11 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({
         result: resultGenerators.fieldersChoice(1),
         bases: {
-          B: undefined,
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true
+          },
           1: {
             endBase: 2,
             result: resultGenerators.putout([6, 4])
@@ -146,6 +150,29 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    expect(getResult('54(1)/FO/G5.3-H;B-1')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.fieldersChoice(1),
+        bases: {
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true
+          },
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([5, 4])
+          },
+          2: undefined,
+          3: {
+            endBase: 4,
+            result: undefined
+          }
+        }
+      })
+    )
+
     // TODO: make this work
     expect(getResult('1(B)16(2)63(1)/LTP/L1')).toEqual(
       getEventWithDefaults({
@@ -296,7 +323,10 @@ describe('Retrosheet parsing', () => {
         bases: {
           B: undefined,
           1: undefined,
-          2: undefined,
+          2: {
+            result: resultGenerators.putout([5, 6]),
+            endBase: 3
+          },
           3: {
             result: resultGenerators.putout([2, 5]),
             endBase: 4

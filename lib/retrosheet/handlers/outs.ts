@@ -3,7 +3,7 @@ import { AtBat } from 'retrosheet-parse'
 import * as resultGenerators from '../../resultGenerators'
 
 import { RetrosheetEvent, AtBatResult } from '../../types'
-import { getAction } from '../utilities'
+import { getAction, getPutoutPositions } from '../utilities'
 import { ActionConfig } from '../retrosheet.types'
 
 export function getOutType(
@@ -18,13 +18,6 @@ export function getOutType(
 
 export function isSacrifice(atBatResult: string) {
   return !!atBatResult.match(/\/S(F|H)/)
-}
-
-export function getPutoutPositions(putout: string) {
-  return putout
-    .split('')
-    .map(Number)
-    .filter((p) => !!p)
 }
 
 function getPutoutFromString(putout: string) {
@@ -163,10 +156,14 @@ const multiActionOut: ActionConfig = {
         : resultGenerators.fieldersChoice(1)
     }
 
+    const res = getAtBatResult()
     return getAction({
-      result: getAtBatResult(),
+      result: res,
       bases: {
-        B: undefined,
+        B:
+          res && res.type === 'fielders-choice'
+            ? { endBase: 1, isAtBatResult: true, result: undefined }
+            : undefined,
         1: baseResults[1]
           ? { endBase: 2, result: getPutoutFromString(baseResults[1]) }
           : undefined,
