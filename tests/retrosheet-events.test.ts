@@ -98,7 +98,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it.only('parses double/triple plays and fielders choices', () => {
+  it('parses double/triple plays and fielders choices', () => {
     expect(getResult('64(1)3/GDP')).toEqual(
       getEventWithDefaults({
         result: resultGenerators.putout([6, 4, 3]),
@@ -113,6 +113,22 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    expect(getResult('64(1)/G')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.fieldersChoice(1),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([6, 4])
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
     expect(getResult('5(2)4(1)3/GDP')).toEqual(
       getEventWithDefaults({
         result: resultGenerators.putout([5, 4, 3]),

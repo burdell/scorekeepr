@@ -47,27 +47,35 @@ const strikeout: ActionConfig = {
   }
 }
 
-function getOutInfo(atBatResult: string) {
-  const batterAction = getBatterAction(atBatResult)
+function getNonGroundout(
+  outType: 'flyout' | 'lineout' | 'sacrifice-fly' | undefined,
+  defensivePositions: number[]
+) {
+  let result: AtBatResult | undefined = undefined
+  const defensivePosition = defensivePositions.pop()
+  if (!defensivePosition || defensivePositions.length > 0)
+    throw new Error(
+      'Attempted to record an out without a valid defensive player'
+    )
 
-  return {
-    outType: getOutType(atBatResult),
-    isSacrifice: isSacrifice(atBatResult),
-    defensivePositions: getPutoutPositions(batterAction)
+  if (outType === 'flyout') {
+    result = resultGenerators.flyOut(defensivePosition)
+  } else if (outType === 'lineout') {
+    result = resultGenerators.lineOut(defensivePosition)
+  } else if (outType === 'sacrifice-fly') {
+    result = resultGenerators.flyOut(defensivePosition)
   }
+
+  return result
 }
 
-function getOut({
-  outType,
-  isSacrifice,
-  defensivePositions
-}: {
-  outType: ReturnType<typeof getOutType>
-  isSacrifice: boolean
-  defensivePositions: number[]
-}) {
+function getOut(atBatResult: string) {
+  const outType = getOutType(atBatResult)
+  const batterAction = getBatterAction(atBatResult)
+  const defensivePositions = getPutoutPositions(batterAction)
+
   const outData: Partial<RetrosheetEvent> = {
-    isSacrifice,
+    isSacrifice: isSacrifice(atBatResult),
     isOut: true
   }
 
@@ -75,19 +83,7 @@ function getOut({
   if (outType === 'groundout') {
     result = resultGenerators.putout(defensivePositions)
   } else {
-    const defensivePosition = defensivePositions.pop()
-    if (!defensivePosition || defensivePositions.length > 0)
-      throw new Error(
-        'Attempted to record an out without a valid defensive player'
-      )
-
-    if (outType === 'flyout') {
-      result = resultGenerators.flyOut(defensivePosition)
-    } else if (outType === 'lineout') {
-      result = resultGenerators.lineOut(defensivePosition)
-    } else if (outType === 'sacrifice-fly') {
-      result = resultGenerators.flyOut(defensivePosition)
-    }
+    result = getNonGroundout(outType, defensivePositions)
   }
 
   outData.result = result
@@ -98,8 +94,7 @@ const simpleOut: ActionConfig = {
   actionType: 'batter',
   regexp: /^\d+\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
-    const outInfo = getOutInfo(gameplayEvent.result)
-    const out = getOut(outInfo)
+    const out = getOut(gameplayEvent.result)
     return getAction(out)
   }
 }
@@ -111,6 +106,7 @@ const multiActionOut: ActionConfig = {
     const { result } = gameplayEvent
     const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
     const batterMatch = result.match(/(\d+)(\(B\))?\//)
+    const notGroundoutBatterResult = result.match(/.+\/.+(\/.+)/)
 
     let batterAction = batterMatch ? batterMatch[1] : ''
     let firstBaseResult = ''
@@ -151,16 +147,24 @@ const multiActionOut: ActionConfig = {
       '3': thirdBaseResult ? `${thirdBaseResult}` : undefined
     }
 
-    const outType = getOutType(gameplayEvent.result)
-    console.log(result, outType)
-    let atBatResult: any
-    if (outType !== 'groundout') {
+    function getAtBatResult() {
+      if (notGroundoutBatterResult) {
+        const [fullMatch, result] = notGroundoutBatterResult
+        const outType = getOutType(result)
+
+        if (outType !== 'groundout') {
+          const batterOut = getNonGroundout(outType, getPutoutPositions(result))
+          return batterOut
+        }
+      }
+
+      return batterResult
+        ? resultGenerators.putout(getPutoutPositions(batterResult))
+        : resultGenerators.fieldersChoice(1)
     }
 
     return getAction({
-      result: batterResult
-        ? resultGenerators.putout(getPutoutPositions(batterResult))
-        : resultGenerators.fieldersChoice(1),
+      result: getAtBatResult(),
       bases: {
         B: undefined,
         1: baseResults[1]
