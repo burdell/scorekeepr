@@ -1,1229 +1,439 @@
 {
-  "home": [
-    [
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            1,
-            3
-          ],
-          "display": "1-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            3
-          ],
-          "display": "3u"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 1,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 1,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 0,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
+  "id": "",
+  "gameInfo": {
+    "homeTeam": "Chicago Cubs",
+    "visitingTeam": "Atlanta Braves",
+    "date": "2019/06/25",
+    "location": "Wrigley Field",
+    "startTime": "7:05PM",
+    "id": "CHN201906250"
+  },
+  "lineups": {
+    "home": [
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Kyle Schwarber"
           },
-          "2": {
-            "endBase": 3
-          }
+          "position": 7
         }
-      },
-      {
-        "isOut": true,
-        "isSacrifice": false,
-        "bases": {
-          "2": {
-            "endBase": 3,
-            "result": {
-              "type": "putout",
-              "result": [
-                5,
-                6
-              ],
-              "display": "5-6"
-            }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Kris Bryant"
           },
-          "3": {
-            "endBase": 4,
-            "result": {
-              "type": "putout",
-              "result": [
-                2,
-                5
-              ],
-              "display": "2-5"
-            }
-          }
+          "position": 9
         }
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            4,
-            3
-          ],
-          "display": "4-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 0,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "fielders-choice",
-          "result": 1,
-          "display": "FC"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2,
-            "result": {
-              "type": "putout",
-              "result": [
-                4,
-                5
-              ],
-              "display": "4-5"
-            }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Anthony Rizzo"
           },
-          "B": {
-            "endBase": 1,
-            "isAtBatResult": true
-          }
+          "position": 3
         }
-      },
-      {
-        "result": {
-          "type": "hit",
-          "result": 1,
-          "display": "1B"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "hit",
-          "result": 2,
-          "display": "2B"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 1,
-          "strikes": 1,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 4
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Javier Baez"
           },
-          "2": {
-            "endBase": 4
-          }
+          "position": 6
         }
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "IBB",
-          "display": "IBB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 0,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 2,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            4,
-            3
-          ],
-          "display": "4-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "lineout",
-          "result": 3,
-          "display": "L3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            5,
-            3
-          ],
-          "display": "5-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 7
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 7,
-          "display": "F7"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            1,
-            3
-          ],
-          "display": "1-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 2,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "hit",
-          "result": 1,
-          "display": "1B"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 1,
-          "strikes": 0,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "hit",
-          "result": 1,
-          "display": "1B"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 1,
-          "strikes": 1,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            5,
-            3
-          ],
-          "display": "5-3"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Willson Contreras"
           },
-          "2": {
-            "endBase": 3,
-            "result": {
-              "type": "putout",
-              "result": [
-                5
-              ],
-              "display": "5u"
-            }
-          }
+          "position": 2
         }
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "David Bote"
+          },
+          "position": 5
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Addison Russell"
+          },
+          "position": 4
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Adbert Alzolay"
+          },
+          "position": 1
         },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
+        {
+          "inning": 4,
+          "player": {
+            "name": "Mike Montgomery"
+          },
+          "position": 1
         },
-        "isSacrifice": false,
-        "bases": {}
-      }
+        {
+          "inning": 7,
+          "player": {
+            "name": "Jason Heyward"
+          },
+          "position": 11
+        },
+        {
+          "inning": 7,
+          "player": {
+            "name": "Brad Brach"
+          },
+          "position": 1
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Albert Almora"
+          },
+          "position": 8
+        }
+      ]
     ],
-    [
-      {
-        "result": {
-          "type": "flyout",
-          "result": 7,
-          "display": "F7"
+    "visiting": [
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Ronald Acuna"
+          },
+          "position": 8
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Dansby Swanson"
+          },
+          "position": 6
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Freddie Freeman"
+          },
+          "position": 3
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Josh Donaldson"
+          },
+          "position": 5
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Nick Markakis"
+          },
+          "position": 9
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Austin Riley"
+          },
+          "position": 7
         },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
+        {
+          "inning": 9,
+          "player": {
+            "name": "Charlie Culberson"
+          },
+          "position": 7
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Brian McCann"
+          },
+          "position": 2
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Ozzie Albies"
+          },
+          "position": 4
+        }
+      ],
+      [
+        {
+          "inning": 1,
+          "player": {
+            "name": "Max Fried"
+          },
+          "position": 1
         },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
+        {
+          "inning": 7,
+          "player": {
+            "name": "Johan Camargo"
+          },
+          "position": 11
         },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
+        {
+          "inning": 7,
+          "player": {
+            "name": "Sean Newcomb"
+          },
+          "position": 1
         },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
+        {
+          "inning": 8,
+          "player": {
+            "name": "Anthony Swarzak"
+          },
+          "position": 1
         },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
+        {
+          "inning": 9,
+          "player": {
+            "name": "Luke Jackson"
+          },
+          "position": 1
+        }
+      ]
     ]
-  ],
-  "visiting": [
-    [
-      {
-        "result": {
-          "type": "hit",
-          "result": 4,
-          "display": "HR"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 7,
-          "display": "F7"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 4,
-          "display": "P4"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
+  },
+  "gameplay": {
+    "home": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     ],
-    [
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            5,
-            3
-          ],
-          "display": "5-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 2,
-          "display": "P2"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 7
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "fielders-choice",
-          "result": 1,
-          "display": "FC"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 0,
-          "strikes": 1,
-          "pitchCount": 2
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2,
-            "result": {
-              "type": "putout",
-              "result": [
-                1,
-                6
-              ],
-              "display": "1-6"
-            }
-          },
-          "B": {
-            "endBase": 1,
-            "isAtBatResult": true
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "flyout",
-          "result": 5,
-          "display": "P5"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 10
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            2,
-            3
-          ],
-          "display": "2-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            3,
-            1
-          ],
-          "display": "3-1"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 1,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "isOut": false,
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2,
-            "result": {
-              "type": "defensive-error",
-              "result": 1,
-              "display": "E1"
-            }
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 7,
-          "display": "F7"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "lineout",
-          "result": 8,
-          "display": "L8"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 0,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {
-          "2": {
-            "endBase": 3
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 8
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 1,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 2
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            5,
-            3
-          ],
-          "display": "5-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "lineout",
-          "result": 6,
-          "display": "L6"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            1,
-            3
-          ],
-          "display": "1-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 4
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "hit",
-          "result": 1,
-          "display": "1B"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "hit",
-          "result": 4,
-          "display": "HR"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {
-          "1": {
-            "endBase": 4
-          }
-        }
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            6,
-            3
-          ],
-          "display": "6-3"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 1,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 6
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "putout",
-          "result": [
-            3,
-            1
-          ],
-          "display": "3-1"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 9
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 7
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
-    ],
-    [
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "K",
-          "display": "K"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 2,
-          "pitchCount": 3
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 8,
-          "display": "F8"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 2,
-          "strikes": 2,
-          "pitchCount": 5
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "pitcher-result",
-          "result": "BB",
-          "display": "BB"
-        },
-        "isOut": false,
-        "pitches": {
-          "balls": 3,
-          "strikes": 2,
-          "pitchCount": 10
-        },
-        "isSacrifice": false,
-        "bases": {}
-      },
-      {
-        "result": {
-          "type": "flyout",
-          "result": 4,
-          "display": "P4"
-        },
-        "isOut": true,
-        "pitches": {
-          "balls": 0,
-          "strikes": 0,
-          "pitchCount": 1
-        },
-        "isSacrifice": false,
-        "bases": {}
-      }
+    "visiting": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     ]
-  ]
+  }
 }

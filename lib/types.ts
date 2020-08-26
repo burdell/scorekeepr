@@ -1,5 +1,3 @@
-import { AtBat as RetrosheetAtBat } from 'retrosheet-parse'
-
 export type PitchData = {
   balls: number
   strikes: number
@@ -157,7 +155,6 @@ export type CurrentAtBat = {
 export type Gameplay = {
   home: AtBat[][]
   visiting: AtBat[][]
-  currentAtBat: CurrentAtBat | undefined
 }
 
 export type InitialGame = Partial<Game> & {
@@ -174,12 +171,12 @@ export type Game = {
   id: string
 }
 
-// export type GameOutput = {
-//   id: string
-//   lineups: LineupState
-//   gameplay: Gameplay
-//   gameInfo: Game
-// }
+export type GameOutput = {
+  id: string
+  lineups: { home: Lineup; visiting: Lineup }
+  gameplay: Gameplay
+  gameInfo: Game
+}
 
 export type RunnerMovement = {
   startBase: Base | 'B'
