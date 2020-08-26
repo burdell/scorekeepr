@@ -12,8 +12,7 @@
     "typecheck": "tsc --noEmit",
     "generate": "ts-node ./dev/generate",
     "server": "ts-node ./dev/server.ts",
-    "dev": "npm run generate && npm run server",
-    "refactor": "ts-node ./dev/refactor.ts"
+    "dev": "npm run generate && npm run server"
   },
   "keywords": [],
   "author": "",

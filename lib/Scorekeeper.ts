@@ -59,10 +59,16 @@ export class Scorekeeper {
   handleRetrosheetEvent(
     event: RetrosheetEvent,
     inning: number,
-    lineupSpot: number
+    lineupSpot: number,
+    team: 'home' | 'visiting'
   ) {
     this.store.dispatch(
-      handleRetrosheetEvent({ retrosheetEvent: event, inning, lineupSpot })
+      handleRetrosheetEvent({
+        retrosheetEvent: event,
+        inning,
+        lineupSpot,
+        team
+      })
     )
   }
 }
