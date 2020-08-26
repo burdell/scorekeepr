@@ -1,4 +1,4 @@
-import { Game } from '../types'
+import { Game } from '../../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 function getGame(overrides: Partial<Game> = {}): Game {

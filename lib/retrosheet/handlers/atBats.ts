@@ -1,5 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
-import * as resultGenerators from '../../resultGenerators'
+import * as resultGenerators from '../generators/result'
+import * as actionGenerators from '../generators/action'
 
 import { getAction, getBases } from '../utilities'
 
@@ -18,16 +19,7 @@ const hit: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup] = match
     const hitType = getHitType(hrGroup || hitGroup || grdGroup)
-    return getAction({
-      result: resultGenerators.hit(hitType),
-      bases: getBases({
-        B: {
-          isAtBatResult: true,
-          endBase: hitType,
-          result: undefined
-        }
-      })
-    })
+    return actionGenerators.hit(hitType)
   }
 }
 
@@ -35,16 +27,7 @@ const hitBatter: ActionConfig = {
   actionType: 'batter',
   regexp: /^HP/,
   handler: () => {
-    return getAction({
-      result: resultGenerators.pitcherResult('HBP'),
-      bases: getBases({
-        B: {
-          result: undefined,
-          isAtBatResult: true,
-          endBase: 1
-        }
-      })
-    })
+    return actionGenerators.pitcherResult('HBP')
   }
 }
 
@@ -54,18 +37,7 @@ const walk: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const [fullMatch, intentionalGroup] = match
     const isIntentional = intentionalGroup === 'I'
-    return getAction({
-      result: isIntentional
-        ? resultGenerators.pitcherResult('IBB')
-        : resultGenerators.pitcherResult('BB'),
-      bases: getBases({
-        B: {
-          result: undefined,
-          isAtBatResult: true,
-          endBase: 1
-        }
-      })
-    })
+    return actionGenerators.pitcherResult(isIntentional ? 'IBB' : 'BB')
   }
 }
 

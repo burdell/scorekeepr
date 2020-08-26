@@ -1,4 +1,4 @@
-import { Lineup, LineupEntry } from '../types'
+import { Lineup, LineupEntry } from '../../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 export type LineupState = { home: Lineup; visiting: Lineup }

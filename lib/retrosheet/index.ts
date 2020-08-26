@@ -6,7 +6,7 @@ import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
 import { getBaserunnerMovements } from './baseMovements'
 import { getPutoutPositions } from './utilities'
-import * as resultGenerators from '../resultGenerators'
+import * as resultGenerators from './generators/result'
 
 export function parseAction(gameplayEvent: GameplayEvent) {
   if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {

@@ -184,3 +184,10 @@ export type RunnerMovement = {
   result: AdvanceBaseResult | OutBaseResult | undefined
   isOut?: boolean
 }
+
+export type RetrosheetEventHandler = {
+  retrosheetEvent: RetrosheetEvent
+  inning: number
+  lineupSpot: number
+  team: 'home' | 'visiting'
+}

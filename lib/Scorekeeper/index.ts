@@ -3,7 +3,13 @@ import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
 import { handleRetrosheetEvent } from './store/gameplay'
 
-import { Game, LineupEntry, InitialGame, RetrosheetEvent } from './types'
+import {
+  Game,
+  LineupEntry,
+  InitialGame,
+  RetrosheetEvent,
+  RetrosheetEventHandler
+} from '../types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>
@@ -56,15 +62,15 @@ export class Scorekeeper {
     this.store.dispatch(setGameInfo(gameInfo))
   }
 
-  handleRetrosheetEvent(
-    event: RetrosheetEvent,
-    inning: number,
-    lineupSpot: number,
-    team: 'home' | 'visiting'
-  ) {
+  handleRetrosheetEvent({
+    retrosheetEvent,
+    inning,
+    lineupSpot,
+    team
+  }: RetrosheetEventHandler) {
     this.store.dispatch(
       handleRetrosheetEvent({
-        retrosheetEvent: event,
+        retrosheetEvent,
         inning,
         lineupSpot,
         team

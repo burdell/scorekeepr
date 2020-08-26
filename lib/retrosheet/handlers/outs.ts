@@ -1,6 +1,6 @@
 import { AtBat } from 'retrosheet-parse'
 
-import * as resultGenerators from '../../resultGenerators'
+import * as resultGenerators from '../generators/result'
 
 import { RetrosheetEvent, AtBatResult } from '../../types'
 import { getAction, getPutoutPositions } from '../utilities'

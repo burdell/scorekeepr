@@ -2,7 +2,7 @@ import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
 import { parseAction as realParseAction } from '../lib/retrosheet'
 import { RetrosheetEvent } from '../lib/types'
-import * as resultGenerators from '../lib/resultGenerators'
+import * as resultGenerators from '../lib/retrosheet/generators/result'
 
 function getEventWithDefaults(
   overrides: Partial<RetrosheetEvent> = {}

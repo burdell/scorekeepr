@@ -1,18 +1,22 @@
-import { parseGames, GameplayEvent, Lineup } from 'retrosheet-parse'
+import { parseGames, GameplayEvent, Lineup, Game } from 'retrosheet-parse'
 
 import { parseAction } from './retrosheet'
 import { getTeam, getStadium, getLineup } from './retrosheet/translator'
-import { RetrosheetEvent, GameOutput } from './types'
+import { RetrosheetEvent } from './types'
 import { Scorekeeper } from './Scorekeeper'
 
-type InningList = RetrosheetEvent[][]
-
-function handleInnings(
-  gameplayEvents: GameplayEvent[][],
-  lineup: Lineup,
-  scorekeeper: Scorekeeper,
+function generateGameplay({
+  game,
+  scorekeeper,
+  team
+}: {
+  game: Game
+  scorekeeper: Scorekeeper
   team: 'home' | 'visiting'
-) {
+}) {
+  const lineup = game.lineup[team]
+  const gameplayEvents = game.play[team]
+
   const lineupMap = lineup.reduce<{ [player: string]: number }>(
     (acc, lineupSpot, index) => {
       lineupSpot.forEach((player) => {
@@ -50,12 +54,12 @@ function handleInnings(
         return
       }
 
-      scorekeeper.handleRetrosheetEvent(
-        action.retrosheetEvent,
-        inningNumber,
-        action.lineupSpot,
+      scorekeeper.handleRetrosheetEvent({
+        retrosheetEvent: action.retrosheetEvent,
+        inning: inningNumber,
+        lineupSpot: action.lineupSpot,
         team
-      )
+      })
     })
   })
 }
@@ -68,7 +72,7 @@ export async function getRetrosheetScorekeepers(
 
   gameList.forEach((game) => {
     const { info, lineup, play } = game
-    const scorebook = new Scorekeeper({
+    const scorekeeper = new Scorekeeper({
       date: info.date,
       homeTeam: getTeam(info.hometeam).fullName,
       visitingTeam: getTeam(info.visteam).fullName,
@@ -77,15 +81,15 @@ export async function getRetrosheetScorekeepers(
       id: game.id
     })
 
-    scorebook.setLineups({
+    scorekeeper.setLineups({
       home: getLineup(lineup.home),
       visiting: getLineup(lineup.visiting)
     })
 
-    handleInnings(play.home, lineup.home, scorebook, 'home')
-    handleInnings(play.visiting, lineup.visiting, scorebook, 'visiting')
+    generateGameplay({ game, team: 'home', scorekeeper })
+    generateGameplay({ game, team: 'visiting', scorekeeper })
 
-    scorekeepers.push(scorebook)
+    scorekeepers.push(scorekeeper)
   })
 
   return scorekeepers

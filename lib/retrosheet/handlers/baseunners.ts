@@ -7,7 +7,7 @@ import {
   getNextBase,
   getPreviousBase
 } from '../utilities'
-import * as resultGenerators from '../../resultGenerators'
+import * as resultGenerators from '../generators/result'
 
 function getPutoutFromString(putoutString: string) {
   return resultGenerators.putout(putoutString.split('').map(Number))

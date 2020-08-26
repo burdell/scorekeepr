@@ -16,7 +16,7 @@ import {
   DefensiveIndifference,
   PassedBall,
   WildPitch
-} from './types'
+} from '../../types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
   return {
