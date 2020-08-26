@@ -196,27 +196,87 @@ describe('Retrosheet parsing', () => {
   it('parses hits', () => {
     const single = parseAction(getAtBat({ result: 'S8/L' }))
     expect(single).toEqual(
-      getEventWithDefaults({ result: resultGenerators.hit(1) })
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
 
     const double = parseAction(getAtBat({ result: 'D7/L' }))
     expect(double).toEqual(
-      getEventWithDefaults({ result: resultGenerators.hit(2) })
+      getEventWithDefaults({
+        result: resultGenerators.hit(2),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 2,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
 
     const groundRuleDouble = parseAction(getAtBat({ result: 'DGR/L' }))
     expect(groundRuleDouble).toEqual(
-      getEventWithDefaults({ result: resultGenerators.hit(2) })
+      getEventWithDefaults({
+        result: resultGenerators.hit(2),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 2,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
 
     const triple = parseAction(getAtBat({ result: 'T9/F' }))
     expect(triple).toEqual(
-      getEventWithDefaults({ result: resultGenerators.hit(3) })
+      getEventWithDefaults({
+        result: resultGenerators.hit(3),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 3,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
 
     const homerun = parseAction(getAtBat({ result: 'HR/78/F' }))
     expect(homerun).toEqual(
-      getEventWithDefaults({ result: resultGenerators.hit(4) })
+      getEventWithDefaults({
+        result: resultGenerators.hit(4),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 4,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
   })
 
@@ -224,17 +284,53 @@ describe('Retrosheet parsing', () => {
     const hbp = parseAction(getAtBat({ result: 'HP' }))
 
     expect(hbp).toEqual(
-      getEventWithDefaults({ result: resultGenerators.pitcherResult('HBP') })
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('HBP'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
   })
 
   it('parses walks', () => {
     expect(parseAction(getAtBat({ result: 'W' }))).toEqual(
-      getEventWithDefaults({ result: resultGenerators.pitcherResult('BB') })
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('BB'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
 
     expect(parseAction(getAtBat({ result: 'IW' }))).toEqual(
-      getEventWithDefaults({ result: resultGenerators.pitcherResult('IBB') })
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('IBB'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
     )
   })
 

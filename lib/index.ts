@@ -47,7 +47,6 @@ function handleInnings(
       const action = getActionInfo(event)
 
       if (!action) {
-        console.log('Unhandled: ', event)
         return
       }
 

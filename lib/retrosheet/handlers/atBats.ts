@@ -1,7 +1,7 @@
 import { ActionConfig } from '../retrosheet.types'
 import * as resultGenerators from '../../resultGenerators'
 
-import { getAction } from '../utilities'
+import { getAction, getBases } from '../utilities'
 
 function getHitType(hit: string) {
   if (hit === 'S') return 1
@@ -17,8 +17,16 @@ const hit: ActionConfig = {
   regexp: /^(HR)|^([SDT])\d+|^(DGR)/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup] = match
+    const hitType = getHitType(hrGroup || hitGroup || grdGroup)
     return getAction({
-      result: resultGenerators.hit(getHitType(hrGroup || hitGroup || grdGroup))
+      result: resultGenerators.hit(hitType),
+      bases: getBases({
+        B: {
+          isAtBatResult: true,
+          endBase: hitType,
+          result: undefined
+        }
+      })
     })
   }
 }
@@ -28,7 +36,14 @@ const hitBatter: ActionConfig = {
   regexp: /^HP/,
   handler: () => {
     return getAction({
-      result: resultGenerators.pitcherResult('HBP')
+      result: resultGenerators.pitcherResult('HBP'),
+      bases: getBases({
+        B: {
+          result: undefined,
+          isAtBatResult: true,
+          endBase: 1
+        }
+      })
     })
   }
 }
@@ -42,7 +57,14 @@ const walk: ActionConfig = {
     return getAction({
       result: isIntentional
         ? resultGenerators.pitcherResult('IBB')
-        : resultGenerators.pitcherResult('BB')
+        : resultGenerators.pitcherResult('BB'),
+      bases: getBases({
+        B: {
+          result: undefined,
+          isAtBatResult: true,
+          endBase: 1
+        }
+      })
     })
   }
 }

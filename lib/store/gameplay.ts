@@ -1,19 +1,48 @@
-import { createAction, createReducer, Dispatch } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { Gameplay, CurrentAtBat, AtBat, RetrosheetEvent } from '../types'
-import { getEmptyGame } from 'retrosheet-parse/dist/GameBuilder'
+import {
+  Gameplay,
+  AtBat,
+  RetrosheetEvent,
+  Base,
+  BaseResult,
+  BaseResultResult
+} from '../types'
 
 const initialState: Gameplay = {
   home: Array(9).fill(Array(9).fill(null)),
   visiting: Array(9).fill(Array(9).fill(null))
 }
 
-function getDefaultAtBat(): CurrentAtBat {
-  return {
-    inning: 0,
-    lineupSpot: 0,
-    team: 'visiting'
-  }
+function advanceRunnerHelper({
+  baseAdvancedTo,
+  isAtBatResult,
+  existingBases = [],
+  result = undefined,
+  isOut = false
+}: {
+  baseAdvancedTo: Base
+  existingBases?: BaseResult[]
+  result?: BaseResultResult
+  isOut?: boolean
+  isAtBatResult?: boolean
+}) {
+  return new Array<BaseResult>(baseAdvancedTo)
+    .fill({ advanced: true, result: undefined })
+    .map((newResult, index) => {
+      const existingResult = existingBases[index]
+      const isAdvancedToBase = index + 1 === baseAdvancedTo
+      if (isAdvancedToBase) {
+        newResult.result = result
+        newResult.advanced = !isOut
+        if (isAtBatResult) {
+          newResult.isAtBatResult = isAtBatResult
+        }
+        return { ...newResult }
+      }
+
+      return existingResult || { ...newResult }
+    })
 }
 
 export function getAtBat(overrides: Partial<AtBat> = {}): AtBat {
@@ -50,11 +79,22 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     currentLineupSpot.result = retrosheetEvent.result
+
     const pitchInfo = retrosheetEvent.pitches
     if (pitchInfo) {
       currentLineupSpot.strikes = pitchInfo.strikes
       currentLineupSpot.balls = pitchInfo.balls
       currentLineupSpot.pitchCount = pitchInfo.pitchCount
+    }
+
+    const batterBase = retrosheetEvent.bases['B']
+    if (batterBase) {
+      const { endBase, isAtBatResult } = batterBase
+      const bases = advanceRunnerHelper({
+        baseAdvancedTo: endBase,
+        isAtBatResult
+      })
+      currentLineupSpot.bases = bases
     }
 
     currentInning[lineupSpot] = currentLineupSpot
