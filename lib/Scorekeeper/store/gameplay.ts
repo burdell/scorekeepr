@@ -114,6 +114,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     if (retrosheetEvent.result) {
       currentLineupSpot.result = retrosheetEvent.result
+      currentLineupSpot.isOut = retrosheetEvent.isOut
     }
 
     const pitchInfo = retrosheetEvent.pitches
@@ -133,35 +134,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentLineupSpot.bases = bases
     }
 
-    // const currentBaserunners = getCurrentBaserunners(currentInning)
-
-    // const firstBaseMovement = retrosheetEvent.bases[1]
-    // const currentFirstBase = currentBaserunners[1]
-    // if (firstBaseMovement && currentFirstBase) {
-    //   const bases = advanceRunnerHelper({
-    //     baseAdvancedTo: firstBaseMovement.endBase,
-    //     result: firstBaseMovement.result
-    //   })
-
-    // }
-
-    // const secondBaseMovement = retrosheetEvent.bases[2]
-    // const currentSecondBase = currentBaserunners[2]
-    // if (secondBaseMovement && currentSecondBase) {
-    //   const bases = advanceRunnerHelper({
-    //     baseAdvancedTo: secondBaseMovement.endBase,
-    //     result: secondBaseMovement.result
-    //   })
-    // }
-
-    // const thirdBaseMovement = retrosheetEvent.bases[3]
-    // const currentThirdBase = currentBaserunners[3]
-    // if (thirdBaseMovement && currentThirdBase) {
-    //   const bases = advanceRunnerHelper({
-    //     baseAdvancedTo: thirdBaseMovement.endBase,
-    //     result: thirdBaseMovement.result
-    //   })
-    // }
+    console.log(retrosheetEvent.bases)
 
     currentInning[lineupSpot] = currentLineupSpot
   })

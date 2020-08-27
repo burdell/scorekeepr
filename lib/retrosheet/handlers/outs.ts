@@ -157,21 +157,39 @@ const multiActionOut: ActionConfig = {
     }
 
     const res = getAtBatResult()
+    const isFieldersChoice = !!(res && res.type === 'fielders-choice')
     return getAction({
+      isOut: !isFieldersChoice,
       result: res,
       bases: {
-        B:
-          res && res.type === 'fielders-choice'
-            ? { endBase: 1, isAtBatResult: true, result: undefined }
-            : undefined,
+        B: isFieldersChoice
+          ? {
+              endBase: 1,
+              isAtBatResult: true,
+              result: undefined,
+              isOut: true
+            }
+          : undefined,
         1: baseResults[1]
-          ? { endBase: 2, result: getPutoutFromString(baseResults[1]) }
+          ? {
+              endBase: 2,
+              result: getPutoutFromString(baseResults[1]),
+              isOut: true
+            }
           : undefined,
         2: baseResults[2]
-          ? { endBase: 3, result: getPutoutFromString(baseResults[2]) }
+          ? {
+              endBase: 3,
+              result: getPutoutFromString(baseResults[2]),
+              isOut: true
+            }
           : undefined,
         3: baseResults[3]
-          ? { endBase: 4, result: getPutoutFromString(baseResults[3]) }
+          ? {
+              endBase: 4,
+              result: getPutoutFromString(baseResults[3]),
+              isOut: true
+            }
           : undefined
       }
     })

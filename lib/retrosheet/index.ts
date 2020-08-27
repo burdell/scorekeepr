@@ -35,7 +35,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   }
 
   getBaserunnerMovements(gameplayEvent.result).forEach(
-    ({ startBase, endBase, isOut, isAdvancement, result }) => {
+    ({ startBase, endBase, isOut, result }) => {
       if (startBase === 4 || !event) return
 
       const base = event.bases[startBase]
@@ -43,6 +43,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
 
       event.bases[startBase] = {
         endBase,
+        isOut: isOut,
         result: isOut
           ? resultGenerators.putout(getPutoutPositions(result))
           : undefined

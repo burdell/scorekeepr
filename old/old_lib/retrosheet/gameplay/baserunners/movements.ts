@@ -11,7 +11,7 @@ export const getBaserunnerMovements = (str: string) => {
     endBase: Base
     isOut: boolean
     errorPosition: number | undefined
-    isAdvancement: boolean
+    isOut: boolean
     result: string
   }[] = []
   for (const movement of baseRunnerMovements) {
@@ -36,7 +36,7 @@ export const getBaserunnerMovements = (str: string) => {
       endBase,
       isOut,
       errorPosition,
-      isAdvancement: advanceOrOut === '-',
+      isOut: advanceOrOut === '-',
       result
     })
   }

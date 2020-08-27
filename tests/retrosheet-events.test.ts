@@ -101,12 +101,14 @@ describe('Retrosheet parsing', () => {
   it('parses double/triple plays and fielders choices', () => {
     expect(getResult('64(1)3/GDP')).toEqual(
       getEventWithDefaults({
+        isOut: true,
         result: resultGenerators.putout([6, 4, 3]),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.putout([6, 4])
+            result: resultGenerators.putout([6, 4]),
+            isOut: true
           },
           2: undefined,
           3: undefined
@@ -125,7 +127,8 @@ describe('Retrosheet parsing', () => {
           },
           1: {
             endBase: 2,
-            result: resultGenerators.putout([6, 4])
+            result: resultGenerators.putout([6, 4]),
+            isOut: true
           },
           2: undefined,
           3: undefined
@@ -135,16 +138,19 @@ describe('Retrosheet parsing', () => {
 
     expect(getResult('5(2)4(1)3/GDP')).toEqual(
       getEventWithDefaults({
+        isOut: true,
         result: resultGenerators.putout([5, 4, 3]),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.putout([5, 4])
+            result: resultGenerators.putout([5, 4]),
+            isOut: true
           },
           2: {
             endBase: 3,
-            result: resultGenerators.putout([5])
+            result: resultGenerators.putout([5]),
+            isOut: true
           },
           3: undefined
         }
@@ -162,7 +168,8 @@ describe('Retrosheet parsing', () => {
           },
           1: {
             endBase: 2,
-            result: resultGenerators.putout([5, 4])
+            result: resultGenerators.putout([5, 4]),
+            isOut: true
           },
           2: undefined,
           3: {
@@ -176,16 +183,19 @@ describe('Retrosheet parsing', () => {
     // TODO: make this work
     expect(getResult('1(B)16(2)63(1)/LTP/L1')).toEqual(
       getEventWithDefaults({
+        isOut: true,
         result: resultGenerators.lineOut(1),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.putout([1, 6, 6, 3])
+            result: resultGenerators.putout([1, 6, 6, 3]),
+            isOut: true
           },
           2: {
             endBase: 3,
-            result: resultGenerators.putout([1, 6])
+            result: resultGenerators.putout([1, 6]),
+            isOut: true
           },
           3: undefined
         }
@@ -219,7 +229,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 2,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -236,7 +247,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 2,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -253,7 +265,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 3,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -270,7 +283,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 4,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -290,7 +304,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -308,7 +323,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -324,7 +340,8 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined
+            result: undefined,
+            isOut: true
           },
           1: undefined,
           2: undefined,
@@ -354,7 +371,8 @@ describe('Retrosheet parsing', () => {
           1: undefined,
           2: {
             result: resultGenerators.error(1),
-            endBase: 3
+            endBase: 3,
+            isOut: true
           },
           3: undefined
         }
@@ -370,7 +388,8 @@ describe('Retrosheet parsing', () => {
           1: {
             result: undefined,
             endBase: 1,
-            pickOff: resultGenerators.putout([2, 3])
+            pickOff: resultGenerators.putout([2, 3]),
+            isOut: false
           },
           2: undefined,
           3: undefined
@@ -388,7 +407,8 @@ describe('Retrosheet parsing', () => {
           B: undefined,
           1: {
             result: resultGenerators.putout([2, 6]),
-            endBase: 2
+            endBase: 2,
+            isOut: false
           },
           2: undefined,
           3: undefined
@@ -405,7 +425,8 @@ describe('Retrosheet parsing', () => {
           1: undefined,
           2: {
             result: resultGenerators.putout([2, 5]),
-            endBase: 3
+            endBase: 3,
+            isOut: false
           },
           3: undefined
         }
@@ -421,11 +442,13 @@ describe('Retrosheet parsing', () => {
           1: undefined,
           2: {
             result: resultGenerators.putout([5, 6]),
-            endBase: 3
+            endBase: 3,
+            isOut: false
           },
           3: {
             result: resultGenerators.putout([2, 5]),
-            endBase: 4
+            endBase: 4,
+            isOut: false
           }
         }
       })

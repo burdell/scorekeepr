@@ -10,7 +10,8 @@ export function hit(base: Base) {
       B: {
         result: undefined,
         isAtBatResult: true,
-        endBase: base
+        endBase: base,
+        isOut: false
       }
     })
   })
@@ -23,7 +24,8 @@ export function pitcherResult(pitcherResultString: PitcherResultString) {
       B: {
         result: undefined,
         isAtBatResult: true,
-        endBase: 1
+        endBase: 1,
+        isOut: false
       }
     })
   })

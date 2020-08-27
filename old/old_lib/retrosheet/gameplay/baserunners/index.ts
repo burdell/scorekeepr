@@ -104,14 +104,14 @@ function moveRunners(
 ) {
   const runnerMovements: RunnerMovement[] = []
   movements.forEach(
-    ({ errorPosition, startBase, endBase, isAdvancement, result, isOut }) => {
+    ({ errorPosition, startBase, endBase, isOut, result, isOut }) => {
       if (errorPosition) {
         runnerMovements.push({
           startBase,
           endBase,
           result: resultGenerators.error(errorPosition)
         })
-      } else if (isAdvancement) {
+      } else if (isOut) {
         runnerMovements.push({
           startBase,
           endBase,

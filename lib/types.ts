@@ -7,6 +7,7 @@ export type PitchData = {
 export type RetrosheetBaseResult = {
   endBase: Base
   result: BaseResultResult
+  isOut?: boolean
   isAtBatResult?: boolean
   pickOff?: PutOut
 }

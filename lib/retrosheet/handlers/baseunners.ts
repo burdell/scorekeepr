@@ -24,7 +24,8 @@ const caughtStealing: ActionConfig = {
       bases: getBases({
         [getPreviousBase(base)]: {
           endBase: base,
-          result: getPutoutFromString(putout)
+          result: getPutoutFromString(putout),
+          isOut: true
         }
       })
     })
@@ -54,7 +55,9 @@ const pickOff: ActionConfig = {
       const pickOff = getPutoutFromString(putoutString)
       return getAction({
         isOut: true,
-        bases: getBases({ [base]: { endBase: base, pickOff } })
+        bases: getBases({
+          [base]: { endBase: base, pickOff, isOut: true }
+        })
       })
     }
   }
