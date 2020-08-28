@@ -5,7 +5,8 @@ import {
   getBase,
   getBases,
   getNextBase,
-  getPreviousBase
+  getPreviousBase,
+  getAdvanceableBase
 } from '../utilities'
 import * as resultGenerators from '../generators/result'
 
@@ -26,6 +27,23 @@ const caughtStealing: ActionConfig = {
           endBase: base,
           result: getPutoutFromString(putout),
           isOut: true
+        }
+      })
+    })
+  }
+}
+
+const stolenBase: ActionConfig = {
+  actionType: 'baserunner',
+  regexp: /SB([23H])/,
+  handler: (atBat, match) => {
+    const [fullMatch, baseStolen] = match
+    const base = getAdvanceableBase(baseStolen)
+    return getAction({
+      bases: getBases({
+        [getPreviousBase(base)]: {
+          endBase: base,
+          result: resultGenerators.stolenBase(base)
         }
       })
     })
@@ -56,11 +74,11 @@ const pickOff: ActionConfig = {
       return getAction({
         isOut: true,
         bases: getBases({
-          [base]: { endBase: base, pickOff, isOut: true }
+          [base]: { endBase: base, onBasePutout: pickOff, isOut: true }
         })
       })
     }
   }
 }
 
-export const baserunnerConfigs = [caughtStealing, pickOff]
+export const baserunnerConfigs = [caughtStealing, pickOff, stolenBase]

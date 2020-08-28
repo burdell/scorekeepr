@@ -2,17 +2,21 @@ import { Base } from '../types'
 import { getBase } from './utilities'
 
 export const getBaserunnerMovements = (str: string) => {
+  // const baseRunnerMovements = str.matchAll(
+  //   /(([123B])([-X])([123H])(\((.+)\))?)+;/g
+  // )
   const baseRunnerMovements = str.matchAll(
-    /([\d|B])+([-X])([\d+H])(\((.+)\))?/g
+    /([123B])([-X])([123H])(\((\w+)\))?;?/g
   )
 
-  const runnerMovements: {
+  const runnerMovements: Array<{
     startBase: Base | 'B'
     endBase: Base
     isOut: boolean
     errorPosition: number | undefined
     result: string
-  }[] = []
+  }> = []
+
   for (const movement of baseRunnerMovements) {
     const [
       fullGroup,
@@ -38,6 +42,7 @@ export const getBaserunnerMovements = (str: string) => {
       result
     })
   }
+
   return runnerMovements
 }
 

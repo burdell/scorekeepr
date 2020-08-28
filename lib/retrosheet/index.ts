@@ -1,6 +1,6 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { RetrosheetEvent } from '../types'
+import { RetrosheetEvent, RetrosheetBaseResult, Bases } from '../types'
 
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
@@ -8,18 +8,11 @@ import { getBaserunnerMovements } from './baseMovements'
 import { getPutoutPositions } from './utilities'
 import * as resultGenerators from './generators/result'
 
-export function parseAction(gameplayEvent: GameplayEvent) {
-  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
-    return
-  }
-  const action = getAction(gameplayEvent.result)
-
-  if (!action) {
-    console.log(`Unhandled actiont: ${gameplayEvent.result}`)
-    return
-  }
-
+function handleAction(gameplayEvent: AtBat, action: Action | undefined) {
   let event: RetrosheetEvent | undefined = undefined
+
+  if (!action) return event
+
   switch (action.actionType) {
     case 'batter':
       event = handleBatterAction(action, gameplayEvent)
@@ -29,27 +22,73 @@ export function parseAction(gameplayEvent: GameplayEvent) {
       break
   }
 
+  return event
+}
+
+export function parseAction(gameplayEvent: GameplayEvent) {
+  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
+    return
+  }
+  const action = getAction(gameplayEvent.result)
+
+  if (!action) {
+    console.log(`Unhandled action: ${gameplayEvent.result}`)
+    return
+  }
+
+  const event = handleAction(gameplayEvent, action)
   if (!event) {
     console.log(`Unhandled event: `, gameplayEvent.result)
     return
   }
 
   getBaserunnerMovements(gameplayEvent.result).forEach(
-    ({ startBase, endBase, isOut, result }) => {
+    ({ startBase, endBase, isOut, result, errorPosition }) => {
       if (startBase === 4 || !event) return
 
-      const base = event.bases[startBase]
-      if (base) return
+      const existingBase = event.bases[startBase]
 
-      event.bases[startBase] = {
+      const baseMovement: RetrosheetBaseResult = {
         endBase,
-        isOut: isOut,
-        result: isOut
-          ? resultGenerators.putout(getPutoutPositions(result))
-          : undefined
+        result: undefined,
+        ...(existingBase || {})
       }
+
+      if (existingBase && endBase !== existingBase.endBase) {
+        baseMovement.additionalBases = [{ base: endBase, result: undefined }]
+      }
+
+      if (errorPosition) {
+        baseMovement.result = resultGenerators.error(errorPosition)
+      } else if (isOut) {
+        baseMovement.isOut = true
+        const putOut = resultGenerators.putout(getPutoutPositions(result))
+        if (startBase === endBase) {
+          baseMovement.onBasePutout = putOut
+        } else {
+          baseMovement.result = putOut
+        }
+      }
+
+      event.bases[startBase] = baseMovement
     }
   )
+
+  const extraEvents = gameplayEvent.result.match(/\+(.+)/)
+  if (extraEvents) {
+    const [fullMatch, eventMatch] = extraEvents
+    const extraAction = getAction(eventMatch)
+    const extraEvent = handleAction(gameplayEvent, extraAction)
+
+    if (extraEvent && extraEvent.bases) {
+      event.bases = {
+        B: extraEvent.bases.B || event.bases.B,
+        1: extraEvent.bases[1] || event.bases[1],
+        2: extraEvent.bases[2] || event.bases[3],
+        3: extraEvent.bases[3] || event.bases[3]
+      }
+    }
+  }
 
   return event
 }

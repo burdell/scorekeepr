@@ -50,7 +50,13 @@ type BaserunnerFinder = {
   atBat: AtBat
 }
 
-function getCurrentBaserunners(inning: AtBat[]) {
+function getCurrentBaserunners(
+  inning: AtBat[]
+): {
+  1: BaserunnerFinder | undefined
+  2: BaserunnerFinder | undefined
+  3: BaserunnerFinder | undefined
+} {
   let firstBase: BaserunnerFinder | undefined = undefined
   let secondBase: BaserunnerFinder | undefined = undefined
   let thirdbase: BaserunnerFinder | undefined = undefined
@@ -64,17 +70,12 @@ function getCurrentBaserunners(inning: AtBat[]) {
     }
 
     if (basesReached === 1) {
-      if (firstBase) console.warn('Multiple runners found on 1st base')
       firstBase = { lineupSpot, atBat }
     }
     if (basesReached === 2) {
-      if (firstBase) console.warn('Multiple runners found on 2nd base')
-
       secondBase = { lineupSpot, atBat }
     }
     if (basesReached === 3) {
-      if (firstBase) console.warn('Multiple runners found on 3rd base')
-
       thirdbase = { lineupSpot, atBat }
     }
   })
@@ -124,17 +125,56 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentLineupSpot.pitchCount = pitchInfo.pitchCount
     }
 
-    const batterBase = retrosheetEvent.bases['B']
+    const currentBaserunners = getCurrentBaserunners(currentInning)
+    const baseMovements = retrosheetEvent.bases
+
+    ;([1, 2, 3] as Base[]).forEach((base) => {
+      if (base === 4) return
+
+      const baseMovement = baseMovements[base]
+      const currentBase = currentBaserunners[base]
+      if (baseMovement && currentBase) {
+        if (baseMovement.endBase === base) {
+          currentBase.atBat.bases[base - 1].onBasePutout =
+            baseMovement.onBasePutout
+        } else {
+          const existingBases = currentInning[currentBase.lineupSpot].bases
+          let newBases = advanceRunnerHelper({
+            baseAdvancedTo: baseMovement.endBase,
+            isOut: baseMovement.isOut,
+            existingBases,
+            result: baseMovement.result
+          })
+
+          currentInning[currentBase.lineupSpot].bases = newBases
+        }
+
+        if (baseMovement.isOut) {
+          currentInning[currentBase.lineupSpot].isOut = true
+        }
+      }
+    })
+
+    const batterBase = baseMovements['B']
     if (batterBase) {
       const { endBase, isAtBatResult } = batterBase
-      const bases = advanceRunnerHelper({
+      let bases = advanceRunnerHelper({
         baseAdvancedTo: endBase,
         isAtBatResult
       })
+
+      if (batterBase.additionalBases) {
+        batterBase.additionalBases.forEach((advancement) => {
+          bases = advanceRunnerHelper({
+            baseAdvancedTo: advancement.base,
+            result: advancement.result,
+            existingBases: bases
+          })
+        })
+      }
+
       currentLineupSpot.bases = bases
     }
-
-    console.log(retrosheetEvent.bases)
 
     currentInning[lineupSpot] = currentLineupSpot
   })

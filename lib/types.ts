@@ -9,7 +9,8 @@ export type RetrosheetBaseResult = {
   result: BaseResultResult
   isOut?: boolean
   isAtBatResult?: boolean
-  pickOff?: PutOut
+  onBasePutout?: PutOut
+  additionalBases?: Array<{ base: Base; result?: BaseResultResult }>
 }
 
 export type Bases = {
@@ -134,7 +135,7 @@ export type BaseResult = {
   advanced: boolean
   result: BaseResultResult
   isAtBatResult?: boolean
-  pickOff?: PutOut
+  onBasePutout?: PutOut
 }
 
 export type AtBat = {

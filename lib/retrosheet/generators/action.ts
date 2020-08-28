@@ -10,8 +10,7 @@ export function hit(base: Base) {
       B: {
         result: undefined,
         isAtBatResult: true,
-        endBase: base,
-        isOut: false
+        endBase: base
       }
     })
   })
@@ -24,8 +23,20 @@ export function pitcherResult(pitcherResultString: PitcherResultString) {
       B: {
         result: undefined,
         isAtBatResult: true,
-        endBase: 1,
-        isOut: false
+        endBase: 1
+      }
+    })
+  })
+}
+
+export function fieldersChoice(base: Base = 1) {
+  return getAction({
+    result: resultGenerators.fieldersChoice(base),
+    bases: getBases({
+      B: {
+        result: undefined,
+        isAtBatResult: true,
+        endBase: 1
       }
     })
   })

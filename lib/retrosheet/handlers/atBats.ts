@@ -52,4 +52,12 @@ const error: ActionConfig = {
   }
 }
 
-export const atBatConfigs = [hit, hitBatter, walk, error]
+const fieldersChoice: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^FC/,
+  handler: () => {
+    return actionGenerators.fieldersChoice()
+  }
+}
+
+export const atBatConfigs = [hit, hitBatter, walk, error, fieldersChoice]

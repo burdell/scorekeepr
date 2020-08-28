@@ -166,8 +166,7 @@ const multiActionOut: ActionConfig = {
           ? {
               endBase: 1,
               isAtBatResult: true,
-              result: undefined,
-              isOut: true
+              result: undefined
             }
           : undefined,
         1: baseResults[1]

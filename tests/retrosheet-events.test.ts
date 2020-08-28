@@ -53,11 +53,11 @@ function requireExistence<T>(thing: T) {
 
 describe('Retrosheet parsing', () => {
   it('parses strikeouts', () => {
-    const action = parseAction(
+    const strikeout = parseAction(
       getAtBat({ result: 'K', pitchSequence: 'BBFCBFB', count: '32' })
     )
 
-    expect(action).toEqual(
+    expect(strikeout).toEqual(
       getEventWithDefaults({
         isOut: true,
         pitches: {
@@ -66,6 +66,24 @@ describe('Retrosheet parsing', () => {
           strikes: 2
         },
         result: resultGenerators.pitcherResult('K')
+      })
+    )
+
+    const strikeoutWithStolenBase = parseAction(getAtBat({ result: 'K+SB2' }))
+
+    expect(strikeoutWithStolenBase).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.pitcherResult('K'),
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.stolenBase(2)
+          },
+          2: undefined,
+          3: undefined
+        }
       })
     )
   })
@@ -180,7 +198,26 @@ describe('Retrosheet parsing', () => {
       })
     )
 
-    // TODO: make this work
+    expect(getResult('FC6.1X2(64)')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.fieldersChoice(1),
+        bases: {
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true
+          },
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([6, 4]),
+            isOut: true
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
     expect(getResult('1(B)16(2)63(1)/LTP/L1')).toEqual(
       getEventWithDefaults({
         isOut: true,
@@ -189,6 +226,7 @@ describe('Retrosheet parsing', () => {
           B: undefined,
           1: {
             endBase: 2,
+            // TODO: fix this
             result: resultGenerators.putout([1, 6, 6, 3]),
             isOut: true
           },
@@ -229,8 +267,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 2,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -247,8 +284,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 2,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -265,8 +301,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 3,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -283,8 +318,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 4,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -304,8 +338,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -323,8 +356,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -340,8 +372,7 @@ describe('Retrosheet parsing', () => {
           B: {
             isAtBatResult: true,
             endBase: 1,
-            result: undefined,
-            isOut: true
+            result: undefined
           },
           1: undefined,
           2: undefined,
@@ -371,8 +402,7 @@ describe('Retrosheet parsing', () => {
           1: undefined,
           2: {
             result: resultGenerators.error(1),
-            endBase: 3,
-            isOut: true
+            endBase: 3
           },
           3: undefined
         }
@@ -388,8 +418,8 @@ describe('Retrosheet parsing', () => {
           1: {
             result: undefined,
             endBase: 1,
-            pickOff: resultGenerators.putout([2, 3]),
-            isOut: false
+            onBasePutout: resultGenerators.putout([2, 3]),
+            isOut: true
           },
           2: undefined,
           3: undefined
@@ -408,7 +438,7 @@ describe('Retrosheet parsing', () => {
           1: {
             result: resultGenerators.putout([2, 6]),
             endBase: 2,
-            isOut: false
+            isOut: true
           },
           2: undefined,
           3: undefined
@@ -426,7 +456,7 @@ describe('Retrosheet parsing', () => {
           2: {
             result: resultGenerators.putout([2, 5]),
             endBase: 3,
-            isOut: false
+            isOut: true
           },
           3: undefined
         }
@@ -443,12 +473,79 @@ describe('Retrosheet parsing', () => {
           2: {
             result: resultGenerators.putout([5, 6]),
             endBase: 3,
-            isOut: false
+            isOut: true
           },
           3: {
             result: resultGenerators.putout([2, 5]),
             endBase: 4,
-            isOut: false
+            isOut: true
+          }
+        }
+      })
+    )
+  })
+
+  it('handles on-base putouts', () => {
+    const lineoutDP = parseAction(getAtBat({ result: '3/L/DP.1X1(3)' }))
+    expect(lineoutDP).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.lineOut(3),
+        bases: {
+          B: undefined,
+          1: {
+            isOut: true,
+            onBasePutout: resultGenerators.putout([3]),
+            endBase: 1,
+            result: undefined
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+  })
+
+  it('handles on-base errors', () => {
+    expect(getResult('FC6.1X3(6E4);B-2')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.fieldersChoice(1),
+        bases: {
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true,
+            additionalBases: [{ base: 2, result: undefined }]
+          },
+          1: {
+            endBase: 3,
+            result: resultGenerators.error(4)
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+  })
+
+  it('advances multiple bases with extra stuff ', () => {
+    expect(getResult('S8/G+.3-H(UR);2-H(UR)')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: {
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true
+          },
+          1: undefined,
+          2: {
+            endBase: 4,
+            result: undefined
+          },
+          3: {
+            endBase: 4,
+            result: undefined
           }
         }
       })
