@@ -26,6 +26,7 @@ export type RetrosheetEvent = {
   result: AtBatResult | undefined
   bases: Bases
   isSacrifice?: boolean
+  allBasesAdvanceResult?: Balk | WildPitch | PassedBall
 }
 
 type Team = string
@@ -68,12 +69,6 @@ export type DefensiveError = {
   display: string
 }
 
-export type Balk = {
-  type: 'balk'
-  result: 'BK'
-  display: 'BK'
-}
-
 export type CaughtStealing = {
   type: 'caught-stealing'
   result: PutOut
@@ -88,7 +83,7 @@ export type StolenBase = {
 
 export type DefensiveIndifference = {
   type: 'defensive-indifference'
-  result: AdvanceableBase
+  result: 'DI'
   display: 'DI'
 }
 
@@ -100,14 +95,20 @@ export type FieldersChoice = {
 
 export type PassedBall = {
   type: 'passed-ball'
-  result: Base
+  result: 'PB'
   display: 'PB'
 }
 
 export type WildPitch = {
   type: 'wild-pitch'
-  result: Base
+  result: 'WP'
   display: 'WP'
+}
+
+export type Balk = {
+  type: 'balk'
+  result: 'BK'
+  display: 'BK'
 }
 
 export type AtBatResult =

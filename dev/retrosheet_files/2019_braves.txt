@@ -1,0 +1,1063 @@
+id,PHI201903300
+version,2
+info,visteam,ATL
+info,hometeam,PHI
+info,site,PHI13
+info,date,2019/03/30
+info,number,0
+info,starttime,4:06PM
+info,daynight,day
+info,usedh,false
+info,umphome,timmt901
+info,ump1b,drakr901
+info,ump2b,muchm901
+info,ump3b,wintm901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,shutd701
+info,temp,76
+info,winddir,tocf
+info,windspeed,17
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,cloudy
+info,timeofgame,207
+info,attendance,44597
+info,wp,morga001
+info,lp,parsw001
+info,save,
+start,incie001,"Ender Inciarte",0,1,8
+start,donaj001,"Josh Donaldson",0,2,5
+start,freef001,"Freddie Freeman",0,3,3
+start,acunr001,"Ronald Acuna",0,4,7
+start,markn001,"Nick Markakis",0,5,9
+start,albio001,"Ozzie Albies",0,6,4
+start,flowt001,"Tyler Flowers",0,7,2
+start,swand001,"Dansby Swanson",0,8,6
+start,wilsb003,"Bryse Wilson",0,9,1
+start,mccua001,"Andrew McCutchen",1,1,7
+start,seguj002,"Jean Segura",1,2,6
+start,harpb003,"Bryce Harper",1,3,9
+start,hoskr001,"Rhys Hoskins",1,4,3
+start,realj001,"J.T. Realmuto",1,5,2
+start,herro001,"Odubel Herrera",1,6,8
+start,hernc005,"Cesar Hernandez",1,7,4
+start,franm004,"Maikel Franco",1,8,5
+start,piven001,"Nick Pivetta",1,9,1
+play,1,0,incie001,10,BX,T8/L+
+play,1,0,donaj001,01,CX,63/G
+play,1,0,freef001,11,FBX,S8/L.3-H
+play,1,0,acunr001,12,FFBX,64(1)3/GDP
+play,1,1,mccua001,22,CBFFBX,7/F
+play,1,1,seguj002,20,BBX,D8/L+
+play,1,1,harpb003,22,CBSFBX,7/F/DP.2X3(75)
+com,"$Braves challenged call that Segura was safe at 3rd; call"
+com,"was overturned - out advancing to complete double play"
+play,2,0,markn001,02,CSFX,7/F
+play,2,0,albio001,21,FBBX,9/L
+play,2,0,flowt001,01,CX,S7/L
+play,2,0,swand001,31,BBCBX,HR/7/L.1-H
+play,2,0,wilsb003,02,CFC,K
+play,2,1,hoskr001,12,CFBFX,D7/F
+play,2,1,realj001,00,X,S8/G.2-H
+play,2,1,herro001,12,BSC1FB,CS2(26)
+play,2,1,herro001,32,BSC1FB.BB,W
+play,2,1,hernc005,21,1B*BS1X,46(1)/FO/G
+play,2,1,franm004,10,BB,SB2
+play,2,1,franm004,30,BB.VV,IW
+play,2,1,piven001,22,BBCCC,K
+play,3,0,incie001,00,X,8/F
+play,3,0,donaj001,31,BBCBX,6/P
+play,3,0,freef001,02,CFX,D7/L
+play,3,0,acunr001,32,CBBBFX,4/L
+play,3,1,mccua001,20,BBX,63/G
+play,3,1,seguj002,12,CFBS,K
+play,3,1,harpb003,32,CBCBB*B,W
+com,"Mound Visit"
+play,3,1,hoskr001,32,*BBBCCX,6/L
+play,4,0,markn001,11,BFX,43/G
+play,4,0,albio001,00,X,S8/L
+play,4,0,flowt001,21,1B11BS1X,S8/G.1-3
+play,4,0,swand001,22,BTBLS,K
+play,4,0,wilsb003,02,CCS,K
+play,4,1,realj001,02,CFS,K
+play,4,1,herro001,31,BCBBB,W
+play,4,1,hernc005,22,BFF1BFX,T9/L.1-H
+play,4,1,franm004,00,X,HR/7/F.3-H
+com,"Mound Visit"
+play,4,1,piven001,00,,NP
+sub,parsw001,"Wes Parsons",0,9,1
+play,4,1,piven001,02,.CSX,3/G
+play,4,1,mccua001,22,CBBCC,K
+play,5,0,incie001,32,BBBCFB,W
+com,"Mound Visit"
+play,5,0,donaj001,22,11FC*B1BC,K+SB2
+play,5,0,freef001,12,*BSFX,S8/G.2-H
+play,5,0,acunr001,00,X,9/L
+com,"Mound Visit"
+play,5,0,markn001,00,,NP
+sub,morga001,"Adam Morgan",1,9,1
+play,5,0,markn001,02,.FCX,6(1)/FO/G
+play,5,1,seguj002,12,BCSS,K
+play,5,1,harpb003,10,BX,7/F
+play,5,1,hoskr001,32,BSBCFBFB,W
+play,5,1,realj001,10,B1X,HR/78/L.1-H
+com,"Mound Visit"
+play,5,1,herro001,00,,NP
+sub,ventj001,"Jonny Venters",0,9,1
+play,5,1,herro001,31,.CBBBX,43/G
+play,6,0,albio001,00,,NP
+sub,nicaj001,"Juan Nicasio",1,9,1
+play,6,0,albio001,02,.FST,K
+play,6,0,flowt001,32,FBCBBB,W
+play,6,0,swand001,11,BCX,54(1)/FO/G
+com,"Mound Visit"
+com,"$Braves challenged call that Swanson was out at 1st to"
+com,"complete double play; call was overturned - safe at 1st"
+play,6,0,ventj001,00,,NP
+sub,camaj001,"Johan Camargo",0,9,11
+play,6,0,camaj001,00,.N,BK.1-2
+play,6,0,camaj001,32,.N.C2*BFB*BX,7/F
+play,6,1,hernc005,00,,NP
+sub,biddj001,"Jesse Biddle",0,9,1
+play,6,1,hernc005,32,.FBBBCX,8/F
+play,6,1,franm004,12,CBFX,1/P
+play,6,1,nicaj001,00,,NP
+sub,altha001,"Aaron Altherr",1,9,11
+com,"Mound Visit"
+play,6,1,altha001,22,.CSBBS,K
+play,7,0,incie001,00,,NP
+sub,alvaj003,"Jose Alvarez",1,9,1
+play,7,0,incie001,22,.SSBBFX,13/G-
+com,"Mound Visit"
+play,7,0,donaj001,00,,NP
+sub,neshp001,"Pat Neshek",1,9,1
+play,7,0,donaj001,11,.CBX,63/G
+play,7,0,freef001,02,CSS,K
+play,7,1,mccua001,31,BBCBX,7/L
+play,7,1,seguj002,12,CBCS,K
+play,7,1,harpb003,11,BCX,HR/89/F
+com,"Mound Visit"
+play,7,1,hoskr001,00,,NP
+sub,culbc001,"Charlie Culberson",0,9,5
+play,7,1,hoskr001,00,,NP
+sub,soboc001,"Chad Sobotka",0,2,1
+play,7,1,hoskr001,32,..CBBFBS,K
+play,8,0,acunr001,00,,NP
+sub,domis001,"Seranthony Dominguez",1,9,1
+play,8,0,acunr001,22,.CSBBX,43/G
+play,8,0,markn001,32,TBFBBT,K
+play,8,0,albio001,32,BCFBBB,W
+com,"Mound Visit"
+play,8,0,flowt001,22,BSBFS,K
+play,8,1,realj001,32,BBSCBS,K
+play,8,1,herro001,32,FBBBFFX,63/G
+com,"Mound Visit"
+play,8,1,hernc005,00,,NP
+sub,tomlj001,"Josh Tomlin",0,2,1
+play,8,1,hernc005,32,.BBBCFX,S8/L
+play,8,1,franm004,12,B1CCFX,S39/P.1-H
+play,8,1,domis001,00,,NP
+sub,willn001,"Nick Williams",1,9,11
+com,"Mound Visit"
+play,8,1,willn001,22,.*BFF*BX,46(1)/FO/G
+play,9,0,swand001,00,,NP
+sub,robed002,"David Robertson",1,9,1
+play,9,0,swand001,32,.CBFFBBB,W
+play,9,0,culbc001,12,S*BSX,HR/7/L.1-H
+com,"Mound Visit"
+play,9,0,incie001,22,BCCBX,31/G
+play,9,0,tomlj001,00,,NP
+sub,joycm001,"Matt Joyce",0,2,11
+play,9,0,joycm001,32,.BFFBFBS,K
+play,9,0,freef001,01,CX,D7/G
+com,"Mound Visit"
+play,9,0,acunr001,11,BCX,9/F
+data,er,wilsb003,4
+data,er,parsw001,2
+data,er,ventj001,0
+data,er,biddj001,1
+data,er,soboc001,0
+data,er,tomlj001,1
+data,er,piven001,4
+data,er,morga001,0
+data,er,nicaj001,0
+data,er,alvaj003,0
+data,er,neshp001,0
+data,er,domis001,0
+data,er,robed002,2
+id,ATL201904010
+version,2
+info,visteam,CHN
+info,hometeam,ATL
+info,site,ATL03
+info,date,2019/04/01
+info,number,0
+info,starttime,7:12PM
+info,daynight,night
+info,usedh,false
+info,umphome,cedeg901
+info,ump1b,hudsm901
+info,ump2b,johna901
+info,ump3b,wolcq901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,stamm701
+info,temp,58
+info,winddir,ltor
+info,windspeed,4
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,sunny
+info,timeofgame,192
+info,attendance,41912
+info,wp,parsw001
+info,lp,hendk001
+info,save,
+start,almoa002,"Albert Almora",0,1,8
+start,bryak001,"Kris Bryant",0,2,5
+start,rizza001,"Anthony Rizzo",0,3,3
+start,baezj001,"Javier Baez",0,4,6
+start,contw001,"Willson Contreras",0,5,2
+start,boted002,"David Bote",0,6,4
+start,heywj001,"Jason Heyward",0,7,9
+start,hendk001,"Kyle Hendricks",0,8,1
+start,zagum002,"Mark Zagunis",0,9,7
+start,incie001,"Ender Inciarte",1,1,8
+start,donaj001,"Josh Donaldson",1,2,5
+start,freef001,"Freddie Freeman",1,3,3
+start,acunr001,"Ronald Acuna",1,4,7
+start,markn001,"Nick Markakis",1,5,9
+start,albio001,"Ozzie Albies",1,6,4
+start,mccab002,"Brian McCann",1,7,2
+start,swand001,"Dansby Swanson",1,8,6
+start,newcs001,"Sean Newcomb",1,9,1
+play,1,0,almoa002,22,BCSFBFX,7/F
+play,1,0,bryak001,00,X,D8/L
+play,1,0,rizza001,30,BBBX,3/P
+play,1,0,baezj001,22,SBSBFFX,9/F
+play,1,1,incie001,01,CF,FLE7
+play,1,1,incie001,02,CF.X,HR/89/F.B-H(UR)
+play,1,1,donaj001,12,CBFX,S7/L
+play,1,1,freef001,31,BBBCX,8/F+
+play,1,1,acunr001,32,CBC*BBF1B,W.1-2
+play,1,1,markn001,01,CX,36(1)/FO/G.2-H(E6/TH)(UR)(NR)
+play,1,1,albio001,10,BX,D6/P.1-3
+play,1,1,mccab002,00,X,S8/L.3-H(UR);2-H(UR)
+play,1,1,swand001,12,BSFX,63/G
+play,2,0,contw001,31,BBCBB,W
+play,2,0,boted002,21,C*BB1X,S8/L.1-2
+play,2,0,heywj001,00,X,16(1)3/GDP.2-3
+play,2,0,hendk001,32,BBCBCB,W
+play,2,0,zagum002,22,BCBSC,K
+play,2,1,newcs001,02,CFX,7/F
+play,2,1,incie001,00,X,3/G
+play,2,1,donaj001,31,CBBBX,S8/G+
+play,2,1,freef001,12,SBFS,K
+play,3,0,almoa002,22,FBBFX,43/G
+play,3,0,bryak001,30,BBBB,W
+play,3,0,rizza001,12,BFFT,K
+play,3,0,baezj001,00,X,S7/G+.1-3
+play,3,0,contw001,11,CBB,WP.1-2
+play,3,0,contw001,31,CBB.BB,W
+com,"Mound Visit"
+play,3,0,boted002,32,CBBFFF*BX,53/G
+play,3,1,acunr001,01,CX,HR/78/F
+play,3,1,markn001,22,BBCCX,S8/L.BX2(86/TH)
+play,3,1,albio001,10,BX,9/L+
+play,3,1,mccab002,22,CBBFX,E3/G-.B-2(E3/TH)
+play,3,1,swand001,12,BCFS,K
+play,4,0,heywj001,10,BX,S7/L
+play,4,0,hendk001,12,LBMC,K
+play,4,0,zagum002,32,BCF1BFBX,9/F
+play,4,0,almoa002,12,SBFX,S7/L.1-2
+play,4,0,bryak001,11,CBX,63/G
+play,4,1,newcs001,12,CSBS,K
+play,4,1,incie001,10,BX,3/G-
+play,4,1,donaj001,32,CBBFBFB,W
+play,4,1,freef001,02,FFX,7/F7LF
+play,5,0,rizza001,21,BCBX,S9/G+
+com,"Mound Visit"
+play,5,0,baezj001,00,,NP
+sub,parsw001,"Wes Parsons",1,9,1
+play,5,0,baezj001,01,.CX,64(1)3/GDP
+play,5,0,contw001,21,BCBX,E5/G
+play,5,0,boted002,22,CCFBBFX,13/G
+play,5,1,acunr001,32,BCSBFBS,K
+play,5,1,markn001,22,BCCBFFX,S8/L
+play,5,1,albio001,11,BFX,D9/L+.1-3
+play,5,1,mccab002,30,VVVV,IW
+play,5,1,swand001,11,CBX,S14/G.3-H;2-H(E4/TH)(UR)(NR);1-2
+play,5,1,parsw001,00,,NP
+sub,joycm001,"Matt Joyce",1,9,11
+com,"Mound Visit"
+play,5,1,joycm001,00,,NP
+sub,kintb001,"Brandon Kintzler",0,8,1
+play,5,1,joycm001,12,..BCFS,K
+play,5,1,incie001,22,BBCCFC,K
+play,6,0,heywj001,00,,NP
+sub,biddj001,"Jesse Biddle",1,9,1
+play,6,0,heywj001,12,.CBFS,K
+play,6,0,kintb001,00,,NP
+sub,descd001,"Daniel Descalso",0,8,11
+play,6,0,descd001,31,.BBBCX,8/F
+play,6,0,zagum002,02,CCX,D7/L+
+play,6,0,almoa002,10,BX,63/G
+play,6,1,donaj001,00,,NP
+sub,rosar002,"Randy Rosario",0,8,1
+play,6,1,donaj001,01,.CX,63/G
+play,6,1,freef001,10,BX,D7/L+
+play,6,1,acunr001,12,FBFS,K
+play,6,1,markn001,00,X,E5/G.2-3
+play,6,1,albio001,10,1BX,S4/G.3-H(UR);1-2
+play,6,1,mccab002,12,BCCT,K
+play,7,0,bryak001,21,CBBX,53/G
+play,7,0,rizza001,22,CBFBX,7/L
+play,7,0,baezj001,31,BBFBX,653/G+
+play,7,1,swand001,00,,NP
+sub,edwac001,"Carl Edwards",0,8,1
+play,7,1,swand001,12,.BFSFX,8/F
+play,7,1,biddj001,00,,NP
+sub,camaj001,"Johan Camargo",1,9,11
+play,7,1,camaj001,32,.BFCBFBB,W
+play,7,1,incie001,12,SCFBFX,7/F
+play,7,1,donaj001,02,FFS,K
+play,8,0,contw001,00,,NP
+sub,soboc001,"Chad Sobotka",1,9,1
+play,8,0,contw001,02,.SSX,63/G
+play,8,0,boted002,20,BBX,S8/G
+play,8,0,heywj001,00,X,46(1)3/GDP
+play,8,1,freef001,00,,NP
+sub,bracb001,"Brad Brach",0,8,1
+play,8,1,freef001,31,.BFBBB,W
+play,8,1,acunr001,22,BSBSFX,14(1)3/GDP
+play,8,1,markn001,32,CBFBBFB,W
+play,8,1,albio001,31,BCBBB,W.1-2
+com,"Mound Visit"
+play,8,1,mccab002,00,B,WP.2-3;1-2
+play,8,1,mccab002,31,B.FBBX,153/G
+play,9,0,bracb001,00,,NP
+sub,vizca001,"Arodys Vizcaino",1,9,1
+play,9,0,bracb001,00,,NP
+sub,schwk001,"Kyle Schwarber",0,8,11
+play,9,0,schwk001,02,..CSFC,K
+play,9,0,zagum002,22,CBCBX,D8/L+
+play,9,0,almoa002,01,FX,4/P/DP.2X2(46)
+data,er,hendk001,2
+data,er,kintb001,0
+data,er,rosar002,0
+data,er,edwac001,0
+data,er,bracb001,0
+data,er,newcs001,0
+data,er,parsw001,0
+data,er,biddj001,0
+data,er,soboc001,0
+data,er,vizca001,0
+id,COL201904090
+version,2
+info,visteam,ATL
+info,hometeam,COL
+info,site,DEN02
+info,date,2019/04/09
+info,number,0
+info,starttime,6:41PM
+info,daynight,night
+info,usedh,false
+info,umphome,fostm901
+info,ump1b,morag901
+info,ump2b,mealj901
+info,ump3b,kulpr901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,platd701
+info,temp,74
+info,winddir,rtol
+info,windspeed,4
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,cloudy
+info,timeofgame,192
+info,attendance,26124
+info,wp,friem001
+info,lp,marqg001
+info,save,
+start,incie001,"Ender Inciarte",0,1,8
+start,donaj001,"Josh Donaldson",0,2,5
+start,freef001,"Freddie Freeman",0,3,3
+start,acunr001,"Ronald Acuna",0,4,7
+start,markn001,"Nick Markakis",0,5,9
+start,swand001,"Dansby Swanson",0,6,6
+start,albio001,"Ozzie Albies",0,7,4
+start,flowt001,"Tyler Flowers",0,8,2
+start,friem001,"Max Fried",0,9,1
+start,dazay001,"Yonathan Daza",1,1,9
+start,tapir001,"Raimel Tapia",1,2,7
+start,arenn001,"Nolan Arenado",1,3,5
+start,stort001,"Trevor Story",1,4,6
+start,desmi001,"Ian Desmond",1,5,8
+start,fuenj001,"Josh Fuentes",1,6,3
+start,hampg001,"Garrett Hampson",1,7,4
+start,woltt001,"Tony Wolters",1,8,2
+start,marqg001,"German Marquez",1,9,1
+com,"Injury Delay"
+play,1,0,incie001,32,BBCFFBFFFFX,63/G
+play,1,0,donaj001,32,FBFFBBX,41/G
+play,1,0,freef001,20,BBX,6/L+
+play,1,1,dazay001,11,BFX,43/G
+play,1,1,tapir001,21,CBBX,S7/G
+play,1,1,arenn001,11,F1BX,8/F
+play,1,1,stort001,32,BF1FBBX,9/F
+play,2,0,acunr001,00,X,HR/8/F
+play,2,0,markn001,22,CBFBFX,41/G
+play,2,0,swand001,22,BCCBX,9/L
+play,2,0,albio001,01,CX,7/F
+play,2,1,desmi001,00,X,53/G
+play,2,1,fuenj001,12,CBSFFX,7/F
+play,2,1,hampg001,11,CBX,13/BG
+play,3,0,flowt001,22,CBBCX,4/L+
+play,3,0,friem001,02,CFX,13/G
+play,3,0,incie001,02,CFX,43/G
+play,3,1,woltt001,10,BX,D8/L+
+play,3,1,marqg001,00,X,S2/BG.2-3
+com,"$Rockies challegned call that Marquez was out at 1st;"
+com,"call was overturned - single"
+play,3,1,dazay001,32,BFFBBX,3/L/DP.1X1(3)
+play,3,1,tapir001,02,FSS,K23
+play,4,0,donaj001,02,CCX,D9/L
+play,4,0,freef001,11,CBX,S8/L+.2-H
+play,4,0,acunr001,02,FCS,K
+play,4,0,markn001,01,CX,S8/G.1-3
+com,"$Braves challenged call that Freeman was out at third; call"
+com,"was overturned - safe at third advancing on single"
+play,4,0,swand001,32,BSSBBX,HR/8/F.3-H;1-H
+play,4,0,albio001,01,CX,S8/L
+com,"Mound Visit"
+play,4,0,flowt001,22,1F1SB*BX,S7/G.1-2
+play,4,0,friem001,00,X,14/BG/SH.2-3;1-2
+play,4,0,incie001,12,F*BFX,7/F7LF
+play,4,1,arenn001,22,BBSFX,S56/G+
+play,4,1,stort001,22,BBFFX,54(1)/FO/G
+play,4,1,desmi001,10,BB,PB.1-2
+play,4,1,desmi001,20,BB.X,S8/L.2-H(UR)
+play,4,1,fuenj001,00,1,PO1(E1).1-3
+play,4,1,fuenj001,02,1.FTS,K
+play,4,1,hampg001,32,C*BSBBX,3/P
+play,5,0,donaj001,32,BBBCSX,9/F
+play,5,0,freef001,21,CBBX,31/G
+play,5,0,acunr001,22,FBSFFBC,K
+play,5,1,woltt001,32,BBFBFX,43/G
+play,5,1,marqg001,00,,NP
+sub,valap001,"Pat Valaika",1,9,11
+play,5,1,valap001,30,.BBBB,W
+play,5,1,dazay001,22,CFFFB*BS,K
+com,"Mound Visit"
+play,5,1,tapir001,12,CBFFS,K
+play,6,0,markn001,00,,NP
+sub,shawb001,"Bryan Shaw",1,9,1
+play,6,0,markn001,12,.CBCFFX,43/G
+play,6,0,swand001,00,X,53/G
+play,6,0,albio001,10,BX,8/F
+play,6,1,arenn001,00,X,7/F
+play,6,1,stort001,12,CFBX,53/G+
+play,6,1,desmi001,02,CFX,43/G
+play,7,0,flowt001,20,BBX,9/F
+play,7,0,friem001,00,,NP
+sub,joycm001,"Matt Joyce",0,9,11
+com,"Mound Visit"
+play,7,0,joycm001,00,,NP
+sub,dunnm002,"Michael Dunn",1,9,1
+play,7,0,joycm001,01,..CX,13/G
+play,7,0,incie001,32,BSBTBS,K
+play,7,1,fuenj001,00,,NP
+sub,jackl001,"Luke Jackson",0,9,1
+play,7,1,fuenj001,02,.TSS,K
+play,7,1,hampg001,22,BSSBX,S7/G
+play,7,1,woltt001,02,CFFS,K
+play,7,1,dunnm002,00,,NP
+sub,reynm001,"Mark Reynolds",1,9,11
+com,"Mound Visit"
+play,7,1,reynm001,30,.BBBB,W.1-2
+play,7,1,dazay001,02,CFS,K23
+play,8,0,donaj001,00,,NP
+sub,oh--s001,"Seung Hwan Oh",1,9,1
+play,8,0,donaj001,02,.CFS,K
+play,8,0,freef001,22,SBCFFBX,S4/G+
+play,8,0,acunr001,32,BBB1FCX,S8/L.1-3
+play,8,0,markn001,22,SCBFBX,S8/L.3-H;1-2
+com,"Mound Visit"
+play,8,0,swand001,12,CFBFFS,K
+play,8,0,albio001,12,FBS*B,OA.2X3(25)
+com,"$Braves challenged call that Acuna was out at 3rd; call"
+com,"was upheld - out advancing"
+play,8,1,tapir001,00,,NP
+sub,soboc001,"Chad Sobotka",0,9,1
+play,8,1,tapir001,12,.CFBS,K
+play,8,1,arenn001,12,CCFBS,K
+play,8,1,stort001,12,SSBX,8/F
+play,9,0,albio001,00,,NP
+sub,almoy001,"Yency Almonte",1,9,1
+play,9,0,albio001,31,.BBFBX,D8/L
+play,9,0,flowt001,11,FBX,63/G.2-3
+play,9,0,soboc001,00,,NP
+sub,culbc001,"Charlie Culberson",0,9,11
+play,9,0,culbc001,22,.FCBBX,D8/F+.3-H
+play,9,0,incie001,12,FSBX,63/G.2-3
+play,9,0,donaj001,21,SBBX,5/P5F
+play,9,1,desmi001,00,,NP
+sub,biddj001,"Jesse Biddle",0,9,1
+play,9,1,desmi001,31,.BBBCB,W
+com,"Mound Visit"
+play,9,1,fuenj001,00,C,DI.1-2
+play,9,1,fuenj001,12,C.F*BFX,53/G
+play,9,1,hampg001,22,BFBCS,K
+play,9,1,woltt001,02,CCX,3/G
+data,er,friem001,0
+data,er,jackl001,0
+data,er,soboc001,0
+data,er,biddj001,0
+data,er,marqg001,5
+data,er,shawb001,0
+data,er,dunnm002,0
+data,er,oh--s001,1
+data,er,almoy001,1
+id,ATL201904140
+version,2
+info,visteam,NYN
+info,hometeam,ATL
+info,site,ATL03
+info,date,2019/04/14
+info,number,0
+info,starttime,7:37PM
+info,daynight,night
+info,usedh,false
+info,umphome,porta901
+info,ump1b,belld901
+info,ump2b,segac901
+info,ump3b,marqa901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,stamm701
+info,temp,67
+info,winddir,rtol
+info,windspeed,15
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,cloudy
+info,timeofgame,216
+info,attendance,23385
+info,wp,tehej001
+info,lp,degrj001
+info,save,
+start,nimmb001,"Brandon Nimmo",0,1,8
+start,alonp001,"Pete Alonso",0,2,3
+start,canor001,"Robinson Cano",0,3,4
+start,confm001,"Michael Conforto",0,4,9
+start,ramow001,"Wilson Ramos",0,5,2
+start,mcnej002,"Jeff McNeil",0,6,7
+start,rosaa003,"Amed Rosario",0,7,6
+start,davij006,"J.D. Davis",0,8,5
+start,degrj001,"Jacob deGrom",0,9,1
+start,albio001,"Ozzie Albies",1,1,4
+start,donaj001,"Josh Donaldson",1,2,5
+start,freef001,"Freddie Freeman",1,3,3
+start,acunr001,"Ronald Acuna",1,4,7
+start,markn001,"Nick Markakis",1,5,9
+start,camaj001,"Johan Camargo",1,6,6
+start,incie001,"Ender Inciarte",1,7,8
+start,flowt001,"Tyler Flowers",1,8,2
+start,tehej001,"Julio Teheran",1,9,1
+play,1,0,nimmb001,22,CBTBC,K
+play,1,0,alonp001,12,BFFX,S9/G
+play,1,0,canor001,12,CFFBS,K
+play,1,0,confm001,21,BBSX,D9/L+.1-3
+play,1,0,ramow001,00,X,63/G
+play,1,1,albio001,01,SX,7/F
+play,1,1,donaj001,32,CBSFBBB,W
+play,1,1,freef001,22,CB*BCFX,35(1)/FO/G
+play,1,1,acunr001,12,CTBFX,2/P
+play,2,0,mcnej002,21,BSBX,3/G
+play,2,0,rosaa003,22,BBCFC,K
+play,2,0,davij006,00,X,HR/8/L
+play,2,0,degrj001,22,FSFBBC,K
+play,2,1,markn001,10,BX,HR/9/F
+play,2,1,camaj001,22,FFBBC,K
+play,2,1,incie001,00,X,S5/BG-
+play,2,1,flowt001,32,BC11FF1BBFS,K+SB2
+play,2,1,tehej001,22,BFBFFT,K
+play,3,0,nimmb001,32,BBCBCX,3/G
+play,3,0,alonp001,00,X,63/G
+play,3,0,canor001,00,X,S9/L+
+play,3,0,confm001,32,SBBBFX,9/F
+play,3,1,albio001,00,X,S9/L
+play,3,1,donaj001,02,SF1C,K
+play,3,1,freef001,00,B,SB2.1-3(E2/TH)
+play,3,1,freef001,32,B.BBTSB,W
+play,3,1,acunr001,00,X,S9/L+.3-H;1-2
+play,3,1,markn001,32,CBBBCS,K
+play,3,1,camaj001,01,FB,WP.2-3;1-2
+play,3,1,camaj001,32,FB.FBBFB,W
+com,"Mound Visit"
+play,3,1,incie001,22,SBSBC,K
+play,4,0,ramow001,10,BX,63/G
+play,4,0,mcnej002,22,BFBFX,S9/L
+play,4,0,rosaa003,00,11X,64(1)/FO/G
+play,4,0,davij006,30,1BB*BB,W.1-2
+play,4,0,degrj001,12,CFBS,K
+play,4,1,flowt001,10,BX,3/G
+play,4,1,tehej001,02,CFS,K
+play,4,1,albio001,32,BBFCFBX,8/F
+play,5,0,nimmb001,21,BBCX,S9/L
+play,5,0,alonp001,00,11X,7/F
+play,5,0,canor001,31,B1BF1BX,8/F
+play,5,0,confm001,01,CX,7/F
+play,5,1,donaj001,22,BSFFBFFX,HR/78/L
+play,5,1,freef001,32,BCFBFBC,K
+play,5,1,acunr001,32,CBBFBB,W
+com,"Mound Visit"
+play,5,1,markn001,22,11BBCS1S,K+SB2
+play,5,1,camaj001,02,FCFFX,13/G
+play,6,0,ramow001,00,X,43/G
+play,6,0,mcnej002,32,CBBBCB,W
+play,6,0,rosaa003,12,CB1SS,K
+play,6,0,davij006,12,BSFX,7/L
+play,6,1,incie001,00,,NP
+sub,wilsj004,"Justin Wilson",0,9,1
+play,6,1,incie001,22,.BFFBS,K
+play,6,1,flowt001,10,BX,S9/F
+play,6,1,tehej001,00,,NP
+sub,culbc001,"Charlie Culberson",1,9,11
+play,6,1,culbc001,12,.CBFFX,HR/7/F.1-H
+play,6,1,albio001,12,FFFBC,K
+play,6,1,donaj001,32,CBSFBB*B,W
+play,6,1,freef001,32,BBSFFFFBB,W.1-2
+com,"Mound Visit"
+play,6,1,acunr001,00,,NP
+sub,broxk001,"Keon Broxton",0,9,8
+play,6,1,acunr001,00,,NP
+sub,sewap001,"Paul Sewald",0,8,1
+play,6,1,acunr001,00,,NP
+sub,mcnej002,"Jeff McNeil",0,6,5
+play,6,1,acunr001,00,,NP
+sub,nimmb001,"Brandon Nimmo",0,1,7
+play,6,1,acunr001,12,....CCBC,K
+play,7,0,broxk001,00,,NP
+sub,biddj001,"Jesse Biddle",1,9,1
+play,7,0,broxk001,02,.CCX,9/F
+play,7,0,nimmb001,32,CFBBBX,S9/L
+play,7,0,alonp001,00,B,WP.1-2
+play,7,0,alonp001,22,B.CF*BFFS,K
+com,"Mound Visit"
+play,7,0,canor001,22,CT*BBFFX,63/G
+play,7,1,markn001,32,CBBCFFBFFFB,W
+play,7,1,camaj001,21,BF*BX,D7/L.1-H
+play,7,1,incie001,12,SFBX,7/F7LF
+play,7,1,flowt001,31,BBFBX,8/F
+play,7,1,biddj001,00,,NP
+sub,swand001,"Dansby Swanson",1,9,11
+play,7,1,swand001,22,.C*BSBX,8/F
+play,8,0,confm001,00,,NP
+sub,ventj001,"Jonny Venters",1,9,1
+play,8,0,confm001,22,.BBSFS,K23
+play,8,0,ramow001,10,BX,S8/G
+play,8,0,mcnej002,00,X,D8/L.1-3
+com,"Mound Visit"
+play,8,0,rosaa003,00,,NP
+sub,jackl001,"Luke Jackson",1,9,1
+play,8,0,rosaa003,10,.*BX,S5/G.3-H;2-2
+play,8,0,sewap001,00,,NP
+sub,smitd008,"Dominic Smith",0,8,11
+play,8,0,smitd008,11,.CBX,9/F
+play,8,0,broxk001,01,CX,S9/L.2-H;1-3
+com,"Mound Visit"
+play,8,0,nimmb001,22,TB*BSS,K
+play,8,1,albio001,00,,NP
+sub,famij001,"Jeurys Familia",0,8,1
+play,8,1,albio001,00,.X,T9/G
+play,8,1,donaj001,00,X,S7/G.3-H
+play,8,1,freef001,00,X,9/F
+play,8,1,acunr001,32,B1SS*B*BB,W.1-2
+play,8,1,markn001,22,BCBSX,46(1)3/GDP
+play,9,0,alonp001,00,,NP
+sub,minta001,"A.J. Minter",1,9,1
+play,9,0,alonp001,32,.BBCCBFFFC,K
+play,9,0,canor001,02,FFX,7/L
+play,9,0,confm001,12,BCCX,43/G
+data,er,degrj001,3
+data,er,wilsj004,2
+data,er,sewap001,1
+data,er,famij001,1
+data,er,tehej001,1
+data,er,biddj001,0
+data,er,ventj001,2
+data,er,jackl001,0
+data,er,minta001,0
+id,CLE201904210
+version,2
+info,visteam,ATL
+info,hometeam,CLE
+info,site,CLE08
+info,date,2019/04/21
+info,number,0
+info,starttime,7:08PM
+info,daynight,night
+info,usedh,true
+info,umphome,torrc901
+info,ump1b,rehaj901
+info,ump2b,davig901
+info,ump3b,gibsg901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,maveb701
+info,temp,52
+info,winddir,tocf
+info,windspeed,1
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,cloudy
+info,timeofgame,202
+info,attendance,16039
+info,wp,friem001
+info,lp,biebs001
+info,save,
+start,albio001,"Ozzie Albies",0,1,4
+start,donaj001,"Josh Donaldson",0,2,5
+start,freef001,"Freddie Freeman",0,3,3
+start,acunr001,"Ronald Acuna",0,4,7
+start,markn001,"Nick Markakis",0,5,9
+start,mccab002,"Brian McCann",0,6,2
+start,swand001,"Dansby Swanson",0,7,6
+start,joycm001,"Matt Joyce",0,8,10
+start,incie001,"Ender Inciarte",0,9,8
+start,friem001,"Max Fried",0,0,1
+start,lindf001,"Francisco Lindor",1,1,6
+start,martl004,"Leonys Martin",1,2,8
+start,ramij003,"Jose Ramirez",1,3,5
+start,santc002,"Carlos Santana",1,4,3
+start,gonzc001,"Carlos Gonzalez",1,5,7
+start,kipnj001,"Jason Kipnis",1,6,4
+start,perer003,"Roberto Perez",1,7,2
+start,bauej001,"Jake Bauers",1,8,10
+start,naqut001,"Tyler Naquin",1,9,9
+start,biebs001,"Shane Bieber",1,0,1
+play,1,0,albio001,32,BBCFBFX,8/F
+play,1,0,donaj001,11,CBX,HR/8/F
+play,1,0,freef001,32,FFBBBFB,W
+play,1,0,acunr001,02,CSS,K
+play,1,0,markn001,32,BBBCCX,D9/L.1-H
+play,1,0,mccab002,12,CC*BX,S6/G.2-3
+com,"Mound Visit"
+com,"$originally scored as E6, changed to singel on 04-30-2019"
+play,1,0,swand001,32,B*BBCCC,K
+play,1,1,lindf001,01,CX,8/F
+play,1,1,martl004,10,BX,5/P+
+play,1,1,ramij003,32,BBFFFBB,W
+play,1,1,santc002,32,C1S*B1BBB,W.1-2
+play,1,1,gonzc001,32,CBTBFBB,W.2-3;1-2
+com,"Mound Visit"
+play,1,1,kipnj001,10,BX,8/F
+play,2,0,joycm001,21,CBBX,D9/L+
+play,2,0,incie001,02,CFS,K
+play,2,0,albio001,00,H,HP
+play,2,0,donaj001,12,SBSX,HR/78/F.2-H;1-H
+com,"Mound Visit"
+play,2,0,freef001,10,BX,8/F+
+play,2,0,acunr001,32,CFBBBX,9/L
+play,2,1,perer003,11,CBX,S9/G
+play,2,1,bauej001,00,X,7/F
+play,2,1,naqut001,12,CBCS,K
+play,2,1,lindf001,12,CBTS,K
+play,3,0,markn001,02,CCFX,13/G
+play,3,0,mccab002,11,BCX,D8/L+
+play,3,0,swand001,01,CX,E5/G
+com,"Mound Visit"
+play,3,0,joycm001,00,,NP
+sub,olsot002,"Tyler Olson",1,0,1
+play,3,0,joycm001,12,.BCSS,K
+play,3,0,incie001,21,FBBX,D7/L.2-H(UR);1-3
+play,3,0,albio001,00,X,S9/L.3-H(UR);2-H(TUR);BX2(9364/TH)
+play,3,1,martl004,02,CFS,K
+play,3,1,ramij003,12,BFCS,K
+play,3,1,santc002,00,X,9/L+
+play,4,0,donaj001,00,,NP
+sub,andec002,"Cody Anderson",1,0,1
+play,4,0,donaj001,01,.CX,S7/G
+play,4,0,freef001,11,BCB,WP.1-2
+play,4,0,freef001,22,BCB.SX,S7/L.2-H
+play,4,0,acunr001,31,BBS*BX,S7/L+.1-2
+com,"Mound Visit"
+play,4,0,markn001,21,*BF*BX,8/F
+play,4,0,mccab002,02,CFS,K
+play,4,0,swand001,00,X,9/F
+play,4,1,gonzc001,02,CSX,43/G
+play,4,1,kipnj001,12,BCFX,43/G
+play,4,1,perer003,21,CBBX,S9/G
+play,4,1,bauej001,00,X,S7/G+.1-2
+play,4,1,naqut001,12,SF*BX,43/G
+play,5,0,joycm001,22,BBFFX,9/F
+play,5,0,incie001,00,X,43/G-
+play,5,0,albio001,12,CSBS,K
+play,5,1,lindf001,01,FX,3/G
+play,5,1,martl004,10,BX,7/F
+play,5,1,ramij003,32,CBBFBFFX,3/G
+play,6,0,donaj001,32,CBFBBFS,K
+play,6,0,freef001,12,SFFBX,D9/L
+play,6,0,acunr001,32,BBFFBFX,8/F
+com,"Mound Visit"
+play,6,0,markn001,00,,NP
+sub,pereo002,"Oliver Perez",1,0,1
+play,6,0,markn001,02,.CFFX,S6/G.2-3
+play,6,0,mccab002,11,BCX,S7/G.3-H;1-2
+play,6,0,swand001,32,BBCBCX,53/G
+play,6,1,santc002,31,BSBBX,8/F
+play,6,1,gonzc001,00,X,S8/G
+play,6,1,kipnj001,20,BBX,S7/F.1-2
+play,6,1,perer003,22,CBFBC,K
+play,6,1,bauej001,01,CX,7/L
+play,7,0,joycm001,00,,NP
+sub,alleg002,"Greg Allen",1,5,7
+play,7,0,joycm001,00,,NP
+sub,oterd001,"Dan Otero",1,0,1
+play,7,0,joycm001,31,..FBBBB,W
+play,7,0,incie001,01,FX,8/L
+play,7,0,albio001,11,CBX,6(1)/FO/G
+com,"$Braves challenged call that Albies was out at 1st to"
+com,"complete double play; call was overturned - force out"
+com,"but no double play"
+play,7,0,donaj001,32,F*BBBFFFB,W.1-2
+play,7,0,freef001,11,CBX,S9/G.2-H;1-2
+play,7,0,acunr001,11,BFX,S9/G.2-3;1-2
+play,7,0,markn001,10,BX,7/F
+play,7,1,naqut001,12,CBSS,K
+play,7,1,lindf001,31,BFBBX,HR/7/F
+play,7,1,martl004,10,BX,S8/G
+com,"Mound Visit"
+play,7,1,ramij003,00,,NP
+sub,biddj001,"Jesse Biddle",0,0,1
+play,7,1,ramij003,00,.X,8/F
+play,7,1,santc002,31,CBBBB,W.1-2
+play,7,1,alleg002,10,BX,S9/F-.2-H;1-3
+play,7,1,kipnj001,01,CX,8/F
+play,8,0,mccab002,00,,NP
+sub,morom001,"Max Moroff",1,1,6
+play,8,0,mccab002,00,,NP
+sub,freem002,"Mike Freeman",1,3,5
+play,8,0,mccab002,00,,NP
+sub,cimba001,"Adam Cimber",1,0,1
+play,8,0,mccab002,01,...CX,63/G
+play,8,0,swand001,00,X,S7/G+
+play,8,0,joycm001,12,CBCFX,7/F
+play,8,0,incie001,01,FX,8/F
+play,8,1,perer003,00,,NP
+sub,tomlj001,"Josh Tomlin",0,0,1
+play,8,1,perer003,21,.BBCX,HR/78/F
+play,8,1,bauej001,22,BCSFBC,K
+play,8,1,naqut001,02,CCX,31/G
+play,8,1,morom001,12,SFBS,K
+play,9,0,albio001,00,,NP
+sub,plawk001,"Kevin Plawecki",1,0,1
+badj,albio001,R
+play,9,0,albio001,22,.CCFBBX,43/G
+play,9,0,donaj001,00,,NP
+sub,culbc001,"Charlie Culberson",0,2,11
+play,9,0,culbc001,22,.BBCFX,53/G
+play,9,0,freef001,00,,NP
+sub,camaj001,"Johan Camargo",0,3,11
+play,9,0,camaj001,01,.CX,7/F
+play,9,1,martl004,00,,NP
+sub,culbc001,"Charlie Culberson",0,2,3
+play,9,1,martl004,00,,NP
+sub,camaj001,"Johan Camargo",0,3,5
+play,9,1,martl004,12,..FBSX,S9/G
+play,9,1,freem002,22,CCBBS,K
+play,9,1,santc002,01,CX,8/F
+play,9,1,alleg002,01,FX,S6/G.1-2
+play,9,1,kipnj001,11,CBX,S8/F.2-H;1-H(E8/TH)(UR)(NR);B-3
+play,9,1,perer003,22,CFBBS,K
+data,er,friem001,2
+data,er,biddj001,0
+data,er,tomlj001,2
+data,er,biebs001,5
+data,er,olsot002,1
+data,er,andec002,2
+data,er,pereo002,0
+data,er,oterd001,1
+data,er,cimba001,0
+data,er,plawk001,0
+id,ATL201904260
+version,2
+info,visteam,COL
+info,hometeam,ATL
+info,site,ATL03
+info,date,2019/04/26
+info,number,0
+info,starttime,7:23PM
+info,daynight,night
+info,usedh,false
+info,umphome,torrc901
+info,ump1b,demud901
+info,ump2b,herna901
+info,ump3b,hicke901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,mustr701
+info,temp,70
+info,winddir,tocf
+info,windspeed,13
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,sunny
+info,timeofgame,201
+info,attendance,40282
+info,wp,senza001
+info,lp,friem001
+info,save,daviw001
+start,blacc001,"Charlie Blackmon",0,1,9
+start,stort001,"Trevor Story",0,2,6
+start,arenn001,"Nolan Arenado",0,3,5
+start,murpd006,"Daniel Murphy",0,4,3
+start,dahld001,"David Dahl",0,5,7
+start,desmi001,"Ian Desmond",0,6,8
+start,mcmar001,"Ryan McMahon",0,7,4
+start,buted001,"Drew Butera",0,8,2
+start,senza001,"Antonio Senzatela",0,9,1
+start,albio001,"Ozzie Albies",1,1,4
+start,donaj001,"Josh Donaldson",1,2,5
+start,freef001,"Freddie Freeman",1,3,3
+start,acunr001,"Ronald Acuna",1,4,7
+start,markn001,"Nick Markakis",1,5,9
+start,camaj001,"Johan Camargo",1,6,6
+start,flowt001,"Tyler Flowers",1,7,2
+start,incie001,"Ender Inciarte",1,8,8
+start,friem001,"Max Fried",1,9,1
+play,1,0,blacc001,11,CBX,4/L
+play,1,0,stort001,22,BFBCC,K
+play,1,0,arenn001,22,BFTFFBFFS,K
+play,1,1,albio001,32,BBBCFFFB,W
+play,1,1,donaj001,02,C1FX,D7/L.1-H
+play,1,1,freef001,11,BFX,3/G.2-3
+play,1,1,acunr001,12,FSBX,53/G
+play,1,1,markn001,31,B*BBCB,W
+play,1,1,camaj001,20,BBX,53/G
+play,2,0,murpd006,22,CCFBBX,D9/L
+play,2,0,dahld001,10,BB,PB.2-3
+play,2,0,dahld001,22,BB.CSC,K
+play,2,0,desmi001,01,CX,FC5/G+.3XH(52)
+play,2,0,mcmar001,32,CBBSBS,K
+play,2,1,flowt001,32,BBBCFX,S4/G.B-2(E4/TH)
+play,2,1,incie001,02,CFC,K
+play,2,1,friem001,11,BFX,1/L/DP.2X2(16)
+play,3,0,buted001,10,BX,53/G
+play,3,0,senza001,00,X,31/G
+play,3,0,blacc001,10,BX,7/F+
+play,3,1,albio001,12,CFBFT,K
+play,3,1,donaj001,32,FBBBSX,13/G-
+play,3,1,freef001,30,BBBB,W
+play,3,1,acunr001,32,FBTB*BX,4/P
+play,4,0,stort001,00,X,HR/7/F
+play,4,0,arenn001,00,X,HR/7/F
+play,4,0,murpd006,10,BX,43/G
+play,4,0,dahld001,22,SBBFFX,S4/G
+play,4,0,desmi001,32,CB1CF*BBS,K
+play,4,0,mcmar001,12,1*BCF1FB,WP.1-2
+play,4,0,mcmar001,22,1*BCF1FB.S,K
+play,4,1,markn001,20,BBX,DGR/L
+play,4,1,camaj001,11,C*BX,63/G
+play,4,1,flowt001,22,FBCBFX,S7/L.2-3
+com,"Mound Visit"
+play,4,1,incie001,20,*BBX,S7/F.3-H;1-2
+com,"Mound Visit"
+play,4,1,friem001,22,LLBBL,K
+play,4,1,albio001,00,X,43/G
+play,5,0,buted001,22,CBFBX,6/L+
+play,5,0,senza001,12,CFBS,K
+play,5,0,blacc001,22,CBBSX,53/G
+play,5,1,donaj001,22,CBSBX,7/L
+play,5,1,freef001,21,BFBX,43/G
+play,5,1,acunr001,02,CFS,K
+play,6,0,stort001,01,FX,D9/L
+play,6,0,arenn001,00,X,D9/L.2-H
+com,"Mound Visit"
+play,6,0,murpd006,01,FX,D7/L.2-H
+play,6,0,dahld001,12,BCSS,K
+com,"Mound Visit"
+play,6,0,desmi001,00,,NP
+sub,tomlj001,"Josh Tomlin",1,9,1
+play,6,0,desmi001,32,.CBSBBX,FC6/G.2X3(65)
+play,6,0,mcmar001,22,111BC1F1BFS,K
+play,6,1,markn001,22,CBBFFX,S7/L
+play,6,1,camaj001,01,SX,16(1)3/GDP
+play,6,1,flowt001,31,FBBBX,HR/78/F
+com,"Mound Visit"
+play,6,1,incie001,00,,NP
+sub,estec001,"Carlos Estevez",0,9,1
+play,6,1,incie001,12,.SFFBFS,K
+play,7,0,buted001,12,CFBFX,D7/L+
+play,7,0,estec001,00,,NP
+sub,tapir001,"Raimel Tapia",0,9,11
+play,7,0,tapir001,00,.X,6/P
+play,7,0,blacc001,00,X,S9/G.2-H
+com,"Mound Visit"
+play,7,0,stort001,00,,NP
+sub,soboc001,"Chad Sobotka",1,9,1
+play,7,0,stort001,11,.1*B1FN,BK.1-2
+play,7,0,stort001,22,.1*B1FN.FBFX,7/F
+play,7,0,arenn001,22,*BBCFX,8/F
+play,7,1,soboc001,00,,NP
+sub,oh--s001,"Seung Hwan Oh",0,9,1
+play,7,1,soboc001,00,,NP
+sub,joycm001,"Matt Joyce",1,9,11
+play,7,1,joycm001,01,..CX,63/G
+play,7,1,albio001,22,BCCBX,S8/G
+play,7,1,donaj001,12,SSBX,8/F+
+play,7,1,freef001,01,CX,9/F
+play,8,0,murpd006,00,,NP
+sub,biddj001,"Jesse Biddle",1,9,1
+play,8,0,murpd006,22,.CFBBX,S9/L
+play,8,0,dahld001,00,X,E5/BG-.1-2
+play,8,0,desmi001,01,CX,S1/G.2-3;1-2
+com,"Injury Delay"
+play,8,0,mcmar001,21,FBBX,S8/G.3-H;2-H(UR);1-2
+com,"Mound Visit"
+play,8,0,buted001,00,,NP
+sub,webbj002,"Jacob Webb",1,9,1
+play,8,0,buted001,20,.BBX,54/BG/SH.2-3;1-2
+play,8,0,oh--s001,00,,NP
+sub,reynm001,"Mark Reynolds",0,9,11
+play,8,0,reynm001,01,.FX,53/G.3-H(UR);2-3
+play,8,0,blacc001,32,BBBCSX,5/P
+play,8,1,acunr001,00,,NP
+sub,obers001,"Scott Oberg",0,9,1
+play,8,1,acunr001,32,.CBBCBX,13/G
+com,"Injury Delay"
+play,8,1,markn001,12,BCFX,3/G
+play,8,1,camaj001,10,BX,3/G
+play,9,0,stort001,00,,NP
+sub,swand001,"Dansby Swanson",1,9,6
+play,9,0,stort001,00,,NP
+sub,wilsb003,"Bryse Wilson",1,6,1
+play,9,0,stort001,22,..STBBFS,K
+play,9,0,arenn001,12,CSBX,8/L
+play,9,0,murpd006,11,BCX,63/G
+play,9,1,flowt001,00,,NP
+sub,bettc001,"Chad Bettis",0,9,1
+play,9,1,flowt001,22,.CBBSX,HR/7/L
+play,9,1,incie001,11,CBX,43/G
+play,9,1,swand001,12,CFBFS,K
+play,9,1,albio001,01,CX,S6/G
+play,9,1,donaj001,00,H,HP.1-2
+com,"Mound Visit"
+play,9,1,freef001,00,,NP
+sub,daviw001,"Wade Davis",0,9,1
+play,9,1,freef001,22,.*BFFBS,K
+data,er,senza001,3
+data,er,estec001,0
+data,er,oh--s001,0
+data,er,obers001,0
+data,er,bettc001,1
+data,er,daviw001,0
+data,er,friem001,4
+data,er,tomlj001,1
+data,er,soboc001,0
+data,er,biddj001,1
+data,er,webbj002,0
+data,er,wilsb003,0

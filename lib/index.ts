@@ -1,8 +1,7 @@
 import { parseGames, GameplayEvent, Lineup, Game } from 'retrosheet-parse'
 
 import { parseAction } from './retrosheet'
-import { getTeam, getStadium, getLineup } from './retrosheet/translator'
-import { RetrosheetEvent } from './types'
+import { getTeam, getStadium, getLineup } from './retrosheet/translators'
 import { Scorekeeper } from './Scorekeeper'
 
 function generateGameplay({
@@ -36,9 +35,7 @@ function generateGameplay({
 
   function getActionInfo(gameplayEvent: GameplayEvent) {
     const retrosheetEvent = parseAction(gameplayEvent)
-    if (!retrosheetEvent) return null
-
-    if (gameplayEvent.type !== 'at-bat') return null
+    if (!retrosheetEvent || gameplayEvent.type !== 'at-bat') return null
 
     const lineupSpot = getLineupSpot(gameplayEvent)
     if (lineupSpot < 0) return null

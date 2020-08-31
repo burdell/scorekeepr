@@ -77,14 +77,6 @@ export function fieldersChoice(baseAdvancedTo: Base): FieldersChoice {
   }
 }
 
-export function balk(): Balk {
-  return {
-    type: 'balk',
-    result: 'BK',
-    display: 'BK'
-  }
-}
-
 export function caughtStealing(putoutPositions: number[]): CaughtStealing {
   const result = putout(putoutPositions)
   return {
@@ -102,28 +94,34 @@ export function stolenBase(base: AdvanceableBase): StolenBase {
   }
 }
 
-export function defensiveIndifference(
-  base: AdvanceableBase
-): DefensiveIndifference {
+export function defensiveIndifference(): DefensiveIndifference {
   return {
     type: 'defensive-indifference',
-    result: base,
-    display: 'DI'
+    display: 'DI',
+    result: 'DI'
   }
 }
 
-export function passedBall(base: Base): PassedBall {
+export function passedBall(): PassedBall {
   return {
     type: 'passed-ball',
-    result: base,
+    result: 'PB',
     display: 'PB'
   }
 }
 
-export function wildPitch(base: Base): WildPitch {
+export function wildPitch(): WildPitch {
   return {
     type: 'wild-pitch',
-    result: base,
+    result: 'WP',
     display: 'WP'
+  }
+}
+
+export function balk(): Balk {
+  return {
+    type: 'balk',
+    result: 'BK',
+    display: 'BK'
   }
 }

@@ -48,7 +48,7 @@ function getNonGroundout(
   const defensivePosition = defensivePositions.pop()
   if (!defensivePosition || defensivePositions.length > 0)
     throw new Error(
-      'Attempted to record an out without a valid defensive player'
+      `Attempted to record an out without a valid defensive player: ${defensivePositions}`
     )
 
   if (outType === 'flyout') {
@@ -98,10 +98,10 @@ const multiActionOut: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const { result } = gameplayEvent
     const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
-    const batterMatch = result.match(/(\d+)(\(B\))?\//)
-    const notGroundoutBatterResult = result.match(/.+\/.+(\/.+)/)
+    const batterMatch = result.match(/^(\d+\([123]\))*(\d+)(\(B\))?\//)
+    const batterResultType = result.match(/(\/\w+)(\.[B123]-[123H]((.+))*)*$/)
 
-    let batterAction = batterMatch ? batterMatch[1] : ''
+    let batterAction = batterMatch ? batterMatch[2] : ''
     let firstBaseResult = ''
     let secondBaseResult = ''
     let thirdBaseResult = ''
@@ -141,10 +141,9 @@ const multiActionOut: ActionConfig = {
     }
 
     function getAtBatResult() {
-      if (notGroundoutBatterResult) {
-        const [fullMatch, result] = notGroundoutBatterResult
+      if (batterResultType) {
+        const [fullMatch, result] = batterResultType
         const outType = getOutType(result)
-
         if (outType !== 'groundout') {
           const batterOut = getNonGroundout(outType, getPutoutPositions(result))
           return batterOut

@@ -33,10 +33,10 @@ const hitBatter: ActionConfig = {
 
 const walk: ActionConfig = {
   actionType: 'batter',
-  regexp: /^(I)?W/,
+  regexp: /^(I)?W[^P]|^(I)?W$/,
   handler: (gameplayEvent, match) => {
-    const [fullMatch, intentionalGroup] = match
-    const isIntentional = intentionalGroup === 'I'
+    const [fullMatch, firstIntentional, secondIntentional] = match
+    const isIntentional = firstIntentional === 'I' || secondIntentional === 'I'
     return actionGenerators.pitcherResult(isIntentional ? 'IBB' : 'BB')
   }
 }
@@ -46,9 +46,7 @@ const error: ActionConfig = {
   regexp: /^C?\/?E(\d)/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, fielder] = match
-    return getAction({
-      result: resultGenerators.error(Number(fielder))
-    })
+    return actionGenerators.error(Number(fielder))
   }
 }
 

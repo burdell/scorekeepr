@@ -41,3 +41,16 @@ export function fieldersChoice(base: Base = 1) {
     })
   })
 }
+
+export function error(fielder: number) {
+  return getAction({
+    result: resultGenerators.error(fielder),
+    bases: getBases({
+      B: {
+        result: undefined,
+        isAtBatResult: true,
+        endBase: 1
+      }
+    })
+  })
+}

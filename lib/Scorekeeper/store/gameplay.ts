@@ -146,6 +146,22 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
             result: baseMovement.result
           })
 
+          if (baseMovement.additionalBases) {
+            baseMovement.additionalBases.forEach((advancement) => {
+              const isOut =
+                advancement.result && advancement.result.type === 'putout'
+              if (isOut) {
+                currentLineupSpot.isOut = true
+              }
+              newBases = advanceRunnerHelper({
+                baseAdvancedTo: advancement.base,
+                result: advancement.result,
+                existingBases: newBases,
+                isOut
+              })
+            })
+          }
+
           currentInning[currentBase.lineupSpot].bases = newBases
         }
 
@@ -165,10 +181,16 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
       if (batterBase.additionalBases) {
         batterBase.additionalBases.forEach((advancement) => {
+          const isOut =
+            advancement.result && advancement.result.type === 'putout'
+          if (isOut) {
+            currentLineupSpot.isOut = true
+          }
           bases = advanceRunnerHelper({
             baseAdvancedTo: advancement.base,
             result: advancement.result,
-            existingBases: bases
+            existingBases: bases,
+            isOut
           })
         })
       }

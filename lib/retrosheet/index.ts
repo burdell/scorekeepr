@@ -25,6 +25,21 @@ function handleAction(gameplayEvent: AtBat, action: Action | undefined) {
   return event
 }
 
+function getAdditionalBaseResult(
+  errorPosition: number | undefined,
+  putoutResult: string
+) {
+  if (errorPosition) {
+    return resultGenerators.error(errorPosition)
+  }
+
+  if (putoutResult) {
+    return resultGenerators.putout(getPutoutPositions(putoutResult))
+  }
+
+  return undefined
+}
+
 export function parseAction(gameplayEvent: GameplayEvent) {
   if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
     return
@@ -50,15 +65,18 @@ export function parseAction(gameplayEvent: GameplayEvent) {
 
       const baseMovement: RetrosheetBaseResult = {
         endBase,
-        result: undefined,
+        result: event.allBasesAdvanceResult || undefined,
         ...(existingBase || {})
       }
 
       if (existingBase && endBase !== existingBase.endBase) {
-        baseMovement.additionalBases = [{ base: endBase, result: undefined }]
-      }
-
-      if (errorPosition) {
+        baseMovement.additionalBases = [
+          {
+            base: endBase,
+            result: getAdditionalBaseResult(errorPosition, result)
+          }
+        ]
+      } else if (errorPosition) {
         baseMovement.result = resultGenerators.error(errorPosition)
       } else if (isOut) {
         baseMovement.isOut = true
@@ -90,6 +108,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     }
   }
 
+  delete event.allBasesAdvanceResult
   return event
 }
 

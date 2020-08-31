@@ -1,12 +1,10 @@
 import { Base } from '../types'
 import { getBase } from './utilities'
+import * as resultGenerators from './generators/result'
 
 export const getBaserunnerMovements = (str: string) => {
-  // const baseRunnerMovements = str.matchAll(
-  //   /(([123B])([-X])([123H])(\((.+)\))?)+;/g
-  // )
   const baseRunnerMovements = str.matchAll(
-    /([123B])([-X])([123H])(\((\w+)\))?;?/g
+    /([123B])([-X])([123H])(\(([\w\/]+)\))?;?/g
   )
 
   const runnerMovements: Array<{
@@ -16,6 +14,13 @@ export const getBaserunnerMovements = (str: string) => {
     errorPosition: number | undefined
     result: string
   }> = []
+
+  function getPassedBallOrWildPitch() {
+    if (str.match(/^WP/)) return resultGenerators.wildPitch
+    if (str.match(/^PB/)) return resultGenerators.passedBall
+    return
+  }
+  const baseResultFn = getPassedBallOrWildPitch()
 
   for (const movement of baseRunnerMovements) {
     const [
@@ -28,7 +33,7 @@ export const getBaserunnerMovements = (str: string) => {
     ] = movement
 
     const isOut = advanceOrOut === 'X'
-    const errorOnOut = isOut && result ? result.match(/E(\d+)/) : null
+    const errorOnOut = result ? result.match(/E(\d+)/) : null
     const errorPosition = errorOnOut ? Number(errorOnOut[1]) : undefined
 
     const startBase =

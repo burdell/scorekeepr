@@ -40,12 +40,6 @@ export type DefensiveError = {
   display: string
 }
 
-export type Balk = {
-  type: 'balk'
-  result: 'BK'
-  display: 'BK'
-}
-
 export type CaughtStealing = {
   type: 'caught-stealing'
   result: PutOut
@@ -72,14 +66,20 @@ export type FieldersChoice = {
 
 export type PassedBall = {
   type: 'passed-ball'
-  result: Base
+  result: 'PB'
   display: 'PB'
 }
 
 export type WildPitch = {
   type: 'wild-pitch'
-  result: Base
+  result: 'WP'
   display: 'WP'
+}
+
+export type Balk = {
+  type: 'balk'
+  result: 'BK'
+  display: 'BK'
 }
 
 export type AtBatResult =

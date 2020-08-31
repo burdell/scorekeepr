@@ -6,17 +6,29 @@ type TeamMap = {
 }
 
 const teams: TeamMap = {
-  CHN: {
-    abbreviation: 'CHN',
-    fullName: 'Chicago Cubs'
-  },
   ATL: {
     abbreviation: 'ATL',
     fullName: 'Atlanta Braves'
   },
+  CHN: {
+    abbreviation: 'CHN',
+    fullName: 'Chicago Cubs'
+  },
   CLE: {
     abbreviation: 'CLE',
     fullName: 'Cleveland Indians'
+  },
+  COL: {
+    abbreviation: 'COL',
+    fullName: 'Colorado Rockies'
+  },
+  NYN: {
+    abbreviation: 'NYM',
+    fullName: 'New York Mets'
+  },
+  PHI: {
+    abbreviation: 'PHI',
+    fullName: 'Philadelphia Phillies'
   }
 }
 

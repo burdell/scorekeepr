@@ -14,9 +14,21 @@ const stadiums: TeamMap = {
     abbreviation: 'ATL01',
     fullName: 'Atlanta Fulton County Stadium'
   },
+  ATL03: {
+    abbreviation: 'ATL03',
+    fullName: 'Suntrust Park'
+  },
   CLE08: {
     abbreviation: 'CLE08',
     fullName: 'Jacobs Field'
+  },
+  PHI13: {
+    abbreviation: 'PHI13',
+    fullName: 'Citizens Bank Park'
+  },
+  DEN02: {
+    abbreviation: 'DEN02',
+    fullName: 'Coors Field'
   }
 }
 
