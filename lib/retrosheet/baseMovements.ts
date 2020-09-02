@@ -2,6 +2,8 @@ import { Base } from '../types'
 import { getBase } from './utilities'
 import * as resultGenerators from './generators/result'
 
+export type BaserunnerMovements = ReturnType<typeof getBaserunnerMovements>
+
 export const getBaserunnerMovements = (str: string) => {
   const baseRunnerMovements = str.matchAll(
     /([123B])([-X])([123H])(\(([\w\/]+)\))?;?/g
@@ -29,9 +31,10 @@ export const getBaserunnerMovements = (str: string) => {
       advanceOrOut,
       rawEndBase,
       resultGroup,
-      result
+      resultString
     ] = movement
 
+    const result = resultString === 'TH' ? '' : resultString
     const isOut = advanceOrOut === 'X'
     const errorOnOut = result ? result.match(/E(\d+)/) : null
     const errorPosition = errorOnOut ? Number(errorOnOut[1]) : undefined
@@ -39,6 +42,7 @@ export const getBaserunnerMovements = (str: string) => {
     const startBase =
       rawStartBase === 'B' ? rawStartBase : getBase(rawStartBase)
     const endBase = getBase(rawEndBase)
+
     runnerMovements.push({
       startBase,
       endBase,

@@ -9,7 +9,7 @@ export type RetrosheetBaseResult = {
   result: BaseResultResult
   isOut?: boolean
   isAtBatResult?: boolean
-  onBasePutout?: PutOut
+  onBasePutout?: PutOut | PickOff
   additionalBases?: Array<{ base: Base; result?: BaseResultResult }>
 }
 
@@ -26,7 +26,7 @@ export type RetrosheetEvent = {
   result: AtBatResult | undefined
   bases: Bases
   isSacrifice?: boolean
-  allBasesAdvanceResult?: Balk | WildPitch | PassedBall
+  foulTerritoryError?: DefensiveError
 }
 
 type Team = string
@@ -111,6 +111,12 @@ export type Balk = {
   display: 'BK'
 }
 
+export type PickOff = {
+  type: 'pick-off'
+  result: PutOut
+  display: string
+}
+
 export type AtBatResult =
   | PutOut
   | FlyOut
@@ -136,7 +142,7 @@ export type BaseResult = {
   advanced: boolean
   result: BaseResultResult
   isAtBatResult?: boolean
-  onBasePutout?: PutOut
+  onBasePutout?: PutOut | PickOff
 }
 
 export type AtBat = {

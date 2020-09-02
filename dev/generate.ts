@@ -50,7 +50,6 @@ export async function generateScorebooks() {
 
     const retrosheetFiles = await getFilenames(sourceFolder)
     await generateGames(retrosheetFiles)
-    console.log('💃 Games generated')
   } catch (e) {
     console.error(`Unable to generate game files: ${e.message}`)
   }

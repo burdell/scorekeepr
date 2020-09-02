@@ -15,7 +15,8 @@ import {
   AdvanceBaseResult,
   DefensiveIndifference,
   PassedBall,
-  WildPitch
+  WildPitch,
+  PickOff
 } from '../../types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
@@ -83,6 +84,15 @@ export function caughtStealing(putoutPositions: number[]): CaughtStealing {
     type: 'caught-stealing',
     result,
     display: `CS ${result.display}`
+  }
+}
+
+export function pickOff(putoutPositions: number[]): PickOff {
+  const result = putout(putoutPositions)
+  return {
+    type: 'pick-off',
+    result,
+    display: `PO ${result.display}`
   }
 }
 

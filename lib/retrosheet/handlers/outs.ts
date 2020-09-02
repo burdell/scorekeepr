@@ -11,8 +11,7 @@ export function getOutType(
 ): 'groundout' | 'lineout' | 'flyout' | 'sacrifice-fly' | undefined {
   if (modifier.match(/\/(B*)G/)) return 'groundout'
   if (modifier.indexOf('/L') >= 0) return 'lineout'
-  if (modifier.indexOf('/F') >= 0 || modifier.indexOf('/P') >= 0)
-    return 'flyout'
+  if (modifier.match(/\/.*F.*/) || modifier.indexOf('/P') >= 0) return 'flyout'
   if (modifier.indexOf('/SF') >= 0) return 'sacrifice-fly'
 }
 
@@ -73,7 +72,7 @@ function getOut(atBatResult: string) {
   }
 
   let result: AtBatResult | undefined = undefined
-  if (outType === 'groundout') {
+  if (defensivePositions.length > 1 || outType === 'groundout') {
     result = resultGenerators.putout(defensivePositions)
   } else {
     result = getNonGroundout(outType, defensivePositions)
@@ -97,8 +96,8 @@ const multiActionOut: ActionConfig = {
   regexp: /(\d+)\(([B|1|2|3])\)/g,
   handler: (gameplayEvent, match) => {
     const { result } = gameplayEvent
-    const baseActions = result.matchAll(/(\d+)\(([B|1|2|3])\)/g)
-    const batterMatch = result.match(/^(\d+\([123]\))*(\d+)(\(B\))?\//)
+    const baseActions = result.matchAll(/([\d!]+)\(([B|1|2|3])\)/g)
+    const batterMatch = result.match(/^([\d!]+\([123]\))*(\d+)(\(B\))?\//)
     const batterResultType = result.match(/(\/\w+)(\.[B123]-[123H]((.+))*)*$/)
 
     let batterAction = batterMatch ? batterMatch[2] : ''
@@ -107,7 +106,8 @@ const multiActionOut: ActionConfig = {
     let thirdBaseResult = ''
 
     for (const putout of baseActions) {
-      const [_, action, base] = putout
+      const [_, rawAction, base] = putout
+      const action = getPutoutPositions(rawAction).join('')
       switch (base) {
         case 'B': {
           batterAction = action
@@ -144,8 +144,9 @@ const multiActionOut: ActionConfig = {
       if (batterResultType) {
         const [fullMatch, result] = batterResultType
         const outType = getOutType(result)
-        if (outType !== 'groundout') {
-          const batterOut = getNonGroundout(outType, getPutoutPositions(result))
+        const positions = getPutoutPositions(result)
+        if (outType !== 'groundout' && positions.length) {
+          const batterOut = getNonGroundout(outType, positions)
           return batterOut
         }
       }

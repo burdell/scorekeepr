@@ -61,6 +61,19 @@ function generateGameplay({
   })
 }
 
+function alertSuccess(game: Game, scorekeeper: Scorekeeper) {
+  console.log(`💥 Created ${scorekeeper.gameInfo.id}`)
+  if (!scorekeeper.gameInfo.homeTeam) {
+    console.warn(`  ⚠️ Home team not translated: ${game.info.hometeam}`)
+  }
+  if (!scorekeeper.gameInfo.visitingTeam) {
+    console.warn(`  ⚠️ Visiting team not translated: ${game.info.visteam}`)
+  }
+  if (!scorekeeper.gameInfo.location) {
+    console.warn(`  ⚠️ Stadium not translated: ${game.info.site}`)
+  }
+}
+
 export async function getRetrosheetScorekeepers(
   filename: string
 ): Promise<Scorekeeper[]> {
@@ -83,11 +96,18 @@ export async function getRetrosheetScorekeepers(
       visiting: getLineup(lineup.visiting)
     })
 
-    generateGameplay({ game, team: 'home', scorekeeper })
-    generateGameplay({ game, team: 'visiting', scorekeeper })
+    try {
+      generateGameplay({ game, team: 'home', scorekeeper })
+      generateGameplay({ game, team: 'visiting', scorekeeper })
+    } catch (e) {
+      console.error('Gameplay error: ', scorekeeper.gameInfo.id, e.message)
+      return
+    }
 
+    alertSuccess(game, scorekeeper)
     scorekeepers.push(scorekeeper)
   })
 
+  console.log(`💃 ${scorekeepers.length} games generated`)
   return scorekeepers
 }

@@ -3,6 +3,12 @@ import { AtBat, GameplayEvent } from 'retrosheet-parse'
 import { parseAction as realParseAction } from '../lib/retrosheet'
 import { RetrosheetEvent } from '../lib/types'
 import * as resultGenerators from '../lib/retrosheet/generators/result'
+import { getBases } from '../lib/retrosheet/utilities'
+
+// Uhandled:
+//   PHI201904270 - S6/G.3-H;1-3 S5
+//   PHI201906070 = PO3(E2/TH).3-H(UR);1-2
+//   PHI201906090 - CSH(2)
 
 function getEventWithDefaults(
   overrides: Partial<RetrosheetEvent> = {}
@@ -112,6 +118,45 @@ describe('Retrosheet parsing', () => {
         isOut: true,
         pitches: { pitchCount: 5, balls: 1, strikes: 2 },
         result: resultGenerators.flyOut(4)
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: '3/BP23F' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.flyOut(3),
+        isOut: true
+      })
+    )
+  })
+
+  it('parses putouts', () => {
+    expect(getResult('93/L')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([9, 3])
+      })
+    )
+
+    expect(getResult('85(2)/FO/F.1-2')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        result: resultGenerators.fieldersChoice(1),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            result: undefined,
+            endBase: 1
+          },
+          1: {
+            endBase: 2,
+            result: undefined
+          },
+          2: {
+            endBase: 3,
+            isOut: true,
+            result: resultGenerators.putout([8, 5])
+          }
+        })
       })
     )
   })
@@ -262,6 +307,23 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    expect(getResult('16!4(1)3/GDP/G6M')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.putout([1, 6, 4, 3]),
+        isOut: true,
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.putout([1, 6, 4]),
+            isOut: true
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
   })
 
   it('parses hits', () => {
@@ -394,6 +456,56 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    expect(parseAction(getAtBat({ result: 'S7/L.2-H;1-3;B-2(TH)' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true,
+            additionalBases: [{ base: 2, result: undefined }]
+          },
+          1: {
+            endBase: 3,
+            result: undefined
+          },
+          2: {
+            endBase: 4,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    const fanInterferenceDouble = parseAction(getAtBat({ result: 'D/L+/FINT' }))
+    expect(fanInterferenceDouble).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(2),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 2,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    const fanInterferenceTriple = parseAction(getAtBat({ result: 'T/L+/FINT' }))
+    expect(fanInterferenceTriple).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(3),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 3,
+            result: undefined
+          }
+        })
+      })
+    )
   })
 
   it('parses hit batters', () => {
@@ -486,6 +598,25 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    expect(parseAction(getAtBat({ result: 'W+WP.2-3' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('BB'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: {
+            endBase: 3,
+            result: resultGenerators.wildPitch()
+          },
+          3: undefined
+        }
+      })
+    )
   })
 
   it('parses errors', () => {
@@ -518,6 +649,53 @@ describe('Retrosheet parsing', () => {
           2: undefined,
           3: undefined
         }
+      })
+    )
+
+    expect(getResult('E7/L7M.2-H(NR)(UR);B-2')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.error(7),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 2,
+            result: undefined
+          },
+          2: {
+            endBase: 4,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(getResult('5E3/G')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.error(3),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(getResult('6E3/G.2-3')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.error(3),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          2: {
+            endBase: 3,
+            result: undefined
+          }
+        })
       })
     )
   })
@@ -563,7 +741,7 @@ describe('Retrosheet parsing', () => {
           1: {
             result: undefined,
             endBase: 1,
-            onBasePutout: resultGenerators.putout([2, 3]),
+            onBasePutout: resultGenerators.pickOff([2, 3]),
             isOut: true
           },
           2: undefined,
@@ -581,7 +759,7 @@ describe('Retrosheet parsing', () => {
         bases: {
           B: undefined,
           1: {
-            result: resultGenerators.putout([2, 6]),
+            result: resultGenerators.caughtStealing([2, 6]),
             endBase: 2,
             isOut: true
           },
@@ -599,10 +777,44 @@ describe('Retrosheet parsing', () => {
           B: undefined,
           1: undefined,
           2: {
-            result: resultGenerators.putout([2, 5]),
+            result: resultGenerators.caughtStealing([2, 5]),
             endBase: 3,
             isOut: true
           },
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('CS2(2!4)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            result: resultGenerators.caughtStealing([2, 4]),
+            endBase: 2,
+            isOut: true
+          },
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('CS2(243)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            result: resultGenerators.caughtStealing([2, 4, 3]),
+            endBase: 2,
+            isOut: true
+          },
+          2: undefined,
           3: undefined
         }
       })
@@ -621,7 +833,7 @@ describe('Retrosheet parsing', () => {
             isOut: true
           },
           3: {
-            result: resultGenerators.putout([2, 5]),
+            result: resultGenerators.caughtStealing([2, 5]),
             endBase: 4,
             isOut: true
           }
@@ -761,6 +973,52 @@ describe('Retrosheet parsing', () => {
           },
           3: undefined
         }
+      })
+    )
+
+    expect(getResult('PB.2-3;1-2')).toEqual(
+      getEventWithDefaults({
+        result: undefined,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.passedBall()
+          },
+          2: {
+            endBase: 3,
+            result: resultGenerators.passedBall()
+          },
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('BK.2-3;1-2')).toEqual(
+      getEventWithDefaults({
+        result: undefined,
+        pitches: undefined,
+        bases: {
+          B: undefined,
+          1: {
+            endBase: 2,
+            result: resultGenerators.balk()
+          },
+          2: {
+            endBase: 3,
+            result: resultGenerators.balk()
+          },
+          3: undefined
+        }
+      })
+    )
+  })
+
+  it('handles foul territory errors', () => {
+    expect(getResult('FLE7')).toEqual(
+      getEventWithDefaults({
+        foulTerritoryError: resultGenerators.error(7)
       })
     )
   })

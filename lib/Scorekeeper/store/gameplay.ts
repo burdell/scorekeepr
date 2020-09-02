@@ -9,9 +9,13 @@ import {
   RetrosheetEventHandler
 } from '../../types'
 
+function getEmptyInning() {
+  return Array(9).fill(null)
+}
+
 const initialState: Gameplay = {
-  home: Array(9).fill(Array(9).fill(null)),
-  visiting: Array(9).fill(Array(9).fill(null))
+  home: Array(9).fill(getEmptyInning()),
+  visiting: Array(9).fill(getEmptyInning())
 }
 
 function advanceRunnerHelper({
@@ -106,7 +110,13 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
   builder.addCase(handleRetrosheetEvent, (state, action) => {
     const { team, inning, lineupSpot, retrosheetEvent } = action.payload
     const currentTeam = state[team]
-    const currentInning = currentTeam[inning]
+
+    let currentInning = currentTeam[inning]
+    if (!currentInning) {
+      currentTeam[inning] = getEmptyInning()
+      currentInning = currentTeam[inning]
+    }
+
     let currentLineupSpot = currentInning[lineupSpot]
 
     if (!currentLineupSpot) {

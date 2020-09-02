@@ -1,4 +1,4 @@
-import { ActionConfig, Action } from '../retrosheet.types'
+import { ActionConfig } from '../retrosheet.types'
 
 import {
   getAction,
@@ -11,14 +11,11 @@ import {
 import * as resultGenerators from '../generators/result'
 import { getBaserunnerMovements } from '../baseMovements'
 import { Bases } from '../../types'
-
-function getPutoutFromString(putoutString: string) {
-  return resultGenerators.putout(putoutString.split('').map(Number))
-}
+import { getPutoutPositions } from '../utilities'
 
 const caughtStealing: ActionConfig = {
   actionType: 'baserunner',
-  regexp: /^(PO)?CS([23H])\((\dE?\d)!?\)/,
+  regexp: /^(PO)?CS([23H])\((\dE?!?\d+)!?\)/,
   handler: (atBat, match) => {
     const [fullMatch, isPickoff, baseString, putout] = match
     const base = getBase(baseString)
@@ -27,7 +24,7 @@ const caughtStealing: ActionConfig = {
       bases: getBases({
         [getPreviousBase(base)]: {
           endBase: base,
-          result: getPutoutFromString(putout),
+          result: resultGenerators.caughtStealing(getPutoutPositions(putout)),
           isOut: true
         }
       })
@@ -77,14 +74,12 @@ const defensiveIndifference: ActionConfig = {
 const pickOff: ActionConfig = {
   actionType: 'baserunner',
   regexp: /^PO([123])\((E?\d+)\)/,
-  handler: (atBat, match) => {
+  handler: (atBat, match, baserunnerMovements) => {
     const [_, rawBase, putoutString] = match
     const base = getBase(rawBase)
 
     if (putoutString.indexOf('E') >= 0) {
-      const movement = getBaserunnerMovements(atBat.result).find(
-        (m) => m.startBase === base
-      )
+      const movement = baserunnerMovements.find((m) => m.startBase === base)
 
       return getAction({
         isOut: false,
@@ -98,11 +93,15 @@ const pickOff: ActionConfig = {
         })
       })
     } else {
-      const pickOff = getPutoutFromString(putoutString)
+      const pickOff = getPutoutPositions(putoutString)
       return getAction({
         isOut: true,
         bases: getBases({
-          [base]: { endBase: base, onBasePutout: pickOff, isOut: true }
+          [base]: {
+            endBase: base,
+            onBasePutout: resultGenerators.pickOff(pickOff),
+            isOut: true
+          }
         })
       })
     }
@@ -112,19 +111,30 @@ const pickOff: ActionConfig = {
 const allBaseMovement: ActionConfig = {
   actionType: 'baserunner',
   regexp: /^(WP|PB|BK)/,
-  handler: (atBat, match) => {
+  handler: (atBat, match, baseMovements) => {
     const [_, action] = match
 
-    function getMovement() {
-      if (action === 'PB') return resultGenerators.passedBall()
-      else if (action === 'WP') return resultGenerators.wildPitch()
-      else if (action === 'BK') return resultGenerators.balk()
+    function getResultFn() {
+      if (action === 'PB') return resultGenerators.passedBall
+      else if (action === 'WP') return resultGenerators.wildPitch
+      else if (action === 'BK') return resultGenerators.balk
 
-      return undefined
+      return () => undefined
     }
+    const resultFn = getResultFn()
+
+    const bases = baseMovements.reduce<Partial<Bases>>((acc, movement) => {
+      if (movement.startBase === 4) return acc
+
+      acc[movement.startBase] = {
+        endBase: movement.endBase,
+        result: resultFn()
+      }
+      return acc
+    }, {})
 
     return getAction({
-      allBasesAdvanceResult: getMovement()
+      bases: getBases(bases)
     })
   }
 }

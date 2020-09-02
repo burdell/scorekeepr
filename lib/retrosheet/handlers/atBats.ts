@@ -1,6 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
-import * as resultGenerators from '../generators/result'
 import * as actionGenerators from '../generators/action'
+import * as resultGenerators from '../generators/result'
 
 import { getAction, getBases } from '../utilities'
 
@@ -15,7 +15,7 @@ function getHitType(hit: string) {
 
 const hit: ActionConfig = {
   actionType: 'batter',
-  regexp: /^(HR)|^([SDT])\d+|^(DGR)/,
+  regexp: /^(HR)|^([SDT])\d*\/|^(DGR)/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup] = match
     const hitType = getHitType(hrGroup || hitGroup || grdGroup)
@@ -43,10 +43,13 @@ const walk: ActionConfig = {
 
 const error: ActionConfig = {
   actionType: 'batter',
-  regexp: /^C?\/?E(\d)/,
-  handler: (gameplayEvent, match) => {
+  regexp: /^\d?C?\/?E(\d)/,
+  handler: (gameplayEvent, match, baserunnerMovements) => {
     const [fullMatch, fielder] = match
-    return actionGenerators.error(Number(fielder))
+    const batterMovement = baserunnerMovements.find(
+      (m) => m.startBase === 'B'
+    ) || { endBase: 1 }
+    return actionGenerators.error(Number(fielder), batterMovement.endBase)
   }
 }
 
@@ -58,4 +61,22 @@ const fieldersChoice: ActionConfig = {
   }
 }
 
-export const atBatConfigs = [hit, hitBatter, walk, error, fieldersChoice]
+const foulTerritoryError: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^FLE(\d)/,
+  handler: (gameplayEvent, match) => {
+    const [fullMatch, position] = match
+    return getAction({
+      foulTerritoryError: resultGenerators.error(Number(position))
+    })
+  }
+}
+
+export const atBatConfigs = [
+  hit,
+  hitBatter,
+  walk,
+  error,
+  fieldersChoice,
+  foulTerritoryError
+]

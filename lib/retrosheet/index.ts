@@ -4,21 +4,25 @@ import { RetrosheetEvent, RetrosheetBaseResult, Bases } from '../types'
 
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
-import { getBaserunnerMovements } from './baseMovements'
+import { getBaserunnerMovements, BaserunnerMovements } from './baseMovements'
 import { getPutoutPositions } from './utilities'
 import * as resultGenerators from './generators/result'
 
-function handleAction(gameplayEvent: AtBat, action: Action | undefined) {
+function handleAction(
+  gameplayEvent: AtBat,
+  action: Action | undefined,
+  baserunnerMovements: BaserunnerMovements
+) {
   let event: RetrosheetEvent | undefined = undefined
 
   if (!action) return event
 
   switch (action.actionType) {
     case 'batter':
-      event = handleBatterAction(action, gameplayEvent)
+      event = handleBatterAction(action, gameplayEvent, baserunnerMovements)
       break
     case 'baserunner':
-      event = handleRunnerAction(action, gameplayEvent)
+      event = handleRunnerAction(action, gameplayEvent, baserunnerMovements)
       break
   }
 
@@ -50,14 +54,14 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     console.log(`Unhandled action: ${gameplayEvent.result}`)
     return
   }
-
-  const event = handleAction(gameplayEvent, action)
+  const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
+  const event = handleAction(gameplayEvent, action, baserunnerMovements)
   if (!event) {
     console.log(`Unhandled event: `, gameplayEvent.result)
     return
   }
 
-  getBaserunnerMovements(gameplayEvent.result).forEach(
+  baserunnerMovements.forEach(
     ({ startBase, endBase, isOut, result, errorPosition }) => {
       if (startBase === 4 || !event) return
 
@@ -65,7 +69,7 @@ export function parseAction(gameplayEvent: GameplayEvent) {
 
       const baseMovement: RetrosheetBaseResult = {
         endBase,
-        result: event.allBasesAdvanceResult || undefined,
+        result: undefined,
         ...(existingBase || {})
       }
 
@@ -96,7 +100,11 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   if (extraEvents) {
     const [fullMatch, eventMatch] = extraEvents
     const extraAction = getAction(eventMatch)
-    const extraEvent = handleAction(gameplayEvent, extraAction)
+    const extraEvent = handleAction(
+      gameplayEvent,
+      extraAction,
+      baserunnerMovements
+    )
 
     if (extraEvent && extraEvent.bases) {
       event.bases = {
@@ -108,12 +116,19 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     }
   }
 
-  delete event.allBasesAdvanceResult
   return event
 }
 
-function handleBatterAction(action: Action, gameplayEvent: AtBat) {
-  const parsedEvent = action.handler(gameplayEvent, action.match)
+function handleBatterAction(
+  action: Action,
+  gameplayEvent: AtBat,
+  baserunnerMovements: BaserunnerMovements
+) {
+  const parsedEvent = action.handler(
+    gameplayEvent,
+    action.match,
+    baserunnerMovements
+  )
   if (parsedEvent) {
     parsedEvent.pitches = getPitchData(gameplayEvent)
   }
@@ -121,8 +136,16 @@ function handleBatterAction(action: Action, gameplayEvent: AtBat) {
   return parsedEvent
 }
 
-function handleRunnerAction(action: Action, gameplayEvent: AtBat) {
-  const parsedEvent = action.handler(gameplayEvent, action.match)
+function handleRunnerAction(
+  action: Action,
+  gameplayEvent: AtBat,
+  baserunnerMovements: BaserunnerMovements
+) {
+  const parsedEvent = action.handler(
+    gameplayEvent,
+    action.match,
+    baserunnerMovements
+  )
 
   return parsedEvent
 }

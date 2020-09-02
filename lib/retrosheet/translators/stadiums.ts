@@ -22,13 +22,25 @@ const stadiums: TeamMap = {
     abbreviation: 'CLE08',
     fullName: 'Jacobs Field'
   },
+  DEN02: {
+    abbreviation: 'DEN02',
+    fullName: 'Coors Field'
+  },
+  MIA02: {
+    abbreviation: 'MIA02',
+    fullName: 'Marlins Park'
+  },
   PHI13: {
     abbreviation: 'PHI13',
     fullName: 'Citizens Bank Park'
   },
-  DEN02: {
-    abbreviation: 'DEN02',
-    fullName: 'Coors Field'
+  PHO01: {
+    abbreviation: 'PHO01',
+    fullName: 'Chase Field'
+  },
+  STL10: {
+    abbreviation: 'STL10',
+    fullName: 'Busch Stadium'
   }
 }
 
