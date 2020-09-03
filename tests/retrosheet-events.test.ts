@@ -7,13 +7,6 @@ import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled/mishandled:
 // 6(B)3(1)/LDP (mishandled)
-// 9.1-2 (unhandled) - flyball to RF, 1B -> 2B
-// 43.2-3 (unhandled)
-// 9/9LD (unhandled)
-// 8!/F (unhandled)
-// 5!/P5F (unhandled)
-// 5!3/G+
-// 9!/F
 
 function getEventWithDefaults(
   overrides: Partial<RetrosheetEvent> = {}
@@ -132,6 +125,21 @@ describe('Retrosheet parsing', () => {
         isOut: true
       })
     )
+
+    expect(getResult('9.1-2')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.flyOut(9),
+        bases: getBases({ 1: { endBase: 2, result: undefined } })
+      })
+    )
+
+    expect(getResult('8!/F')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.flyOut(8)
+      })
+    )
   })
 
   it('parses putouts', () => {
@@ -160,6 +168,13 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({
         isOut: true,
         result: resultGenerators.putout([1, 3])
+      })
+    )
+
+    expect(getResult('5!3/G+')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([5, 3])
       })
     )
 

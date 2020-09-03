@@ -85,7 +85,7 @@ function getOut(atBatResult: string) {
 
 const simpleOut: ActionConfig = {
   actionType: 'batter',
-  regexp: /^\d+\//,
+  regexp: /^\d+!*\d*\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
     const out = getOut(gameplayEvent.result)
     return getAction(out)
@@ -96,8 +96,16 @@ const simpleOut: ActionConfig = {
 // just numbers that don't invlude the hit type modifier
 const oldSimpleOut: ActionConfig = {
   actionType: 'batter',
-  regexp: /^\d+#?$/,
+  regexp: /^(\d+)(\..+)?#?$/,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
+    const [fullMatch, positions] = match
+    if (positions.length === 1 && Number(positions) > 6) {
+      return getAction({
+        result: resultGenerators.flyOut(Number(positions)),
+        isOut: true
+      })
+    }
+
     const putoutPositions = getPutoutPositions(gameplayEvent.result)
     return actionGenerators.putout(putoutPositions)
   }

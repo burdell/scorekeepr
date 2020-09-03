@@ -42,6 +42,10 @@ const stadiums: TeamMap = {
     abbreviation: 'CIN08',
     fullName: 'Riverfront Stadium'
   },
+  CIN09: {
+    abbreviation: 'CIN09',
+    fullName: 'Great American Ballpark'
+  },
   CLE07: {
     abbreviation: 'CLE07',
     fullName: 'Cleveland Stadium'
@@ -53,6 +57,10 @@ const stadiums: TeamMap = {
   DEN02: {
     abbreviation: 'DEN02',
     fullName: 'Coors Field'
+  },
+  KAN06: {
+    abbreviation: 'KAN06',
+    fullName: 'Kauffman Stadium'
   },
   LOS03: {
     abbreviation: 'LOS03',
@@ -66,6 +74,14 @@ const stadiums: TeamMap = {
     abbreviation: 'MIA02',
     fullName: 'Marlins Park'
   },
+  MIL06: {
+    abbreviation: 'MIL06',
+    fullName: 'Miller Park'
+  },
+  MIN04: {
+    abbreviation: 'MIN04',
+    fullName: 'Target Field'
+  },
   NYC16: {
     abbreviation: 'NY16',
     fullName: 'Yankee Stadium'
@@ -73,6 +89,10 @@ const stadiums: TeamMap = {
   NYC17: {
     abbreviation: 'NYC17',
     fullName: 'Shea Stadium'
+  },
+  NYC20: {
+    abbreviation: 'NYC20',
+    fullName: 'Citi Field'
   },
   OAK01: {
     abbreviation: 'OAK01',
@@ -82,9 +102,17 @@ const stadiums: TeamMap = {
     abbreviation: 'PHI13',
     fullName: 'Citizens Bank Park'
   },
+  PIT08: {
+    abbreviation: 'PIT08',
+    fullName: 'PNC Park'
+  },
   PHO01: {
     abbreviation: 'PHO01',
     fullName: 'Chase Field'
+  },
+  SAN02: {
+    abbreviation: 'SAN02',
+    fullName: 'Petco Park'
   },
   SEA03: {
     abbreviation: 'SEA03',
@@ -97,6 +125,14 @@ const stadiums: TeamMap = {
   STL10: {
     abbreviation: 'STL10',
     fullName: 'Busch Stadium'
+  },
+  TOR02: {
+    abbreviation: 'TOR02',
+    fullName: 'Rogers Center'
+  },
+  WAS11: {
+    abbreviation: 'WAS11',
+    fullName: 'Nationals Park'
   }
 }
 
