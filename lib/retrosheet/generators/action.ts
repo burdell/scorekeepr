@@ -42,6 +42,13 @@ export function fieldersChoice(base: Base = 1) {
   })
 }
 
+export function putout(putoutPositions: number[]) {
+  return getAction({
+    result: resultGenerators.putout(putoutPositions),
+    isOut: true
+  })
+}
+
 export function error(fielder: number, endBase: Base = 1) {
   return getAction({
     result: resultGenerators.error(fielder),

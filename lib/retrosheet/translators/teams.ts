@@ -18,12 +18,20 @@ const teams: TeamMap = {
     abbreviation: 'BOS',
     fullName: 'Boston Red Sox'
   },
+  BRO: {
+    abbreviation: 'BRO',
+    fullName: 'Brooklyn Dodgers'
+  },
+  CAL: {
+    abbreviation: 'CAL',
+    fullName: 'California Angels'
+  },
   CHA: {
-    abbreviation: 'CHA',
+    abbreviation: 'CHW',
     fullName: 'Chicago White Sox'
   },
   CHN: {
-    abbreviation: 'CHN',
+    abbreviation: 'CHC',
     fullName: 'Chicago Cubs'
   },
   CIN: {
@@ -41,6 +49,14 @@ const teams: TeamMap = {
   DET: {
     abbreviation: 'DET',
     fullName: 'Detroit Tigers'
+  },
+  FLO: {
+    abbreviation: 'FL',
+    fullName: 'Florida Marlins'
+  },
+  HOU: {
+    abbreviation: 'HOU',
+    fullName: 'Houston Astros'
   },
   KCA: {
     abbreviation: 'KC',
@@ -66,6 +82,18 @@ const teams: TeamMap = {
     abbreviation: 'MIN',
     fullName: 'Minnesota Twins'
   },
+  MON: {
+    abbreviation: 'MON',
+    fullName: 'Montreal Expos'
+  },
+  NYA: {
+    abbreviation: 'NYY',
+    fullName: 'New York Yankees'
+  },
+  OAK: {
+    abbreviation: 'OAK',
+    fullName: 'Oakland Athletics'
+  },
   PHI: {
     abbreviation: 'PHI',
     fullName: 'Philadelphia Phillies'
@@ -78,6 +106,10 @@ const teams: TeamMap = {
     abbreviation: 'STL',
     fullName: 'St. Louis Cardinals'
   },
+  SEA: {
+    abbreviation: 'SEA',
+    fullName: 'Seattle Mariners'
+  },
   SDN: {
     abbreviation: 'SD',
     fullName: 'San Diego Padres'
@@ -89,6 +121,10 @@ const teams: TeamMap = {
   TBA: {
     abbreviation: 'TB',
     fullName: 'Tampa Bay Rays'
+  },
+  TEX: {
+    abbreviation: 'TEX',
+    fullName: 'Texas Rangers'
   },
   TOR: {
     abbreviation: 'TOR',

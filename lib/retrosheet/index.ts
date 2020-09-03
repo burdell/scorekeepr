@@ -57,7 +57,6 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
   const event = handleAction(gameplayEvent, action, baserunnerMovements)
   if (!event) {
-    console.log(`Unhandled event: `, gameplayEvent.result)
     return
   }
 

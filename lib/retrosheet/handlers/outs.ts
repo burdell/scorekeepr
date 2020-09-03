@@ -1,6 +1,7 @@
 import { AtBat } from 'retrosheet-parse'
 
 import * as resultGenerators from '../generators/result'
+import * as actionGenerators from '../generators/action'
 
 import { RetrosheetEvent, AtBatResult } from '../../types'
 import { getAction, getPutoutPositions } from '../utilities'
@@ -88,6 +89,17 @@ const simpleOut: ActionConfig = {
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
     const out = getOut(gameplayEvent.result)
     return getAction(out)
+  }
+}
+
+// these are usually in older game files.
+// just numbers that don't invlude the hit type modifier
+const oldSimpleOut: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^\d+#?$/,
+  handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
+    const putoutPositions = getPutoutPositions(gameplayEvent.result)
+    return actionGenerators.putout(putoutPositions)
   }
 }
 
@@ -195,4 +207,4 @@ const multiActionOut: ActionConfig = {
   }
 }
 
-export const outConfigs = [strikeout, simpleOut, multiActionOut]
+export const outConfigs = [strikeout, simpleOut, oldSimpleOut, multiActionOut]

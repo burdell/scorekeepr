@@ -5,9 +5,15 @@ import { RetrosheetEvent } from '../lib/types'
 import * as resultGenerators from '../lib/retrosheet/generators/result'
 import { getBases } from '../lib/retrosheet/utilities'
 
-// Uhandled:
-//   PHI201906070 = PO3(E2/TH).3-H(UR);1-2
-//   PHI201906090 - CSH(2)
+// Uhandled/mishandled:
+// 6(B)3(1)/LDP (mishandled)
+// 9.1-2 (unhandled) - flyball to RF, 1B -> 2B
+// 43.2-3 (unhandled)
+// 9/9LD (unhandled)
+// 8!/F (unhandled)
+// 5!/P5F (unhandled)
+// 5!3/G+
+// 9!/F
 
 function getEventWithDefaults(
   overrides: Partial<RetrosheetEvent> = {}
@@ -133,6 +139,27 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({
         isOut: true,
         result: resultGenerators.putout([9, 3])
+      })
+    )
+
+    expect(getResult('53')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([5, 3])
+      })
+    )
+
+    expect(getResult('5')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([5])
+      })
+    )
+
+    expect(getResult('13#')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([1, 3])
       })
     )
 
@@ -349,6 +376,75 @@ describe('Retrosheet parsing', () => {
         bases: getBases({
           B: {
             endBase: 1,
+            isAtBatResult: true,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'S' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            endBase: 1,
+            isAtBatResult: true,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'S.1-3#' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            endBase: 1,
+            isAtBatResult: true,
+            result: undefined
+          },
+          1: {
+            endBase: 3,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'D' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(2),
+        bases: getBases({
+          B: {
+            endBase: 2,
+            isAtBatResult: true,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'T' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(3),
+        bases: getBases({
+          B: {
+            endBase: 3,
+            isAtBatResult: true,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'HR' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(4),
+        bases: getBases({
+          B: {
+            endBase: 4,
             isAtBatResult: true,
             result: undefined
           }

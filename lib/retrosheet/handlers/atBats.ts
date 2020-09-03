@@ -1,4 +1,4 @@
-import { ActionConfig } from '../retrosheet.types'
+import { ActionConfig, Action } from '../retrosheet.types'
 import * as actionGenerators from '../generators/action'
 import * as resultGenerators from '../generators/result'
 
@@ -21,6 +21,19 @@ const hit: ActionConfig = {
     const hitType = getHitType(
       hrGroup || hitGroup || grdGroup || yetAnotherHitGroup
     )
+    return actionGenerators.hit(hitType)
+  }
+}
+
+// some old retrosheet files have # at the end of lines. idk why
+// they also often times don't specify where the hit was
+// the regex above is getting nasty, so just splitting this into another one since this one is fairly simple
+const oldHits: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^([SDT])\d*(\..+)?#*$/,
+  handler: (gameplayEvent, match) => {
+    const [fullMatch, hitGroup] = match
+    const hitType = getHitType(hitGroup)
     return actionGenerators.hit(hitType)
   }
 }
@@ -74,11 +87,22 @@ const foulTerritoryError: ActionConfig = {
   }
 }
 
+// you see this in very old games
+const unknown: ActionConfig = {
+  actionType: 'batter',
+  regexp: /^99/,
+  handler: () => {
+    return getAction()
+  }
+}
+
 export const atBatConfigs = [
   hit,
+  oldHits,
   hitBatter,
   walk,
   error,
   fieldersChoice,
-  foulTerritoryError
+  foulTerritoryError,
+  unknown
 ]
