@@ -15,7 +15,7 @@ import { getPutoutPositions } from '../utilities'
 
 const caughtStealing: ActionConfig = {
   actionType: 'baserunner',
-  regexp: /^(PO)?CS([23H])\((\dE?!?\d+)!?\)/,
+  regexp: /^(PO)?CS([23H])\((\dE?!?\d*)!?\)/,
   handler: (atBat, match) => {
     const [fullMatch, isPickoff, baseString, putout] = match
     const base = getBase(baseString)
@@ -73,7 +73,7 @@ const defensiveIndifference: ActionConfig = {
 
 const pickOff: ActionConfig = {
   actionType: 'baserunner',
-  regexp: /^PO([123])\((E?\d+)\)/,
+  regexp: /^PO([123])\((E?\d+)(\/TH)?\)/,
   handler: (atBat, match, baserunnerMovements) => {
     const [_, rawBase, putoutString] = match
     const base = getBase(rawBase)

@@ -62,7 +62,7 @@ function generateGameplay({
 }
 
 function alertSuccess(game: Game, scorekeeper: Scorekeeper) {
-  console.log(`💥 Created ${scorekeeper.gameInfo.id}`)
+  console.log(`⚾  Created ${scorekeeper.gameInfo.id}`)
   if (!scorekeeper.gameInfo.homeTeam) {
     console.warn(`  ⚠️ Home team not translated: ${game.info.hometeam}`)
   }
@@ -108,6 +108,10 @@ export async function getRetrosheetScorekeepers(
     scorekeepers.push(scorekeeper)
   })
 
-  console.log(`💃 ${scorekeepers.length} games generated`)
+  console.log(
+    `💃 ${scorekeepers.length} games generated from ${filename
+      .split('/')
+      .pop()}`
+  )
   return scorekeepers
 }

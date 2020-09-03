@@ -86,6 +86,10 @@ const teams: TeamMap = {
     abbreviation: 'SF',
     fullName: 'San Francisco Giants'
   },
+  TBA: {
+    abbreviation: 'TB',
+    fullName: 'Tampa Bay Rays'
+  },
   TOR: {
     abbreviation: 'TOR',
     fullName: 'Toronto Blue Jays'

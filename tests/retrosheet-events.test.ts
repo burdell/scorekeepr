@@ -6,7 +6,6 @@ import * as resultGenerators from '../lib/retrosheet/generators/result'
 import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled:
-//   PHI201904270 - S6/G.3-H;1-3 S5
 //   PHI201906070 = PO3(E2/TH).3-H(UR);1-2
 //   PHI201906090 - CSH(2)
 
@@ -341,6 +340,19 @@ describe('Retrosheet parsing', () => {
           2: undefined,
           3: undefined
         }
+      })
+    )
+
+    expect(parseAction(getAtBat({ result: 'S5' }))).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            endBase: 1,
+            isAtBatResult: true,
+            result: undefined
+          }
+        })
       })
     )
 
@@ -749,6 +761,24 @@ describe('Retrosheet parsing', () => {
         }
       })
     )
+
+    // PO3(E2/TH).3-H(UR);1-2
+    expect(getResult('PO3(E2/TH).3-H(UR);1-2')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        bases: getBases({
+          1: {
+            endBase: 2,
+            result: undefined
+          },
+          3: {
+            endBase: 4,
+            result: resultGenerators.error(2)
+          }
+        })
+      })
+    )
   })
 
   it('parses caught stealing', () => {
@@ -838,6 +868,20 @@ describe('Retrosheet parsing', () => {
             isOut: true
           }
         }
+      })
+    )
+
+    expect(getResult('CSH(2)')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: undefined,
+        bases: getBases({
+          3: {
+            result: resultGenerators.caughtStealing([2]),
+            isOut: true,
+            endBase: 4
+          }
+        })
       })
     )
   })
