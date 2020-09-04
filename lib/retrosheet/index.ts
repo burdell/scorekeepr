@@ -1,6 +1,6 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { RetrosheetEvent, RetrosheetBaseResult, Bases } from '../types'
+import { GameEvent, RetrosheetBaseResult, Bases } from '../types'
 
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
@@ -13,7 +13,7 @@ function handleAction(
   action: Action | undefined,
   baserunnerMovements: BaserunnerMovements
 ) {
-  let event: RetrosheetEvent | undefined = undefined
+  let event: GameEvent | undefined = undefined
 
   if (!action) return event
 
@@ -63,7 +63,6 @@ export function parseAction(gameplayEvent: GameplayEvent) {
   baserunnerMovements.forEach(
     ({ startBase, endBase, isOut, result, errorPosition }) => {
       if (startBase === 4 || !event) return
-
       const existingBase = event.bases[startBase]
 
       const baseMovement: RetrosheetBaseResult = {
@@ -107,9 +106,11 @@ export function parseAction(gameplayEvent: GameplayEvent) {
 
     if (extraEvent && extraEvent.bases) {
       event.bases = {
-        B: extraEvent.bases.B || event.bases.B,
+        B: extraEvent.bases.B
+          ? { ...extraEvent.bases.B, isAtBatResult: true }
+          : event.bases.B,
         1: extraEvent.bases[1] || event.bases[1],
-        2: extraEvent.bases[2] || event.bases[3],
+        2: extraEvent.bases[2] || event.bases[2],
         3: extraEvent.bases[3] || event.bases[3]
       }
     }

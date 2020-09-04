@@ -1,16 +1,14 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
 import { parseAction as realParseAction } from '../lib/retrosheet'
-import { RetrosheetEvent } from '../lib/types'
+import { GameEvent } from '../lib/types'
 import * as resultGenerators from '../lib/retrosheet/generators/result'
 import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled/mishandled:
 // 6(B)3(1)/LDP (mishandled)
 
-function getEventWithDefaults(
-  overrides: Partial<RetrosheetEvent> = {}
-): RetrosheetEvent {
+function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
   return {
     result: undefined,
     isOut: false,
@@ -88,6 +86,24 @@ describe('Retrosheet parsing', () => {
           2: undefined,
           3: undefined
         }
+      })
+    )
+
+    expect(getResult('K+WP.3-H(TUR)(NR);B-1')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('K'),
+        isOut: true,
+        bases: getBases({
+          B: {
+            endBase: 1,
+            isAtBatResult: true,
+            result: resultGenerators.wildPitch()
+          },
+          3: {
+            endBase: 4,
+            result: resultGenerators.wildPitch()
+          }
+        })
       })
     )
   })

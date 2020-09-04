@@ -34,13 +34,13 @@ function generateGameplay({
   }
 
   function getActionInfo(gameplayEvent: GameplayEvent) {
-    const retrosheetEvent = parseAction(gameplayEvent)
-    if (!retrosheetEvent || gameplayEvent.type !== 'at-bat') return null
+    const gameEvent = parseAction(gameplayEvent)
+    if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
 
     const lineupSpot = getLineupSpot(gameplayEvent)
     if (lineupSpot < 0) return null
 
-    return { retrosheetEvent, lineupSpot }
+    return { gameEvent, lineupSpot }
   }
 
   gameplayEvents.forEach((events, inningNumber) => {
@@ -51,8 +51,8 @@ function generateGameplay({
         return
       }
 
-      scorekeeper.handleRetrosheetEvent({
-        retrosheetEvent: action.retrosheetEvent,
+      scorekeeper.handleGameEvent({
+        event: action.gameEvent,
         inning: inningNumber,
         lineupSpot: action.lineupSpot,
         team

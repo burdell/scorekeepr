@@ -3,7 +3,7 @@ import { AtBat } from 'retrosheet-parse'
 import * as resultGenerators from '../generators/result'
 import * as actionGenerators from '../generators/action'
 
-import { RetrosheetEvent, AtBatResult } from '../../types'
+import { GameEvent, AtBatResult } from '../../types'
 import { getAction, getPutoutPositions } from '../utilities'
 import { ActionConfig } from '../retrosheet.types'
 
@@ -67,7 +67,7 @@ function getOut(atBatResult: string) {
   const batterAction = getBatterAction(atBatResult)
   const defensivePositions = getPutoutPositions(batterAction)
 
-  const outData: Partial<RetrosheetEvent> = {
+  const outData: Partial<GameEvent> = {
     isSacrifice: isSacrifice(atBatResult),
     isOut: true
   }

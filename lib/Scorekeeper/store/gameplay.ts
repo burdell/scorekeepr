@@ -6,7 +6,7 @@ import {
   Base,
   BaseResult,
   BaseResultResult,
-  RetrosheetEventHandler
+  GameEventHandler
 } from '../../types'
 
 function getEmptyInning() {
@@ -103,12 +103,10 @@ export function getAtBat(overrides: Partial<AtBat> = {}): AtBat {
   }
 }
 
-export const handleRetrosheetEvent = createAction<RetrosheetEventHandler>(
-  'handleRetrosheetEvent'
-)
+export const handleGameEvent = createAction<GameEventHandler>('handleGameEvent')
 export const gameplayReducer = createReducer(initialState, (builder) => {
-  builder.addCase(handleRetrosheetEvent, (state, action) => {
-    const { team, inning, lineupSpot, retrosheetEvent } = action.payload
+  builder.addCase(handleGameEvent, (state, action) => {
+    const { team, inning, lineupSpot, event } = action.payload
     const currentTeam = state[team]
 
     let currentInning = currentTeam[inning]
@@ -123,12 +121,12 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentLineupSpot = getAtBat()
     }
 
-    if (retrosheetEvent.result) {
-      currentLineupSpot.result = retrosheetEvent.result
-      currentLineupSpot.isOut = retrosheetEvent.isOut
+    if (event.result) {
+      currentLineupSpot.result = event.result
+      currentLineupSpot.isOut = event.isOut
     }
 
-    const pitchInfo = retrosheetEvent.pitches
+    const pitchInfo = event.pitches
     if (pitchInfo) {
       currentLineupSpot.strikes = pitchInfo.strikes
       currentLineupSpot.balls = pitchInfo.balls
@@ -136,7 +134,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     }
 
     const currentBaserunners = getCurrentBaserunners(currentInning)
-    const baseMovements = retrosheetEvent.bases
+    const baseMovements = event.bases
 
     ;([1, 2, 3] as Base[]).forEach((base) => {
       if (base === 4) return
@@ -183,10 +181,11 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     const batterBase = baseMovements['B']
     if (batterBase) {
-      const { endBase, isAtBatResult } = batterBase
+      const { endBase, isAtBatResult, result } = batterBase
       let bases = advanceRunnerHelper({
         baseAdvancedTo: endBase,
-        isAtBatResult
+        isAtBatResult,
+        result
       })
 
       if (batterBase.additionalBases) {

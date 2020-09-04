@@ -1,14 +1,14 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
-import { handleRetrosheetEvent } from './store/gameplay'
+import { handleGameEvent } from './store/gameplay'
 
 import {
   Game,
   LineupEntry,
   InitialGame,
-  RetrosheetEvent,
-  RetrosheetEventHandler
+  GameEvent,
+  GameEventHandler
 } from '../types'
 
 export class Scorekeeper {
@@ -62,15 +62,10 @@ export class Scorekeeper {
     this.store.dispatch(setGameInfo(gameInfo))
   }
 
-  handleRetrosheetEvent({
-    retrosheetEvent,
-    inning,
-    lineupSpot,
-    team
-  }: RetrosheetEventHandler) {
+  handleGameEvent({ event, inning, lineupSpot, team }: GameEventHandler) {
     this.store.dispatch(
-      handleRetrosheetEvent({
-        retrosheetEvent,
+      handleGameEvent({
+        event,
         inning,
         lineupSpot,
         team

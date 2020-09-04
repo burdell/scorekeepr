@@ -1,5 +1,5 @@
 import {
-  RetrosheetEvent,
+  GameEvent,
   Base,
   BaseResult,
   BaseResultResult,
@@ -7,9 +7,7 @@ import {
   AdvanceableBase
 } from '../types'
 
-export function getAction(
-  overrides: Partial<RetrosheetEvent> = {}
-): RetrosheetEvent {
+export function getAction(overrides: Partial<GameEvent> = {}): GameEvent {
   return {
     result: undefined,
     isOut: false,

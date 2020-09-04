@@ -20,7 +20,7 @@ export type Bases = {
   3: RetrosheetBaseResult | undefined
 }
 
-export type RetrosheetEvent = {
+export type GameEvent = {
   pitches: PitchData | undefined
   isOut: boolean
   result: AtBatResult | undefined
@@ -194,8 +194,8 @@ export type RunnerMovement = {
   isOut?: boolean
 }
 
-export type RetrosheetEventHandler = {
-  retrosheetEvent: RetrosheetEvent
+export type GameEventHandler = {
+  event: GameEvent
   inning: number
   lineupSpot: number
   team: 'home' | 'visiting'
