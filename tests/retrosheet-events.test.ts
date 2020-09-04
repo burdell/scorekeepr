@@ -54,7 +54,7 @@ function requireExistence<T>(thing: T) {
 }
 
 describe('Retrosheet parsing', () => {
-  it('parses strikeouts', () => {
+  it('handles strikeouts', () => {
     const strikeout = parseAction(
       getAtBat({ result: 'K', pitchSequence: 'BBFCBFB', count: '32' })
     )
@@ -92,7 +92,7 @@ describe('Retrosheet parsing', () => {
     expect(getResult('K+WP.3-H(TUR)(NR);B-1')).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('K'),
-        isOut: true,
+        isOut: false,
         bases: getBases({
           B: {
             endBase: 1,
@@ -108,7 +108,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses flyouts and lineouts', () => {
+  it('handles flyouts and lineouts', () => {
     // 01,CX,7/F
     const outfieldFlyout = parseAction(
       getAtBat({ result: '7/F', pitchSequence: 'CX', count: '01' })
@@ -158,7 +158,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses putouts', () => {
+  it('handles putouts', () => {
     expect(getResult('93/L')).toEqual(
       getEventWithDefaults({
         isOut: true,
@@ -218,7 +218,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses double/triple plays and fielders choices', () => {
+  it('handles double/triple plays and fielders choices', () => {
     expect(getResult('64(1)3/GDP')).toEqual(
       getEventWithDefaults({
         isOut: true,
@@ -383,7 +383,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses hits', () => {
+  it('handles hits', () => {
     const single = parseAction(getAtBat({ result: 'S8/L' }))
     expect(single).toEqual(
       getEventWithDefaults({
@@ -647,7 +647,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses hit batters', () => {
+  it('handles hit batters', () => {
     const hbp = parseAction(getAtBat({ result: 'HP' }))
 
     expect(hbp).toEqual(
@@ -667,7 +667,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses walks', () => {
+  it('handles walks', () => {
     expect(parseAction(getAtBat({ result: 'W' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('BB'),
@@ -758,7 +758,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses errors', () => {
+  it('handles errors', () => {
     expect(getResult('E6/G6+')).toEqual(
       getEventWithDefaults({
         result: resultGenerators.error(6),
@@ -839,7 +839,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses pickoffs', () => {
+  it('handles pickoffs', () => {
     expect(getResult('PO2(E1).2-3')).toEqual(
       getEventWithDefaults({
         isOut: false,
@@ -908,7 +908,7 @@ describe('Retrosheet parsing', () => {
     )
   })
 
-  it('parses caught stealing', () => {
+  it('handles caught stealing', () => {
     expect(getResult('CS2(26!)')).toEqual(
       getEventWithDefaults({
         isOut: true,

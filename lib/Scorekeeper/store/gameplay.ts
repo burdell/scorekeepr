@@ -115,10 +115,21 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentInning = currentTeam[inning]
     }
 
+    let lineupIndex = lineupSpot
     let currentLineupSpot = currentInning[lineupSpot]
 
     if (!currentLineupSpot) {
       currentLineupSpot = getAtBat()
+    } else if (currentLineupSpot.result && event.result) {
+      const timesThroughLineup =
+        Math.floor(lineupIndex / currentInning.length) + 1
+      const expectedNumberOfAtBats = timesThroughLineup * 9
+
+      lineupIndex = lineupIndex + expectedNumberOfAtBats
+      currentLineupSpot = getAtBat()
+      if (currentInning.length <= expectedNumberOfAtBats) {
+        currentInning = currentInning.concat(getEmptyInning())
+      }
     }
 
     if (event.result) {
@@ -207,6 +218,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentLineupSpot.bases = bases
     }
 
-    currentInning[lineupSpot] = currentLineupSpot
+    currentInning[lineupIndex] = currentLineupSpot
+    state[team][inning] = currentInning
   })
 })

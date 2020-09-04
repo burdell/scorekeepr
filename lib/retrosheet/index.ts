@@ -105,13 +105,18 @@ export function parseAction(gameplayEvent: GameplayEvent) {
     )
 
     if (extraEvent && extraEvent.bases) {
+      const batterExtraBases = extraEvent.bases.B
       event.bases = {
-        B: extraEvent.bases.B
-          ? { ...extraEvent.bases.B, isAtBatResult: true }
+        B: batterExtraBases
+          ? { ...batterExtraBases, isAtBatResult: true }
           : event.bases.B,
         1: extraEvent.bases[1] || event.bases[1],
         2: extraEvent.bases[2] || event.bases[2],
         3: extraEvent.bases[3] || event.bases[3]
+      }
+
+      if (batterExtraBases) {
+        event.isOut = false
       }
     }
   }
