@@ -20,10 +20,11 @@ import {
 } from '../../types'
 
 export function pitcherResult(result: PitcherResultString): PitcherResult {
+  const display = result === 'K-looking' ? 'K' : result
   return {
     type: 'pitcher-result',
     result,
-    display: result
+    display
   }
 }
 

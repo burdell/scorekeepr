@@ -71,8 +71,37 @@ describe('Retrosheet parsing', () => {
       })
     )
 
-    const strikeoutWithStolenBase = parseAction(getAtBat({ result: 'K+SB2' }))
+    const lookingStrikeout = parseAction(
+      getAtBat({ result: 'K', pitchSequence: 'CBFBC', count: '22' })
+    )
+    expect(lookingStrikeout).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: {
+          pitchCount: 5,
+          balls: 2,
+          strikes: 2
+        },
+        result: resultGenerators.pitcherResult('K-looking')
+      })
+    )
 
+    const lookingStrikeout2 = parseAction(
+      getAtBat({ result: 'K', pitchSequence: 'B*BBCCC', count: '32' })
+    )
+    expect(lookingStrikeout2).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        pitches: {
+          pitchCount: 6,
+          balls: 3,
+          strikes: 2
+        },
+        result: resultGenerators.pitcherResult('K-looking')
+      })
+    )
+
+    const strikeoutWithStolenBase = parseAction(getAtBat({ result: 'K+SB2' }))
     expect(strikeoutWithStolenBase).toEqual(
       getEventWithDefaults({
         isOut: true,

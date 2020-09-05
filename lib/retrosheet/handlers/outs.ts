@@ -32,10 +32,13 @@ function getBatterAction(atBatResult: string) {
 const strikeout: ActionConfig = {
   actionType: 'batter',
   regexp: /^K/,
-  handler: () => {
+  handler: (gameplayEvent) => {
+    const isLooking = gameplayEvent.pitchSequence.endsWith('C')
+    const resultType = isLooking ? 'K-looking' : 'K'
+
     return getAction({
       isOut: true,
-      result: resultGenerators.pitcherResult('K')
+      result: resultGenerators.pitcherResult(resultType)
     })
   }
 }
