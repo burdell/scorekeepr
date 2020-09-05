@@ -22,7 +22,8 @@ async function generateGame(filePath: string) {
       id: scorekeeper.gameInfo.id,
       lineups: scorekeeper.lineups,
       gameplay: scorekeeper.gameplay,
-      gameInfo: scorekeeper.gameInfo
+      gameInfo: scorekeeper.gameInfo,
+      stats: scorekeeper.stats
     }
     writeToFile(game, outputFolder, `${game.gameInfo.id}.json`)
   })

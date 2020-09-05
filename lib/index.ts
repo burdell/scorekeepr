@@ -84,8 +84,8 @@ export async function getRetrosheetScorekeepers(
     const { info, lineup, play } = game
     const scorekeeper = new Scorekeeper({
       date: info.date,
-      homeTeam: getTeam(info.hometeam).fullName,
-      visitingTeam: getTeam(info.visteam).fullName,
+      homeTeam: getTeam(info.hometeam),
+      visitingTeam: getTeam(info.visteam),
       location: getStadium(info.site).fullName,
       startTime: info.starttime,
       id: game.id

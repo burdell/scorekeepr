@@ -3,8 +3,14 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 
 function getGame(overrides: Partial<Game> = {}): Game {
   return {
-    homeTeam: '',
-    visitingTeam: '',
+    homeTeam: {
+      fullName: '',
+      abbreviation: ''
+    },
+    visitingTeam: {
+      fullName: '',
+      abbreviation: ''
+    },
     date: '',
     location: '',
     startTime: '',

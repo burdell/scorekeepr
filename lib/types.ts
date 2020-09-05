@@ -4,7 +4,7 @@ export type PitchData = {
   pitchCount: number
 }
 
-export type RetrosheetBaseResult = {
+export type EventBaseResult = {
   endBase: Base
   result?: BaseResultResult
   isOut?: boolean
@@ -14,10 +14,10 @@ export type RetrosheetBaseResult = {
 }
 
 export type Bases = {
-  B: RetrosheetBaseResult | undefined
-  1: RetrosheetBaseResult | undefined
-  2: RetrosheetBaseResult | undefined
-  3: RetrosheetBaseResult | undefined
+  B: EventBaseResult | undefined
+  1: EventBaseResult | undefined
+  2: EventBaseResult | undefined
+  3: EventBaseResult | undefined
 }
 
 export type GameEvent = {
@@ -29,7 +29,10 @@ export type GameEvent = {
   foulTerritoryError?: DefensiveError
 }
 
-type Team = string
+type Team = {
+  fullName: string
+  abbreviation: string
+}
 export type Player = {
   name: string
   number: number | undefined
@@ -161,6 +164,13 @@ export type CurrentAtBat = {
   inning: number
 }
 
+export type Stats = {
+  scoring: number[]
+  runs: number
+  hits: number
+  errors: number
+}
+
 export type Gameplay = {
   home: AtBat[][]
   visiting: AtBat[][]
@@ -185,6 +195,10 @@ export type GameOutput = {
   lineups: { home: Lineup; visiting: Lineup }
   gameplay: Gameplay
   gameInfo: Game
+  stats: {
+    home: Stats
+    visiting: Stats
+  }
 }
 
 export type RunnerMovement = {

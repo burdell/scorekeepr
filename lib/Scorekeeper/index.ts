@@ -2,6 +2,7 @@ import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
 import { handleGameEvent } from './store/gameplay'
+import { calculateStats } from './stats'
 
 import {
   Game,
@@ -44,6 +45,10 @@ export class Scorekeeper {
 
   get gameplay() {
     return this.store.getState().gameplay
+  }
+
+  get stats() {
+    return calculateStats(this.gameplay)
   }
 
   setLineups = (lineups: LineupState) => {
