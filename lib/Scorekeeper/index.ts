@@ -20,6 +20,8 @@ export class Scorekeeper {
     this.store = getStore()
     this.updateGameInfo(gameInfo)
     this.setLineups({
+      homePitchers: [],
+      visitingPitchers: [],
       home: homeLineup.map((l) => [
         {
           ...l,
@@ -48,7 +50,7 @@ export class Scorekeeper {
   }
 
   get stats() {
-    return calculateStats(this.gameplay)
+    return calculateStats(this.gameplay, this.lineups)
   }
 
   setLineups = (lineups: LineupState) => {

@@ -14,6 +14,10 @@ const teams: TeamMap = {
     abbreviation: 'ARI',
     fullName: 'Arizona Diamondbacks'
   },
+  BAL: {
+    abbreviation: 'BAL',
+    fullName: 'Baltimore Orioles'
+  },
   BOS: {
     abbreviation: 'BOS',
     fullName: 'Boston Red Sox'

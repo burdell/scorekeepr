@@ -1,3 +1,5 @@
+import { Player } from 'retrosheet-parse'
+
 export type PitchData = {
   balls: number
   strikes: number
@@ -33,17 +35,24 @@ type Team = {
   fullName: string
   abbreviation: string
 }
-export type Player = {
+export type LineupPlayer = {
   name: string
-  number: number | undefined
+  number?: number | undefined
 }
 
 type FieldPosition = number | 'DH'
 
 export type LineupEntry = {
-  player: Player
+  player: LineupPlayer
   position: FieldPosition
   inning: number
+}
+
+export type PitcherEntry = {
+  player: Player
+  stats: {
+    er: number
+  }
 }
 
 export type Lineup = LineupEntry[][]
@@ -164,6 +173,10 @@ export type CurrentAtBat = {
   inning: number
 }
 
+export type PitchingStats = {
+  er: number
+}
+
 export type Stats = {
   scoring: number[]
   runs: number
@@ -193,6 +206,7 @@ export type Game = {
 export type GameOutput = {
   id: string
   lineups: { home: Lineup; visiting: Lineup }
+  pitchers: { home: PitcherEntry[]; visiting: PitcherEntry[] }
   gameplay: Gameplay
   gameInfo: Game
   stats: {

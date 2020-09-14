@@ -3,8 +3,12 @@
 import fs from 'fs'
 import path from 'path'
 
-export const sourceFolder = path.join(__dirname, './retrosheet_files')
-export const outputFolder = path.join(__dirname, 'output')
+export const sourceFolder = path.join(__dirname, '../retrosheet_files')
+export const outputFolder = path.join(__dirname, '../output')
+export const buildDataFolder = path.join(__dirname, '../config')
+export const gameFolder = `${outputFolder}/games`
+export const seasonFolder = `${outputFolder}/series`
+export const listFolder = `${outputFolder}/lists`
 
 /**
  * Promise all
@@ -31,8 +35,9 @@ function promiseAllP(items, block) {
  * @author Loreto Parisi (loretoparisi at gmail dot com)
  * @see http://stackoverflow.com/questions/10049557/reading-all-files-in-a-directory-store-them-in-objects-and-send-the-object
  */
-export function readFiles() {
-  const dirname = outputFolder
+export function readFiles(
+  dirname: string
+): Promise<{ filename: string; contents: string }[]> {
   return new Promise((resolve, reject) => {
     fs.readdir(dirname, function (err, filenames) {
       if (err) return reject(err)

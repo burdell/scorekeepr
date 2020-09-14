@@ -30,6 +30,10 @@ const stadiums: TeamMap = {
     abbreviation: 'ARL02',
     fullName: 'The Ballpark in Arlington'
   },
+  BAL12: {
+    abbreviation: 'BAL12',
+    fullName: 'Oriole Park at Camden Yards'
+  },
   CHI11: {
     abbreviation: 'CHI11',
     fullName: 'Wrigley Field'

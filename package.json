@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "generate": "ts-node ./dev/generate",
-    "server": "ts-node ./dev/server.ts",
+    "generate": "ts-node ./generate",
+    "server": "ts-node ./generate/server.ts",
     "dev": "npm run generate && npm run server"
   },
   "keywords": [],

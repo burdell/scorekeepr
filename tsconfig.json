@@ -12,5 +12,5 @@
     "lib": ["es2020.string", "dom"]
   },
   "exclude": ["node_modules"],
-  "include": ["lib", "dev*"]
+  "include": ["lib", "dev*", "generate"]
 }

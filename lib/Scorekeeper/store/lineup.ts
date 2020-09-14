@@ -1,7 +1,12 @@
-import { Lineup, LineupEntry } from '../../types'
+import { Lineup, LineupEntry, PitcherEntry } from '../../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-export type LineupState = { home: Lineup; visiting: Lineup }
+export type LineupState = {
+  home: Lineup
+  visiting: Lineup
+  homePitchers: PitcherEntry[]
+  visitingPitchers: PitcherEntry[]
+}
 type LineupSubstition = { lineupSpot: number; lineupEntry: LineupEntry }
 
 function sub(lineup: Lineup, sub: LineupSubstition) {
@@ -16,11 +21,19 @@ export const setLineups = createAction<LineupState>('setLineup')
 export const subHome = createAction<LineupSubstition>('subHome')
 export const subVisiting = createAction<LineupSubstition>('subVisiting')
 
-const initialState: LineupState = { home: [], visiting: [] }
+const initialState: LineupState = {
+  home: [],
+  visiting: [],
+  homePitchers: [],
+  visitingPitchers: []
+}
 export const lineupReducer = createReducer(initialState, (builder) => {
   builder.addCase(setLineups, (state, action) => {
     state.home = action.payload.home
     state.visiting = action.payload.visiting
+
+    state.homePitchers = action.payload.homePitchers
+    state.visitingPitchers = action.payload.visitingPitchers
   })
   builder.addCase(subHome, (state, action) => {
     sub(state.home, action.payload)

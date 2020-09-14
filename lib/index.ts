@@ -1,8 +1,10 @@
-import { parseGames, GameplayEvent, Lineup, Game } from 'retrosheet-parse'
+import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
 import { parseAction } from './retrosheet'
 import { getTeam, getStadium, getLineup } from './retrosheet/translators'
 import { Scorekeeper } from './Scorekeeper'
+import { getLineupMap, getLineupSpot, getPitchers } from './utils/lineup'
+import { alertSuccess, alertGameGenerated } from './utils/alerts'
 
 function generateGameplay({
   game,
@@ -13,31 +15,15 @@ function generateGameplay({
   scorekeeper: Scorekeeper
   team: 'home' | 'visiting'
 }) {
-  const lineup = game.lineup[team]
   const gameplayEvents = game.play[team]
-
-  const lineupMap = lineup.reduce<{ [player: string]: number }>(
-    (acc, lineupSpot, index) => {
-      lineupSpot.forEach((player) => {
-        if (!acc[player.name]) acc[player.id] = index
-      })
-      return acc
-    },
-    {}
-  )
-
-  function getLineupSpot(event: GameplayEvent) {
-    if (event.type !== 'at-bat') return -1
-
-    const lineupSpot = lineupMap[event.playerId]
-    return lineupSpot >= 0 ? lineupSpot : -1
-  }
+  const lineup = game.lineup[team]
+  const lineupMap = getLineupMap(lineup)
 
   function getActionInfo(gameplayEvent: GameplayEvent) {
     const gameEvent = parseAction(gameplayEvent)
     if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
 
-    const lineupSpot = getLineupSpot(gameplayEvent)
+    const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)
     if (lineupSpot < 0) return null
 
     return { gameEvent, lineupSpot }
@@ -61,19 +47,6 @@ function generateGameplay({
   })
 }
 
-function alertSuccess(game: Game, scorekeeper: Scorekeeper) {
-  console.log(`⚾  Created ${scorekeeper.gameInfo.id}`)
-  if (!scorekeeper.gameInfo.homeTeam) {
-    console.warn(`  ⚠️ Home team not translated: ${game.info.hometeam}`)
-  }
-  if (!scorekeeper.gameInfo.visitingTeam) {
-    console.warn(`  ⚠️ Visiting team not translated: ${game.info.visteam}`)
-  }
-  if (!scorekeeper.gameInfo.location) {
-    console.warn(`  ⚠️ Stadium not translated: ${game.info.site}`)
-  }
-}
-
 export async function getRetrosheetScorekeepers(
   filename: string
 ): Promise<Scorekeeper[]> {
@@ -81,7 +54,8 @@ export async function getRetrosheetScorekeepers(
   const scorekeepers: Scorekeeper[] = []
 
   gameList.forEach((game) => {
-    const { info, lineup, play } = game
+    const { info, lineup, play, data } = game
+
     const scorekeeper = new Scorekeeper({
       date: info.date,
       homeTeam: getTeam(info.hometeam),
@@ -93,7 +67,9 @@ export async function getRetrosheetScorekeepers(
 
     scorekeeper.setLineups({
       home: getLineup(lineup.home),
-      visiting: getLineup(lineup.visiting)
+      visiting: getLineup(lineup.visiting),
+      homePitchers: getPitchers(lineup.home, game.data.er),
+      visitingPitchers: getPitchers(lineup.visiting, game.data.er)
     })
 
     try {
@@ -108,10 +84,6 @@ export async function getRetrosheetScorekeepers(
     scorekeepers.push(scorekeeper)
   })
 
-  console.log(
-    `💃 ${scorekeepers.length} games generated from ${filename
-      .split('/')
-      .pop()}`
-  )
+  alertGameGenerated(scorekeepers, filename)
   return scorekeepers
 }
