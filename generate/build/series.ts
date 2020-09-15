@@ -64,6 +64,8 @@ function buildSeries(
       endSeries(currentSeries)
       series.push(startSeries(idFn(game.matchup, game.id), game, seriesName))
     }
+
+    endSeries(currentSeries)
   })
 
   return series
@@ -86,7 +88,12 @@ async function generateSeries(
   return { seasonSeries, fullGames }
 }
 
-type SeriesData = { name: string; urlSlug: string; series: Series[] }
+type SeriesData = {
+  name: string
+  urlSlug: string
+  series: Series[]
+  targetTeam?: string
+}
 
 export async function buildSeriesList(configList: SeriesBuildConfig[]) {
   const seasonGameLists: GameList[] = []
@@ -109,6 +116,7 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
     const seriesData: SeriesData = {
       name: config.name,
       urlSlug: config.urlSlug,
+      targetTeam: config.targetTeam,
       series: []
     }
     generatedSeries.forEach((s) => {

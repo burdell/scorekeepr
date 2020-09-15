@@ -46,6 +46,7 @@ export const buildConfig: BuildConfig[] = [
   },
   {
     name: '2019 Braves Season',
+    targetTeam: 'Atlanta Braves',
     type: 'series',
     series: [
       {

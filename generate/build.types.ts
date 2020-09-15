@@ -23,6 +23,7 @@ export type SeriesConfig = {
 export type SeriesBuildConfig = BaseBuildConfig & {
   type: 'series'
   series: SeriesConfig[]
+  targetTeam?: string
 }
 
 export type BuildConfig = CategoryBuildConfig | SeriesBuildConfig
@@ -50,6 +51,7 @@ export type Series = {
   endDate: string
   homeTeam: string
   visitingTeam: string
+  targetTeam?: string
   urlSlug: string
   // homeWins: number
   // visitingWins: number
