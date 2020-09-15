@@ -16,7 +16,7 @@ async function generateConfig(
     category: {
       name: config.name,
       description: config.description,
-      urlSlug: config.urlSlug,
+      listId: config.urlSlug,
       type: 'category'
     },
     categoryGames: generatedGames.map((game) =>
@@ -41,7 +41,7 @@ export async function buildGameList(configList: CategoryBuildConfig[]) {
     fullGames = fullGames.concat(config.games)
     categories.push(config.category)
     categoryGames.push({
-      categoryUrl: config.category.urlSlug,
+      categoryUrl: config.category.listId,
       categoryName: config.category.name,
       games: config.categoryGames
     })

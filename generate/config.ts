@@ -56,7 +56,7 @@ export const buildConfig: BuildConfig[] = [
       {
         retrosheetFiles: ['2019_braves_postseason.txt'],
         seriesId: () => `2019-NLDS-ATL-STL`,
-        seriesName: '2019 NLDS'
+        seriesName: 'NLDS vs St. Louis Cardinals'
       }
     ],
     urlSlug: 'braves-2019',

@@ -95,6 +95,20 @@ type SeriesData = {
   targetTeam?: string
 }
 
+function getWinCounts(games: ListGame[]) {
+  let homeWins = 0
+  let visitingWins = 0
+  games.forEach(({ visitingScore, homeScore }) => {
+    if (visitingScore > homeScore) {
+      visitingWins += 1
+    } else if (homeScore > visitingScore) {
+      homeWins += 1
+    }
+  })
+
+  return { homeWins, visitingWins }
+}
+
 export async function buildSeriesList(configList: SeriesBuildConfig[]) {
   const seasonGameLists: GameList[] = []
   const series: SeriesData[] = []
@@ -105,7 +119,7 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
     seasonGameLists.push({
       name: config.name,
       description: config.description,
-      urlSlug: config.urlSlug,
+      listId: config.urlSlug,
       type: 'season'
     })
 
@@ -122,13 +136,23 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
     generatedSeries.forEach((s) => {
       fullGames = fullGames.concat(s.fullGames)
       s.seasonSeries.map(
-        ({ dateEnd, dateStart, seriesId, homeTeam, visitingTeam, games }) => {
+        ({
+          dateEnd,
+          dateStart,
+          seriesId,
+          homeTeam,
+          visitingTeam,
+          games,
+          seriesName
+        }) => {
           seriesData.series.push({
+            seriesName,
             homeTeam,
             visitingTeam,
+            seriesId,
             endDate: dateEnd,
             startDate: dateStart,
-            urlSlug: seriesId
+            ...getWinCounts(games)
           })
           seriesGames.push({ urlSlug: seriesId, games })
         }

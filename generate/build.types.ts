@@ -30,7 +30,7 @@ export type BuildConfig = CategoryBuildConfig | SeriesBuildConfig
 
 export type GameList = {
   name: string
-  urlSlug: string
+  listId: string
   description: string
   type: 'season' | 'category'
 }
@@ -52,9 +52,10 @@ export type Series = {
   homeTeam: string
   visitingTeam: string
   targetTeam?: string
-  urlSlug: string
-  // homeWins: number
-  // visitingWins: number
+  seriesId: string
+  homeWins: number
+  visitingWins: number
+  seriesName: string | undefined
 }
 
 export type GeneratedConfig = {
