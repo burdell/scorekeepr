@@ -4,7 +4,7 @@ import {
   outputFolder,
   seasonFolder,
   listFolder
-} from './utilities/readFolderFiles'
+} from './outputFolders'
 import { buildConfig } from './config'
 import { buildGameList } from './build/categories'
 import { buildSeriesList } from './build/series'

@@ -1,23 +1,19 @@
 import express from 'express'
 import cors from 'cors'
-import * as path from 'path'
+
+import { outputFolder } from './outputFolders'
 
 const app = express()
 const port = 4000
 
 app.use(cors())
 
-app.get('/:folder/:itemId', (req, res) => {
-  res.sendFile(
-    path.join(
-      __dirname,
-      `/output/${req.params.folder}/${req.params.itemId}.json`
-    )
-  )
+app.get('/:folder/:itemFile', (req, res) => {
+  res.sendFile(`${outputFolder}/${req.params.folder}/${req.params.itemFile}`)
 })
 
-app.get('/lists', function (req, res) {
-  res.sendFile(path.join(__dirname, `/output/lists.json`))
+app.get('/:file', function (req, res) {
+  res.sendFile(`${outputFolder}/${req.params.file}`)
 })
 
 app.listen(port, () =>
