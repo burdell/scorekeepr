@@ -52,19 +52,17 @@ const stolenBase: ActionConfig = {
 const defensiveIndifference: ActionConfig = {
   actionType: 'baserunner',
   regexp: /^DI/,
-  handler: (atBat) => {
-    const bases = getBaserunnerMovements(atBat.result).reduce<Bases>(
-      (acc, movement) => {
-        if (movement.startBase === 4) return acc
+  handler: (atBat, match, baserunnerMovements) => {
+    const bases = getBases()
+    baserunnerMovements.forEach(({ startBase, endBase }) => {
+      if (startBase === 4) return
 
-        acc[movement.startBase] = {
-          endBase: movement.endBase,
-          result: resultGenerators.defensiveIndifference()
-        }
-        return acc
-      },
-      getBases()
-    )
+      bases[startBase] = {
+        endBase: endBase,
+        result: resultGenerators.defensiveIndifference()
+      }
+    })
+
     return getAction({
       bases
     })
