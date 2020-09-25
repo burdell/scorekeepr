@@ -7,6 +7,9 @@ import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled/mishandled:
 // 6(B)3(1)/LDP (mishandled)
+// S8!/F89XDW.1-3
+// I.1-2
+// I
 
 function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
   return {

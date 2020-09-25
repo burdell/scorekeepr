@@ -21,7 +21,7 @@ export type SeriesConfig = {
   seriesName?: string
 }
 export type SeriesBuildConfig = BaseBuildConfig & {
-  type: 'series'
+  type: 'series' | 'series-group'
   series: SeriesConfig[]
   targetTeam?: string
 }
@@ -32,7 +32,7 @@ export type GameList = {
   name: string
   listId: string
   description: string
-  type: 'season' | 'category'
+  type: 'series' | 'series-group' | 'category'
 }
 export type ListGame = {
   date: string

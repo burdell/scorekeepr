@@ -120,7 +120,7 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
       name: config.name,
       description: config.description,
       listId: config.urlSlug,
-      type: 'season'
+      type: config.type === 'series' ? 'series' : 'series-group'
     })
 
     const generatedSeries = await Promise.all(

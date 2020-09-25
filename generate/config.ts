@@ -2,18 +2,30 @@ import { BuildConfig } from './build.types'
 
 export const buildConfig: BuildConfig[] = [
   {
-    name: '1995 World Series',
-    type: 'category',
-    retrosheetFiles: ['1995_WS.txt'],
-    urlSlug: '1995-worldseries',
-    description: 'All the games of the 1995 World Series.',
+    name: '1995 Braves Playoffs',
+    targetTeam: 'Atlanta Braves',
+    type: 'series-group',
+    series: [
+      {
+        retrosheetFiles: ['1995_NLDS.txt'],
+        seriesId: () => '1995_nlds',
+        seriesName: 'NLDS'
+      },
+      {
+        retrosheetFiles: ['1995_NLCS.txt'],
+        seriesId: () => '1995_nlcs',
+        seriesName: 'NLCS'
+      },
+      {
+        retrosheetFiles: ['1995_WS.txt'],
+        seriesId: () => '1995_ws',
+        seriesName: 'World Series'
+      }
+    ],
+    urlSlug: '1995-playoffs',
+    description: 'All 1995 Braves Playoff Games',
     gameDescriptions: {
-      ATL199510210: 'World Series Game 1',
-      ATL199510220: 'World Series Game 2',
-      CLE199510240: 'World Series Game 3',
-      CLE199510250: 'World Series Game 4',
-      CLE199510260: 'World Series Game 5',
-      ATL199510280: 'World Series Game 6 - Braves win!'
+      ATL199510280: 'Braves win!'
     }
   },
   {

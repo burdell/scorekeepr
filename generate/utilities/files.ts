@@ -4,8 +4,10 @@ import { resolve } from 'path'
 import {
   outputFolder,
   gameFolder,
-  seasonFolder,
-  listFolder
+  seriesFolder,
+  categoriesFolder,
+  seriesGroupFolder,
+  seriesListsFolder
 } from '../outputFolders'
 
 export function writeToFile(data: unknown, dir: string, filename: string) {
@@ -18,6 +20,8 @@ export function regenOutputFolder() {
   }
   mkdirSync(outputFolder)
   mkdirSync(gameFolder)
-  mkdirSync(seasonFolder)
-  mkdirSync(listFolder)
+  mkdirSync(seriesFolder)
+  mkdirSync(categoriesFolder)
+  mkdirSync(seriesGroupFolder)
+  mkdirSync(seriesListsFolder)
 }
