@@ -15,7 +15,7 @@ function getHitType(hit: string) {
 
 const hit: ActionConfig = {
   actionType: 'batter',
-  regexp: /^(HR)|^([SDT])\d*\/|^(DGR)|^([SDT])\d$/,
+  regexp: /^(HR)|^([SDT])\d*!?\/|^(DGR)|^([SDT])\d$/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup, yetAnotherHitGroup] = match
     const hitType = getHitType(
@@ -48,10 +48,19 @@ const hitBatter: ActionConfig = {
 
 const walk: ActionConfig = {
   actionType: 'batter',
-  regexp: /^(I)?W[^P]|^(I)?W$/,
+  regexp: /^(I)?W[^P]|^(I)?W$|^(I)/,
   handler: (gameplayEvent, match) => {
-    const [fullMatch, firstIntentional, secondIntentional] = match
-    const isIntentional = firstIntentional === 'I' || secondIntentional === 'I'
+    // WHY ARE THERE SO MANY WAYS TO RECORD A WALK
+    const [
+      fullMatch,
+      firstIntentional,
+      secondIntentional,
+      thirdIntentional
+    ] = match
+    const isIntentional =
+      firstIntentional === 'I' ||
+      secondIntentional === 'I' ||
+      thirdIntentional === 'I'
     return actionGenerators.pitcherResult(isIntentional ? 'IBB' : 'BB')
   }
 }

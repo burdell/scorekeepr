@@ -7,9 +7,6 @@ import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled/mishandled:
 // 6(B)3(1)/LDP (mishandled)
-// S8!/F89XDW.1-3
-// I.1-2
-// I
 
 function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
   return {
@@ -677,6 +674,23 @@ describe('Retrosheet parsing', () => {
         })
       })
     )
+
+    expect(getResult('S8!/F89XDW.1-3')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: {
+            endBase: 3,
+            result: undefined
+          }
+        })
+      })
+    )
   })
 
   it('handles hit batters', () => {
@@ -784,6 +798,41 @@ describe('Retrosheet parsing', () => {
             endBase: 3,
             result: resultGenerators.wildPitch()
           },
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('I')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('IBB'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+
+    expect(getResult('I.1-2')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('IBB'),
+        bases: {
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: {
+            endBase: 2,
+            result: undefined
+          },
+          2: undefined,
           3: undefined
         }
       })
