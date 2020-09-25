@@ -4,7 +4,7 @@ import {
   SeriesIdFn,
   BuildConfig
 } from '../build.types'
-import { ListGame, Series, GameList } from '../build.types'
+import { ListGame, Series, GameList, SeriesGames } from '../build.types'
 import { generateGames, convertToListGame } from '.'
 import { GameOutput } from '../../lib/types'
 
@@ -112,7 +112,7 @@ function getWinCounts(games: ListGame[]) {
 export async function buildSeriesList(configList: SeriesBuildConfig[]) {
   const seasonGameLists: GameList[] = []
   const series: SeriesData[] = []
-  const seriesGames: { urlSlug: string; games: ListGame[] }[] = []
+  const seriesGames: SeriesGames[] = []
   let fullGames: GameOutput[] = []
 
   const configs = configList.map(async (config) => {
@@ -154,7 +154,17 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
             startDate: dateStart,
             ...getWinCounts(games)
           })
-          seriesGames.push({ urlSlug: seriesId, games })
+          seriesGames.push({
+            urlSlug: seriesId,
+            games,
+            seriesInfo: {
+              seriesName,
+              homeTeam,
+              visitingTeam,
+              startDate: dateStart,
+              endDate: dateEnd
+            }
+          })
         }
       )
     })

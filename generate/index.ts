@@ -49,8 +49,8 @@ async function buildOutput() {
     series.series.forEach((s) => {
       writeToFile(s, listFolder, `${s.urlSlug}.json`)
     })
-    series.seriesGames.forEach((sg) => {
-      writeToFile(sg.games, seasonFolder, `${sg.urlSlug}.json`)
+    series.seriesGames.forEach(({ games, seriesInfo, urlSlug }) => {
+      writeToFile({ games, seriesInfo }, seasonFolder, `${urlSlug}.json`)
     })
   }
 

@@ -184,15 +184,16 @@ export type Stats = {
   errors: number
 }
 
+export type InitialGame = Partial<Game> & {
+  homeLineup?: InitialLineupEntry[]
+  visitingLineup?: InitialLineupEntry[]
+}
+
 export type Gameplay = {
   home: AtBat[][]
   visiting: AtBat[][]
 }
 
-export type InitialGame = Partial<Game> & {
-  homeLineup?: InitialLineupEntry[]
-  visitingLineup?: InitialLineupEntry[]
-}
 
 export type Game = {
   homeTeam: Team

@@ -58,6 +58,18 @@ export type Series = {
   seriesName: string | undefined
 }
 
+export type SeriesGames = {
+  seriesInfo: {
+    seriesName: string | undefined
+    homeTeam: string
+    visitingTeam: string
+    startDate: string
+    endDate: string
+  }
+  games: ListGame[]
+  urlSlug: string
+}
+
 export type GeneratedConfig = {
   category: GameList
   categoryGames: ListGame[]
@@ -67,6 +79,6 @@ export type GeneratedConfig = {
 export type GeneratedSeriesConfig = {
   seriesName: string
   series: Series[]
-  seriesGames: ListGame[]
+  seriesGames: SeriesGames[]
   games: GameOutput[]
 }

@@ -6,7 +6,7 @@ import {
   gameFolder,
   seasonFolder,
   listFolder
-} from './readFolderFiles'
+} from '../outputFolders'
 
 export function writeToFile(data: unknown, dir: string, filename: string) {
   writeFileSync(resolve(dir, `${filename}`), JSON.stringify(data, null, 2))

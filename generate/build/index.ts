@@ -1,5 +1,5 @@
 import { getRetrosheetScorekeepers } from '../../lib/index'
-import { sourceFolder } from '../utilities/readFolderFiles'
+import { sourceFolder } from '../outputFolders'
 import { GameOutput } from '../../lib/types'
 import { Scorekeeper } from '../../lib/Scorekeeper'
 import { ListGame, BuildConfig } from '../build.types'
