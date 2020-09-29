@@ -34,6 +34,10 @@ const stadiums: TeamMap = {
     abbreviation: 'BAL12',
     fullName: 'Oriole Park at Camden Yards'
   },
+  BOS07: {
+    abbreviation: 'BOS07',
+    fullName: 'Fenway Park'
+  },
   CHI11: {
     abbreviation: 'CHI11',
     fullName: 'Wrigley Field'
@@ -61,6 +65,10 @@ const stadiums: TeamMap = {
   DEN02: {
     abbreviation: 'DEN02',
     fullName: 'Coors Field'
+  },
+  DET05: {
+    abbreviation: 'DET05',
+    fullName: 'Comerica Park'
   },
   KAN06: {
     abbreviation: 'KAN06',

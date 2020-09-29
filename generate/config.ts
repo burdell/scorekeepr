@@ -91,11 +91,11 @@ export const buildConfig: BuildConfig[] = [
     }
   },
   {
-    name: 'Random Notable Games',
+    name: 'Random Braves Games',
     type: 'category',
     retrosheetFiles: ['random_games.txt'],
     urlSlug: 'randos',
-    description: 'Some random (mostly Braves) games',
+    description: 'Some notable Braves games',
     gameDescriptions: {
       ATL201005200:
         'Braves enter bottom of the 9th down 9-3 and walk it off with a Brooks Conrad grand slam',
@@ -106,6 +106,31 @@ export const buildConfig: BuildConfig[] = [
       ATL201810070: 'Ronald Acuña Jr. hits a grand slam in the NLDS',
       ATL201606150: 'Freddie Freeman hits for the cycle',
       SFN201010080: "Bobby Cox's last win - an 11-inning game in 2010 NLDS",
+      ATL197308050: 'Phil Niekro no-hitter'
+    }
+  },
+  {
+    name: 'Interesting Pitching Games',
+    type: 'category',
+    urlSlug: 'pitching',
+    description: 'Games with fun pitching things',
+    retrosheetFiles: ['pitching.txt'],
+    gameDescriptions: {
+      BOS198604290: 'Roger Clemens records 20 strikeouts for Boston',
+      DET199609180: 'Roger Clemens records 20 strikeouts for Boston (again)',
+      CHN199805060: 'Kerry Wood records 20 strikeouts for Chicago',
+      WAS201605110: 'Max Scherzer records 20 strikeouts for Washington',
+      NYN197004220: 'Tom Seaver records 10 strikeouts in a row for the Mets'
+    }
+  },
+  {
+    name: 'Interesting Hitting Games',
+    type: 'category',
+    urlSlug: 'hitting',
+    description: 'Games with fun hitting things',
+    retrosheetFiles: ['hitting.txt'],
+    gameDescriptions: {
+      LAN199904230: 'Fernando Tatis hits 2 grand slams in a single inning',
       BAL200708221:
         'New American League record for most runs scored by a team with 30 by the Rangers'
     }

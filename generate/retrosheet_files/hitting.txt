@@ -1,0 +1,360 @@
+id,LAN199904230
+info,visteam,SLN
+info,hometeam,LAN
+info,date,1999/04/23
+info,site,LOS03
+info,number,0
+info,starttime,7:28PM
+info,daynight,night
+info,usedh,false
+info,umphome,bonig901
+info,ump1b,nelsj901
+info,ump2b,pullf901
+info,ump3b,willc901
+info,pitches,pitches
+info,temp,61
+info,winddir,rtol
+info,windspeed,11
+info,fieldcond,unknown
+info,precip,none
+info,sky,cloudy
+info,timeofgame,185
+info,attendance,46687
+info,wp,jimej001
+info,lp,parkc002
+info,save,
+start,bragd001,"Darren Bragg",0,1,9
+start,rente001,"Edgar Renteria",0,2,6
+start,mcgwm001,"Mark McGwire",0,3,3
+start,tatif001,"Fernando Tatis",0,4,5
+start,drewj001,"J.D. Drew",0,5,8
+start,marre001,"Eli Marrero",0,6,2
+start,howad001,"David Howard",0,7,4
+start,mcewj001,"Joe McEwing",0,8,7
+start,jimej001,"Jose Jimenez",0,9,1
+start,youne001,"Eric Young",1,1,4
+start,vizcj001,"Jose Vizcaino",1,2,6
+start,shefg001,"Gary Sheffield",1,3,7
+start,mondr002,"Raul Mondesi",1,4,9
+start,karre001,"Eric Karros",1,5,3
+start,whitd001,"Devon White",1,6,8
+start,belta001,"Adrian Beltre",1,7,5
+start,hundt001,"Todd Hundley",1,8,2
+start,parkc002,"Chan Ho Park",1,9,1
+play,1,0,bragd001,32,FBCBBFX,S7/L7M
+play,1,0,rente001,12,F11FB1FC,K
+play,1,0,mcgwm001,22,BCBSS,K
+play,1,0,tatif001,32,CBBFBX,43/G4S
+play,1,1,youne001,01,CX,S9/L3D.B-2(E9)
+play,1,1,vizcj001,01,LX,13/SH/BG13S.2-3
+play,1,1,shefg001,10,BX,7/SF/F7LD.3-H(UR)
+play,1,1,mondr002,01,CX,63/G6
+play,2,0,drewj001,00,X,D9/L9LS
+play,2,0,marre001,01,FX,FC1/G15.2X2(1654)
+play,2,0,howad001,10,BB,SB2
+play,2,0,howad001,32,BB.CBCB,W
+play,2,0,mcewj001,11,CBX,16(1)/FO/G15.2-3
+play,2,0,jimej001,00,B,SB2
+play,2,0,jimej001,12,B.FFX,3/G3
+play,2,1,karre001,02,CFX,13/G13S
+play,2,1,whitd001,32,BCLBFFBX,S8/G6M
+play,2,1,belta001,10,BX,S8/L8LS.1-3;B-2
+play,2,1,hundt001,22,CBFFFBX,8/SF/F8RXD.3-H;2-3
+play,2,1,parkc002,02,CFS,K
+play,3,0,bragd001,10,BX,S9/G34
+play,3,0,rente001,22,1BFBFH,HP.1-2
+play,3,0,mcgwm001,01,FX,S9/L34D.2-3;1-2
+play,3,0,tatif001,20,BBX,HR/F7D.3-H;2-H;1-H
+play,3,0,drewj001,01,FX,31/G3
+play,3,0,marre001,11,FBX,HR/F7LD
+play,3,0,howad001,,,NP
+sub,polap001,"Placido Polanco",0,7,11
+play,3,0,polap001,30,BBBB,W
+play,3,0,mcewj001,32,BBS1BFF1B,W.1-2
+play,3,0,jimej001,01,LX,FC/SH/BG15S.2-3;1-2;B-1
+play,3,0,bragd001,11,FBX,E3/TH/G34S.3-H(NR);2-3;1-2
+com,"ej,johnd105,M,bonig901,Call at HP"
+com,"Dodgers manager Davey Johnson ejected by HP umpire Greg Bonin"
+play,3,0,rente001,22,CFBBX,S9/L9LS.3-H(UR);2-3;1-2
+play,3,0,mcgwm001,12,BFCX,9/F89M
+play,3,0,tatif001,32,CBBBCX,HR/F8LXD.3-H(UR);2-H(UR);1-H(UR);B-H(UR)
+play,3,0,drewj001,,,NP
+sub,perec001,"Carlos Perez",1,9,1
+play,3,0,drewj001,02,FFX,5/P25F
+play,3,1,youne001,,,NP
+sub,polap001,"Placido Polanco",0,7,4
+play,3,1,youne001,32,BBCCBX,63/G6
+play,3,1,vizcj001,11,BCX,S7/L7S
+play,3,1,shefg001,12,CBCFS,K
+play,3,1,mondr002,22,CBSBC,K
+play,4,0,marre001,02,SFX,13/G13
+play,4,0,polap001,22,BCBFX,53/G56
+play,4,0,mcewj001,00,X,63/G6MD
+play,4,1,karre001,22,FBCBX,S6/G15
+play,4,1,whitd001,00,X,S8/F8LS.1-2
+play,4,1,belta001,32,BBBCSS,K
+play,4,1,hundt001,00,X,9/L9D
+play,4,1,perec001,22,BFFBS,K
+play,5,0,jimej001,02,CSS,K
+play,5,0,bragd001,22,CSBBS,K
+play,5,0,rente001,10,BX,53/G5
+play,5,1,youne001,11,BCX,9/F89D
+play,5,1,vizcj001,11,BCX,63/G6
+play,5,1,shefg001,00,X,5/P15
+play,6,0,mcgwm001,32,FBBBSFC,K
+play,6,0,tatif001,12,FCBS,K
+play,6,0,drewj001,31,BBFBX,HR/F8LXD
+play,6,0,marre001,11,CBX,S8/G4.B-2(E6)
+play,6,0,polap001,11,BCX,5/L5
+play,6,1,mondr002,10,BX,7/F7D
+play,6,1,karre001,11,BFX,2/P23F
+play,6,1,whitd001,22,CSBFBC,K
+play,7,0,mcewj001,,,NP
+sub,brumj001,"Jacob Brumfield",1,6,8
+play,7,0,mcewj001,11,BFX,53/G5
+play,7,0,jimej001,01,SX,8/F8RD
+play,7,0,bragd001,01,CX,D8/L8LM
+play,7,0,rente001,01,FX,E6/G6.2-3
+play,7,0,mcgwm001,21,BSBX,3/P3F
+play,7,1,belta001,12,SBFX,S7/G56
+play,7,1,hundt001,10,BX,3/P9LSF
+play,7,1,perec001,,,NP
+sub,grudm001,"Mark Grudzielanek",1,9,11
+play,7,1,grudm001,21,BBCX,S7/L7S.1-2
+play,7,1,youne001,10,BX,S8/L4M.2-H;1-2
+play,7,1,vizcj001,30,BBBB,W.2-3;1-2
+play,7,1,shefg001,,,NP
+sub,hollt001,"Todd Hollandsworth",1,3,11
+play,7,1,hollt001,00,X,64(1)/FO/G6.3-H;2-3
+play,7,1,mondr002,01,SX,4/P8RS
+play,8,0,tatif001,,,NP
+sub,cromt001,"Tripp Cromer",1,1,9
+play,8,0,tatif001,,,NP
+sub,vizcj001,"Jose Vizcaino",1,2,4
+play,8,0,tatif001,,,NP
+sub,hollt001,"Todd Hollandsworth",1,3,7
+play,8,0,tatif001,,,NP
+sub,kubej001,"Jeff Kubenka",1,4,1
+play,8,0,tatif001,,,NP
+sub,hansd001,"Dave Hansen",1,5,3
+play,8,0,tatif001,,,NP
+sub,grudm001,"Mark Grudzielanek",1,9,6
+play,8,0,tatif001,22,CBFBS,K13
+play,8,0,drewj001,31,BFBBB,W
+play,8,0,marre001,20,BBX,4/P4
+play,8,0,polap001,22,BBCFX,7/F7LM
+play,8,1,hansd001,,,NP
+sub,aybam001,"Manny Aybar",0,3,1
+play,8,1,hansd001,,,NP
+sub,marre001,"Eli Marrero",0,6,3
+play,8,1,hansd001,,,NP
+sub,casta001,"Alberto Castillo",0,9,2
+play,8,1,hansd001,12,FCBX,D7/L7LS
+play,8,1,brumj001,11,CBX,43/G4.2-3
+play,8,1,belta001,11,BCX,53/G5.3-H
+play,8,1,hundt001,32,SFBFBFBFS,K
+play,9,0,mcewj001,02,SSX,9/F9M
+play,9,0,casta001,00,X,6/L6
+play,9,0,bragd001,32,CBBSBFB,W
+play,9,0,rente001,01,SX,8/F8RD
+play,9,1,grudm001,10,BH,HP
+play,9,1,cromt001,01,CX,13/G15S.1-2
+play,9,1,vizcj001,00,X,S8/G6MD.2-3
+play,9,1,hollt001,02,FFFS,K
+play,9,1,kubej001,,,NP
+sub,lodup001,"Paul LoDuca",1,4,11
+play,9,1,lodup001,00,X,8/F8RM
+data,er,jimej001,3
+data,er,aybam001,1
+data,er,parkc002,6
+data,er,perec001,1
+data,er,kubej001,0
+id,BAL200708221
+version,2
+info,visteam,TEX
+info,hometeam,BAL
+info,site,BAL12
+info,date,2007/08/22
+info,number,1
+info,starttime,5:05PM
+info,daynight,night
+info,usedh,true
+info,umphome,reedr901
+info,ump1b,davib902
+info,ump2b,wendh902
+info,ump3b,holbs901
+info,howscored,park
+info,pitches,pitches
+info,oscorer,jacom701
+info,temp,74
+info,winddir,fromlf
+info,windspeed,7
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,unknown
+info,timeofgame,201
+info,attendance,0
+info,wp,gabbk001
+info,lp,cabrd001
+info,save,littw001
+start,cataf001,"Frank Catalanotto",0,1,3
+start,kinsi001,"Ian Kinsler",0,2,4
+start,younm003,"Michael Young",0,3,6
+start,byrdm001,"Marlon Byrd",0,4,8
+start,bottj001,"Jason Botts",0,5,10
+start,cruzn002,"Nelson Cruz",0,6,9
+start,murpd005,"David Murphy",0,7,7
+start,saltj001,"Jarrod Saltalamacchia",0,8,2
+start,vazqr001,"Ramon Vazquez",0,9,5
+start,gabbk001,"Kason Gabbard",0,0,1
+start,robeb003,"Brian Roberts",1,1,4
+start,pattc001,"Corey Patterson",1,2,8
+start,markn001,"Nick Markakis",1,3,9
+start,tejam001,"Miguel Tejada",1,4,6
+start,millk005,"Kevin Millar",1,5,3
+start,moram002,"Melvin Mora",1,6,5
+start,housj001,"J.R. House",1,7,10
+start,hernr002,"Ramon Hernandez",1,8,2
+start,paytj001,"Jay Payton",1,9,7
+start,cabrd001,"Daniel Cabrera",1,0,1
+play,1,0,cataf001,02,CFX,63/G
+play,1,0,kinsi001,22,BFBCX,43/G
+play,1,0,younm003,11,BFX,S8/L
+play,1,0,byrdm001,12,BCFX,64(1)/FO/G-
+play,1,1,robeb003,32,BBBCCX,D8/F
+play,1,1,pattc001,01,CX,S9/F-.2-H(E9/TH)(NR);B-2
+play,1,1,markn001,12,CCBX,31/G-.2-3
+play,1,1,tejam001,21,FBBX,FC1/G.3XH(152);B-2
+play,1,1,millk005,01,CX,13/G
+play,2,0,bottj001,22,CBSBS,K23
+play,2,0,cruzn002,22,BFBFX,9/F
+play,2,0,murpd005,12,BCSC,K
+play,2,1,moram002,20,BBX,7/F
+play,2,1,housj001,00,X,7/F
+play,2,1,hernr002,01,CX,9/F9LF
+play,3,0,saltj001,01,FX,8/F
+play,3,0,vazqr001,21,CBBX,8/F
+play,3,0,cataf001,00,X,S7/L
+play,3,0,kinsi001,11,BCX,S4/P.1-3
+play,3,0,younm003,20,BBX,43/G
+play,3,1,paytj001,00,X,8/F
+play,3,1,robeb003,10,BX,S9/L
+play,3,1,pattc001,10,BX,43/G.1-2
+play,3,1,markn001,20,BBX,DGR/78/F.2-H
+play,3,1,tejam001,11,BFX,S9/G+.2-H;B-2(TH)
+play,3,1,millk005,22,CBFBS,K
+play,4,0,byrdm001,32,BBCFFBFB,W
+play,4,0,bottj001,32,BSBSBFX,S6/G+.1-2
+play,4,0,cruzn002,00,X,4/P/IF
+play,4,0,murpd005,02,FFX,S1/G-.2-3;1-2
+play,4,0,saltj001,32,CBFBBX,S8/G+.3-H;2-H;1-2
+play,4,0,vazqr001,20,BBX,HR/9/F.2-H;1-H
+play,4,0,cataf001,11,FBX,E5/G+
+play,4,0,kinsi001,00,X,53/G.1-2
+play,4,0,younm003,21,BBCX,143/G+
+play,4,1,moram002,10,BX,S1/BG
+play,4,1,housj001,12,CBSS,K
+play,4,1,hernr002,12,B1CCFFX,64(1)3/GDP
+play,5,0,byrdm001,02,CSC,K
+play,5,0,bottj001,20,BBX,S7/L-
+play,5,0,cruzn002,12,CFBFS,K
+play,5,0,murpd005,11,F*BX,6/P
+play,5,1,paytj001,32,CFBBBX,8/F
+play,5,1,robeb003,12,BCFX,S8/G+
+play,5,1,pattc001,10,BX,5/P5F
+play,5,1,markn001,21,BBF1X,43/G
+play,6,0,saltj001,12,CSBX,HR/8/F
+play,6,0,vazqr001,00,,NP
+sub,burrb001,"Brian Burres",1,0,1
+play,6,0,vazqr001,00,.X,S9/F-
+play,6,0,cataf001,01,CB,WP.1-2
+play,6,0,cataf001,31,CB.BBB,W
+play,6,0,kinsi001,21,BBOX,15(2)/FO/BG.1-2
+play,6,0,younm003,00,X,S7/L.2-3;1-2
+play,6,0,byrdm001,01,CX,HR/7/F.3-H;2-H;1-H
+play,6,0,bottj001,12,CBSC,K
+play,6,0,cruzn002,21,SBBX,S5/G
+play,6,0,murpd005,11,FBX,S8/L+.1-2
+play,6,0,saltj001,02,CFFX,S7/L.2-H;1-2
+play,6,0,vazqr001,12,CFBX,S7/L-.2-H;1-2
+play,6,0,cataf001,10,BX,S7/L.2-H;1-2
+play,6,0,kinsi001,00,,NP
+sub,bellr003,"Rob Bell",1,0,1
+play,6,0,kinsi001,32,.*BSBF*B>X,S8/F-.2-H;1-3
+play,6,0,younm003,00,X,9/F
+play,6,1,tejam001,31,BBBCB,W
+play,6,1,millk005,02,CSFX,13/G.1-2
+play,6,1,moram002,12,BCFB,WP.2-3
+play,6,1,moram002,32,BCFB.BFT,K
+play,6,1,housj001,12,CCBFX,53/G
+play,7,0,byrdm001,11,BFX,53/G
+play,7,0,bottj001,02,CST,K
+play,7,0,cruzn002,12,BFFX,8/F
+play,7,1,hernr002,00,,NP
+sub,metct001,"Travis Metcalf",0,3,5
+play,7,1,hernr002,00,,NP
+sub,vazqr001,"Ramon Vazquez",0,9,6
+play,7,1,hernr002,00,,NP
+sub,littw001,"Wes Littleton",0,0,1
+play,7,1,hernr002,11,...CBX,4/L-
+play,7,1,paytj001,11,CBX,3/P
+play,7,1,robeb003,00,X,7/F
+play,8,0,murpd005,00,,NP
+sub,redmt001,"Tike Redman",1,2,8
+play,8,0,murpd005,00,,NP
+sub,bynuf001,"Freddie Bynum",1,3,7
+play,8,0,murpd005,00,,NP
+sub,paytj001,"Jay Payton",1,9,9
+play,8,0,murpd005,11,...BFX,S4/G-
+play,8,0,saltj001,31,SBBBB,W.1-2
+play,8,0,vazqr001,32,FBBFFBB,W.2-3;1-2
+play,8,0,cataf001,02,FFX,S9/G.3-H;2-3;1-2
+play,8,0,kinsi001,22,F*BF*BFFFFX,S7/G.3-H;2-3;1-2
+play,8,0,metct001,20,BBX,HR/7/F.3-H;2-H;1-H
+play,8,0,byrdm001,32,BSFBBFB,W
+play,8,0,bottj001,00,,NP
+sub,shuep001,"Paul Shuey",1,0,1
+play,8,0,bottj001,32,.BC*BS*BFC,K
+play,8,0,cruzn002,22,BSBFX,D8/F.1-3
+play,8,0,murpd005,01,FX,S49/L+.3-H;2-3
+play,8,0,saltj001,02,CSX,HR/89/F.3-H;1-H
+play,8,0,vazqr001,22,BBCFC,K
+play,8,0,cataf001,22,BCBSC,K
+play,8,1,redmt001,01,CX,S8/G+
+play,8,1,bynuf001,00,X,64(1)/FO/G
+play,8,1,tejam001,20,BBX,8/F
+play,8,1,millk005,01,CX,S9/L-.1-2
+play,8,1,moram002,32,CBFFFFBB>B,W.2-3;1-2
+play,8,1,housj001,21,FBBX,64(1)/FO/G+
+play,9,0,kinsi001,00,,NP
+sub,shuep001,"Paul Shuey",1,4,1
+play,9,0,kinsi001,00,,NP
+sub,bynuf001,"Freddie Bynum",1,3,6
+play,9,0,kinsi001,00,,NP
+sub,millk005,"Kevin Millar",1,5,7
+play,9,0,kinsi001,00,,NP
+sub,housj001,"J.R. House",1,7,2
+play,9,0,kinsi001,00,,NP
+sub,hernr002,"Ramon Hernandez",1,8,3
+play,9,0,kinsi001,30,.....BBBB,W
+play,9,0,metct001,32,BCFB*BB,W.1-2
+play,9,0,byrdm001,12,BCFX,S7/G+.2-3;1-2
+play,9,0,bottj001,11,*BCX,D9/L+.3-H;2-H;1-3
+play,9,0,cruzn002,02,SCFFT,K
+play,9,0,murpd005,12,BCFX,S4/G.3-H;2-3
+play,9,0,saltj001,22,CBBFS,K
+play,9,0,vazqr001,10,BX,HR/9/F.3-H;1-H
+com,"$new American League record for most runs scored by a team with"
+com,"the 30 by the Rangers; they also set a new club record for most"
+com,"runs in a double header - in the first game!"
+play,9,0,cataf001,31,BBCBB,W
+play,9,0,kinsi001,02,CFX,8/F
+play,9,1,hernr002,32,BCFFFBBFFS,K
+play,9,1,paytj001,00,X,63/G
+play,9,1,robeb003,12,CBFX,63/G
+data,er,gabbk001,3
+data,er,littw001,0
+data,er,cabrd001,6
+data,er,burrb001,8
+data,er,bellr003,7
+data,er,shuep001,9
