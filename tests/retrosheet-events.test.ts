@@ -698,7 +698,7 @@ describe('Retrosheet parsing', () => {
 
     expect(hbp).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('HBP'),
+        result: resultGenerators.pitcherResult('HB'),
         bases: {
           B: {
             isAtBatResult: true,

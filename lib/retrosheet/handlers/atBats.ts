@@ -42,7 +42,7 @@ const hitBatter: ActionConfig = {
   actionType: 'batter',
   regexp: /^HP/,
   handler: () => {
-    return actionGenerators.pitcherResult('HBP')
+    return actionGenerators.pitcherResult('HB')
   }
 }
 

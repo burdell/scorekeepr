@@ -69,7 +69,7 @@ export type FlyOut = {
 }
 export type LineOut = { type: 'lineout'; result: number; display: string }
 export type Hit = { type: 'hit'; result: Base; display: string }
-export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'IBB' | 'HBP'
+export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'IBB' | 'HB'
 export type PitcherResult = {
   type: 'pitcher-result'
   result: PitcherResultString

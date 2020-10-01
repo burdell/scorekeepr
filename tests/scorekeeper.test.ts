@@ -195,7 +195,7 @@ describe('Scorekeeper tests', () => {
       .fill(null)
       .map((_, i) => {
         sk.handleGameEvent({
-          event: getAction({ result: resultGenerators.pitcherResult('HBP') }),
+          event: getAction({ result: resultGenerators.pitcherResult('HB') }),
           inning: 0,
           lineupSpot: i,
           team: 'visiting'
@@ -207,10 +207,10 @@ describe('Scorekeeper tests', () => {
       resultGenerators.pitcherResult('BB')
     )
     expect(sk.gameplay.visiting[0][9].result).toEqual(
-      resultGenerators.pitcherResult('HBP')
+      resultGenerators.pitcherResult('HB')
     )
     expect(sk.gameplay.visiting[0][10].result).toEqual(
-      resultGenerators.pitcherResult('HBP')
+      resultGenerators.pitcherResult('HB')
     )
   })
 
