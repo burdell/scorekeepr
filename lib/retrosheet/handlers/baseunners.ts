@@ -34,17 +34,25 @@ const caughtStealing: ActionConfig = {
 
 const stolenBase: ActionConfig = {
   actionType: 'baserunner',
-  regexp: /SB([23H])/,
-  handler: (atBat, match) => {
-    const [fullMatch, baseStolen] = match
-    const base = getAdvanceableBase(baseStolen)
+  regexp: /SB([23H])/g,
+  handler: (atBat, matches) => {
+    const bases = getBases()
+    matches.forEach((matchString) => {
+      const baseMatch = matchString.match(/\d+|H+/)
+      if (!baseMatch) return
+
+      const base = getAdvanceableBase(baseMatch[0])
+      const previousBase = getPreviousBase(base)
+      if (previousBase === 4) return
+
+      bases[previousBase] = {
+        endBase: base,
+        result: resultGenerators.stolenBase(base)
+      }
+    })
+
     return getAction({
-      bases: getBases({
-        [getPreviousBase(base)]: {
-          endBase: base,
-          result: resultGenerators.stolenBase(base)
-        }
-      })
+      bases
     })
   }
 }
