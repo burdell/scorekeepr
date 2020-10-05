@@ -358,3 +358,163 @@ data,er,cabrd001,6
 data,er,burrb001,8
 data,er,bellr003,7
 data,er,shuep001,9
+id,CHN193210010
+version,1
+info,inputprogvers,"version 7RS(19) of 07/07/92"
+info,visteam,NYA
+info,hometeam,CHN
+info,date,1932/10/01
+info,site,CHI11
+info,number,0
+info,starttime,0:00PM
+info,daynight,day
+info,usedh,false
+info,umphome,vangr901
+info,ump1b,mageg901
+info,ump2b,dinnb101
+info,ump3b,klemb901
+info,scorer,"Cohen/Neft"
+info,translator,"John Booth"
+info,inputter,"John Booth"
+info,inputtime,1995/09/05 5:14PM
+info,howscored,unknown
+info,pitches,none
+info,temp,0
+info,winddir,unknown
+info,windspeed,-1
+info,fieldcond,unknown
+info,precip,unknown
+info,sky,unknown
+info,timeofgame,131
+info,attendance,49986
+info,wp,pipgg101
+info,lp,rootc101
+info,save,pennh101
+info,gwrbi,
+start,combe101,"Earle Combs",0,1,8
+start,sewej101,"Joe Sewell",0,2,5
+start,ruthb101,"Babe Ruth",0,3,7
+start,gehrl101,"Lou Gehrig",0,4,3
+start,lazzt101,"Tony Lazzeri",0,5,4
+start,dickb101,"Bill Dickey",0,6,2
+start,chapb102,"Ben Chapman",0,7,9
+start,crosf103,"Frankie Crosetti",0,8,6
+start,pipgg101,"George Pipgras",0,9,1
+start,hermb101,"Billy Herman",1,1,4
+start,englw101,"Woody English",1,2,5
+start,cuylk101,"Kiki Cuyler",1,3,9
+start,stepr101,"Riggs Stephenson",1,4,7
+start,moorj104,"Johnny Moore",1,5,8
+start,grimc101,"Charlie Grimm",1,6,3
+start,hartg103,"Gabby Hartnett",1,7,2
+start,jurgb101,"Billy Jurges",1,8,6
+start,rootc101,"Charlie Root",1,9,1
+play,1,0,combe101,??,,E6/TH1.B-2
+play,1,0,sewej101,??,,W
+play,1,0,ruthb101,??,,HR/89D.2-H(UR);1-H
+play,1,0,gehrl101,??,,43
+play,1,0,lazzt101,??,,K/C
+play,1,0,dickb101,??,,S9
+play,1,0,chapb102,??,,S7.1-2
+play,1,0,crosf103,??,,7/F7D
+play,1,1,hermb101,??,,W
+play,1,1,englw101,??,,7
+play,1,1,cuylk101,??,,D9/F9D.1-H
+play,1,1,stepr101,??,,63
+play,1,1,moorj104,??,,W
+play,1,1,grimc101,??,,63
+play,2,0,pipgg101,??,,K
+play,2,0,combe101,??,,8/F78D
+play,2,0,sewej101,??,,W
+play,2,0,ruthb101,??,,9/F9D
+play,2,1,hartg103,??,,63
+play,2,1,jurgb101,??,,S7
+play,2,1,rootc101,??,,K
+play,2,1,hermb101,??,,SB2
+play,2,1,hermb101,??,,7
+play,3,0,gehrl101,??,,HR/9D
+play,3,0,lazzt101,??,,63
+play,3,0,dickb101,??,,8/F78
+play,3,0,chapb102,??,,W
+play,3,0,crosf103,??,,CS2(26)
+play,3,1,englw101,??,,63
+play,3,1,cuylk101,??,,HR/9D
+play,3,1,stepr101,??,,S/F89S
+play,3,1,moorj104,??,,36(1)/FO
+play,3,1,grimc101,??,,D9/G.1-H
+play,3,1,hartg103,??,,5/FL
+play,4,0,crosf103,??,,53
+play,4,0,pipgg101,??,,K/C
+play,4,0,combe101,??,,K/C
+play,4,1,jurgb101,??,,D7
+play,4,1,rootc101,??,,53
+play,4,1,hermb101,??,,4/P8S
+play,4,1,englw101,??,,E4/G.2-H(UR)(NR)
+play,4,1,cuylk101,??,,CS2(24)
+play,5,0,sewej101,??,,63
+com,"$the Cubs bench players were riding Babe Ruth mercilessly"
+com,"and Ruth yelled and gestured back"
+play,5,0,ruthb101,??,,HR/8D
+play,5,0,gehrl101,??,,HR/9D
+play,5,0,lazzt101,??,,NP
+sub,malop103,"Pat Malone",1,9,1
+play,5,0,lazzt101,??,,W
+play,5,0,dickb101,??,,W.1-2
+play,5,0,chapb102,??,,53.2-3;1-2
+play,5,0,crosf103,??,,IW
+play,5,0,pipgg101,??,,K/C
+play,5,1,cuylk101,??,,S4/G
+play,5,1,stepr101,??,,54(1)3/GDP
+play,5,1,moorj104,??,,43
+play,6,0,combe101,??,,3/L
+play,6,0,sewej101,??,,8/F89
+play,6,0,ruthb101,??,,W
+play,6,0,gehrl101,??,,K/C
+play,6,1,grimc101,??,,43
+play,6,1,hartg103,??,,5/FL
+play,6,1,jurgb101,??,,43
+play,7,0,lazzt101,??,,53
+play,7,0,dickb101,??,,E6/TH1.B-1
+play,7,0,chapb102,??,,K
+play,7,0,crosf103,??,,S7.1-2
+play,7,0,pipgg101,??,,K/C
+play,7,1,malop103,??,,NP
+sub,gudam101,"Marv Gudat",1,9,11
+play,7,1,gudam101,??,,6/P
+play,7,1,hermb101,??,,3/G
+play,7,1,englw101,??,,W
+play,7,1,cuylk101,??,,6(1)/FO
+play,8,0,combe101,??,,NP
+sub,may-j102,"Jakie May",1,9,1
+play,8,0,combe101,??,,K
+play,8,0,sewej101,??,,HP
+play,8,0,ruthb101,??,,46(1)3/GDP
+play,8,1,stepr101,??,,8/F8D
+play,8,1,moorj104,??,,6/P56D
+play,8,1,grimc101,??,,3/G
+play,9,0,gehrl101,??,,2/P1
+play,9,0,lazzt101,??,,E2/P1.B-1
+play,9,0,dickb101,??,,E4/P34D.1-2;B-1
+play,9,0,chapb102,??,,D7.2-H(UR);1-3
+play,9,0,crosf103,??,,NP
+sub,tinnb101,"Bud Tinning",1,9,1
+play,9,0,crosf103,??,,4/P
+play,9,0,pipgg101,??,,K
+play,9,1,hartg103,??,,HR/7D
+play,9,1,jurgb101,??,,S7
+play,9,1,tinnb101,??,,NP
+sub,koenm101,"Mark Koenig",1,9,11
+play,9,1,koenm101,??,,NP
+sub,pennh101,"Herb Pennock",0,9,1
+play,9,1,koenm101,??,,NP
+sub,hemsr101,"Rollie Hemsley",1,9,11
+play,9,1,hemsr101,??,,K
+play,9,1,hermb101,??,,13/G1.1-2
+play,9,1,englw101,??,,SB3
+play,9,1,englw101,??,,3/G
+data,er,pipgg101,4
+data,er,pennh101,0
+data,er,rootc101,5
+data,er,malop103,0
+data,er,may-j102,0
+data,er,tinnb101,0

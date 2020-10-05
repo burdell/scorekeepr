@@ -6,6 +6,10 @@ type TeamMap = {
 }
 
 const teams: TeamMap = {
+  ALS: {
+    abbreviation: 'AL',
+    fullName: 'American League'
+  },
   ATL: {
     abbreviation: 'ATL',
     fullName: 'Atlanta Braves'
@@ -69,6 +73,10 @@ const teams: TeamMap = {
   LAN: {
     abbreviation: 'LAD',
     fullName: 'Los Angeles Dodgers'
+  },
+  NLS: {
+    abbreviation: 'NL',
+    fullName: 'National League'
   },
   NYN: {
     abbreviation: 'NYM',

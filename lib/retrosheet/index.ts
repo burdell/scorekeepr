@@ -114,11 +114,11 @@ export function parseAction(gameplayEvent: GameplayEvent) {
         2: extraEvent.bases[2] || event.bases[2],
         3: extraEvent.bases[3] || event.bases[3]
       }
-
-      if (batterExtraBases) {
-        event.isOut = false
-      }
     }
+  }
+
+  if (event.bases.B && !event.bases.B.isOut) {
+    event.isOut = false
   }
 
   return event

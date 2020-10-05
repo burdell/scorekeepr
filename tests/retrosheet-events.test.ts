@@ -135,6 +135,23 @@ describe('Retrosheet parsing', () => {
         })
       })
     )
+
+    expect(getResult('K.1-2;B-1(E2/TH)')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('K'),
+        isOut: false,
+        bases: getBases({
+          B: {
+            endBase: 1,
+            result: resultGenerators.error(2)
+          },
+          1: {
+            endBase: 2,
+            result: undefined
+          }
+        })
+      })
+    )
   })
 
   it('handles flyouts and lineouts', () => {
@@ -183,6 +200,14 @@ describe('Retrosheet parsing', () => {
       getEventWithDefaults({
         isOut: true,
         result: resultGenerators.flyOut(8)
+      })
+    )
+
+    expect(getResult('8/F.2-3')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.flyOut(8),
+        bases: getBases({ 2: { endBase: 3, result: undefined } })
       })
     )
   })
@@ -686,6 +711,31 @@ describe('Retrosheet parsing', () => {
           },
           1: {
             endBase: 3,
+            result: undefined
+          }
+        })
+      })
+    )
+
+    expect(getResult('S8/G.3-H(UR);2-H(UR);1-3')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.hit(1),
+        bases: getBases({
+          B: {
+            isAtBatResult: true,
+            endBase: 1,
+            result: undefined
+          },
+          1: {
+            endBase: 3,
+            result: undefined
+          },
+          2: {
+            endBase: 4,
+            result: undefined
+          },
+          3: {
+            endBase: 4,
             result: undefined
           }
         })

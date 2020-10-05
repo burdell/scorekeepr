@@ -101,8 +101,7 @@ export const buildConfig: BuildConfig[] = [
         'Braves enter bottom of the 9th down 9-3 and walk it off with a Brooks Conrad grand slam',
       ATL201209020:
         'Chipper Jones hits a walk-off homerun for his final home run to cap off a 5-run comeback 9th inning',
-      ATL201107260:
-        '19 inning game vs the Pirates. The infamous LETS GO PIRRAAATTES girl',
+      ATL201107260: '19 inning game vs the Pirates.',
       ATL201810070: 'Ronald Acuña Jr. hits a grand slam in the NLDS',
       ATL201606150: 'Freddie Freeman hits for the cycle',
       SFN201010080: "Bobby Cox's last win - an 11-inning game in 2010 NLDS",
@@ -132,7 +131,17 @@ export const buildConfig: BuildConfig[] = [
     gameDescriptions: {
       LAN199904230: 'Fernando Tatis hits 2 grand slams in a single inning',
       BAL200708221:
-        'New American League record for most runs scored by a team with 30 by the Rangers'
+        'New American League record for most runs scored by a team with 30 by the Rangers',
+      CHN193210010:
+        ' 1932 World Series game where Babe Ruth (supposedly) called his shot in the 5th'
     }
   }
+  // {
+  //   name: 'All-Star Games',
+  //   type: 'category',
+  //   urlSlug: 'all-star',
+  //   description: 'All-Star Games',
+  //   retrosheetFiles: ['all-star.txt'],
+  //   gameDescriptions: {}
+  // }
 ]
