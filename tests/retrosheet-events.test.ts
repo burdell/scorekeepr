@@ -7,7 +7,6 @@ import { getBases } from '../lib/retrosheet/utilities'
 
 // Uhandled/mishandled:
 // 6(B)3(1)/LDP (mishandled)
-// SB3;SB2
 
 function getEventWithDefaults(overrides: Partial<GameEvent> = {}): GameEvent {
   return {
@@ -267,6 +266,23 @@ describe('Retrosheet parsing', () => {
             endBase: 3,
             isOut: true,
             result: resultGenerators.putout([8, 5])
+          }
+        })
+      })
+    )
+
+    expect(getResult('53.2-3;1-2')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.putout([5, 3]),
+        bases: getBases({
+          2: {
+            endBase: 3,
+            result: undefined
+          },
+          1: {
+            endBase: 2,
+            result: undefined
           }
         })
       })

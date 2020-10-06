@@ -109,7 +109,7 @@ const oldSimpleOut: ActionConfig = {
       })
     }
 
-    const putoutPositions = getPutoutPositions(gameplayEvent.result)
+    const putoutPositions = getPutoutPositions(positions)
     return actionGenerators.putout(putoutPositions)
   }
 }
