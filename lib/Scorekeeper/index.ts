@@ -4,13 +4,7 @@ import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
 import { handleGameEvent } from './store/gameplay'
 import { calculateStats } from './stats'
 
-import {
-  Game,
-  LineupEntry,
-  InitialGame,
-  GameEvent,
-  GameEventHandler
-} from '../types'
+import { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
 
 export class Scorekeeper {
   private store: ReturnType<typeof getStore>

@@ -3,8 +3,23 @@ import { getAction, getBases } from '../lib/retrosheet/utilities'
 import * as actionGenerators from '../lib/retrosheet/generators/action'
 import * as resultGenerators from '../lib/retrosheet/generators/result'
 import { Stats, GameEvent } from '../lib/types'
+import { formatStartTime } from '../lib/utils/time'
 
 describe('Scorekeeper tests', () => {
+  it('correctly formats start time', () => {
+    const correctlyFormatted = '7:45PM'
+    expect(formatStartTime(correctlyFormatted)).toEqual(correctlyFormatted)
+
+    const noPm = '6:21'
+    expect(formatStartTime(noPm)).toEqual('6:21PM')
+
+    const invalidTime1 = '0:00'
+    expect(formatStartTime(invalidTime1)).toEqual(undefined)
+
+    const invalidTime2 = '0:00PM'
+    expect(formatStartTime(invalidTime2)).toEqual(undefined)
+  })
+
   it('handles gameplay events', () => {
     const sk = new Scorekeeper()
     const action = actionGenerators.hit(1)

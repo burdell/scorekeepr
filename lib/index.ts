@@ -5,6 +5,7 @@ import { getTeam, getStadium, getLineup } from './retrosheet/translators'
 import { Scorekeeper } from './Scorekeeper'
 import { getLineupMap, getLineupSpot, getPitchers } from './utils/lineup'
 import { alertSuccess, alertGameGenerated } from './utils/alerts'
+import { formatStartTime } from './utils/time'
 
 function generateGameplay({
   game,
@@ -61,7 +62,7 @@ export async function getRetrosheetScorekeepers(
       homeTeam: getTeam(info.hometeam),
       visitingTeam: getTeam(info.visteam),
       location: getStadium(info.site).fullName,
-      startTime: info.starttime,
+      startTime: formatStartTime(info.starttime),
       id: game.id
     })
 
