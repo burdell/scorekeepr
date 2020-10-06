@@ -61,7 +61,7 @@ export async function getRetrosheetScorekeepers(
       date: info.date,
       homeTeam: getTeam(info.hometeam),
       visitingTeam: getTeam(info.visteam),
-      location: getStadium(info.site).fullName,
+      location: getStadium(info.site, info.date),
       startTime: formatStartTime(info.starttime),
       id: game.id
     })
