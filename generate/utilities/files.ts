@@ -1,5 +1,6 @@
 import { writeFileSync, rmdirSync, mkdirSync, existsSync } from 'fs'
 import { resolve } from 'path'
+import jsonminify from 'jsonminify'
 
 import {
   outputFolder,
@@ -11,7 +12,8 @@ import {
 } from '../outputFolders'
 
 export function writeToFile(data: unknown, dir: string, filename: string) {
-  writeFileSync(resolve(dir, `${filename}`), JSON.stringify(data, null, 2))
+  const minified = jsonminify(JSON.stringify(data))
+  writeFileSync(resolve(dir, `${filename}`), minified)
 }
 
 export function regenOutputFolder() {
