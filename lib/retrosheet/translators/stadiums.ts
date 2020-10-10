@@ -74,7 +74,10 @@ const stadiums: TeamMap = {
   },
   CLE08: {
     abbreviation: 'CLE08',
-    fullName: 'Jacobs Field'
+    fullNameFn: (year) => {
+      if (year < 2008) return 'Jacobs Field'
+      return 'Progressive Field'
+    }
   },
   DEN02: {
     abbreviation: 'DEN02',

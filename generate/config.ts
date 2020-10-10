@@ -76,7 +76,7 @@ export const buildConfig: BuildConfig[] = [
     gameDescriptions: {
       ATL201905150: 'Austin Riley hits HR in debut',
       ATL201906140:
-        'Brian McCann walks off Phillies after trailing Phillies 7-2 in the 7th',
+        'Brian McCann walks off Phillies after trailing 7-2 in the 7th',
       ATL201908180:
         'Rafael Ortega hits decisive grand slam vs Dodgers for his 2nd career HR',
       ATL201909200: 'Braves clinch division for 2nd straight year',

@@ -12,7 +12,7 @@ export function getOutType(
 ): 'groundout' | 'lineout' | 'flyout' | 'sacrifice-fly' | undefined {
   if (modifier.match(/\/(B*)G/)) return 'groundout'
   if (modifier.indexOf('/L') >= 0) return 'lineout'
-  if (modifier.match(/\/.*F.*/) || modifier.indexOf('/P') >= 0) return 'flyout'
+  if (modifier.match(/\/.*F.*/) || modifier.match(/\/B?P/)) return 'flyout'
   if (modifier.indexOf('/SF') >= 0) return 'sacrifice-fly'
 }
 

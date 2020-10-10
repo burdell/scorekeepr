@@ -155,7 +155,6 @@ describe('Retrosheet parsing', () => {
   })
 
   it('handles flyouts and lineouts', () => {
-    // 01,CX,7/F
     const outfieldFlyout = parseAction(
       getAtBat({ result: '7/F', pitchSequence: 'CX', count: '01' })
     )
@@ -208,6 +207,13 @@ describe('Retrosheet parsing', () => {
         isOut: true,
         result: resultGenerators.flyOut(8),
         bases: getBases({ 2: { endBase: 3, result: undefined } })
+      })
+    )
+
+    expect(getResult('5/BP-')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.flyOut(5)
       })
     )
   })
