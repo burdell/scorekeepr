@@ -137,6 +137,10 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentLineupSpot.isOut = event.isOut
     }
 
+    if (event.isSacrifice) {
+      currentLineupSpot.isSacrifice = event.isSacrifice
+    }
+
     const pitchInfo = event.pitches
     if (pitchInfo) {
       currentLineupSpot.strikes = pitchInfo.strikes

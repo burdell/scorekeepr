@@ -218,6 +218,38 @@ describe('Retrosheet parsing', () => {
     )
   })
 
+  it('records sacrifice flys', () => {
+    expect(getResult('7/F/SF.3-H')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        isSacrifice: true,
+        result: resultGenerators.flyOut(7),
+        bases: getBases({
+          3: {
+            result: undefined,
+            endBase: 4
+          }
+        })
+      })
+    )
+  })
+
+  it('records sacrifice bunts', () => {
+    expect(getResult('34/BG/SH.1-2')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        isSacrifice: true,
+        result: resultGenerators.putout([3, 4]),
+        bases: getBases({
+          1: {
+            result: undefined,
+            endBase: 2
+          }
+        })
+      })
+    )
+  })
+
   it('handles putouts', () => {
     expect(getResult('93/L')).toEqual(
       getEventWithDefaults({
