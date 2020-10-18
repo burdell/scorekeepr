@@ -27,12 +27,8 @@ function calculateInningStats(atBats: AtBat[]) {
         stats.errors += 1
       }
     })
-
     if (atBat.bases.length === 4 && !atBat.isOut) {
       stats.runs += 1
-    }
-    if (atBat.bases.length > 0 && atBat.isOut === false) {
-      stats.lob += 1
     }
   })
 
