@@ -7,17 +7,17 @@ export const buildConfig: BuildConfig[] = [
     type: 'series-group',
     series: [
       {
-        retrosheetFiles: ['1995_NLDS.txt'],
+        retrosheetFiles: ['braves_1995/1995_NLDS.txt'],
         seriesId: () => '1995_nlds',
         seriesName: 'NLDS'
       },
       {
-        retrosheetFiles: ['1995_NLCS.txt'],
+        retrosheetFiles: ['braves_1995/1995_NLCS.txt'],
         seriesId: () => '1995_nlcs',
         seriesName: 'NLCS'
       },
       {
-        retrosheetFiles: ['1995_WS.txt'],
+        retrosheetFiles: ['braves_1995/1995_WS.txt'],
         seriesId: () => '1995_ws',
         seriesName: 'World Series'
       }
@@ -62,11 +62,14 @@ export const buildConfig: BuildConfig[] = [
     type: 'series',
     series: [
       {
-        retrosheetFiles: ['2019_braves_01.txt', '2019_braves_02.txt'],
+        retrosheetFiles: [
+          'braves_2019/2019_braves_01.txt',
+          'braves_2019/2019_braves_02.txt'
+        ],
         seriesId: (teams, firstGameId) => `${teams}-${firstGameId}`
       },
       {
-        retrosheetFiles: ['2019_braves_postseason.txt'],
+        retrosheetFiles: ['braves_2019/2019_braves_postseason.txt'],
         seriesId: () => `2019-NLDS-ATL-STL`,
         seriesName: 'NLDS vs St. Louis Cardinals'
       }
@@ -87,7 +90,8 @@ export const buildConfig: BuildConfig[] = [
       CLE201904202:
         'Braves come back after trailing 7-3 with the bases loaded and two outs in the ninth inning',
       NYN201908230: 'Ronald Acuña Jr. joins the 30-30 club',
-      MIA201905030: 'Kevin Gausman (unsucessfully) throws at Jose Urena'
+      MIA201905030:
+        'Kevin Gausman (unsucessfully) throws at Jose Urena in retaliation'
     }
   },
   {
@@ -100,12 +104,13 @@ export const buildConfig: BuildConfig[] = [
       ATL201005200:
         'Braves enter bottom of the 9th down 9-3 and walk it off with a Brooks Conrad grand slam',
       ATL201209020:
-        'Chipper Jones hits a walk-off homerun for his final home run to cap off a 5-run comeback 9th inning',
-      ATL201107260: '19 inning game vs the Pirates.',
+        'Chipper Jones records the final homerun of his career - a walkoff to cap off a 5-run comeback',
+      ATL201107260: 'Braves win a 19 inning battle against the Pirates.',
       ATL201810070: 'Ronald Acuña Jr. hits a grand slam in the NLDS',
       ATL201606150: 'Freddie Freeman hits for the cycle',
-      SFN201010080: "Bobby Cox's last win - an 11-inning game in 2010 NLDS",
-      ATL197308050: 'Phil Niekro no-hitter'
+      SFN201010080:
+        "Bobby Cox's records his last win as a manager in an 11-inning game in the 2010 NLDS",
+      ATL197308050: 'Phil Niekro throws a no-hitter'
     }
   },
   {
@@ -119,7 +124,9 @@ export const buildConfig: BuildConfig[] = [
       DET199609180: 'Roger Clemens records 20 strikeouts for Boston (again)',
       CHN199805060: 'Kerry Wood records 20 strikeouts for Chicago',
       WAS201605110: 'Max Scherzer records 20 strikeouts for Washington',
-      NYN197004220: 'Tom Seaver records 10 strikeouts in a row for the Mets'
+      NYN197004220: 'Tom Seaver records 10 strikeouts in a row for the Mets',
+      SLN196810020:
+        'Bob Gibson records a record 17 strikeouts in a World Series game'
     }
   },
   {
@@ -131,17 +138,9 @@ export const buildConfig: BuildConfig[] = [
     gameDescriptions: {
       LAN199904230: 'Fernando Tatis hits 2 grand slams in a single inning',
       BAL200708221:
-        'New American League record for most runs scored by a team with 30 by the Rangers',
+        'Rangers score a new American League record 30 runs against the Orioles',
       CHN193210010:
-        ' 1932 World Series game where Babe Ruth (supposedly) called his shot in the 5th'
+        'Babe Ruth (supposedly) calls his shot in the 5th inning of the 1932 World Series'
     }
   }
-  // {
-  //   name: 'All-Star Games',
-  //   type: 'category',
-  //   urlSlug: 'all-star',
-  //   description: 'All-Star Games',
-  //   retrosheetFiles: ['all-star.txt'],
-  //   gameDescriptions: {}
-  // }
 ]

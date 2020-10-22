@@ -158,6 +158,10 @@ const stadiums: TeamMap = {
       return ''
     }
   },
+  STL09: {
+    abbreviation: 'STL09',
+    fullName: 'Busch Stadium'
+  },
   STL10: {
     abbreviation: 'STL10',
     fullName: 'Busch Stadium'

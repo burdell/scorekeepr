@@ -1,6 +1,6 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { GameEvent, EventBaseResult, Bases } from '../types'
+import { GameEvent, EventBaseResult } from '../types'
 
 import { getAction, Action } from './getAction'
 import { getPitchData } from './pitches'
