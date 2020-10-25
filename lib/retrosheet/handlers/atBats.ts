@@ -1,24 +1,16 @@
 import { ActionConfig, Action } from '../retrosheet.types'
 import * as actionGenerators from '../generators/action'
 import * as resultGenerators from '../generators/result'
+import * as guards from '../guards'
 
 import { getAction, getBases } from '../utilities'
-
-function getHitType(hit: string) {
-  if (hit === 'S') return 1
-  if (hit === 'D' || hit === 'DGR') return 2
-  if (hit === 'T') return 3
-  if (hit === 'HR') return 4
-
-  throw new Error('Attempted to record an invalid hit')
-}
 
 const hit: ActionConfig = {
   actionType: 'batter',
   regexp: /^(HR)|^([SDT])\d*!?\/|^(DGR)|^([SDT])\d$/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hrGroup, hitGroup, grdGroup, yetAnotherHitGroup] = match
-    const hitType = getHitType(
+    const hitType = guards.getHitType(
       hrGroup || hitGroup || grdGroup || yetAnotherHitGroup
     )
     return actionGenerators.hit(hitType)
@@ -33,7 +25,7 @@ const oldHits: ActionConfig = {
   regexp: /^([SDT])\d*(\..+)?#*$/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, hitGroup] = match
-    const hitType = getHitType(hitGroup)
+    const hitType = guards.getHitType(hitGroup)
     return actionGenerators.hit(hitType)
   }
 }

@@ -3,6 +3,17 @@ import * as resultGenerators from '../../lib/retrosheet/generators/result'
 import { getBases } from '../../lib/retrosheet/utilities'
 
 describe('Retrosheet - Outs', () => {
+  it('handles invalid players in outs', () => {
+    try {
+      getResult('0/F')
+      fail('Did not correctly fail with invalid players in flyout')
+    } catch (e) {
+      expect(e.message).toEqual(
+        `Attempted to record an out without a valid defensive player: `
+      )
+    }
+  })
+
   it('handles strikeouts', () => {
     const strikeout = parseAction(
       getAtBat({ result: 'K', pitchSequence: 'BBFCBFB', count: '32' })
@@ -396,6 +407,23 @@ describe('Retrosheet - Outs', () => {
             isOut: true
           },
           3: undefined
+        }
+      })
+    )
+
+    expect(getResult('1(B)15(3)/LDP/L1')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.lineOut(1),
+        bases: {
+          B: undefined,
+          1: undefined,
+          2: undefined,
+          3: {
+            endBase: 4,
+            result: resultGenerators.putout([1, 5]),
+            isOut: true
+          }
         }
       })
     )

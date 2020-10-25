@@ -9,6 +9,7 @@
   "engineStrict": true,
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "generate": "ts-node ./generate",
     "server": "ts-node ./generate/server.ts",

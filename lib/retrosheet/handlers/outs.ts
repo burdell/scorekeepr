@@ -9,11 +9,10 @@ import { ActionConfig } from '../retrosheet.types'
 
 export function getOutType(
   modifier: string
-): 'groundout' | 'lineout' | 'flyout' | 'sacrifice-fly' | undefined {
+): 'groundout' | 'lineout' | 'flyout' | undefined {
   if (modifier.match(/\/(B*)G/)) return 'groundout'
   if (modifier.indexOf('/L') >= 0) return 'lineout'
   if (modifier.match(/\/.*F.*/) || modifier.match(/\/B?P/)) return 'flyout'
-  if (modifier.indexOf('/SF') >= 0) return 'sacrifice-fly'
 }
 
 export function isSacrifice(atBatResult: string) {
@@ -44,7 +43,7 @@ const strikeout: ActionConfig = {
 }
 
 function getNonGroundout(
-  outType: 'flyout' | 'lineout' | 'sacrifice-fly' | undefined,
+  outType: 'flyout' | 'lineout' | undefined,
   defensivePositions: number[]
 ) {
   let result: AtBatResult | undefined = undefined
@@ -58,8 +57,6 @@ function getNonGroundout(
     result = resultGenerators.flyOut(defensivePosition)
   } else if (outType === 'lineout') {
     result = resultGenerators.lineOut(defensivePosition)
-  } else if (outType === 'sacrifice-fly') {
-    result = resultGenerators.flyOut(defensivePosition)
   }
 
   return result

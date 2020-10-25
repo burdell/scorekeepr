@@ -1,4 +1,5 @@
 import { parseAction } from '../../lib/retrosheet'
+import { getEventWithDefaults } from './utils'
 
 describe('Retrosheet - miscellaneous things', () => {
   it('handles comments', () => {
@@ -32,5 +33,17 @@ describe('Retrosheet - miscellaneous things', () => {
     })
 
     expect(result).toEqual(undefined)
+  })
+
+  it('handles unknown plays', () => {
+    const result = parseAction({
+      type: 'at-bat',
+      result: '99',
+      pitchSequence: '',
+      playerId: 'acun11',
+      count: ''
+    })
+
+    expect(result).toEqual(getEventWithDefaults({}))
   })
 })

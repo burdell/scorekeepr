@@ -49,7 +49,7 @@ export function putout(putoutPositions: number[]) {
   })
 }
 
-export function error(fielder: number, endBase: Base = 1) {
+export function error(fielder: number, endBase: Base) {
   return getAction({
     result: resultGenerators.error(fielder),
     bases: getBases({

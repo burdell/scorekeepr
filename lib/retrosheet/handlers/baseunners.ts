@@ -9,9 +9,9 @@ import {
   getAdvanceableBase
 } from '../utilities'
 import * as resultGenerators from '../generators/result'
-import { getBaserunnerMovements } from '../baseMovements'
 import { Bases } from '../../types'
 import { getPutoutPositions } from '../utilities'
+import { getAllBaserunnerAction } from '../guards'
 
 const caughtStealing: ActionConfig = {
   actionType: 'baserunner',
@@ -119,22 +119,14 @@ const allBaseMovement: ActionConfig = {
   regexp: /^(WP|PB|BK)/,
   handler: (atBat, match, baseMovements) => {
     const [_, action] = match
-
-    function getResultFn() {
-      if (action === 'PB') return resultGenerators.passedBall
-      else if (action === 'WP') return resultGenerators.wildPitch
-      else if (action === 'BK') return resultGenerators.balk
-
-      return () => undefined
-    }
-    const resultFn = getResultFn()
+    const result = getAllBaserunnerAction(action)
 
     const bases = baseMovements.reduce<Partial<Bases>>((acc, movement) => {
       if (movement.startBase === 4) return acc
 
       acc[movement.startBase] = {
         endBase: movement.endBase,
-        result: resultFn()
+        result
       }
       return acc
     }, {})
