@@ -139,6 +139,10 @@ const stadiums: TeamMap = {
     abbreviation: 'PHO01',
     fullName: 'Chase Field'
   },
+  SAN01: {
+    abbreviation: 'SAN01',
+    fullName: 'San Diego Stadium'
+  },
   SAN02: {
     abbreviation: 'SAN02',
     fullName: 'Petco Park'

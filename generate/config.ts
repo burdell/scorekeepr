@@ -126,7 +126,8 @@ export const buildConfig: BuildConfig[] = [
       WAS201605110: 'Max Scherzer records 20 strikeouts for Washington',
       NYN197004220: 'Tom Seaver records 10 strikeouts in a row for the Mets',
       SLN196810020:
-        'Bob Gibson records a record 17 strikeouts in a World Series game'
+        'Bob Gibson records a record 17 strikeouts in a World Series game',
+      SDN197006121: 'Dock Ellis throws a no-hitter under the influence of LSD'
     }
   },
   {
