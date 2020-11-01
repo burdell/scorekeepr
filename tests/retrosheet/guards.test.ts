@@ -1,7 +1,7 @@
 import * as guards from '../../lib/retrosheet/guards'
 
 describe('Type Guard getters tests', () => {
-  it('throws an error for invalid hit types', () => {
+  it('getHitType - throws an error for invalid hit types', () => {
     try {
       guards.getHitType('8')
       fail()
@@ -10,8 +10,57 @@ describe('Type Guard getters tests', () => {
     }
   })
 
-  it('handles invalid walks, balks, and passed balls', () => {
+  it('getAllBaserunnerAction - handles invalid walks, balks, and passed balls', () => {
     const result = guards.getAllBaserunnerAction('LOL')
     expect(result).toEqual(undefined)
+  })
+
+  it('getBaseFromString - handles invalid base strings', () => {
+    try {
+      guards.getBaseFromString('NOTABASE')
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual(
+        'Attempted to parse an invalid base from NOTABASE'
+      )
+    }
+  })
+
+  it('getNextBase - prevents getting an invalid next base', () => {
+    try {
+      guards.getNextBase(4)
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual('Attempted to get next base of invalid base 4')
+    }
+  })
+
+  it('getPreviousBase - prevents getting an invalid previous base', () => {
+    try {
+      guards.getPreviousBase(1)
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual(
+        'Attempted to get previous base of invalid base 1'
+      )
+    }
+  })
+
+  it('getBase - prevents using an invalid base', () => {
+    try {
+      guards.getBase('NOTABASE')
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual('Attempted to use an invalid base')
+    }
+  })
+
+  it('getAdvanceableBase - prevents using an invalid advanceable base', () => {
+    try {
+      guards.getAdvanceableBase(1)
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual('Attempted to use an invalid advanceable base')
+    }
   })
 })

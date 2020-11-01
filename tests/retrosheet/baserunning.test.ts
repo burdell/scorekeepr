@@ -398,4 +398,8 @@ describe('Retrosheet - Baserunning', () => {
       })
     )
   })
+
+  // it('handles unproperly formatted stolen bases', () => {
+  //   expect(getResult(''))
+  // })
 })

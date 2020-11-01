@@ -61,6 +61,7 @@ export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>
 
 export type Base = 1 | 2 | 3 | 4
 export type AdvanceableBase = 2 | 3 | 4
+export type StartableBase = 1 | 2 | 3
 export type PutOut = { type: 'putout'; result: number[]; display: string }
 export type FlyOut = {
   type: 'flyout'

@@ -4,7 +4,8 @@ import {
   BaseResult,
   BaseResultResult,
   Bases,
-  AdvanceableBase
+  AdvanceableBase,
+  StartableBase
 } from '../types'
 
 export function getAction(overrides: Partial<GameEvent> = {}): GameEvent {
@@ -57,45 +58,6 @@ export function advanceRunnerHelper({
 
       return existingResult || { ...newResult }
     })
-}
-
-export function getNextBase(base: Base): Base {
-  if (base === 1) return 2
-  if (base === 2) return 3
-  if (base === 3) return 4
-
-  throw new Error(`Attempted to get next base of invalid base ${base}`)
-}
-
-export function getPreviousBase(base: Base): Base {
-  if (base === 2) return 1
-  if (base === 3) return 2
-  if (base === 4) return 3
-
-  throw new Error(`Attempted to get previous base of invalid base ${base}`)
-}
-
-export function getBase(rawBase: string | number): Base {
-  if (rawBase === 'H') return 4
-
-  const base = Number(rawBase)
-  if (base === 1) return 1
-  if (base === 2) return 2
-  if (base === 3) return 3
-  if (base === 4) return 4
-
-  throw new Error('Attempted to use an invalid base')
-}
-
-export function getAdvanceableBase(rawBase: string | number): AdvanceableBase {
-  if (rawBase === 'H') return 4
-
-  const base = Number(rawBase)
-  if (base === 2) return 2
-  if (base === 3) return 3
-  if (base === 4) return 4
-
-  throw new Error('Attempted to use an invalid advanceable base')
 }
 
 export function getPutoutPositions(putout: string) {

@@ -1,5 +1,5 @@
 import { Base } from '../types'
-import { getBase } from './utilities'
+import { getBase } from './guards'
 
 export type BaserunnerMovements = ReturnType<typeof getBaserunnerMovements>
 

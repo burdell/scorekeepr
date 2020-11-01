@@ -1,13 +1,13 @@
 import { ActionConfig } from '../retrosheet.types'
 
+import { getAction, getBases } from '../utilities'
 import {
-  getAction,
   getBase,
-  getBases,
   getNextBase,
   getPreviousBase,
-  getAdvanceableBase
-} from '../utilities'
+  getAdvanceableBase,
+  getBaseFromString
+} from '../guards'
 import * as resultGenerators from '../generators/result'
 import { Bases } from '../../types'
 import { getPutoutPositions } from '../utilities'
@@ -38,12 +38,8 @@ const stolenBase: ActionConfig = {
   handler: (atBat, matches) => {
     const bases = getBases()
     matches.forEach((matchString) => {
-      const baseMatch = matchString.match(/\d+|H+/)
-      if (!baseMatch) return
-
-      const base = getAdvanceableBase(baseMatch[0])
+      const base = getBaseFromString(matchString)
       const previousBase = getPreviousBase(base)
-      if (previousBase === 4) return
 
       bases[previousBase] = {
         endBase: base,
