@@ -56,11 +56,42 @@ describe('Type Guard getters tests', () => {
   })
 
   it('getAdvanceableBase - prevents using an invalid advanceable base', () => {
+    expect(guards.getAdvanceableBase(4)).toEqual(4)
+
     try {
       guards.getAdvanceableBase(1)
       fail('Failed to throw for an invalid base')
     } catch (e) {
       expect(e.message).toEqual('Attempted to use an invalid advanceable base')
     }
+  })
+
+  it('getStartableBase - prevents using an invalid start base', () => {
+    try {
+      guards.getStartableBase(4)
+      fail('Failed to throw for an invalid base')
+    } catch (e) {
+      expect(e.message).toEqual('Attempted to use invalid start base 4')
+    }
+  })
+
+  it('getOutType - it handles invalid out strings', () => {
+    expect(guards.getOutType('not an out')).toBe(undefined)
+  })
+
+  it('getMultiActionOut', () => {
+    try {
+      guards.getMultiAction('LOL')
+      fail('Failed to throw for an invalid result')
+    } catch (e) {
+      expect(e.message).toEqual(
+        'Attemted to record a multi-action out without a valid batter action (LOL)'
+      )
+    }
+  })
+
+  it('getNonGroundout - handles invalid non-groundouts', () => {
+    const result = guards.getNonGroundout(undefined, [6])
+    expect(result).toEqual(undefined)
   })
 })

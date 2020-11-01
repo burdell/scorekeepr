@@ -6,14 +6,7 @@ import * as actionGenerators from '../generators/action'
 import { GameEvent, AtBatResult } from '../../types'
 import { getAction, getPutoutPositions } from '../utilities'
 import { ActionConfig } from '../retrosheet.types'
-
-export function getOutType(
-  modifier: string
-): 'groundout' | 'lineout' | 'flyout' | undefined {
-  if (modifier.match(/\/(B*)G/)) return 'groundout'
-  if (modifier.indexOf('/L') >= 0) return 'lineout'
-  if (modifier.match(/\/.*F.*/) || modifier.match(/\/B?P/)) return 'flyout'
-}
+import { getOutType, getNonGroundout, getMultiAction } from '../guards'
 
 export function isSacrifice(atBatResult: string) {
   return !!atBatResult.match(/\/S(F|H)/)
@@ -40,26 +33,6 @@ const strikeout: ActionConfig = {
       result: resultGenerators.pitcherResult(resultType)
     })
   }
-}
-
-function getNonGroundout(
-  outType: 'flyout' | 'lineout' | undefined,
-  defensivePositions: number[]
-) {
-  let result: AtBatResult | undefined = undefined
-  const defensivePosition = defensivePositions.pop()
-  if (!defensivePosition || defensivePositions.length > 0)
-    throw new Error(
-      `Attempted to record an out without a valid defensive player: ${defensivePositions}`
-    )
-
-  if (outType === 'flyout') {
-    result = resultGenerators.flyOut(defensivePosition)
-  } else if (outType === 'lineout') {
-    result = resultGenerators.lineOut(defensivePosition)
-  }
-
-  return result
 }
 
 function getOut(atBatResult: string) {
@@ -116,9 +89,9 @@ const multiActionOut: ActionConfig = {
   regexp: /(\d+)\(([B|1|2|3])\)/g,
   handler: (gameplayEvent, match) => {
     const { result } = gameplayEvent
-    const baseActions = result.matchAll(/([\d!]+)\(([B|1|2|3])\)/g)
-    const batterMatch = result.match(/^([\d!]+\([123]\))*(\d+)(\(B\))?\//)
-    const batterResultType = result.match(/(\/\w+)(\.[B123]-[123H]((.+))*)*$/)
+    const { baseActions, batterMatch, batterResultType } = getMultiAction(
+      result
+    )
 
     let batterAction = batterMatch ? batterMatch[2] : ''
     let firstBaseResult = ''
@@ -161,14 +134,12 @@ const multiActionOut: ActionConfig = {
     }
 
     function getAtBatResult() {
-      if (batterResultType) {
-        const [fullMatch, result] = batterResultType
-        const outType = getOutType(result)
-        const positions = getPutoutPositions(result)
-        if (outType !== 'groundout' && positions.length) {
-          const batterOut = getNonGroundout(outType, positions)
-          return batterOut
-        }
+      const [fullMatch, result] = batterResultType
+      const outType = getOutType(result)
+      const positions = getPutoutPositions(result)
+      if (outType !== 'groundout' && positions.length) {
+        const batterOut = getNonGroundout(outType, positions)
+        return batterOut
       }
 
       return batterResult

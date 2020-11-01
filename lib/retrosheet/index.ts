@@ -7,6 +7,7 @@ import { getPitchData } from './pitches'
 import { getBaserunnerMovements, BaserunnerMovements } from './baseMovements'
 import { getPutoutPositions } from './utilities'
 import * as resultGenerators from './generators/result'
+import { getStartableBase } from './guards'
 
 function handleAction(
   gameplayEvent: AtBat,
@@ -63,8 +64,8 @@ export function parseAction(gameplayEvent: GameplayEvent) {
 
   baserunnerMovements.forEach(
     ({ startBase, endBase, isOut, result, errorPosition }) => {
-      if (startBase === 4 || !event) return
-      const existingBase = event.bases[startBase]
+      const validatedStartBase = getStartableBase(startBase)
+      const existingBase = event.bases[validatedStartBase]
 
       const baseMovement: EventBaseResult = {
         endBase,
@@ -84,14 +85,14 @@ export function parseAction(gameplayEvent: GameplayEvent) {
       } else if (isOut) {
         baseMovement.isOut = true
         const putOut = resultGenerators.putout(getPutoutPositions(result))
-        if (startBase === endBase) {
+        if (validatedStartBase === endBase) {
           baseMovement.onBasePutout = putOut
         } else {
           baseMovement.result = putOut
         }
       }
 
-      event.bases[startBase] = baseMovement
+      event.bases[validatedStartBase] = baseMovement
     }
   )
 

@@ -70,6 +70,45 @@ describe('Retrosheet - Baserunning', () => {
         })
       })
     )
+
+    // errors with no explicit base movements
+    // i dont think this would ever be in a retrosheet file, but it does account for this
+    expect(getResult('PO1(E2/TH)')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        bases: getBases({
+          1: {
+            endBase: 2,
+            result: resultGenerators.error(2)
+          }
+        })
+      })
+    )
+    expect(getResult('PO2(E2/TH)')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        bases: getBases({
+          2: {
+            endBase: 3,
+            result: resultGenerators.error(2)
+          }
+        })
+      })
+    )
+    expect(getResult('PO3(E2/TH)')).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        bases: getBases({
+          3: {
+            endBase: 4,
+            result: resultGenerators.error(2)
+          }
+        })
+      })
+    )
   })
 
   it('handles caught stealing', () => {

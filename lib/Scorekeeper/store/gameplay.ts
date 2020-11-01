@@ -6,7 +6,8 @@ import {
   Base,
   BaseResult,
   BaseResultResult,
-  GameEventHandler
+  GameEventHandler,
+  StartableBase
 } from '../../types'
 
 function getEmptyInning() {
@@ -151,9 +152,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
     const currentBaserunners = getCurrentBaserunners(currentInning)
     const baseMovements = event.bases
 
-    ;([1, 2, 3] as Base[]).forEach((base) => {
-      if (base === 4) return
-
+    ;([1, 2, 3] as StartableBase[]).forEach((base) => {
       const baseMovement = baseMovements[base]
       const currentBase = currentBaserunners[base]
       if (baseMovement && currentBase) {

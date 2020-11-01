@@ -6,16 +6,18 @@ import {
   getNextBase,
   getPreviousBase,
   getAdvanceableBase,
-  getBaseFromString
+  getBaseFromString,
+  getStartableBase
 } from '../guards'
 import * as resultGenerators from '../generators/result'
 import { Bases } from '../../types'
 import { getPutoutPositions } from '../utilities'
 import { getAllBaserunnerAction } from '../guards'
+import { start } from 'repl'
 
 const caughtStealing: ActionConfig = {
   actionType: 'baserunner',
-  regexp: /^(PO)?CS([23H])\((\dE?!?\d*)!?\)/,
+  regexp: /^(PO)?CS([234H])\((\dE?!?\d*)!?\)/,
   handler: (atBat, match) => {
     const [fullMatch, isPickoff, baseString, putout] = match
     const base = getBase(baseString)
@@ -58,8 +60,8 @@ const defensiveIndifference: ActionConfig = {
   regexp: /^DI/,
   handler: (atBat, match, baserunnerMovements) => {
     const bases = getBases()
-    baserunnerMovements.forEach(({ startBase, endBase }) => {
-      if (startBase === 4) return
+    baserunnerMovements.forEach(({ startBase: rawStartBase, endBase }) => {
+      const startBase = getStartableBase(rawStartBase)
 
       bases[startBase] = {
         endBase: endBase,
@@ -118,9 +120,9 @@ const allBaseMovement: ActionConfig = {
     const result = getAllBaserunnerAction(action)
 
     const bases = baseMovements.reduce<Partial<Bases>>((acc, movement) => {
-      if (movement.startBase === 4) return acc
+      const startBase = getStartableBase(movement.startBase)
 
-      acc[movement.startBase] = {
+      acc[startBase] = {
         endBase: movement.endBase,
         result
       }

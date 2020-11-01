@@ -176,6 +176,13 @@ describe('Retrosheet - Outs', () => {
         result: resultGenerators.flyOut(5)
       })
     )
+
+    expect(getResult('5/L')).toEqual(
+      getEventWithDefaults({
+        isOut: true,
+        result: resultGenerators.lineOut(5)
+      })
+    )
   })
 
   it('records sacrifice flys', () => {
