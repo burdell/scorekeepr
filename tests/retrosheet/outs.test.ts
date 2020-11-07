@@ -332,6 +332,32 @@ describe('Retrosheet - Outs', () => {
       })
     )
 
+    expect(getResult('2(3)/FO/G-.2-3;1-2')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.fieldersChoice(1),
+        bases: {
+          B: {
+            endBase: 1,
+            result: undefined,
+            isAtBatResult: true
+          },
+          1: {
+            endBase: 2,
+            result: undefined
+          },
+          2: {
+            endBase: 3,
+            result: undefined
+          },
+          3: {
+            endBase: 4,
+            result: resultGenerators.putout([2]),
+            isOut: true
+          }
+        }
+      })
+    )
+
     expect(getResult('5(2)4(1)3/GDP')).toEqual(
       getEventWithDefaults({
         isOut: true,

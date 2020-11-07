@@ -113,11 +113,5 @@ export function getMultiAction(result: string) {
   const batterMatch = result.match(/^([\d!]+\([123]\))*(\d+)(\(B\))?\//)
   const batterResultType = result.match(/(\/\w+)(\.[B123]-[123H]((.+))*)*$/)
 
-  if (!batterResultType) {
-    throw new Error(
-      `Attemted to record a multi-action out without a valid batter action (${result})`
-    )
-  }
-
   return { baseActions, batterMatch, batterResultType }
 }

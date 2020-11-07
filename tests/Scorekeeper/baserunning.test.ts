@@ -2,10 +2,11 @@ import { Scorekeeper } from '../../lib/Scorekeeper'
 import { getAction, getBases } from '../../lib/retrosheet/utilities'
 import * as resultGenerators from '../../lib/retrosheet/generators/result'
 
-describe('Scorekeeper - outs', () => {
-  it('handles sacrifice flys', () => {
+describe('Scorekeeper - baserunning', () => {
+  it('records unsuccessful attempts to gain additional bases', () => {
     const sk = new Scorekeeper()
 
+    // ** BATTER ATTEMPT **
     sk.handleGameEvent({
       event: getAction({
         pitches: {
@@ -13,11 +14,14 @@ describe('Scorekeeper - outs', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(3),
+        result: resultGenerators.hit(1),
         bases: getBases({
           B: {
-            endBase: 3,
-            isAtBatResult: true
+            endBase: 1,
+            isAtBatResult: true,
+            additionalBases: [
+              { base: 2, result: resultGenerators.putout([8, 4]) }
+            ]
           }
         })
       }),
@@ -26,72 +30,26 @@ describe('Scorekeeper - outs', () => {
       team: 'visiting'
     })
 
-    sk.handleGameEvent({
-      event: getAction({
-        result: resultGenerators.flyOut(7),
-        isSacrifice: true,
-        isOut: true,
-        pitches: {
-          balls: 0,
-          strikes: 0,
-          pitchCount: 1
-        },
-        bases: getBases({
-          3: {
-            endBase: 4
-          }
-        })
-      }),
-      inning: 0,
-      lineupSpot: 1,
-      team: 'visiting'
-    })
-
     expect(sk.gameplay.visiting[0][0]).toEqual({
       balls: 0,
       bases: [
-        {
-          advanced: true,
-          result: undefined
-        },
-        {
-          advanced: true,
-          result: undefined
-        },
         {
           advanced: true,
           isAtBatResult: true,
           result: undefined
         },
         {
-          advanced: true,
-          result: undefined
+          advanced: false,
+          result: resultGenerators.putout([8, 4])
         }
       ],
-      isOut: false,
+      isOut: true,
       pitchCount: 1,
-      result: {
-        display: '3B',
-        result: 3,
-        type: 'hit'
-      },
+      result: resultGenerators.hit(1),
       strikes: 0
     })
 
-    expect(sk.gameplay.visiting[0][1]).toEqual({
-      balls: 0,
-      bases: [],
-      isOut: true,
-      pitchCount: 1,
-      result: resultGenerators.flyOut(7),
-      strikes: 0,
-      isSacrifice: true
-    })
-  })
-
-  it('handles sacrifice bunts', () => {
-    const sk = new Scorekeeper()
-
+    // ** RUNNER ATTEMPT **
     sk.handleGameEvent({
       event: getAction({
         pitches: {
@@ -108,28 +66,73 @@ describe('Scorekeeper - outs', () => {
         })
       }),
       inning: 0,
-      lineupSpot: 0,
+      lineupSpot: 1,
+      team: 'visiting'
+    })
+    sk.handleGameEvent({
+      event: getAction({
+        isOut: true,
+        bases: getBases({
+          1: {
+            endBase: 2,
+            result: resultGenerators.error(3),
+            additionalBases: [
+              { base: 3, result: resultGenerators.putout([3, 5]) }
+            ]
+          }
+        })
+      }),
+      inning: 0,
+      lineupSpot: 2,
       team: 'visiting'
     })
 
+    expect(sk.gameplay.visiting[0][1]).toEqual({
+      balls: 0,
+      bases: [
+        {
+          advanced: true,
+          isAtBatResult: true,
+          result: undefined
+        },
+        {
+          advanced: true,
+          result: resultGenerators.error(3)
+        },
+        {
+          advanced: false,
+          result: resultGenerators.putout([3, 5])
+        }
+      ],
+      isOut: false,
+      pitchCount: 1,
+      result: resultGenerators.hit(1),
+      strikes: 0
+    })
+  })
+
+  it('records successful attempts to gain additional bases', () => {
+    const sk = new Scorekeeper()
+
+    // ** BATTER ATTEMPT **
     sk.handleGameEvent({
       event: getAction({
-        result: resultGenerators.putout([3, 4]),
-        isSacrifice: true,
-        isOut: true,
         pitches: {
           balls: 0,
           strikes: 0,
           pitchCount: 1
         },
+        result: resultGenerators.hit(1),
         bases: getBases({
-          1: {
-            endBase: 2
+          B: {
+            endBase: 1,
+            isAtBatResult: true,
+            additionalBases: [{ base: 2 }]
           }
         })
       }),
       inning: 0,
-      lineupSpot: 1,
+      lineupSpot: 0,
       team: 'visiting'
     })
 
@@ -138,8 +141,8 @@ describe('Scorekeeper - outs', () => {
       bases: [
         {
           advanced: true,
-          result: undefined,
-          isAtBatResult: true
+          isAtBatResult: true,
+          result: undefined
         },
         {
           advanced: true,
@@ -148,28 +151,11 @@ describe('Scorekeeper - outs', () => {
       ],
       isOut: false,
       pitchCount: 1,
-      result: {
-        display: '1B',
-        result: 1,
-        type: 'hit'
-      },
+      result: resultGenerators.hit(1),
       strikes: 0
     })
 
-    expect(sk.gameplay.visiting[0][1]).toEqual({
-      balls: 0,
-      bases: [],
-      isOut: true,
-      pitchCount: 1,
-      result: resultGenerators.putout([3, 4]),
-      strikes: 0,
-      isSacrifice: true
-    })
-  })
-
-  it('handles on-base putouts', () => {
-    const sk = new Scorekeeper()
-
+    // ** RUNNER ATTEMPT **
     sk.handleGameEvent({
       event: getAction({
         pitches: {
@@ -186,37 +172,41 @@ describe('Scorekeeper - outs', () => {
         })
       }),
       inning: 0,
-      lineupSpot: 0,
+      lineupSpot: 1,
       team: 'visiting'
     })
-
     sk.handleGameEvent({
       event: getAction({
-        result: undefined,
         bases: getBases({
           1: {
-            endBase: 1,
-            onBasePutout: resultGenerators.putout([1, 3]),
-            isOut: true
+            endBase: 2,
+            result: resultGenerators.error(3),
+            additionalBases: [{ base: 3 }]
           }
         })
       }),
       inning: 0,
-      lineupSpot: 0,
+      lineupSpot: 2,
       team: 'visiting'
     })
 
-    expect(sk.gameplay.visiting[0][0]).toEqual({
+    expect(sk.gameplay.visiting[0][1]).toEqual({
       balls: 0,
       bases: [
         {
           advanced: true,
           isAtBatResult: true,
-          onBasePutout: resultGenerators.putout([1, 3]),
           result: undefined
+        },
+        {
+          advanced: true,
+          result: resultGenerators.error(3)
+        },
+        {
+          advanced: true
         }
       ],
-      isOut: true,
+      isOut: false,
       pitchCount: 1,
       result: resultGenerators.hit(1),
       strikes: 0

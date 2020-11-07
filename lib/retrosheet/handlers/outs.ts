@@ -134,12 +134,14 @@ const multiActionOut: ActionConfig = {
     }
 
     function getAtBatResult() {
-      const [fullMatch, result] = batterResultType
-      const outType = getOutType(result)
-      const positions = getPutoutPositions(result)
-      if (outType !== 'groundout' && positions.length) {
-        const batterOut = getNonGroundout(outType, positions)
-        return batterOut
+      if (batterResultType) {
+        const [fullMatch, result] = batterResultType
+        const outType = getOutType(result)
+        const positions = getPutoutPositions(result)
+        if (outType !== 'groundout' && positions.length) {
+          const batterOut = getNonGroundout(outType, positions)
+          return batterOut
+        }
       }
 
       return batterResult
