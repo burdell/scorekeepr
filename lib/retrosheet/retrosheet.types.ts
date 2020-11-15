@@ -1,7 +1,7 @@
 import { AtBat } from 'retrosheet-parse'
 
 import { GameEvent } from '../types'
-import { BaserunnerMovements } from './baseMovements'
+import { BaserunnerMovements } from './baserunners'
 
 type ActionType = 'baserunner' | 'batter'
 
@@ -14,7 +14,7 @@ export type Handler = (
 export type Action = {
   actionType: ActionType
   match: RegExpMatchArray
-  handler?: Handler
+  handler: Handler
 }
 
 export type ActionConfig = {

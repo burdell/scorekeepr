@@ -1,13 +1,72 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { GameEvent, EventBaseResult } from '../types'
-
-import { getAction, Action } from './getAction'
+import { GameEvent } from '../types'
+import { actionConfigs } from './handlers'
 import { getPitchData } from './pitches'
-import { getBaserunnerMovements, BaserunnerMovements } from './baseMovements'
-import { getPutoutPositions } from './utilities'
-import * as resultGenerators from './generators/result'
-import { getStartableBase } from './guards'
+import {
+  getBaserunnerMovements,
+  BaserunnerMovements,
+  handleBaserunnerMovements
+} from './baserunners'
+import { ActionConfig, Action } from './retrosheet.types'
+
+type Logger = {
+  log: (message: string) => void
+}
+
+export function parseAction(
+  gameplayEvent: GameplayEvent,
+  logger: Logger = { log: console.log }
+) {
+  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
+    return
+  }
+
+  const action = getAction(gameplayEvent.result)
+  if (!action) {
+    logger.log(`Unhandled action: ${gameplayEvent.result}`)
+  }
+  const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
+  const event = handleAction(gameplayEvent, action, baserunnerMovements)
+
+  const extraEventMatch = gameplayEvent.result.match(/\+(.+)/)
+  let extraEvent: GameEvent | undefined = undefined
+  if (extraEventMatch) {
+    const [fullMatch, eventMatch] = extraEventMatch
+    const extraAction = getAction(eventMatch)
+    extraEvent = handleAction(gameplayEvent, extraAction, baserunnerMovements)
+  }
+
+  if (event) {
+    handleBaserunnerMovements(baserunnerMovements, event, extraEvent)
+
+    if (event.bases.B && !event.bases.B.isOut) {
+      event.isOut = false
+    }
+  }
+
+  return event
+}
+
+function getAction(action: string): Action | undefined {
+  let match: RegExpMatchArray | null = null
+  let foundAction: ActionConfig | undefined = undefined
+  for (let identifier of actionConfigs) {
+    match = action.match(identifier.regexp)
+    if (match) {
+      foundAction = identifier
+      break
+    }
+  }
+
+  if (!foundAction || !match) return
+
+  return {
+    actionType: foundAction.actionType,
+    handler: foundAction.handler,
+    match
+  }
+}
 
 function handleAction(
   gameplayEvent: AtBat,
@@ -18,141 +77,14 @@ function handleAction(
 
   if (!action) return event
 
-  switch (action.actionType) {
-    case 'batter':
-      event = handleBatterAction(action, gameplayEvent, baserunnerMovements)
-      break
-    case 'baserunner':
-      event = handleRunnerAction(action, gameplayEvent, baserunnerMovements)
-      break
-  }
-
-  return event
-}
-
-function getAdditionalBaseResult(
-  errorPosition: number | undefined,
-  putoutResult: string
-) {
-  if (errorPosition) {
-    return resultGenerators.error(errorPosition)
-  }
-
-  if (putoutResult) {
-    return resultGenerators.putout(getPutoutPositions(putoutResult))
-  }
-
-  return undefined
-}
-
-export function parseAction(gameplayEvent: GameplayEvent) {
-  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
-    return
-  }
-  const action = getAction(gameplayEvent.result)
-
-  if (!action) {
-    console.log(`Unhandled action: ${gameplayEvent.result}`)
-
-    return
-  }
-  const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
-  const event = handleAction(gameplayEvent, action, baserunnerMovements)
-  if (!event) {
-    return
-  }
-
-  baserunnerMovements.forEach(
-    ({ startBase, endBase, isOut, result, errorPosition }) => {
-      const validatedStartBase = getStartableBase(startBase)
-      const existingBase = event.bases[validatedStartBase]
-
-      const baseMovement: EventBaseResult = {
-        endBase,
-        result: undefined,
-        ...(existingBase || {})
-      }
-
-      if (existingBase && endBase !== existingBase.endBase) {
-        baseMovement.additionalBases = [
-          {
-            base: endBase,
-            result: getAdditionalBaseResult(errorPosition, result)
-          }
-        ]
-      } else if (errorPosition) {
-        baseMovement.result = resultGenerators.error(errorPosition)
-      } else if (isOut) {
-        baseMovement.isOut = true
-        const putOut = resultGenerators.putout(getPutoutPositions(result))
-        if (validatedStartBase === endBase) {
-          baseMovement.onBasePutout = putOut
-        } else {
-          baseMovement.result = putOut
-        }
-      }
-
-      event.bases[validatedStartBase] = baseMovement
-    }
-  )
-
-  const extraEvents = gameplayEvent.result.match(/\+(.+)/)
-  if (extraEvents) {
-    const [fullMatch, eventMatch] = extraEvents
-    const extraAction = getAction(eventMatch)
-    const extraEvent = handleAction(
-      gameplayEvent,
-      extraAction,
-      baserunnerMovements
-    )
-
-    if (extraEvent && extraEvent.bases) {
-      const batterExtraBases = extraEvent.bases.B
-      event.bases = {
-        B: batterExtraBases
-          ? { ...batterExtraBases, isAtBatResult: true }
-          : event.bases.B,
-        1: extraEvent.bases[1] || event.bases[1],
-        2: extraEvent.bases[2] || event.bases[2],
-        3: extraEvent.bases[3] || event.bases[3]
-      }
-    }
-  }
-
-  if (event.bases.B && !event.bases.B.isOut) {
-    event.isOut = false
-  }
-
-  return event
-}
-
-function handleBatterAction(
-  action: Action,
-  gameplayEvent: AtBat,
-  baserunnerMovements: BaserunnerMovements
-) {
   const parsedEvent = action.handler(
     gameplayEvent,
     action.match,
     baserunnerMovements
   )
-  if (parsedEvent) {
+  if (parsedEvent && action.actionType === 'batter') {
     parsedEvent.pitches = getPitchData(gameplayEvent)
   }
-
-  return parsedEvent
-}
-
-function handleRunnerAction(
-  action: Action,
-  gameplayEvent: AtBat,
-  baserunnerMovements: BaserunnerMovements
-) {
-  const parsedEvent = action.handler(
-    gameplayEvent,
-    action.match,
-    baserunnerMovements
-  )
 
   return parsedEvent
 }

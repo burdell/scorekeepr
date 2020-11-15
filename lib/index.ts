@@ -7,47 +7,6 @@ import { getLineupMap, getLineupSpot, getPitchers } from './utils/lineup'
 import { alertSuccess, alertGameGenerated } from './utils/alerts'
 import { formatStartTime } from './utils/time'
 
-function generateGameplay({
-  game,
-  scorekeeper,
-  team
-}: {
-  game: Game
-  scorekeeper: Scorekeeper
-  team: 'home' | 'visiting'
-}) {
-  const gameplayEvents = game.play[team]
-  const lineup = game.lineup[team]
-  const lineupMap = getLineupMap(lineup)
-
-  function getActionInfo(gameplayEvent: GameplayEvent) {
-    const gameEvent = parseAction(gameplayEvent)
-    if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
-
-    const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)
-    if (lineupSpot < 0) return null
-
-    return { gameEvent, lineupSpot }
-  }
-
-  gameplayEvents.forEach((events, inningNumber) => {
-    events.forEach((event) => {
-      const action = getActionInfo(event)
-
-      if (!action) {
-        return
-      }
-
-      scorekeeper.handleGameEvent({
-        event: action.gameEvent,
-        inning: inningNumber,
-        lineupSpot: action.lineupSpot,
-        team
-      })
-    })
-  })
-}
-
 export async function getRetrosheetScorekeepers(
   filename: string
 ): Promise<Scorekeeper[]> {
@@ -87,4 +46,48 @@ export async function getRetrosheetScorekeepers(
 
   alertGameGenerated(scorekeepers, filename)
   return scorekeepers
+}
+
+function generateGameplay({
+  game,
+  scorekeeper,
+  team
+}: {
+  game: Game
+  scorekeeper: Scorekeeper
+  team: 'home' | 'visiting'
+}) {
+  const gameplayEvents = game.play[team]
+  const lineup = game.lineup[team]
+  const lineupMap = getLineupMap(lineup)
+
+  gameplayEvents.forEach((events, inningNumber) => {
+    events.forEach((event) => {
+      const action = getActionInfo(event, lineupMap)
+
+      if (!action) {
+        return
+      }
+
+      scorekeeper.handleGameEvent({
+        event: action.gameEvent,
+        inning: inningNumber,
+        lineupSpot: action.lineupSpot,
+        team
+      })
+    })
+  })
+}
+
+function getActionInfo(
+  gameplayEvent: GameplayEvent,
+  lineupMap: ReturnType<typeof getLineupMap>
+) {
+  const gameEvent = parseAction(gameplayEvent)
+  if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
+
+  const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)
+  if (lineupSpot < 0) return null
+
+  return { gameEvent, lineupSpot }
 }

@@ -24,13 +24,16 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles unknown actions', () => {
-    const result = parseAction({
-      type: 'at-bat',
-      result: 'this is definitely not something that would happen',
-      pitchSequence: '',
-      playerId: 'acun11',
-      count: ''
-    })
+    const result = parseAction(
+      {
+        type: 'at-bat',
+        result: 'this is definitely not something that would happen',
+        pitchSequence: '',
+        playerId: 'acun11',
+        count: ''
+      },
+      { log: () => null }
+    )
 
     expect(result).toEqual(undefined)
   })

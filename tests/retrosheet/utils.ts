@@ -41,7 +41,7 @@ export function getAtBat(overrides: Partial<AtBat>): AtBat {
 }
 
 export function parseAction(gameplayEvent: GameplayEvent) {
-  return requireExistence(realParseAction(gameplayEvent))
+  return requireExistence(realParseAction(gameplayEvent, { log: () => null }))
 }
 
 function requireExistence<T>(thing: T) {

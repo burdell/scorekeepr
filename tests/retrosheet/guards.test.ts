@@ -79,17 +79,6 @@ describe('Type Guard getters tests', () => {
     expect(guards.getOutType('not an out')).toBe(undefined)
   })
 
-  // it('getMultiActionOut', () => {
-  //   try {
-  //     guards.getMultiAction('LOL')
-  //     fail('Failed to throw for an invalid result')
-  //   } catch (e) {
-  //     expect(e.message).toEqual(
-  //       'Attemted to record a multi-action out without a valid batter action (LOL)'
-  //     )
-  //   }
-  // })
-
   it('getNonGroundout - handles invalid non-groundouts', () => {
     const result = guards.getNonGroundout(undefined, [6])
     expect(result).toEqual(undefined)

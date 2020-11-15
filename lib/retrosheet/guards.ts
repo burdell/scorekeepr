@@ -80,9 +80,7 @@ export function getAdvanceableBase(rawBase: string | number): AdvanceableBase {
   throw new Error('Attempted to use an invalid advanceable base')
 }
 
-export function getOutType(
-  modifier: string
-): 'groundout' | 'lineout' | 'flyout' | undefined {
+export function getOutType(modifier: string) {
   if (modifier.match(/\/(B*)G/)) return 'groundout'
   if (modifier.indexOf('/L') >= 0) return 'lineout'
   if (modifier.match(/\/.*F.*/) || modifier.match(/\/B?P/)) return 'flyout'
