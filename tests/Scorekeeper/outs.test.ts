@@ -1,13 +1,13 @@
 import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getAction, getBases } from '../../lib/retrosheet/utilities'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
+import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 
 describe('Scorekeeper - outs', () => {
   it('handles sacrifice flys', () => {
     const sk = new Scorekeeper()
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -27,7 +27,7 @@ describe('Scorekeeper - outs', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         result: resultGenerators.flyOut(7),
         isSacrifice: true,
         isOut: true,
@@ -93,7 +93,7 @@ describe('Scorekeeper - outs', () => {
     const sk = new Scorekeeper()
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -113,7 +113,7 @@ describe('Scorekeeper - outs', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         result: resultGenerators.putout([3, 4]),
         isSacrifice: true,
         isOut: true,
@@ -171,7 +171,7 @@ describe('Scorekeeper - outs', () => {
     const sk = new Scorekeeper()
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -191,7 +191,7 @@ describe('Scorekeeper - outs', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         result: undefined,
         bases: getBases({
           1: {

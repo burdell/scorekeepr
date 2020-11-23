@@ -1,6 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
 
-import { getAction, getBases } from '../utilities'
+import { getGameEvent, getBases } from '../../Scorekeeper/generators'
 import {
   getBase,
   getNextBase,
@@ -9,9 +9,9 @@ import {
   getBaseFromString,
   getStartableBase
 } from '../guards'
-import * as resultGenerators from '../generators/result'
+import * as resultGenerators from '../../Scorekeeper/generators/result'
 import { Bases } from '../../types'
-import { getPutoutPositions } from '../utilities'
+import { getPutoutPositions } from '../outs'
 import { getAllBaserunnerAction } from '../guards'
 import { start } from 'repl'
 
@@ -21,7 +21,7 @@ const caughtStealing: ActionConfig = {
   handler: (atBat, match) => {
     const [fullMatch, isPickoff, baseString, putout] = match
     const base = getBase(baseString)
-    return getAction({
+    return getGameEvent({
       isOut: true,
       bases: getBases({
         [getPreviousBase(base)]: {
@@ -49,7 +49,7 @@ const stolenBase: ActionConfig = {
       }
     })
 
-    return getAction({
+    return getGameEvent({
       bases
     })
   }
@@ -69,7 +69,7 @@ const defensiveIndifference: ActionConfig = {
       }
     })
 
-    return getAction({
+    return getGameEvent({
       bases
     })
   }
@@ -85,7 +85,7 @@ const pickOff: ActionConfig = {
     if (putoutString.indexOf('E') >= 0) {
       const movement = baserunnerMovements.find((m) => m.startBase === base)
 
-      return getAction({
+      return getGameEvent({
         isOut: false,
         bases: getBases({
           [base]: {
@@ -98,7 +98,7 @@ const pickOff: ActionConfig = {
       })
     } else {
       const pickOff = getPutoutPositions(putoutString)
-      return getAction({
+      return getGameEvent({
         isOut: true,
         bases: getBases({
           [base]: {
@@ -129,7 +129,7 @@ const allBaseMovement: ActionConfig = {
       return acc
     }, {})
 
-    return getAction({
+    return getGameEvent({
       bases: getBases(bases)
     })
   }
@@ -140,7 +140,7 @@ const advancementOut: ActionConfig = {
   regexp: /^OA/,
   handler: () => {
     // this is handled entirely through base movements, so just return an empty action here
-    return getAction()
+    return getGameEvent()
   }
 }
 

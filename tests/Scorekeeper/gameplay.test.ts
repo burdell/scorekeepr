@@ -1,14 +1,13 @@
-import { formatStartTime } from '../../lib/utils/time'
 import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getAction } from '../../lib/retrosheet/utilities'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
+import { getGameEvent } from '../../lib/Scorekeeper/generators/'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 
 describe('Scorekeeper - Gameplay', () => {
   it('handles events for innings that arent yet there', () => {
     const sk = new Scorekeeper()
     const result = resultGenerators.lineOut(7)
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         result,
         isOut: true,
         pitches: {

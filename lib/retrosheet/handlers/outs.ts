@@ -1,10 +1,11 @@
 import { AtBat } from 'retrosheet-parse'
 
-import * as resultGenerators from '../generators/result'
-import * as actionGenerators from '../generators/action'
+import * as resultGenerators from '../../Scorekeeper/generators/result'
+import * as actionGenerators from '../../Scorekeeper/generators/action'
+import { getGameEvent } from '../../Scorekeeper/generators'
 
 import { GameEvent, AtBatResult } from '../../types'
-import { getAction, getPutoutPositions } from '../utilities'
+import { getPutoutPositions } from '../outs'
 import { ActionConfig } from '../retrosheet.types'
 import { getOutType, getNonGroundout, getMultiAction } from '../guards'
 
@@ -28,7 +29,7 @@ const strikeout: ActionConfig = {
     const isLooking = gameplayEvent.pitchSequence.endsWith('C')
     const resultType = isLooking ? 'K-looking' : 'K'
 
-    return getAction({
+    return getGameEvent({
       isOut: true,
       result: resultGenerators.pitcherResult(resultType)
     })
@@ -61,7 +62,7 @@ const simpleOut: ActionConfig = {
   regexp: /^\d+!*\d*\//,
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
     const out = getOut(gameplayEvent.result)
-    return getAction(out)
+    return getGameEvent(out)
   }
 }
 
@@ -73,7 +74,7 @@ const oldSimpleOut: ActionConfig = {
   handler: (gameplayEvent: AtBat, match: RegExpMatchArray) => {
     const [fullMatch, positions] = match
     if (positions.length === 1 && Number(positions) > 6) {
-      return getAction({
+      return getGameEvent({
         result: resultGenerators.flyOut(Number(positions)),
         isOut: true
       })
@@ -151,7 +152,7 @@ const multiActionOut: ActionConfig = {
 
     const res = getAtBatResult()
     const isFieldersChoice = !!(res && res.type === 'fielders-choice')
-    return getAction({
+    return getGameEvent({
       isOut: !isFieldersChoice,
       result: res,
       bases: {

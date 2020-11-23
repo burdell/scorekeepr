@@ -1,6 +1,6 @@
-import { parseAction, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
-import { getBases } from '../../lib/retrosheet/utilities'
+import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { getBases } from '../../lib/Scorekeeper/generators/'
 
 describe('Retrosheet - Baserunning', () => {
   it('handles pickoffs', () => {
@@ -234,7 +234,7 @@ describe('Retrosheet - Baserunning', () => {
   })
 
   it('handles on-base putouts', () => {
-    const lineoutDP = parseAction(getAtBat({ result: '3/L/DP.1X1(3)' }))
+    const lineoutDP = handleEvent(getAtBat({ result: '3/L/DP.1X1(3)' }))
     expect(lineoutDP).toEqual(
       getEventWithDefaults({
         isOut: true,

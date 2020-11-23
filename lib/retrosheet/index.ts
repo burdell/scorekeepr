@@ -14,7 +14,7 @@ type Logger = {
   log: (message: string) => void
 }
 
-export function parseAction(
+export function handleEvent(
   gameplayEvent: GameplayEvent,
   logger: Logger = { log: console.log }
 ) {
@@ -22,7 +22,7 @@ export function parseAction(
     return
   }
 
-  const action = getAction(gameplayEvent.result)
+  const action = getActionHandler(gameplayEvent.result)
   if (!action) {
     logger.log(`Unhandled action: ${gameplayEvent.result}`)
   }
@@ -33,7 +33,7 @@ export function parseAction(
   let extraEvent: GameEvent | undefined = undefined
   if (extraEventMatch) {
     const [fullMatch, eventMatch] = extraEventMatch
-    const extraAction = getAction(eventMatch)
+    const extraAction = getActionHandler(eventMatch)
     extraEvent = handleAction(gameplayEvent, extraAction, baserunnerMovements)
   }
 
@@ -48,7 +48,7 @@ export function parseAction(
   return event
 }
 
-function getAction(action: string): Action | undefined {
+function getActionHandler(action: string): Action | undefined {
   let match: RegExpMatchArray | null = null
   let foundAction: ActionConfig | undefined = undefined
   for (let identifier of actionConfigs) {
@@ -77,14 +77,14 @@ function handleAction(
 
   if (!action) return event
 
-  const parsedEvent = action.handler(
+  const result = action.handler(
     gameplayEvent,
     action.match,
     baserunnerMovements
   )
-  if (parsedEvent && action.actionType === 'batter') {
-    parsedEvent.pitches = getPitchData(gameplayEvent)
+  if (result && action.actionType === 'batter') {
+    result.pitches = getPitchData(gameplayEvent)
   }
 
-  return parsedEvent
+  return result
 }

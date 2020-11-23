@@ -1,10 +1,10 @@
-import { parseAction, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
-import { getBases } from '../../lib/retrosheet/utilities'
+import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { getBases } from '../../lib/Scorekeeper/generators/'
 
 describe('Retrosheet - Reached Base At-Bats', () => {
   it('handles hits', () => {
-    const single = parseAction(getAtBat({ result: 'S8/L' }))
+    const single = handleEvent(getAtBat({ result: 'S8/L' }))
     expect(single).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(1),
@@ -21,7 +21,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'S5' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'S5' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(1),
         bases: getBases({
@@ -34,7 +34,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'S' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'S' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(1),
         bases: getBases({
@@ -47,7 +47,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'S.1-3#' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'S.1-3#' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(1),
         bases: getBases({
@@ -64,7 +64,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'D' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'D' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(2),
         bases: getBases({
@@ -77,7 +77,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'T' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'T' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(3),
         bases: getBases({
@@ -90,7 +90,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'HR' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'HR' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(4),
         bases: getBases({
@@ -103,7 +103,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const double = parseAction(getAtBat({ result: 'D7/L' }))
+    const double = handleEvent(getAtBat({ result: 'D7/L' }))
     expect(double).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(2),
@@ -120,7 +120,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const groundRuleDouble = parseAction(getAtBat({ result: 'DGR/L' }))
+    const groundRuleDouble = handleEvent(getAtBat({ result: 'DGR/L' }))
     expect(groundRuleDouble).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(2),
@@ -137,7 +137,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const triple = parseAction(getAtBat({ result: 'T9/F' }))
+    const triple = handleEvent(getAtBat({ result: 'T9/F' }))
     expect(triple).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(3),
@@ -154,7 +154,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const homerun = parseAction(getAtBat({ result: 'HR/78/F' }))
+    const homerun = handleEvent(getAtBat({ result: 'HR/78/F' }))
     expect(homerun).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(4),
@@ -194,7 +194,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const singleWithPutout = parseAction(
+    const singleWithPutout = handleEvent(
       getAtBat({ result: 'S8/L.BX2(86/TH)' })
     )
     expect(singleWithPutout).toEqual(
@@ -216,7 +216,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'S7/L.2-H;1-3;B-2(TH)' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'S7/L.2-H;1-3;B-2(TH)' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(1),
         bases: getBases({
@@ -238,7 +238,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const fanInterferenceDouble = parseAction(getAtBat({ result: 'D/L+/FINT' }))
+    const fanInterferenceDouble = handleEvent(getAtBat({ result: 'D/L+/FINT' }))
     expect(fanInterferenceDouble).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(2),
@@ -252,7 +252,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    const fanInterferenceTriple = parseAction(getAtBat({ result: 'T/L+/FINT' }))
+    const fanInterferenceTriple = handleEvent(getAtBat({ result: 'T/L+/FINT' }))
     expect(fanInterferenceTriple).toEqual(
       getEventWithDefaults({
         result: resultGenerators.hit(3),
@@ -310,7 +310,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
   })
 
   it('handles hit batters', () => {
-    const hbp = parseAction(getAtBat({ result: 'HP' }))
+    const hbp = handleEvent(getAtBat({ result: 'HP' }))
 
     expect(hbp).toEqual(
       getEventWithDefaults({
@@ -330,7 +330,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
   })
 
   it('handles walks', () => {
-    expect(parseAction(getAtBat({ result: 'W' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'W' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('BB'),
         bases: {
@@ -346,7 +346,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'IW' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'IW' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('IBB'),
         bases: {
@@ -362,7 +362,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'W.1-2' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'W.1-2' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('BB'),
         bases: {
@@ -381,7 +381,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'IW.1-2' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'IW.1-2' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('IBB'),
         bases: {
@@ -400,7 +400,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: 'W+WP.2-3' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: 'W+WP.2-3' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.pitcherResult('BB'),
         bases: {

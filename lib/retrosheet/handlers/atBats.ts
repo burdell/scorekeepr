@@ -1,9 +1,9 @@
 import { ActionConfig, Action } from '../retrosheet.types'
-import * as actionGenerators from '../generators/action'
-import * as resultGenerators from '../generators/result'
+import * as actionGenerators from '../../Scorekeeper/generators/action'
+import * as resultGenerators from '../../Scorekeeper/generators/result'
 import * as guards from '../guards'
 
-import { getAction, getBases } from '../utilities'
+import { getGameEvent, getBases } from '../../Scorekeeper/generators'
 
 const hit: ActionConfig = {
   actionType: 'batter',
@@ -82,7 +82,7 @@ const foulTerritoryError: ActionConfig = {
   regexp: /^FLE(\d)/,
   handler: (gameplayEvent, match) => {
     const [fullMatch, position] = match
-    return getAction({
+    return getGameEvent({
       foulTerritoryError: resultGenerators.error(Number(position))
     })
   }
@@ -93,7 +93,7 @@ const unknown: ActionConfig = {
   actionType: 'batter',
   regexp: /^99/,
   handler: () => {
-    return getAction()
+    return getGameEvent()
   }
 }
 

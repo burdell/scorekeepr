@@ -1,7 +1,7 @@
 import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getBases } from '../../lib/retrosheet/utilities'
-import * as actionGenerators from '../../lib/retrosheet/generators/action'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
+import { getBases } from '../../lib/Scorekeeper/generators/'
+import * as actionGenerators from '../../lib/Scorekeeper/generators/action'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 import { Stats, GameEvent } from '../../lib/types'
 
 describe('Scorekeeper - game stats', () => {

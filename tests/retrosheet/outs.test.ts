@@ -1,6 +1,6 @@
-import { parseAction, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
-import { getBases } from '../../lib/retrosheet/utilities'
+import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { getBases } from '../../lib/Scorekeeper/generators/'
 
 describe('Retrosheet - Outs', () => {
   it('handles invalid players in outs', () => {
@@ -15,7 +15,7 @@ describe('Retrosheet - Outs', () => {
   })
 
   it('handles strikeouts', () => {
-    const strikeout = parseAction(
+    const strikeout = handleEvent(
       getAtBat({ result: 'K', pitchSequence: 'BBFCBFB', count: '32' })
     )
 
@@ -31,7 +31,7 @@ describe('Retrosheet - Outs', () => {
       })
     )
 
-    const lookingStrikeout = parseAction(
+    const lookingStrikeout = handleEvent(
       getAtBat({ result: 'K', pitchSequence: 'CBFBC', count: '22' })
     )
     expect(lookingStrikeout).toEqual(
@@ -46,7 +46,7 @@ describe('Retrosheet - Outs', () => {
       })
     )
 
-    const lookingStrikeout2 = parseAction(
+    const lookingStrikeout2 = handleEvent(
       getAtBat({ result: 'K', pitchSequence: 'B*BBCCC', count: '32' })
     )
     expect(lookingStrikeout2).toEqual(
@@ -61,7 +61,7 @@ describe('Retrosheet - Outs', () => {
       })
     )
 
-    const strikeoutWithStolenBase = parseAction(getAtBat({ result: 'K+SB2' }))
+    const strikeoutWithStolenBase = handleEvent(getAtBat({ result: 'K+SB2' }))
     expect(strikeoutWithStolenBase).toEqual(
       getEventWithDefaults({
         isOut: true,
@@ -115,7 +115,7 @@ describe('Retrosheet - Outs', () => {
   })
 
   it('handles flyouts and lineouts', () => {
-    const outfieldFlyout = parseAction(
+    const outfieldFlyout = handleEvent(
       getAtBat({ result: '7/F', pitchSequence: 'CX', count: '01' })
     )
 
@@ -128,7 +128,7 @@ describe('Retrosheet - Outs', () => {
     )
 
     // 12,BSSFX,4/P
-    const infieldFlyout = parseAction(
+    const infieldFlyout = handleEvent(
       getAtBat({ result: '4/P', pitchSequence: 'BSSFX', count: '12' })
     )
 
@@ -140,7 +140,7 @@ describe('Retrosheet - Outs', () => {
       })
     )
 
-    expect(parseAction(getAtBat({ result: '3/BP23F' }))).toEqual(
+    expect(handleEvent(getAtBat({ result: '3/BP23F' }))).toEqual(
       getEventWithDefaults({
         result: resultGenerators.flyOut(3),
         isOut: true

@@ -1,6 +1,6 @@
 import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getAction, getBases } from '../../lib/retrosheet/utilities'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
+import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 
 describe('Scorekeeper - baserunning', () => {
   it('records unsuccessful attempts to gain additional bases', () => {
@@ -8,7 +8,7 @@ describe('Scorekeeper - baserunning', () => {
 
     // ** BATTER ATTEMPT **
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -51,7 +51,7 @@ describe('Scorekeeper - baserunning', () => {
 
     // ** RUNNER ATTEMPT **
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -70,7 +70,7 @@ describe('Scorekeeper - baserunning', () => {
       team: 'visiting'
     })
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         isOut: true,
         bases: getBases({
           1: {
@@ -116,7 +116,7 @@ describe('Scorekeeper - baserunning', () => {
 
     // ** BATTER ATTEMPT **
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -157,7 +157,7 @@ describe('Scorekeeper - baserunning', () => {
 
     // ** RUNNER ATTEMPT **
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -176,7 +176,7 @@ describe('Scorekeeper - baserunning', () => {
       team: 'visiting'
     })
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         bases: getBases({
           1: {
             endBase: 2,

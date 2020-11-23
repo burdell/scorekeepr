@@ -1,6 +1,6 @@
 import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
-import { parseAction } from './retrosheet'
+import { handleEvent } from './retrosheet'
 import { getTeam, getStadium, getLineup } from './retrosheet/translators'
 import { Scorekeeper } from './Scorekeeper'
 import { getLineupMap, getLineupSpot, getPitchers } from './utils/lineup'
@@ -83,7 +83,7 @@ function getActionInfo(
   gameplayEvent: GameplayEvent,
   lineupMap: ReturnType<typeof getLineupMap>
 ) {
-  const gameEvent = parseAction(gameplayEvent)
+  const gameEvent = handleEvent(gameplayEvent)
   if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
 
   const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)

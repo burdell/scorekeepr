@@ -1,9 +1,9 @@
-import { parseAction } from '../../lib/retrosheet'
+import { handleEvent } from '../../lib/retrosheet'
 import { getEventWithDefaults } from './utils'
 
 describe('Retrosheet - miscellaneous things', () => {
   it('handles comments', () => {
-    const result = parseAction({
+    const result = handleEvent({
       type: 'comment',
       text: 'What a cool comment about this game'
     })
@@ -12,7 +12,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles non-plays', () => {
-    const result = parseAction({
+    const result = handleEvent({
       type: 'at-bat',
       result: 'NP',
       pitchSequence: '',
@@ -24,7 +24,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles unknown actions', () => {
-    const result = parseAction(
+    const result = handleEvent(
       {
         type: 'at-bat',
         result: 'this is definitely not something that would happen',
@@ -39,7 +39,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles unknown plays', () => {
-    const result = parseAction({
+    const result = handleEvent({
       type: 'at-bat',
       result: '99',
       pitchSequence: '',

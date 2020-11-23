@@ -1,7 +1,7 @@
 import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getAction, getBases } from '../../lib/retrosheet/utilities'
-import * as actionGenerators from '../../lib/retrosheet/generators/action'
-import * as resultGenerators from '../../lib/retrosheet/generators/result'
+import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
+import * as actionGenerators from '../../lib/Scorekeeper/generators/action'
+import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 
 describe('Scorekeeper tests', () => {
   it('handles gameplay events', () => {
@@ -16,7 +16,7 @@ describe('Scorekeeper tests', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         result: resultGenerators.pitcherResult('BB'),
         pitches: {
           balls: 4,
@@ -39,7 +39,7 @@ describe('Scorekeeper tests', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         bases: getBases({
           2: {
             endBase: 3,
@@ -53,7 +53,7 @@ describe('Scorekeeper tests', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -79,7 +79,7 @@ describe('Scorekeeper tests', () => {
     })
 
     sk.handleGameEvent({
-      event: getAction({
+      event: getGameEvent({
         pitches: {
           balls: 0,
           strikes: 0,
@@ -183,7 +183,7 @@ describe('Scorekeeper tests', () => {
       .fill(null)
       .map((_, i) => {
         sk.handleGameEvent({
-          event: getAction({ result: resultGenerators.pitcherResult('BB') }),
+          event: getGameEvent({ result: resultGenerators.pitcherResult('BB') }),
           inning: 0,
           lineupSpot: i,
           team: 'visiting'
@@ -194,7 +194,7 @@ describe('Scorekeeper tests', () => {
       .fill(null)
       .map((_, i) => {
         sk.handleGameEvent({
-          event: getAction({ result: resultGenerators.pitcherResult('HB') }),
+          event: getGameEvent({ result: resultGenerators.pitcherResult('HB') }),
           inning: 0,
           lineupSpot: i,
           team: 'visiting'

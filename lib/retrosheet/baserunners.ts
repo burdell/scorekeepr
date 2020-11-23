@@ -1,7 +1,7 @@
 import { Base, EventBaseResult, GameEvent } from '../types'
 import { getBase, getStartableBase } from './guards'
-import * as resultGenerators from './generators/result'
-import { getPutoutPositions } from './utilities'
+import * as resultGenerators from '../Scorekeeper/generators/result'
+import { getPutoutPositions } from './outs'
 
 export type BaserunnerMovements = ReturnType<typeof getBaserunnerMovements>
 

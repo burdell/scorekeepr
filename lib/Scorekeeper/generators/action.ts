@@ -1,10 +1,10 @@
 import * as resultGenerators from './result'
 
-import { getAction, getBases } from '../utilities'
+import { getGameEvent, getBases } from './'
 import { Base, PitcherResultString } from '../../types'
 
 export function hit(base: Base) {
-  return getAction({
+  return getGameEvent({
     result: resultGenerators.hit(base),
     bases: getBases({
       B: {
@@ -17,7 +17,7 @@ export function hit(base: Base) {
 }
 
 export function pitcherResult(pitcherResultString: PitcherResultString) {
-  return getAction({
+  return getGameEvent({
     result: resultGenerators.pitcherResult(pitcherResultString),
     bases: getBases({
       B: {
@@ -30,7 +30,7 @@ export function pitcherResult(pitcherResultString: PitcherResultString) {
 }
 
 export function fieldersChoice(base: Base = 1) {
-  return getAction({
+  return getGameEvent({
     result: resultGenerators.fieldersChoice(base),
     bases: getBases({
       B: {
@@ -43,14 +43,14 @@ export function fieldersChoice(base: Base = 1) {
 }
 
 export function putout(putoutPositions: number[]) {
-  return getAction({
+  return getGameEvent({
     result: resultGenerators.putout(putoutPositions),
     isOut: true
   })
 }
 
 export function error(fielder: number, endBase: Base) {
-  return getAction({
+  return getGameEvent({
     result: resultGenerators.error(fielder),
     bases: getBases({
       B: {

@@ -1,6 +1,6 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
-import { parseAction as realParseAction } from '../../lib/retrosheet'
+import { handleEvent as realHandleEvent } from '../../lib/retrosheet'
 import { GameEvent } from '../../lib/types'
 
 export function getEventWithDefaults(
@@ -26,7 +26,7 @@ export function getEventWithDefaults(
 }
 
 export function getResult(result: string) {
-  return parseAction(getAtBat({ result }))
+  return handleEvent(getAtBat({ result }))
 }
 
 export function getAtBat(overrides: Partial<AtBat>): AtBat {
@@ -40,8 +40,8 @@ export function getAtBat(overrides: Partial<AtBat>): AtBat {
   }
 }
 
-export function parseAction(gameplayEvent: GameplayEvent) {
-  return requireExistence(realParseAction(gameplayEvent, { log: () => null }))
+export function handleEvent(gameplayEvent: GameplayEvent) {
+  return requireExistence(realHandleEvent(gameplayEvent, { log: () => null }))
 }
 
 function requireExistence<T>(thing: T) {
