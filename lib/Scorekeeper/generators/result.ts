@@ -12,7 +12,6 @@ import {
   CaughtStealing,
   StolenBase,
   AdvanceableBase,
-  AdvanceBaseResult,
   DefensiveIndifference,
   PassedBall,
   WildPitch,
