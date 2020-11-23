@@ -1,5 +1,6 @@
 import { Bases } from './baserunning'
-import { AtBatResult, DefensiveError, BaseResult } from './result'
+import { AtBatResult, BaseResult } from './result'
+import type { DefensiveError } from '../Scorekeeper/generators/result'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 

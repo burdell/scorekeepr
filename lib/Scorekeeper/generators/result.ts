@@ -1,24 +1,6 @@
-import {
-  PitcherResult,
-  PutOut,
-  FlyOut,
-  LineOut,
-  PitcherResultString,
-  Hit,
-  DefensiveError,
-  FieldersChoice,
-  Base,
-  Balk,
-  CaughtStealing,
-  StolenBase,
-  AdvanceableBase,
-  DefensiveIndifference,
-  PassedBall,
-  WildPitch,
-  PickOff
-} from '../../types'
+import { PitcherResultString, Base, AdvanceableBase } from '../../types'
 
-export function pitcherResult(result: PitcherResultString): PitcherResult {
+export function pitcherResult(result: PitcherResultString) {
   const display = result === 'K-looking' ? 'K' : result
   return {
     type: 'pitcher-result',
@@ -26,8 +8,9 @@ export function pitcherResult(result: PitcherResultString): PitcherResult {
     display
   }
 }
+export type PitcherResult = ReturnType<typeof pitcherResult>
 
-export function putout(defensivePlayers: number[]): PutOut {
+export function putout(defensivePlayers: number[]) {
   return {
     type: 'putout',
     result: defensivePlayers,
@@ -37,48 +20,54 @@ export function putout(defensivePlayers: number[]): PutOut {
         : defensivePlayers.join('-')
   }
 }
+export type PutOut = ReturnType<typeof putout>
 
-export function flyOut(defensivePlayer: number): FlyOut {
+export function flyOut(defensivePlayer: number) {
   return {
     type: 'flyout',
     result: defensivePlayer,
     display: defensivePlayer < 7 ? `P${defensivePlayer}` : `F${defensivePlayer}`
   }
 }
+export type FlyOut = ReturnType<typeof flyOut>
 
-export function lineOut(defensivePlayer: number): LineOut {
+export function lineOut(defensivePlayer: number) {
   return {
     type: 'lineout',
     result: defensivePlayer,
     display: `L${defensivePlayer}`
   }
 }
+export type LineOut = ReturnType<typeof lineOut>
 
-export function hit(base: Base): Hit {
+export function hit(base: Base) {
   return {
     type: 'hit',
     result: base,
     display: base === 4 ? 'HR' : `${base}B`
   }
 }
+export type Hit = ReturnType<typeof hit>
 
-export function error(position: number): DefensiveError {
+export function error(position: number) {
   return {
     type: 'defensive-error',
     result: position,
     display: `E${position}`
   }
 }
+export type DefensiveError = ReturnType<typeof error>
 
-export function fieldersChoice(baseAdvancedTo: Base): FieldersChoice {
+export function fieldersChoice(baseAdvancedTo: Base) {
   return {
     type: 'fielders-choice',
     result: baseAdvancedTo,
     display: 'FC'
   }
 }
+export type FieldersChoice = ReturnType<typeof error>
 
-export function caughtStealing(putoutPositions: number[]): CaughtStealing {
+export function caughtStealing(putoutPositions: number[]) {
   const result = putout(putoutPositions)
   return {
     type: 'caught-stealing',
@@ -86,8 +75,9 @@ export function caughtStealing(putoutPositions: number[]): CaughtStealing {
     display: `CS ${result.display}`
   }
 }
+export type CaughtStealing = ReturnType<typeof caughtStealing>
 
-export function pickOff(putoutPositions: number[]): PickOff {
+export function pickOff(putoutPositions: number[]) {
   const result = putout(putoutPositions)
   return {
     type: 'pick-off',
@@ -95,43 +85,49 @@ export function pickOff(putoutPositions: number[]): PickOff {
     display: `PO ${result.display}`
   }
 }
+export type PickOff = ReturnType<typeof pickOff>
 
-export function stolenBase(base: AdvanceableBase): StolenBase {
+export function stolenBase(base: AdvanceableBase) {
   return {
     type: 'stolen-base',
     result: base,
     display: 'SB'
   }
 }
+export type StolenBase = ReturnType<typeof stolenBase>
 
-export function defensiveIndifference(): DefensiveIndifference {
+export function defensiveIndifference() {
   return {
     type: 'defensive-indifference',
     display: 'DI',
     result: 'DI'
   }
 }
+export type DefensiveIndifference = ReturnType<typeof defensiveIndifference>
 
-export function passedBall(): PassedBall {
+export function passedBall() {
   return {
     type: 'passed-ball',
     result: 'PB',
     display: 'PB'
   }
 }
+export type PassedBall = ReturnType<typeof passedBall>
 
-export function wildPitch(): WildPitch {
+export function wildPitch() {
   return {
     type: 'wild-pitch',
     result: 'WP',
     display: 'WP'
   }
 }
+export type WildPitch = ReturnType<typeof wildPitch>
 
-export function balk(): Balk {
+export function balk() {
   return {
     type: 'balk',
     result: 'BK',
     display: 'BK'
   }
 }
+export type Balk = ReturnType<typeof balk>

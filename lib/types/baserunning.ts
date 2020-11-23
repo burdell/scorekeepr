@@ -1,10 +1,5 @@
-import {
-  AdvanceBaseResult,
-  BaseResultResult,
-  OutBaseResult,
-  PickOff,
-  PutOut
-} from './result'
+import { AdvanceBaseResult, BaseResultResult, OutBaseResult } from './result'
+import type { PickOff, PutOut } from '../Scorekeeper/generators/result'
 
 export type Base = 1 | 2 | 3 | 4
 export type AdvanceableBase = 2 | 3 | 4
