@@ -22,7 +22,7 @@ export function handleEvent(
     return
   }
 
-  const action = getActionHandler(gameplayEvent.result)
+  const action = findAction(gameplayEvent.result)
   if (!action) {
     logger.log(`Unhandled action: ${gameplayEvent.result}`)
   }
@@ -33,7 +33,7 @@ export function handleEvent(
   let extraEvent: GameEvent | undefined = undefined
   if (extraEventMatch) {
     const [fullMatch, eventMatch] = extraEventMatch
-    const extraAction = getActionHandler(eventMatch)
+    const extraAction = findAction(eventMatch)
     extraEvent = handleAction(gameplayEvent, extraAction, baserunnerMovements)
   }
 
@@ -48,11 +48,11 @@ export function handleEvent(
   return event
 }
 
-function getActionHandler(action: string): Action | undefined {
+function findAction(eventResultString: string): Action | undefined {
   let match: RegExpMatchArray | null = null
   let foundAction: ActionConfig | undefined = undefined
   for (let identifier of actionConfigs) {
-    match = action.match(identifier.regexp)
+    match = eventResultString.match(identifier.regexp)
     if (match) {
       foundAction = identifier
       break
@@ -73,9 +73,7 @@ function handleAction(
   action: Action | undefined,
   baserunnerMovements: BaserunnerMovements
 ) {
-  let event: GameEvent | undefined = undefined
-
-  if (!action) return event
+  if (!action) return undefined
 
   const result = action.handler(
     gameplayEvent,

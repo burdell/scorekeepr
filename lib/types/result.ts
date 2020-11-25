@@ -1,4 +1,4 @@
-import { Base, AdvanceableBase } from './baserunning'
+import { Base } from './baserunning'
 import type {
   PitcherResult,
   DefensiveError,
