@@ -5,13 +5,15 @@ export type Base = 1 | 2 | 3 | 4
 export type AdvanceableBase = 2 | 3 | 4
 export type StartableBase = 1 | 2 | 3
 
+export type AdditionalBases = Array<{ base: Base; result?: BaseResultResult }>
+
 export type EventBaseResult = {
   endBase: Base
   result?: BaseResultResult
   isOut?: boolean
   isAtBatResult?: boolean
   onBasePutout?: PutOut | PickOff
-  additionalBases?: Array<{ base: Base; result?: BaseResultResult }>
+  additionalBases?: AdditionalBases
 }
 
 export type Bases = {
