@@ -46,6 +46,7 @@ export type Stats = {
 export type InitialGame = Partial<Game> & {
   homeLineup?: InitialLineupEntry[]
   visitingLineup?: InitialLineupEntry[]
+  initialInningCount?: number
 }
 
 export type Gameplay = {

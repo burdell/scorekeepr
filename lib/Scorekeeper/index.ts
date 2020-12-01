@@ -1,7 +1,7 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
 import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
-import { handleGameEvent } from './store/gameplay'
+import { handleGameEvent, setInningLength } from './store/gameplay'
 import { calculateStats } from './stats'
 
 import { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
@@ -10,7 +10,12 @@ export class Scorekeeper {
   private store: ReturnType<typeof getStore>
 
   constructor(game: Partial<InitialGame> = {}) {
-    const { homeLineup = [], visitingLineup = [], ...gameInfo } = game
+    const {
+      homeLineup = [],
+      visitingLineup = [],
+      initialInningCount,
+      ...gameInfo
+    } = game
     this.store = getStore()
     this.updateGameInfo(gameInfo)
     this.setLineups({
@@ -29,6 +34,10 @@ export class Scorekeeper {
         }
       ])
     })
+
+    if (initialInningCount) {
+      this.store.dispatch(setInningLength(initialInningCount))
+    }
   }
 
   get gameInfo() {

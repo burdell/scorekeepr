@@ -22,7 +22,8 @@ export async function getRetrosheetScorekeepers(
       visitingTeam: getTeam(info.visteam),
       location: getStadium(info.site, info.date),
       startTime: formatStartTime(info.starttime),
-      id: game.id
+      id: game.id,
+      initialInningCount: game.play.visiting.length
     })
 
     scorekeeper.setLineups({

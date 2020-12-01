@@ -7,7 +7,7 @@ import { Stats, GameEvent } from '../../lib/types'
 describe('Scorekeeper - game stats', () => {
   function getStats(overrides: Partial<Stats>): Stats {
     return {
-      scoring: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      scoring: [0],
       runs: 0,
       hits: 0,
       errors: 0,
@@ -102,7 +102,7 @@ describe('Scorekeeper - game stats', () => {
         hits: 2,
         errors: 1,
         runs: 3,
-        scoring: [3, 0, 0, 0, 0, 0, 0, 0, 0]
+        scoring: [3]
       })
     )
 
@@ -155,7 +155,7 @@ describe('Scorekeeper - game stats', () => {
         hits: 4,
         errors: 2,
         runs: 4,
-        scoring: [3, 1, 0, 0, 0, 0, 0, 0, 0]
+        scoring: [3, 1]
       })
     )
   })

@@ -10,12 +10,19 @@ import {
 } from './utils'
 
 const initialState: Gameplay = {
-  home: Array(9).fill(getEmptyInning()),
-  visiting: Array(9).fill(getEmptyInning())
+  home: [],
+  visiting: []
 }
 
+export const setInningLength = createAction<number>('setInningLength')
 export const handleGameEvent = createAction<GameEventHandler>('handleGameEvent')
+
 export const gameplayReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setInningLength, (state, action) => {
+    state.home = Array(action.payload).fill(getEmptyInning())
+    state.visiting = Array(action.payload).fill(getEmptyInning())
+  })
+
   builder.addCase(handleGameEvent, (state, action) => {
     const { team, inning, lineupSpot, event } = action.payload
 
