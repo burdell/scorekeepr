@@ -14,11 +14,9 @@ export function getLineupMap(lineup: Lineup) {
 }
 
 export function getLineupSpot(
-  event: GameplayEvent,
+  event: { playerId: string },
   lineupMap: ReturnType<typeof getLineupMap>
 ) {
-  if (event.type !== 'at-bat') return -1
-
   const lineupSpot = lineupMap[event.playerId]
   return lineupSpot >= 0 ? lineupSpot : -1
 }

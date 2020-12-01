@@ -131,3 +131,12 @@ export function balk() {
   }
 }
 export type Balk = ReturnType<typeof balk>
+
+export function runnerAdjustment(base: Base) {
+  return {
+    type: 'runner-adjustment',
+    result: base,
+    display: ''
+  }
+}
+export type RunnerAdjustment = ReturnType<typeof runnerAdjustment>

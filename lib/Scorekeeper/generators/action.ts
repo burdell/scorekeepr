@@ -61,3 +61,10 @@ export function error(fielder: number, endBase: Base) {
     })
   })
 }
+
+export function runnerAdjustment(base: Base) {
+  return getGameEvent({
+    result: resultGenerators.runnerAdjustment(base),
+    bases: getBases({ B: { endBase: base, isAtBatResult: true } })
+  })
+}

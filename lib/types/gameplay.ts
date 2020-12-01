@@ -1,13 +1,16 @@
 import { Bases } from './baserunning'
 import { AtBatResult, BaseResult } from './result'
-import type { DefensiveError } from '../Scorekeeper/generators/result'
+import type {
+  DefensiveError,
+  RunnerAdjustment
+} from '../Scorekeeper/generators/result'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 
 export type GameEvent = {
   pitches: PitchData | undefined
   isOut: boolean
-  result: AtBatResult | undefined
+  result: AtBatResult | RunnerAdjustment | undefined
   bases: Bases
   isSacrifice?: boolean
   foulTerritoryError?: DefensiveError

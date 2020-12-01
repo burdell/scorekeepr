@@ -84,7 +84,12 @@ function getActionInfo(
   lineupMap: ReturnType<typeof getLineupMap>
 ) {
   const gameEvent = handleEvent(gameplayEvent)
-  if (!gameEvent || gameplayEvent.type !== 'at-bat') return null
+  if (
+    !gameEvent ||
+    (gameplayEvent.type !== 'at-bat' &&
+      gameplayEvent.type !== 'runner-adjustment')
+  )
+    return null
 
   const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)
   if (lineupSpot < 0) return null

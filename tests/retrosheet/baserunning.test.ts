@@ -3,6 +3,31 @@ import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 import { getBases } from '../../lib/Scorekeeper/generators/'
 
 describe('Retrosheet - Baserunning', () => {
+  it('handles runner adjustments (2020 extra inning rules)', () => {
+    const result = handleEvent({
+      type: 'runner-adjustment',
+      playerId: 'acunr001',
+      base: 2
+    })
+
+    expect(result).toEqual(
+      getEventWithDefaults({
+        isOut: false,
+        pitches: undefined,
+        result: resultGenerators.runnerAdjustment(2),
+        bases: {
+          B: {
+            endBase: 2,
+            isAtBatResult: true
+          },
+          1: undefined,
+          2: undefined,
+          3: undefined
+        }
+      })
+    )
+  })
+
   it('handles pickoffs', () => {
     expect(getResult('PO2(E1).2-3')).toEqual(
       getEventWithDefaults({
@@ -437,8 +462,4 @@ describe('Retrosheet - Baserunning', () => {
       })
     )
   })
-
-  // it('handles unproperly formatted stolen bases', () => {
-  //   expect(getResult(''))
-  // })
 })

@@ -36,6 +36,6 @@
     "@reduxjs/toolkit": "^1.4.0",
     "aws-sdk": "^2.753.0",
     "jsonminify": "^0.4.1",
-    "retrosheet-parse": "^0.5.0"
+    "retrosheet-parse": "^0.6.1"
   }
 }

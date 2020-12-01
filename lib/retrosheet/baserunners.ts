@@ -1,3 +1,4 @@
+import { RunnerAdjustment } from 'retrosheet-parse'
 import { Base, EventBaseResult, GameEvent } from '../types'
 import { getBase, getStartableBase } from './guards'
 import * as resultGenerators from '../Scorekeeper/generators/result'

@@ -9,6 +9,8 @@ import {
   handleBaserunnerMovements
 } from './baserunners'
 import { ActionConfig, Action } from './retrosheet.types'
+import { getBase } from './guards'
+import { runnerAdjustment } from '../Scorekeeper/generators/action'
 
 type Logger = {
   log: (message: string) => void
@@ -18,34 +20,45 @@ export function handleEvent(
   gameplayEvent: GameplayEvent,
   logger: Logger = { log: console.log }
 ) {
-  if (gameplayEvent.type === 'comment' || gameplayEvent.result === 'NP') {
-    return
+  switch (gameplayEvent.type) {
+    case 'comment':
+      return
+    case 'at-bat':
+      if (gameplayEvent.result === 'NP') {
+        return
+      }
+
+      const action = findAction(gameplayEvent.result)
+      if (!action) {
+        logger.log(`Unhandled action: ${gameplayEvent.result}`)
+      }
+      const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
+      const event = handleAction(gameplayEvent, action, baserunnerMovements)
+
+      const extraEventMatch = gameplayEvent.result.match(/\+(.+)/)
+      let extraEvent: GameEvent | undefined = undefined
+      if (extraEventMatch) {
+        const [fullMatch, eventMatch] = extraEventMatch
+        const extraAction = findAction(eventMatch)
+        extraEvent = handleAction(
+          gameplayEvent,
+          extraAction,
+          baserunnerMovements
+        )
+      }
+
+      if (event) {
+        handleBaserunnerMovements(baserunnerMovements, event, extraEvent)
+
+        if (event.bases.B && !event.bases.B.isOut) {
+          event.isOut = false
+        }
+      }
+
+      return event
+    case 'runner-adjustment':
+      return runnerAdjustment(getBase(gameplayEvent.base))
   }
-
-  const action = findAction(gameplayEvent.result)
-  if (!action) {
-    logger.log(`Unhandled action: ${gameplayEvent.result}`)
-  }
-  const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
-  const event = handleAction(gameplayEvent, action, baserunnerMovements)
-
-  const extraEventMatch = gameplayEvent.result.match(/\+(.+)/)
-  let extraEvent: GameEvent | undefined = undefined
-  if (extraEventMatch) {
-    const [fullMatch, eventMatch] = extraEventMatch
-    const extraAction = findAction(eventMatch)
-    extraEvent = handleAction(gameplayEvent, extraAction, baserunnerMovements)
-  }
-
-  if (event) {
-    handleBaserunnerMovements(baserunnerMovements, event, extraEvent)
-
-    if (event.bases.B && !event.bases.B.isOut) {
-      event.isOut = false
-    }
-  }
-
-  return event
 }
 
 function findAction(eventResultString: string): Action | undefined {

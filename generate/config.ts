@@ -95,6 +95,43 @@ export const buildConfig: BuildConfig[] = [
     }
   },
   {
+    name: '2020 Braves Season',
+    targetTeam: 'Atlanta Braves',
+    type: 'series',
+    series: [
+      {
+        retrosheetFiles: ['braves_2020/regular_season.txt'],
+        seriesId: (teams, firstGameId) => `${teams}-${firstGameId}`
+      },
+      {
+        retrosheetFiles: ['braves_2020/wildcard.txt'],
+        seriesId: () => `2020-WC-ATL-CIN`,
+        seriesName: 'Wild Card Series vs Cincinatti Reds'
+      },
+      {
+        retrosheetFiles: ['braves_2020/nlds.txt'],
+        seriesId: () => `2020-NLDS-ATL-MIA`,
+        seriesName: 'NLDS vs Miami Marlins'
+      },
+      {
+        retrosheetFiles: ['braves_2020/nlcs.txt'],
+        seriesId: () => `2020-NLCS-ATL-LAD`,
+        seriesName: 'NLCS vs Los Angeles Dodgers'
+      }
+    ],
+    urlSlug: 'braves-2020',
+    description: 'All 60 regular season & playoff games.',
+    gameDescriptions: {
+      ATL202008030: '💔',
+      BOS202009020:
+        'Marcell Ozuna & Adam Duvall make Braves first team in MLB history with back-to-back three-homer games',
+      ATL202009090:
+        'Braves score 29 runs against Marlins - second most in MLB since 1900',
+      ATL202008261: 'Ian Anderson makes MLB debut',
+      ATL202008210: 'Christian Pache makes MLB debut'
+    }
+  },
+  {
     name: 'Random Braves Games',
     type: 'category',
     retrosheetFiles: ['random_games.txt'],

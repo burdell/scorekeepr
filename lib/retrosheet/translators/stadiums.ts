@@ -44,6 +44,10 @@ const stadiums: TeamMap = {
     abbreviation: 'ARL02',
     fullName: 'The Ballpark in Arlington'
   },
+  ARL03: {
+    abbreviation: 'ARL03',
+    fullName: 'Globe Life Field'
+  },
   BAL12: {
     abbreviation: 'BAL12',
     fullName: 'Oriole Park at Camden Yards'
@@ -87,6 +91,10 @@ const stadiums: TeamMap = {
     abbreviation: 'DET05',
     fullName: 'Comerica Park'
   },
+  HOU03: {
+    abbreviation: 'HOU03',
+    fullName: 'Minute Maid Park'
+  },
   KAN06: {
     abbreviation: 'KAN06',
     fullName: 'Kauffman Stadium'
@@ -122,6 +130,10 @@ const stadiums: TeamMap = {
   NYC20: {
     abbreviation: 'NYC20',
     fullName: 'Citi Field'
+  },
+  NYC21: {
+    abbreviation: 'NYC21',
+    fullName: 'Yankee Stadium'
   },
   OAK01: {
     abbreviation: 'OAK01',
@@ -169,6 +181,10 @@ const stadiums: TeamMap = {
   STL10: {
     abbreviation: 'STL10',
     fullName: 'Busch Stadium'
+  },
+  STP01: {
+    abbreviation: 'STP01',
+    fullName: 'Tropicana Field'
   },
   TOR02: {
     abbreviation: 'TOR02',
