@@ -85,11 +85,12 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
 
     const batterBase = baseMovements['B']
     if (batterBase) {
-      const { endBase, isAtBatResult, result } = batterBase
+      const { endBase, isAtBatResult, result, isOut } = batterBase
       let bases = advanceRunnerHelper({
         baseAdvancedTo: endBase,
         isAtBatResult,
-        result
+        result,
+        isOut
       })
 
       if (batterBase.additionalBases) {

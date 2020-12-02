@@ -3,6 +3,43 @@ import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
 import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
 
 describe('Scorekeeper - outs', () => {
+  it('handles strikeouts with a catcher putout', () => {
+    const sk = new Scorekeeper()
+
+    sk.handleGameEvent({
+      event: getGameEvent({
+        result: resultGenerators.pitcherResult('K'),
+        isOut: true,
+        bases: getBases({
+          B: {
+            isOut: true,
+            endBase: 1,
+            result: resultGenerators.putout([2, 3]),
+            isAtBatResult: true
+          }
+        })
+      }),
+      inning: 0,
+      lineupSpot: 0,
+      team: 'visiting'
+    })
+
+    expect(sk.gameplay.visiting[0][0]).toEqual({
+      balls: 0,
+      bases: [
+        {
+          advanced: false,
+          isAtBatResult: true,
+          result: resultGenerators.putout([2, 3])
+        }
+      ],
+      isOut: true,
+      pitchCount: 0,
+      result: resultGenerators.pitcherResult('K'),
+      strikes: 0
+    })
+  })
+
   it('handles sacrifice flys', () => {
     const sk = new Scorekeeper()
 

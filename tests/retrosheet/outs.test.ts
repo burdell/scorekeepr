@@ -112,6 +112,21 @@ describe('Retrosheet - Outs', () => {
         })
       })
     )
+
+    expect(getResult('K.BX1(23)')).toEqual(
+      getEventWithDefaults({
+        result: resultGenerators.pitcherResult('K'),
+        isOut: true,
+        bases: getBases({
+          B: {
+            isOut: true,
+            endBase: 1,
+            result: resultGenerators.putout([2, 3]),
+            isAtBatResult: true
+          }
+        })
+      })
+    )
   })
 
   it('handles flyouts and lineouts', () => {

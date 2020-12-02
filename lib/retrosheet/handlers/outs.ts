@@ -2,7 +2,7 @@ import { AtBat } from 'retrosheet-parse'
 
 import * as resultGenerators from '../../Scorekeeper/generators/result'
 import * as actionGenerators from '../../Scorekeeper/generators/action'
-import { getGameEvent } from '../../Scorekeeper/generators'
+import { getBases, getGameEvent } from '../../Scorekeeper/generators'
 
 import { GameEvent, AtBatResult } from '../../types'
 import { getPutoutPositions } from '../outs'
@@ -25,14 +25,27 @@ function getBatterAction(atBatResult: string) {
 const strikeout: ActionConfig = {
   actionType: 'batter',
   regexp: /^K/,
-  handler: (gameplayEvent) => {
+  handler: (gameplayEvent, match, baserunnnerMovements) => {
     const isLooking = gameplayEvent.pitchSequence.endsWith('C')
     const resultType = isLooking ? 'K-looking' : 'K'
 
-    return getGameEvent({
+    const gameEvent = getGameEvent({
       isOut: true,
       result: resultGenerators.pitcherResult(resultType)
     })
+
+    const batterMovement = baserunnnerMovements.find((m) => m.startBase === 'B')
+    if (batterMovement && batterMovement.isOut) {
+      gameEvent.bases = getBases({
+        B: {
+          isOut: true,
+          isAtBatResult: true,
+          endBase: batterMovement.endBase
+        }
+      })
+    }
+
+    return gameEvent
   }
 }
 
