@@ -53,8 +53,8 @@ export type Series = {
   visitingTeam: string
   targetTeam?: string
   seriesId: string
-  homeWins: number
-  visitingWins: number
+  otherTeamWins: number
+  targetTeamWins: number
   seriesName: string | undefined
 }
 

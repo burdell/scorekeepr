@@ -95,18 +95,34 @@ type SeriesData = {
   targetTeam?: string
 }
 
-function getWinCounts(games: ListGame[]) {
-  let homeWins = 0
-  let visitingWins = 0
-  games.forEach(({ visitingScore, homeScore }) => {
+function getTargettWinCounts(games: ListGame[], targetTeam: string) {
+  let targetTeamWins = 0
+  let otherTeamWins = 0
+  games.forEach(({ visitingScore, homeScore, homeTeam, visitingTeam }) => {
     if (visitingScore > homeScore) {
-      visitingWins += 1
+      if (targetTeam === visitingTeam) targetTeamWins += 1
+      else otherTeamWins += 1
     } else if (homeScore > visitingScore) {
-      homeWins += 1
+      if (targetTeam === homeTeam) targetTeamWins += 1
+      else otherTeamWins += 1
     }
   })
 
-  return { homeWins, visitingWins }
+  return { targetTeamWins, otherTeamWins }
+}
+
+function getWinCounts(games: ListGame[]) {
+  let otherTeamWins = 0
+  let targetTeamWins = 0
+  games.forEach(({ visitingScore, homeScore }) => {
+    if (visitingScore > homeScore) {
+      targetTeamWins += 1
+    } else if (homeScore > visitingScore) {
+      otherTeamWins += 1
+    }
+  })
+
+  return { otherTeamWins, targetTeamWins }
 }
 
 export async function buildSeriesList(configList: SeriesBuildConfig[]) {
@@ -135,6 +151,7 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
     }
     generatedSeries.forEach((s) => {
       fullGames = fullGames.concat(s.fullGames)
+
       s.seasonSeries.map(
         ({
           dateEnd,
@@ -145,6 +162,10 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
           games,
           seriesName
         }) => {
+          const winCounts = seriesData.targetTeam
+            ? getTargettWinCounts(games, seriesData.targetTeam)
+            : getWinCounts(games)
+
           seriesData.series.push({
             seriesName,
             homeTeam,
@@ -152,7 +173,8 @@ export async function buildSeriesList(configList: SeriesBuildConfig[]) {
             seriesId,
             endDate: dateEnd,
             startDate: dateStart,
-            ...getWinCounts(games)
+            targetTeam: seriesData.targetTeam,
+            ...winCounts
           })
           seriesGames.push({
             urlSlug: seriesId,

@@ -38,7 +38,6 @@ const strikeout: ActionConfig = {
     if (batterMovement && batterMovement.isOut) {
       gameEvent.bases = getBases({
         B: {
-          isOut: true,
           isAtBatResult: true,
           endBase: batterMovement.endBase
         }
