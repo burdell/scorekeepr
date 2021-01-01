@@ -103,4 +103,12 @@ describe('Scorekeeper - Game Info', () => {
       ]
     ])
   })
+
+  it('sets an initial inning count', () => {
+    const sk = new Scorekeeper({
+      initialInningCount: 7
+    })
+
+    expect(sk.gameplay.home.length).toBe(7)
+  })
 })
