@@ -1,12 +1,3 @@
-# scorekeeper
+# scorekeepr
 
-- Needs a version of Node greater than `12.10`
-- A really great rundown of Retrosheet files is here: https://www.retrosheet.org/eventfile.htm
-
-## Commands
-
-- `npm run test`: runs jest tests
-- `npm run typecheck`: runs TS compiler with `--noEmit`
-- `npm run generate`: generates Scorekeeper output from the config file define in `generate/config.ts`. Outputs to `/output`
-- `npm run server`: runs a small dev server on `localhost:4000` to serve `/output`
-- `npm run dev`: runs `generate` and `server` to regenerate all the games and 🔥fires🔥  up the dev server
+This is a very new, and very work-in-progress library for general baseball scorekeeping! It currently handles all the data generation for [Scorebook](https://www.scorebook.biz). I'm working on making it into its own library to also be used an interactive scorekeeping app. If any of that sounds interesting and cool and you want to help in any way, free free to contact me!
