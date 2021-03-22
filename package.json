@@ -1,12 +1,13 @@
 {
   "name": "scorekeepr",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Library for baseball scorekeeping",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "retrosheet/**/*"
   ],
   "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "main": "dist",
   "keywords": [
     "baseball",
     "retrosheet"
@@ -19,8 +20,11 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "prepublish": "npm run test && npm run build"
+    "build-core": "tsc --project tsconfig.core.json",
+    "build-retrosheet": "tsc --project tsconfig.retrosheet.json && npm run copy-retrosheet-index",
+    "build": "npm run build-core && npm run build-retrosheet",
+    "prepublish": "npm run test && npm run build",
+    "copy-retrosheet-index": "cp ./retrosheet_lib/** ./retrosheet"
   },
   "author": "nathan griffin <nathanjgriffin@gmail.com>",
   "license": "MIT",

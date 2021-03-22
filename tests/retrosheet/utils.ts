@@ -1,6 +1,6 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
-import { handleEvent as realHandleEvent } from '../../lib/retrosheet'
+import { handleEvent as realHandleEvent } from '../../lib/retrosheet/event'
 import { GameEvent } from '../../lib/types'
 
 export function getEventWithDefaults(

@@ -11,6 +11,5 @@
     "declaration": true,
     "lib": ["es2020.string", "dom"]
   },
-  "exclude": ["node_modules"],
-  "include": ["lib"]
+  "exclude": ["node_modules"]
 }

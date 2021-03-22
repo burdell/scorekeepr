@@ -1,101 +1,101 @@
-import { GameplayEvent, AtBat } from 'retrosheet-parse'
+import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
-import { GameEvent } from '../types'
-import { actionConfigs } from './handlers'
-import { getPitchData } from './pitches'
-import {
-  getBaserunnerMovements,
-  BaserunnerMovements,
-  handleBaserunnerMovements
-} from './baserunners'
-import { ActionConfig, Action } from './retrosheet.types'
-import { getBase } from './guards'
-import { runnerAdjustment } from '../Scorekeeper/generators/action'
+import { handleEvent } from './event'
+import { getTeam, getStadium, getLineup } from './translators'
+import { Scorekeeper } from '../Scorekeeper'
+import { getLineupMap, getLineupSpot, getPitchers } from '../utils/lineup'
+import { alertSuccess, alertGameGenerated } from '../utils/alerts'
+import { formatStartTime } from '../utils/time'
 
-type Logger = {
-  log: (message: string) => void
+export * from '../types'
+
+export async function getRetrosheetScorekeepers(
+  filename: string
+): Promise<Scorekeeper[]> {
+  const gameList = await parseGames(filename)
+  const scorekeepers: Scorekeeper[] = []
+
+  gameList.forEach((game) => {
+    const { info, lineup, play, data } = game
+
+    const scorekeeper = new Scorekeeper({
+      date: info.date,
+      homeTeam: getTeam(info.hometeam),
+      visitingTeam: getTeam(info.visteam),
+      location: getStadium(info.site, info.date),
+      startTime: formatStartTime(info.starttime),
+      id: game.id,
+      initialInningCount: game.play.visiting.length
+    })
+
+    scorekeeper.setLineups({
+      home: getLineup(lineup.home),
+      visiting: getLineup(lineup.visiting),
+      homePitchers: getPitchers(lineup.home, game.data.er),
+      visitingPitchers: getPitchers(lineup.visiting, game.data.er)
+    })
+
+    try {
+      generateGameplay({ game, team: 'home', scorekeeper })
+      generateGameplay({ game, team: 'visiting', scorekeeper })
+    } catch (e) {
+      console.error('Gameplay error: ', scorekeeper.gameInfo.id, e.message)
+      return
+    }
+
+    alertSuccess(game, scorekeeper)
+    scorekeepers.push(scorekeeper)
+  })
+
+  alertGameGenerated(scorekeepers, filename)
+  return scorekeepers
 }
 
-export function handleEvent(
-  gameplayEvent: GameplayEvent,
-  logger: Logger = { log: console.log }
-) {
-  switch (gameplayEvent.type) {
-    case 'comment':
-      return
-    case 'at-bat':
-      if (gameplayEvent.result === 'NP') {
+function generateGameplay({
+  game,
+  scorekeeper,
+  team
+}: {
+  game: Game
+  scorekeeper: Scorekeeper
+  team: 'home' | 'visiting'
+}) {
+  const gameplayEvents = game.play[team]
+  const lineup = game.lineup[team]
+  const lineupMap = getLineupMap(lineup)
+
+  gameplayEvents.forEach((events, inningNumber) => {
+    events.forEach((event) => {
+      const action = getActionInfo(event, lineupMap)
+
+      if (!action) {
         return
       }
 
-      const action = findAction(gameplayEvent.result)
-      if (!action) {
-        logger.log(`Unhandled action: ${gameplayEvent.result}`)
-      }
-      const baserunnerMovements = getBaserunnerMovements(gameplayEvent.result)
-      const event = handleAction(gameplayEvent, action, baserunnerMovements)
-
-      const extraEventMatch = gameplayEvent.result.match(/\+(.+)/)
-      let extraEvent: GameEvent | undefined = undefined
-      if (extraEventMatch) {
-        const [fullMatch, eventMatch] = extraEventMatch
-        const extraAction = findAction(eventMatch)
-        extraEvent = handleAction(
-          gameplayEvent,
-          extraAction,
-          baserunnerMovements
-        )
-      }
-
-      if (event) {
-        handleBaserunnerMovements(baserunnerMovements, event, extraEvent)
-
-        if (event.bases.B && !event.bases.B.isOut) {
-          event.isOut = false
-        }
-      }
-
-      return event
-    case 'runner-adjustment':
-      return runnerAdjustment(getBase(gameplayEvent.base))
-  }
+      scorekeeper.handleGameEvent({
+        event: action.gameEvent,
+        inning: inningNumber,
+        lineupSpot: action.lineupSpot,
+        team
+      })
+    })
+  })
 }
 
-function findAction(eventResultString: string): Action | undefined {
-  let match: RegExpMatchArray | null = null
-  let foundAction: ActionConfig | undefined = undefined
-  for (let identifier of actionConfigs) {
-    match = eventResultString.match(identifier.regexp)
-    if (match) {
-      foundAction = identifier
-      break
-    }
-  }
-
-  if (!foundAction || !match) return
-
-  return {
-    actionType: foundAction.actionType,
-    handler: foundAction.handler,
-    match
-  }
-}
-
-function handleAction(
-  gameplayEvent: AtBat,
-  action: Action | undefined,
-  baserunnerMovements: BaserunnerMovements
+function getActionInfo(
+  gameplayEvent: GameplayEvent,
+  lineupMap: ReturnType<typeof getLineupMap>
 ) {
-  if (!action) return undefined
-
-  const result = action.handler(
-    gameplayEvent,
-    action.match,
-    baserunnerMovements
+  const gameEvent = handleEvent(gameplayEvent)
+  if (
+    !gameEvent ||
+    (gameplayEvent.type !== 'at-bat' &&
+      gameplayEvent.type !== 'runner-adjustment')
   )
-  if (result && action.actionType === 'batter') {
-    result.pitches = getPitchData(gameplayEvent)
-  }
+    return null
 
-  return result
+  const lineupSpot = getLineupSpot(gameplayEvent, lineupMap)
+  if (lineupSpot < 0) return null
+
+  return { gameEvent, lineupSpot }
 }

@@ -8,5 +8,10 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   testEnvironment: 'node',
-  collectCoverageFrom: ['**/lib/**']
+  collectCoverageFrom: ['**/lib/**'],
+  globals: {
+    'ts-jest': {
+      tsConfig: '<rootDir>/tsconfig.test.json'
+    }
+  }
 }

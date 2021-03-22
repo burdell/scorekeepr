@@ -7,7 +7,7 @@ import { calculateStats } from './stats'
 import { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
 
 export class Scorekeeper {
-  private store: ReturnType<typeof getStore>
+  _store: ReturnType<typeof getStore>
 
   constructor(game: Partial<InitialGame> = {}) {
     const {
@@ -16,7 +16,7 @@ export class Scorekeeper {
       initialInningCount,
       ...gameInfo
     } = game
-    this.store = getStore()
+    this._store = getStore()
     this.updateGameInfo(gameInfo)
     this.setLineups({
       homePitchers: [],
@@ -36,20 +36,20 @@ export class Scorekeeper {
     })
 
     if (initialInningCount) {
-      this.store.dispatch(setInningLength(initialInningCount))
+      this._store.dispatch(setInningLength(initialInningCount))
     }
   }
 
   get gameInfo() {
-    return this.store.getState().gameInfo.currentGame
+    return this._store.getState().gameInfo.currentGame
   }
 
   get lineups() {
-    return this.store.getState().lineup
+    return this._store.getState().lineup
   }
 
   get gameplay() {
-    return this.store.getState().gameplay
+    return this._store.getState().gameplay
   }
 
   get stats() {
@@ -57,23 +57,23 @@ export class Scorekeeper {
   }
 
   setLineups = (lineups: LineupState) => {
-    this.store.dispatch(setLineups(lineups))
+    this._store.dispatch(setLineups(lineups))
   }
 
   substituteHomePlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
-    this.store.dispatch(subHome({ lineupSpot, lineupEntry }))
+    this._store.dispatch(subHome({ lineupSpot, lineupEntry }))
   }
 
   substituteVisitingPlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
-    this.store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
+    this._store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
   }
 
   updateGameInfo = (gameInfo: Partial<Game>) => {
-    this.store.dispatch(setGameInfo(gameInfo))
+    this._store.dispatch(setGameInfo(gameInfo))
   }
 
   handleGameEvent({ event, inning, lineupSpot, team }: GameEventHandler) {
-    this.store.dispatch(
+    this._store.dispatch(
       handleGameEvent({
         event,
         inning,

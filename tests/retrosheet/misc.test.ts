@@ -1,4 +1,4 @@
-import { handleEvent } from '../../lib/retrosheet'
+import { handleEvent } from '../../lib/retrosheet/event'
 import { getEventWithDefaults } from './utils'
 
 describe('Retrosheet - miscellaneous things', () => {

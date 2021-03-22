@@ -1,9 +1,9 @@
-import { ActionConfig, Action } from '../retrosheet.types'
+import { ActionConfig } from '../retrosheet.types'
 import * as actionGenerators from '../../Scorekeeper/generators/action'
 import * as resultGenerators from '../../Scorekeeper/generators/result'
 import * as guards from '../guards'
 
-import { getGameEvent, getBases } from '../../Scorekeeper/generators'
+import { getGameEvent } from '../../Scorekeeper/generators'
 
 const hit: ActionConfig = {
   actionType: 'batter',
