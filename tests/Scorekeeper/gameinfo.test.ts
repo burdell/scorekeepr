@@ -17,7 +17,7 @@ describe('Scorekeeper - Game Info', () => {
     expect(formatStartTime(invalidTime2)).toEqual(undefined)
   })
 
-  describe('it sets the game info', () => {
+  it('sets the game info', () => {
     const gameInfo: Game = {
       homeTeam: { abbreviation: 'HT', fullName: 'The Home Team' },
       visitingTeam: { abbreviation: 'VT', fullName: 'The Visiting Team' },
@@ -31,7 +31,7 @@ describe('Scorekeeper - Game Info', () => {
     expect(sk.gameInfo).toEqual(gameInfo)
   })
 
-  describe('it sets the lineups', () => {
+  it('sets the lineups', () => {
     const homeLineup = [
       { player: { name: 'Home Player 1' }, position: 1 },
       { player: { name: 'Home Player 2' }, position: 2 }

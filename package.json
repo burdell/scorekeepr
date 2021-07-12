@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --project tsconfig.core.json",
     "build-core": "tsc --project tsconfig.core.json",
     "build-retrosheet": "tsc --project tsconfig.retrosheet.json && npm run copy-retrosheet-index",
     "build": "npm run build-core && npm run build-retrosheet",
@@ -28,16 +28,14 @@
   },
   "author": "nathan griffin <nathanjgriffin@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.5",
-    "jest": "^25.2.3",
-    "ts-jest": "^25.2.1",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.7"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "@reduxjs/toolkit": "^1.4.0",
-    "retrosheet-parse": "^0.6.1"
+    "@reduxjs/toolkit": "^1.6.0",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.1",
+    "jest": "^27.0.6",
+    "retrosheet-parse": "^0.6.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
   }
 }

@@ -1,17 +1,18 @@
 module.exports = {
-  roots: ['<rootDir>/tests'],
+  roots: ['tests'],
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',
     '**/?(*.)+(spec|test).+(ts|tsx|js)'
   ],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest'
-  },
+  preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverageFrom: ['**/lib/**'],
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/tsconfig.test.json'
+      tsconfig: 'tsconfig.test.json',
+      diagnostics: {
+        ignoreCodes: [151001]
+      }
     }
   }
 }

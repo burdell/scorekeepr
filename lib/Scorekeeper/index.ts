@@ -4,7 +4,7 @@ import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
 import { handleGameEvent, setInningLength } from './store/gameplay'
 import { calculateStats } from './stats'
 
-import { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
+import type { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
 
 export class Scorekeeper {
   _store: ReturnType<typeof getStore>
@@ -69,7 +69,7 @@ export class Scorekeeper {
   }
 
   updateGameInfo = (gameInfo: Partial<Game>) => {
-    this._store.dispatch(setGameInfo(gameInfo))
+    this._store.dispatch(setGameInfo({ gameInfo }))
   }
 
   handleGameEvent({ event, inning, lineupSpot, team }: GameEventHandler) {

@@ -22,10 +22,12 @@ function getGame(overrides: Partial<Game> = {}): Game {
 type GameState = { currentGame: Game }
 const initialState: GameState = { currentGame: getGame() }
 
-export const setGameInfo = createAction<Partial<Game>>('setGameInfo')
+export const setGameInfo = createAction<{ gameInfo: Partial<Game> }>(
+  'setGameInfo'
+)
 export const gameReducer = createReducer(initialState, (builder) => {
   builder.addCase(setGameInfo, (state, action) => {
-    const gameData = { ...state.currentGame, ...action.payload }
+    const gameData = { ...state.currentGame, ...action.payload.gameInfo }
     state.currentGame = getGame(gameData)
     return state
   })
