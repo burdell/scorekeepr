@@ -1,4 +1,4 @@
-import { Lineup, GameplayEvent } from 'retrosheet-parse'
+import { Lineup, GameplayEvent, Player } from 'retrosheet-parse'
 import { PitcherEntry } from '../types'
 
 export function getLineupMap(lineup: Lineup) {
@@ -22,24 +22,14 @@ export function getLineupSpot(
 }
 
 export function getPitchers(
-  lineup: Lineup,
+  pitcherList: Player[],
   pitchingStats: { [playerId: string]: number }
 ): PitcherEntry[] {
   let pitchers: { [playerId: string]: PitcherEntry } = {}
 
-  const nonBattingPitchers = lineup[-1] || []
-  nonBattingPitchers.forEach((p) => {
+  pitcherList.forEach((p) => {
     if (pitchers[p.id]) return
     pitchers[p.id] = { player: p, stats: { er: pitchingStats[p.id] || 0 } }
-  })
-
-  lineup.forEach((lineupSpot) => {
-    lineupSpot
-      .filter((p) => p.position === 1)
-      .forEach((p) => {
-        if (pitchers[p.id]) return
-        pitchers[p.id] = { player: p, stats: { er: pitchingStats[p.id] || 0 } }
-      })
   })
 
   return Object.values(pitchers).sort((p1, p2) => {

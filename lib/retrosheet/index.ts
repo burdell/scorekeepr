@@ -16,7 +16,7 @@ export async function getRetrosheetScorekeepers(
   const scorekeepers: Scorekeeper[] = []
 
   gameList.forEach((game) => {
-    const { info, lineup, play, data } = game
+    const { info, lineup, pitchers } = game
 
     const scorekeeper = new Scorekeeper({
       date: info.date,
@@ -31,8 +31,8 @@ export async function getRetrosheetScorekeepers(
     scorekeeper.setLineups({
       home: getLineup(lineup.home),
       visiting: getLineup(lineup.visiting),
-      homePitchers: getPitchers(lineup.home, game.data.er),
-      visitingPitchers: getPitchers(lineup.visiting, game.data.er)
+      homePitchers: getPitchers(pitchers.home, game.data.er),
+      visitingPitchers: getPitchers(pitchers.visiting, game.data.er)
     })
 
     try {
