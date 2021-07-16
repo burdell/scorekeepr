@@ -11,15 +11,23 @@ import type {
   Balk,
   PickOff,
   PutOut
-} from '../Scorekeepr/generators/result'
+} from '../types/actions'
 
-export type FlyOut = {
+export interface FlyOut {
   type: 'flyout'
   result: number
   display: string
 }
-export type LineOut = { type: 'lineout'; result: number; display: string }
-export type Hit = { type: 'hit'; result: Base; display: string }
+export interface LineOut {
+  type: 'lineout'
+  result: number
+  display: string
+}
+export interface Hit {
+  type: 'hit'
+  result: Base
+  display: string
+}
 export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'IBB' | 'HB'
 
 export type AtBatResult =
@@ -43,7 +51,7 @@ export type AdvanceBaseResult =
 export type OutBaseResult = PutOut | CaughtStealing
 export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
 
-export type BaseResult = {
+export interface BaseResult {
   advanced: boolean
   result: BaseResultResult
   isAtBatResult?: boolean

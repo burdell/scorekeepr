@@ -1,5 +1,4 @@
-import { Stats, AtBat, Gameplay } from '../types'
-import { LineupState } from './store/lineup'
+import { GameStats, AtBat, Gameplay, LineupsAndPitchers } from '../types'
 
 function calculateInningStats(atBats: AtBat[]) {
   const stats = {
@@ -35,7 +34,7 @@ function calculateInningStats(atBats: AtBat[]) {
   return stats
 }
 
-function calculateTeamStats(atBats: AtBat[][]): Stats {
+function calculateTeamStats(atBats: AtBat[][]): GameStats {
   const inningStats = atBats.map(calculateInningStats)
 
   const scoring: number[] = []
@@ -54,7 +53,10 @@ function calculateTeamStats(atBats: AtBat[][]): Stats {
   return { scoring, runs, hits, errors }
 }
 
-export function calculateStats(gameplay: Gameplay, lineups: LineupState) {
+export function calculateStats(
+  gameplay: Gameplay,
+  lineups: LineupsAndPitchers
+) {
   return {
     home: calculateTeamStats(gameplay.home),
     visiting: calculateTeamStats(gameplay.visiting)

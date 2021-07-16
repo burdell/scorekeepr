@@ -1,7 +1,7 @@
-import { Game } from '../../types'
+import { GameInfo } from '../../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-function getGame(overrides: Partial<Game> = {}): Game {
+function getGame(overrides: Partial<GameInfo> = {}): GameInfo {
   return {
     homeTeam: {
       fullName: '',
@@ -19,10 +19,10 @@ function getGame(overrides: Partial<Game> = {}): Game {
   }
 }
 
-type GameState = { currentGame: Game }
+type GameState = { currentGame: GameInfo }
 const initialState: GameState = { currentGame: getGame() }
 
-export const setGameInfo = createAction<{ gameInfo: Partial<Game> }>(
+export const setGameInfo = createAction<{ gameInfo: Partial<GameInfo> }>(
   'setGameInfo'
 )
 export const gameReducer = createReducer(initialState, (builder) => {

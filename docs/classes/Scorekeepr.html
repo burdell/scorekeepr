@@ -65,6 +65,16 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Code blocks are great for examples</p>
+					</div>
+					<pre><code class="language-typescript"><span style="color: #008000">// run typedoc --help for a list of supported languages</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">instance</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">MyClass</span><span style="color: #000000">();</span>
+</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -117,19 +127,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Scorekeepr<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules.html#InitialGame" class="tsd-signature-type" data-tsd-kind="Type alias">InitialGame</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scorekeepr.html" class="tsd-signature-type" data-tsd-kind="Class">Scorekeepr</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Scorekeepr<span class="tsd-signature-symbol">(</span>game<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/InitialGame.html" class="tsd-signature-type" data-tsd-kind="Interface">InitialGame</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Scorekeepr.html" class="tsd-signature-type" data-tsd-kind="Class">Scorekeepr</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L12">Scorekeeper/index.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L26">Scorekeepr/index.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>game: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules.html#InitialGame" class="tsd-signature-type" data-tsd-kind="Type alias">InitialGame</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<h5>game: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/InitialGame.html" class="tsd-signature-type" data-tsd-kind="Interface">InitialGame</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="Scorekeepr.html" class="tsd-signature-type" data-tsd-kind="Class">Scorekeepr</a></h4>
@@ -145,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EnhancedStore</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">ThunkMiddleware</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ThunkMiddleware</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L10">Scorekeeper/index.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L24">Scorekeepr/index.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,16 +166,16 @@
 					<a name="gameInfo" class="tsd-anchor"></a>
 					<h3>game<wbr>Info</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gameInfo<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#Game" class="tsd-signature-type" data-tsd-kind="Type alias">Game</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gameInfo<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/GameInfo.html" class="tsd-signature-type" data-tsd-kind="Interface">GameInfo</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L43">Scorekeeper/index.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L57">Scorekeepr/index.ts:57</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules.html#Game" class="tsd-signature-type" data-tsd-kind="Type alias">Game</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/GameInfo.html" class="tsd-signature-type" data-tsd-kind="Interface">GameInfo</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -173,16 +183,16 @@
 					<a name="gameplay" class="tsd-anchor"></a>
 					<h3>gameplay</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gameplay<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules.html#Gameplay" class="tsd-signature-type" data-tsd-kind="Type alias">Gameplay</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gameplay<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Gameplay.html" class="tsd-signature-type" data-tsd-kind="Interface">Gameplay</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L51">Scorekeeper/index.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L65">Scorekeepr/index.ts:65</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules.html#Gameplay" class="tsd-signature-type" data-tsd-kind="Type alias">Gameplay</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/Gameplay.html" class="tsd-signature-type" data-tsd-kind="Interface">Gameplay</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -190,16 +200,16 @@
 					<a name="lineups" class="tsd-anchor"></a>
 					<h3>lineups</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lineups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LineupState</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lineups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupsAndPitchers.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupsAndPitchers</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L47">Scorekeeper/index.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L61">Scorekeepr/index.ts:61</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">LineupState</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/LineupsAndPitchers.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupsAndPitchers</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -207,22 +217,22 @@
 					<a name="stats" class="tsd-anchor"></a>
 					<h3>stats</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> stats<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a><span class="tsd-signature-symbol"> }</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> stats<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L55">Scorekeeper/index.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L69">Scorekeepr/index.ts:69</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a><span class="tsd-signature-symbol"> }</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol"> }</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
-									<h5>home<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a></h5>
+									<h5>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a></h5>
 								</li>
 								<li class="tsd-parameter">
-									<h5>visiting<span class="tsd-signature-symbol">: </span><a href="../modules.html#Stats" class="tsd-signature-type" data-tsd-kind="Type alias">Stats</a></h5>
+									<h5>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a></h5>
 								</li>
 							</ul>
 						</li>
@@ -235,19 +245,19 @@
 					<a name="handleGameEvent" class="tsd-anchor"></a>
 					<h3>handle<wbr>Game<wbr>Event</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">handle<wbr>Game<wbr>Event<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><a href="../modules.html#GameEventHandler" class="tsd-signature-type" data-tsd-kind="Type alias">GameEventHandler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Game<wbr>Event<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">GameEventHandler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L75">Scorekeeper/index.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L89">Scorekeepr/index.ts:89</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>__namedParameters: <a href="../modules.html#GameEventHandler" class="tsd-signature-type" data-tsd-kind="Type alias">GameEventHandler</a></h5>
+									<h5>__namedParameters: <span class="tsd-signature-type">GameEventHandler</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -258,19 +268,19 @@
 					<a name="setLineups" class="tsd-anchor"></a>
 					<h3>set<wbr>Lineups</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Lineups<span class="tsd-signature-symbol">(</span>lineups<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LineupState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Lineups<span class="tsd-signature-symbol">(</span>lineups<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupsAndPitchers.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupsAndPitchers</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L59">Scorekeeper/index.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L73">Scorekeepr/index.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>lineups: <span class="tsd-signature-type">LineupState</span></h5>
+									<h5>lineups: <a href="../interfaces/LineupsAndPitchers.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupsAndPitchers</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -281,13 +291,13 @@
 					<a name="substituteHomePlayer" class="tsd-anchor"></a>
 					<h3>substitute<wbr>Home<wbr>Player</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">substitute<wbr>Home<wbr>Player<span class="tsd-signature-symbol">(</span>lineupSpot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, lineupEntry<span class="tsd-signature-symbol">: </span><a href="../modules.html#LineupEntry" class="tsd-signature-type" data-tsd-kind="Type alias">LineupEntry</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">substitute<wbr>Home<wbr>Player<span class="tsd-signature-symbol">(</span>lineupSpot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, lineupEntry<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L63">Scorekeeper/index.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L77">Scorekeepr/index.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -296,7 +306,7 @@
 									<h5>lineupSpot: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>lineupEntry: <a href="../modules.html#LineupEntry" class="tsd-signature-type" data-tsd-kind="Type alias">LineupEntry</a></h5>
+									<h5>lineupEntry: <a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -307,13 +317,13 @@
 					<a name="substituteVisitingPlayer" class="tsd-anchor"></a>
 					<h3>substitute<wbr>Visiting<wbr>Player</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">substitute<wbr>Visiting<wbr>Player<span class="tsd-signature-symbol">(</span>lineupSpot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, lineupEntry<span class="tsd-signature-symbol">: </span><a href="../modules.html#LineupEntry" class="tsd-signature-type" data-tsd-kind="Type alias">LineupEntry</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">substitute<wbr>Visiting<wbr>Player<span class="tsd-signature-symbol">(</span>lineupSpot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, lineupEntry<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L67">Scorekeeper/index.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L81">Scorekeepr/index.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -322,7 +332,7 @@
 									<h5>lineupSpot: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5>lineupEntry: <a href="../modules.html#LineupEntry" class="tsd-signature-type" data-tsd-kind="Type alias">LineupEntry</a></h5>
+									<h5>lineupEntry: <a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -333,19 +343,19 @@
 					<a name="updateGameInfo" class="tsd-anchor"></a>
 					<h3>update<wbr>Game<wbr>Info</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Game<wbr>Info<span class="tsd-signature-symbol">(</span>gameInfo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules.html#Game" class="tsd-signature-type" data-tsd-kind="Type alias">Game</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Game<wbr>Info<span class="tsd-signature-symbol">(</span>gameInfo<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/GameInfo.html" class="tsd-signature-type" data-tsd-kind="Interface">GameInfo</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/0c66b48/lib/Scorekeeper/index.ts#L71">Scorekeeper/index.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/94b6246/lib/Scorekeepr/index.ts#L85">Scorekeepr/index.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>gameInfo: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules.html#Game" class="tsd-signature-type" data-tsd-kind="Type alias">Game</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>gameInfo: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/GameInfo.html" class="tsd-signature-type" data-tsd-kind="Interface">GameInfo</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -406,104 +416,53 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#AdditionalBases" class="tsd-kind-icon">Additional<wbr>Bases</a>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/AtBat.html" class="tsd-kind-icon">At<wbr>Bat</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BaseResult.html" class="tsd-kind-icon">Base<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/GameInfo.html" class="tsd-kind-icon">Game<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/GameStats.html" class="tsd-kind-icon">Game<wbr>Stats</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/Gameplay.html" class="tsd-kind-icon">Gameplay</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/InitialGame.html" class="tsd-kind-icon">Initial<wbr>Game</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/LineupEntry.html" class="tsd-kind-icon">Lineup<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/LineupPlayer.html" class="tsd-kind-icon">Lineup<wbr>Player</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/LineupsAndPitchers.html" class="tsd-kind-icon">Lineups<wbr>And<wbr>Pitchers</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/PitcherEntry.html" class="tsd-kind-icon">Pitcher<wbr>Entry</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#AdvanceBaseResult" class="tsd-kind-icon">Advance<wbr>Base<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#AdvanceableBase" class="tsd-kind-icon">Advanceable<wbr>Base</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#AtBat" class="tsd-kind-icon">At<wbr>Bat</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#AtBatResult" class="tsd-kind-icon">At<wbr>Bat<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Base" class="tsd-kind-icon">Base</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#BaseResult" class="tsd-kind-icon">Base<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#BaseResultResult" class="tsd-kind-icon">Base<wbr>Result<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Bases" class="tsd-kind-icon">Bases</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#CurrentAtBat" class="tsd-kind-icon">Current<wbr>AtBat</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#EventBaseResult" class="tsd-kind-icon">Event<wbr>Base<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#FlyOut" class="tsd-kind-icon">Fly<wbr>Out</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Game" class="tsd-kind-icon">Game</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#GameEvent" class="tsd-kind-icon">Game<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#GameEventHandler" class="tsd-kind-icon">Game<wbr>Event<wbr>Handler</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#GameOutput" class="tsd-kind-icon">Game<wbr>Output</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Gameplay" class="tsd-kind-icon">Gameplay</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Hit" class="tsd-kind-icon">Hit</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#InitialGame" class="tsd-kind-icon">Initial<wbr>Game</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#InitialLineupEntry" class="tsd-kind-icon">Initial<wbr>Lineup<wbr>Entry</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#LineOut" class="tsd-kind-icon">Line<wbr>Out</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#Lineup" class="tsd-kind-icon">Lineup</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#LineupEntry" class="tsd-kind-icon">Lineup<wbr>Entry</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#LineupPlayer" class="tsd-kind-icon">Lineup<wbr>Player</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../modules.html#OutBaseResult" class="tsd-kind-icon">Out<wbr>Base<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#PitchData" class="tsd-kind-icon">Pitch<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#PitcherEntry" class="tsd-kind-icon">Pitcher<wbr>Entry</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#PitcherResultString" class="tsd-kind-icon">Pitcher<wbr>Result<wbr>String</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#PitchingStats" class="tsd-kind-icon">Pitching<wbr>Stats</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#RunnerMovement" class="tsd-kind-icon">Runner<wbr>Movement</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#StartableBase" class="tsd-kind-icon">Startable<wbr>Base</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Stats" class="tsd-kind-icon">Stats</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../modules.html#Team" class="tsd-kind-icon">Team</a>
+						<a href="../modules.html#PlayerPosition" class="tsd-kind-icon">Player<wbr>Position</a>
 					</li>
 				</ul>
 			</nav>
@@ -517,6 +476,9 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>

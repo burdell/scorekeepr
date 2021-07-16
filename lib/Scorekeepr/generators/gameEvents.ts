@@ -1,4 +1,4 @@
-import * as resultGenerators from './result'
+import * as resultGenerators from './actions'
 
 import { getGameEvent, getBases } from '.'
 import { Base, PitcherResultString } from '../../types'

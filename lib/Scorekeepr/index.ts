@@ -1,11 +1,25 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
-import { subHome, subVisiting, setLineups, LineupState } from './store/lineup'
+import { subHome, subVisiting, setLineups } from './store/lineup'
 import { handleGameEvent, setInningLength } from './store/gameplay'
 import { calculateStats } from './stats'
 
-import type { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
+import type {
+  GameInfo,
+  LineupEntry,
+  GameEventHandler,
+  InitialGame,
+  LineupsAndPitchers
+} from '../types'
 
+/**
+ * Code blocks are great for examples
+ *
+ * ```typescript
+ * // run typedoc --help for a list of supported languages
+ * const instance = new MyClass();
+ * ```
+ */
 export class Scorekeepr {
   private _store: ReturnType<typeof getStore>
 
@@ -56,7 +70,7 @@ export class Scorekeepr {
     return calculateStats(this.gameplay, this.lineups)
   }
 
-  setLineups = (lineups: LineupState) => {
+  setLineups = (lineups: LineupsAndPitchers) => {
     this._store.dispatch(setLineups(lineups))
   }
 
@@ -68,7 +82,7 @@ export class Scorekeepr {
     this._store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
   }
 
-  updateGameInfo = (gameInfo: Partial<Game>) => {
+  updateGameInfo = (gameInfo: Partial<GameInfo>) => {
     this._store.dispatch(setGameInfo({ gameInfo }))
   }
 

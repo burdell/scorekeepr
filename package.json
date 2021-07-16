@@ -25,7 +25,7 @@
     "build": "npm run build-core && npm run build-retrosheet",
     "prepublish": "npm run test && npm run build",
     "copy-retrosheet-index": "cp ./retrosheet_lib/** ./retrosheet",
-    "generate-docs": "typedoc lib/index.ts --tsconfig tsconfig.core.json"
+    "generate-docs": "typedoc lib/index.ts --tsconfig tsconfig.core.json --readme readme.md"
   },
   "author": "nathan griffin <nathanjgriffin@gmail.com>",
   "license": "MIT",

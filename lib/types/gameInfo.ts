@@ -1,29 +1,51 @@
 import { Player } from 'retrosheet-parse'
 
-export type Team = {
+export interface Team {
   fullName: string
   abbreviation: string
 }
-export type LineupPlayer = {
+export interface LineupPlayer {
   name: string
   number?: number | undefined
 }
 
-type FieldPosition = number | 'DH'
+export type PlayerPosition =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 'DH'
+  | 'PH'
+  | 'PR'
 
-export type LineupEntry = {
+export interface LineupEntry {
   player: LineupPlayer
-  position: FieldPosition
+  position: PlayerPosition
   inning: number
 }
 
-export type PitcherEntry = {
+export interface PitcherEntry {
   player: Player
   stats: {
     er: number
   }
 }
 
-export type Lineup = LineupEntry[][]
+export interface LineupsAndPitchers {
+  home: Lineup
+  visiting: Lineup
+  homePitchers: PitcherEntry[]
+  visitingPitchers: PitcherEntry[]
+}
+export interface LineupSubstition {
+  lineupSpot: number
+  lineupEntry: LineupEntry
+}
 
+export type Lineup = LineupEntry[][]
 export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>

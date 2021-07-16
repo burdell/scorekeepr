@@ -1,6 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
-import * as actionGenerators from '../../Scorekeepr/generators/action'
-import * as resultGenerators from '../../Scorekeepr/generators/result'
+import * as gameEvents from '../../Scorekeepr/generators/gameEvents'
+import * as actions from '../../Scorekeepr/generators/actions'
 import * as guards from '../guards'
 
 import { getGameEvent } from '../../Scorekeepr/generators'
@@ -13,7 +13,7 @@ const hit: ActionConfig = {
     const hitType = guards.getHitType(
       hrGroup || hitGroup || grdGroup || yetAnotherHitGroup
     )
-    return actionGenerators.hit(hitType)
+    return gameEvents.hit(hitType)
   }
 }
 
@@ -26,7 +26,7 @@ const oldHits: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const [fullMatch, hitGroup] = match
     const hitType = guards.getHitType(hitGroup)
-    return actionGenerators.hit(hitType)
+    return gameEvents.hit(hitType)
   }
 }
 
@@ -34,7 +34,7 @@ const hitBatter: ActionConfig = {
   actionType: 'batter',
   regexp: /^HP/,
   handler: () => {
-    return actionGenerators.pitcherResult('HB')
+    return gameEvents.pitcherResult('HB')
   }
 }
 
@@ -53,7 +53,7 @@ const walk: ActionConfig = {
       firstIntentional === 'I' ||
       secondIntentional === 'I' ||
       thirdIntentional === 'I'
-    return actionGenerators.pitcherResult(isIntentional ? 'IBB' : 'BB')
+    return gameEvents.pitcherResult(isIntentional ? 'IBB' : 'BB')
   }
 }
 
@@ -65,7 +65,7 @@ const error: ActionConfig = {
     const batterMovement = baserunnerMovements.find(
       (m) => m.startBase === 'B'
     ) || { endBase: 1 }
-    return actionGenerators.error(Number(fielder), batterMovement.endBase)
+    return gameEvents.error(Number(fielder), batterMovement.endBase)
   }
 }
 
@@ -73,7 +73,7 @@ const fieldersChoice: ActionConfig = {
   actionType: 'batter',
   regexp: /^FC/,
   handler: () => {
-    return actionGenerators.fieldersChoice()
+    return gameEvents.fieldersChoice()
   }
 }
 
@@ -83,7 +83,7 @@ const foulTerritoryError: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const [fullMatch, position] = match
     return getGameEvent({
-      foulTerritoryError: resultGenerators.error(Number(position))
+      foulTerritoryError: actions.error(Number(position))
     })
   }
 }

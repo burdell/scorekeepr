@@ -1,7 +1,7 @@
 import { AtBat } from 'retrosheet-parse'
 
-import * as resultGenerators from '../../Scorekeepr/generators/result'
-import * as actionGenerators from '../../Scorekeepr/generators/action'
+import * as actions from '../../Scorekeepr/generators/actions'
+import * as gameEvents from '../../Scorekeepr/generators/gameEvents'
 import { getBases, getGameEvent } from '../../Scorekeepr/generators'
 
 import { GameEvent, AtBatResult } from '../../types'
@@ -14,7 +14,7 @@ export function isSacrifice(atBatResult: string) {
 }
 
 function getPutoutFromString(putout: string) {
-  return resultGenerators.putout(getPutoutPositions(putout))
+  return actions.putout(getPutoutPositions(putout))
 }
 
 function getBatterAction(atBatResult: string) {
@@ -31,7 +31,7 @@ const strikeout: ActionConfig = {
 
     const gameEvent = getGameEvent({
       isOut: true,
-      result: resultGenerators.pitcherResult(resultType)
+      result: actions.pitcherResult(resultType)
     })
 
     const batterMovement = baserunnnerMovements.find((m) => m.startBase === 'B')
@@ -60,7 +60,7 @@ function getOut(atBatResult: string) {
 
   let result: AtBatResult | undefined = undefined
   if (defensivePositions.length > 1 || outType === 'groundout') {
-    result = resultGenerators.putout(defensivePositions)
+    result = actions.putout(defensivePositions)
   } else {
     result = getNonGroundout(outType, defensivePositions)
   }
@@ -87,13 +87,13 @@ const oldSimpleOut: ActionConfig = {
     const [fullMatch, positions] = match
     if (positions.length === 1 && Number(positions) > 6) {
       return getGameEvent({
-        result: resultGenerators.flyOut(Number(positions)),
+        result: actions.flyOut(Number(positions)),
         isOut: true
       })
     }
 
     const putoutPositions = getPutoutPositions(positions)
-    return actionGenerators.putout(putoutPositions)
+    return gameEvents.putout(putoutPositions)
   }
 }
 
@@ -158,8 +158,8 @@ const multiActionOut: ActionConfig = {
       }
 
       return batterResult
-        ? resultGenerators.putout(getPutoutPositions(batterResult))
-        : resultGenerators.fieldersChoice(1)
+        ? actions.putout(getPutoutPositions(batterResult))
+        : actions.fieldersChoice(1)
     }
 
     const res = getAtBatResult()

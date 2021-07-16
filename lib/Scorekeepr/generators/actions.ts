@@ -8,7 +8,6 @@ export function pitcherResult(result: PitcherResultString) {
     display
   }
 }
-export type PitcherResult = ReturnType<typeof pitcherResult>
 
 export function putout(defensivePlayers: number[]) {
   return {
@@ -20,7 +19,6 @@ export function putout(defensivePlayers: number[]) {
         : defensivePlayers.join('-')
   }
 }
-export type PutOut = ReturnType<typeof putout>
 
 export function flyOut(defensivePlayer: number) {
   return {
@@ -29,7 +27,6 @@ export function flyOut(defensivePlayer: number) {
     display: defensivePlayer < 7 ? `P${defensivePlayer}` : `F${defensivePlayer}`
   }
 }
-export type FlyOut = ReturnType<typeof flyOut>
 
 export function lineOut(defensivePlayer: number) {
   return {
@@ -38,7 +35,6 @@ export function lineOut(defensivePlayer: number) {
     display: `L${defensivePlayer}`
   }
 }
-export type LineOut = ReturnType<typeof lineOut>
 
 export function hit(base: Base) {
   return {
@@ -47,7 +43,6 @@ export function hit(base: Base) {
     display: base === 4 ? 'HR' : `${base}B`
   }
 }
-export type Hit = ReturnType<typeof hit>
 
 export function error(position: number) {
   return {
@@ -56,7 +51,6 @@ export function error(position: number) {
     display: `E${position}`
   }
 }
-export type DefensiveError = ReturnType<typeof error>
 
 export function fieldersChoice(baseAdvancedTo: Base) {
   return {
@@ -65,7 +59,6 @@ export function fieldersChoice(baseAdvancedTo: Base) {
     display: 'FC'
   }
 }
-export type FieldersChoice = ReturnType<typeof error>
 
 export function caughtStealing(putoutPositions: number[]) {
   const result = putout(putoutPositions)
@@ -75,7 +68,6 @@ export function caughtStealing(putoutPositions: number[]) {
     display: `CS ${result.display}`
   }
 }
-export type CaughtStealing = ReturnType<typeof caughtStealing>
 
 export function pickOff(putoutPositions: number[]) {
   const result = putout(putoutPositions)
@@ -85,7 +77,6 @@ export function pickOff(putoutPositions: number[]) {
     display: `PO ${result.display}`
   }
 }
-export type PickOff = ReturnType<typeof pickOff>
 
 export function stolenBase(base: AdvanceableBase) {
   return {
@@ -94,7 +85,6 @@ export function stolenBase(base: AdvanceableBase) {
     display: 'SB'
   }
 }
-export type StolenBase = ReturnType<typeof stolenBase>
 
 export function defensiveIndifference() {
   return {
@@ -103,7 +93,6 @@ export function defensiveIndifference() {
     result: 'DI'
   }
 }
-export type DefensiveIndifference = ReturnType<typeof defensiveIndifference>
 
 export function passedBall() {
   return {
@@ -112,7 +101,6 @@ export function passedBall() {
     display: 'PB'
   }
 }
-export type PassedBall = ReturnType<typeof passedBall>
 
 export function wildPitch() {
   return {
@@ -121,7 +109,6 @@ export function wildPitch() {
     display: 'WP'
   }
 }
-export type WildPitch = ReturnType<typeof wildPitch>
 
 export function balk() {
   return {
@@ -130,7 +117,6 @@ export function balk() {
     display: 'BK'
   }
 }
-export type Balk = ReturnType<typeof balk>
 
 export function runnerAdjustment(base: Base) {
   return {
@@ -139,4 +125,3 @@ export function runnerAdjustment(base: Base) {
     display: ''
   }
 }
-export type RunnerAdjustment = ReturnType<typeof runnerAdjustment>

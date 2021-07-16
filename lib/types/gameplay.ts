@@ -1,13 +1,10 @@
 import { Bases } from './baserunning'
 import { AtBatResult, BaseResult } from './result'
-import type {
-  DefensiveError,
-  RunnerAdjustment
-} from '../Scorekeepr/generators/result'
+import type { DefensiveError, RunnerAdjustment } from '../types/actions'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 
-export type GameEvent = {
+export interface GameEvent {
   pitches: PitchData | undefined
   isOut: boolean
   result: AtBatResult | RunnerAdjustment | undefined
@@ -16,7 +13,7 @@ export type GameEvent = {
   foulTerritoryError?: DefensiveError
 }
 
-export type AtBat = {
+export interface AtBat {
   balls: number
   strikes: number
   pitchCount: number
@@ -26,35 +23,29 @@ export type AtBat = {
   isSacrifice?: boolean
 }
 
-export type CurrentAtBat = {
+export interface CurrentAtBat {
   team: 'home' | 'visiting'
   lineupSpot: number
   inning: number
 }
 
-export type PitchingStats = {
+export interface PitchingStats {
   er: number
 }
 
-export type Stats = {
+export interface GameStats {
   scoring: number[]
   runs: number
   hits: number
   errors: number
 }
 
-export type InitialGame = Partial<Game> & {
-  homeLineup?: InitialLineupEntry[]
-  visitingLineup?: InitialLineupEntry[]
-  initialInningCount?: number
-}
-
-export type Gameplay = {
+export interface Gameplay {
   home: AtBat[][]
   visiting: AtBat[][]
 }
 
-export type Game = {
+export interface GameInfo {
   homeTeam: Team
   visitingTeam: Team
   date: string
@@ -63,19 +54,31 @@ export type Game = {
   id: string
 }
 
-export type GameOutput = {
+export interface InitialGame {
+  homeTeam?: Team
+  visitingTeam?: Team
+  date?: string
+  location?: string
+  startTime?: string | undefined
+  id?: string
+  homeLineup?: InitialLineupEntry[]
+  visitingLineup?: InitialLineupEntry[]
+  initialInningCount?: number
+}
+
+export interface GameOutput {
   id: string
   lineups: { home: Lineup; visiting: Lineup }
   pitchers: { home: PitcherEntry[]; visiting: PitcherEntry[] }
   gameplay: Gameplay
-  gameInfo: Game
+  gameInfo: GameInfo
   stats: {
-    home: Stats
-    visiting: Stats
+    home: GameStats
+    visiting: GameStats
   }
 }
 
-export type GameEventHandler = {
+export interface GameEventHandler {
   event: GameEvent
   inning: number
   lineupSpot: number
