@@ -1,11 +1,11 @@
-import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
-import * as actionGenerators from '../../lib/Scorekeeper/generators/action'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { Scorekeepr } from '../../lib/Scorekeepr'
+import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
+import * as actionGenerators from '../../lib/Scorekeepr/generators/action'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
 
-describe('Scorekeeper tests', () => {
+describe('Scorekeepr tests', () => {
   it('handles gameplay events', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
     const action = actionGenerators.hit(1)
 
     sk.handleGameEvent({
@@ -178,7 +178,7 @@ describe('Scorekeeper tests', () => {
   })
 
   it('handles batting around in the order', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
     Array(9)
       .fill(null)
       .map((_, i) => {

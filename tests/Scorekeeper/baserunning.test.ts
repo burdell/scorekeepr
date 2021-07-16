@@ -1,10 +1,10 @@
-import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { Scorekeepr } from '../../lib/Scorekeepr'
+import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
 
-describe('Scorekeeper - baserunning', () => {
+describe('Scorekeepr - baserunning', () => {
   it('records unsuccessful attempts to gain additional bases', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     // ** BATTER ATTEMPT **
     sk.handleGameEvent({
@@ -112,7 +112,7 @@ describe('Scorekeeper - baserunning', () => {
   })
 
   it('records successful attempts to gain additional bases', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     // ** BATTER ATTEMPT **
     sk.handleGameEvent({

@@ -1,7 +1,7 @@
 import { Game } from 'retrosheet-parse'
-import { Scorekeeper } from '../Scorekeeper'
+import { Scorekeepr } from '../Scorekeepr'
 
-export function alertSuccess(game: Game, scorekeeper: Scorekeeper) {
+export function alertSuccess(game: Game, scorekeeper: Scorekeepr) {
   console.log(`⚾  Created ${scorekeeper.gameInfo.id}`)
   if (!scorekeeper.gameInfo.homeTeam) {
     console.warn(`  ⚠️ Home team not translated: ${game.info.hometeam}`)

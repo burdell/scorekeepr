@@ -1,10 +1,10 @@
-import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getBases } from '../../lib/Scorekeeper/generators/'
-import * as actionGenerators from '../../lib/Scorekeeper/generators/action'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { Scorekeepr } from '../../lib/Scorekeepr'
+import { getBases } from '../../lib/Scorekeepr/generators/'
+import * as actionGenerators from '../../lib/Scorekeepr/generators/action'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
 import { Stats, GameEvent } from '../../lib/types'
 
-describe('Scorekeeper - game stats', () => {
+describe('Scorekeepr - game stats', () => {
   function getStats(overrides: Partial<Stats>): Stats {
     return {
       scoring: [0],
@@ -36,7 +36,7 @@ describe('Scorekeeper - game stats', () => {
   }
 
   it('calculates game statistics', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     sk.handleGameEvent({
       event: actionGenerators.hit(1),

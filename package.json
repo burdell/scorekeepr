@@ -24,11 +24,14 @@
     "build-retrosheet": "tsc --project tsconfig.retrosheet.json && npm run copy-retrosheet-index",
     "build": "npm run build-core && npm run build-retrosheet",
     "prepublish": "npm run test && npm run build",
-    "copy-retrosheet-index": "cp ./retrosheet_lib/** ./retrosheet"
+    "copy-retrosheet-index": "cp ./retrosheet_lib/** ./retrosheet",
+    "generate-docs": "typedoc lib/index.ts --tsconfig tsconfig.core.json"
   },
   "author": "nathan griffin <nathanjgriffin@gmail.com>",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "typedoc": "^0.21.4"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
     "@types/jest": "^26.0.24",

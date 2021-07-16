@@ -1,6 +1,6 @@
 import * as resultGenerators from './result'
 
-import { getGameEvent, getBases } from './'
+import { getGameEvent, getBases } from '.'
 import { Base, PitcherResultString } from '../../types'
 
 export function hit(base: Base) {

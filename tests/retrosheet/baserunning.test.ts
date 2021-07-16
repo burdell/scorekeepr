@@ -1,6 +1,6 @@
 import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
-import { getBases } from '../../lib/Scorekeeper/generators/'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
+import { getBases } from '../../lib/Scorekeepr/generators/'
 
 describe('Retrosheet - Baserunning', () => {
   it('handles runner adjustments (2020 extra inning rules)', () => {

@@ -1,8 +1,8 @@
 import { AtBat } from 'retrosheet-parse'
 
-import * as resultGenerators from '../../Scorekeeper/generators/result'
-import * as actionGenerators from '../../Scorekeeper/generators/action'
-import { getBases, getGameEvent } from '../../Scorekeeper/generators'
+import * as resultGenerators from '../../Scorekeepr/generators/result'
+import * as actionGenerators from '../../Scorekeepr/generators/action'
+import { getBases, getGameEvent } from '../../Scorekeepr/generators'
 
 import { GameEvent, AtBatResult } from '../../types'
 import { getPutoutPositions } from '../outs'

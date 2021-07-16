@@ -1,11 +1,10 @@
-import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getGameEvent } from '../../lib/Scorekeeper/generators/'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
-import * as actionGenerators from '../../lib/Scorekeeper/generators/action'
+import { Scorekeepr } from '../../lib/Scorekeepr'
+import { getGameEvent } from '../../lib/Scorekeepr/generators/'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
 
 describe('Scorekeeper - Gameplay', () => {
   it('handles events for innings that arent yet there', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
     const result = resultGenerators.lineOut(7)
     sk.handleGameEvent({
       event: getGameEvent({
@@ -30,10 +29,4 @@ describe('Scorekeeper - Gameplay', () => {
       strikes: 0
     })
   })
-
-  // it('handles baserunning adjustments', () => {
-  //   const sk = new Scorekeeper()
-  //   const result = actionGenerators.runnerAdjustment(2)
-
-  // })
 })

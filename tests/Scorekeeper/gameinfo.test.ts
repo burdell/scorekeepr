@@ -1,8 +1,8 @@
 import { formatStartTime } from '../../lib/utils/time'
-import { Scorekeeper } from '../../lib/Scorekeeper'
+import { Scorekeepr } from '../../lib/Scorekeepr'
 import { Game } from '../../lib/types'
 
-describe('Scorekeeper - Game Info', () => {
+describe('Scorekeepr - Game Info', () => {
   it('correctly formats start time', () => {
     const correctlyFormatted = '7:45PM'
     expect(formatStartTime(correctlyFormatted)).toEqual(correctlyFormatted)
@@ -26,7 +26,7 @@ describe('Scorekeeper - Game Info', () => {
       location: 'The Stadium',
       id: 'TheGameId'
     }
-    const sk = new Scorekeeper(gameInfo)
+    const sk = new Scorekeepr(gameInfo)
 
     expect(sk.gameInfo).toEqual(gameInfo)
   })
@@ -40,7 +40,7 @@ describe('Scorekeeper - Game Info', () => {
       { player: { name: 'Visiting Player 1' }, position: 1 },
       { player: { name: 'Visiting Player 2' }, position: 2 }
     ]
-    const sk = new Scorekeeper({
+    const sk = new Scorekeepr({
       homeLineup,
       visitingLineup
     })
@@ -67,7 +67,7 @@ describe('Scorekeeper - Game Info', () => {
     ]
     const newVisitingPlayer = { name: 'The Other Visiting Player' }
 
-    const sk = new Scorekeeper({
+    const sk = new Scorekeepr({
       homeLineup,
       visitingLineup
     })
@@ -105,7 +105,7 @@ describe('Scorekeeper - Game Info', () => {
   })
 
   it('sets an initial inning count', () => {
-    const sk = new Scorekeeper({
+    const sk = new Scorekeepr({
       initialInningCount: 7
     })
 

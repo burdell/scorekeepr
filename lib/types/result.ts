@@ -11,7 +11,7 @@ import type {
   Balk,
   PickOff,
   PutOut
-} from '../Scorekeeper/generators/result'
+} from '../Scorekeepr/generators/result'
 
 export type FlyOut = {
   type: 'flyout'

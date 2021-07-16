@@ -1,10 +1,10 @@
-import { Scorekeeper } from '../../lib/Scorekeeper'
-import { getGameEvent, getBases } from '../../lib/Scorekeeper/generators/'
-import * as resultGenerators from '../../lib/Scorekeeper/generators/result'
+import { Scorekeepr } from '../../lib/Scorekeepr'
+import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
+import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
 
-describe('Scorekeeper - outs', () => {
+describe('Scorekeepr - outs', () => {
   it('handles strikeouts with a catcher putout', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     sk.handleGameEvent({
       event: getGameEvent({
@@ -41,7 +41,7 @@ describe('Scorekeeper - outs', () => {
   })
 
   it('handles sacrifice flys', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     sk.handleGameEvent({
       event: getGameEvent({
@@ -127,7 +127,7 @@ describe('Scorekeeper - outs', () => {
   })
 
   it('handles sacrifice bunts', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     sk.handleGameEvent({
       event: getGameEvent({
@@ -205,7 +205,7 @@ describe('Scorekeeper - outs', () => {
   })
 
   it('handles on-base putouts', () => {
-    const sk = new Scorekeeper()
+    const sk = new Scorekeepr()
 
     sk.handleGameEvent({
       event: getGameEvent({

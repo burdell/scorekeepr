@@ -1,2 +1,2 @@
 export * from './types'
-export * from './Scorekeeper'
+export * from './Scorekeepr'

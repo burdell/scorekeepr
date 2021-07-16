@@ -1,6 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
 
-import { getGameEvent, getBases } from '../../Scorekeeper/generators'
+import { getGameEvent, getBases } from '../../Scorekeepr/generators'
 import {
   getBase,
   getNextBase,
@@ -9,7 +9,7 @@ import {
   getBaseFromString,
   getStartableBase
 } from '../guards'
-import * as resultGenerators from '../../Scorekeeper/generators/result'
+import * as resultGenerators from '../../Scorekeepr/generators/result'
 import { Bases } from '../../types'
 import { getPutoutPositions } from '../outs'
 import { getAllBaserunnerAction } from '../guards'

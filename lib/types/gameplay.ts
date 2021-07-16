@@ -3,7 +3,7 @@ import { AtBatResult, BaseResult } from './result'
 import type {
   DefensiveError,
   RunnerAdjustment
-} from '../Scorekeeper/generators/result'
+} from '../Scorekeepr/generators/result'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 

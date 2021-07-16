@@ -6,8 +6,8 @@ import { calculateStats } from './stats'
 
 import type { Game, LineupEntry, InitialGame, GameEventHandler } from '../types'
 
-export class Scorekeeper {
-  _store: ReturnType<typeof getStore>
+export class Scorekeepr {
+  private _store: ReturnType<typeof getStore>
 
   constructor(game: Partial<InitialGame> = {}) {
     const {

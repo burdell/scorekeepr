@@ -2,7 +2,7 @@ import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
 import { handleEvent } from './event'
 import { getTeam, getStadium, getLineup } from './translators'
-import { Scorekeeper } from '../Scorekeeper'
+import { Scorekeepr } from '../Scorekeepr'
 import { getLineupMap, getLineupSpot, getPitchers } from '../utils/lineup'
 import { alertSuccess, alertGameGenerated } from '../utils/alerts'
 import { formatStartTime } from '../utils/time'
@@ -11,14 +11,14 @@ export * from '../types'
 
 export async function getRetrosheetScorekeepers(
   filename: string
-): Promise<Scorekeeper[]> {
+): Promise<Scorekeepr[]> {
   const gameList = await parseGames(filename)
-  const scorekeepers: Scorekeeper[] = []
+  const scorekeepers: Scorekeepr[] = []
 
   gameList.forEach((game) => {
     const { info, lineup, pitchers } = game
 
-    const scorekeeper = new Scorekeeper({
+    const scorekeeper = new Scorekeepr({
       date: info.date,
       homeTeam: getTeam(info.hometeam),
       visitingTeam: getTeam(info.visteam),
@@ -57,7 +57,7 @@ function generateGameplay({
   team
 }: {
   game: Game
-  scorekeeper: Scorekeeper
+  scorekeeper: Scorekeepr
   team: 'home' | 'visiting'
 }) {
   const gameplayEvents = game.play[team]
