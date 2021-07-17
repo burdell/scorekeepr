@@ -1,4 +1,4 @@
-import { PitcherResultString, Base, AdvanceableBase } from '../../types'
+import { PitcherResultString, Base, AdvanceableBase } from '../types'
 
 export function pitcherResult(result: PitcherResultString) {
   const display = result === 'K-looking' ? 'K' : result

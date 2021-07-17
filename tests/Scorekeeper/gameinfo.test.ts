@@ -1,6 +1,6 @@
 import { formatStartTime } from '../../lib/utils/time'
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { Game } from '../../lib/types'
+import { InitialGame, InitialLineupEntry } from '../../lib/types'
 
 describe('Scorekeepr - Game Info', () => {
   it('correctly formats start time', () => {
@@ -18,7 +18,7 @@ describe('Scorekeepr - Game Info', () => {
   })
 
   it('sets the game info', () => {
-    const gameInfo: Game = {
+    const gameInfo: InitialGame = {
       homeTeam: { abbreviation: 'HT', fullName: 'The Home Team' },
       visitingTeam: { abbreviation: 'VT', fullName: 'The Visiting Team' },
       date: '2020-10-15',
@@ -32,11 +32,11 @@ describe('Scorekeepr - Game Info', () => {
   })
 
   it('sets the lineups', () => {
-    const homeLineup = [
+    const homeLineup: InitialLineupEntry[] = [
       { player: { name: 'Home Player 1' }, position: 1 },
       { player: { name: 'Home Player 2' }, position: 2 }
     ]
-    const visitingLineup = [
+    const visitingLineup: InitialLineupEntry[] = [
       { player: { name: 'Visiting Player 1' }, position: 1 },
       { player: { name: 'Visiting Player 2' }, position: 2 }
     ]
@@ -56,12 +56,12 @@ describe('Scorekeepr - Game Info', () => {
   })
 
   it('substitutes players', () => {
-    const homeLineup = [
+    const homeLineup: InitialLineupEntry[] = [
       { player: { name: 'Home Player 1' }, position: 1 },
       { player: { name: 'Home Player 2' }, position: 2 }
     ]
     const newHomePlayer = { name: 'The Other Home Player' }
-    const visitingLineup = [
+    const visitingLineup: InitialLineupEntry[] = [
       { player: { name: 'Visiting Player 1' }, position: 1 },
       { player: { name: 'Visiting Player 2' }, position: 2 }
     ]

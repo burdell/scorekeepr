@@ -1,12 +1,13 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
-import * as actionGenerators from '../../lib/Scorekeepr/generators/action'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
+import * as gameEvents from '../../lib/generators/gameEvents'
+import * as actions from '../../lib/generators/actions'
+
+const { getGameEvent, getBases } = gameEvents
 
 describe('Scorekeepr tests', () => {
   it('handles gameplay events', () => {
     const sk = new Scorekeepr()
-    const action = actionGenerators.hit(1)
+    const action = gameEvents.hit(1)
 
     sk.handleGameEvent({
       event: action,
@@ -17,7 +18,7 @@ describe('Scorekeepr tests', () => {
 
     sk.handleGameEvent({
       event: getGameEvent({
-        result: resultGenerators.pitcherResult('BB'),
+        result: actions.pitcherResult('BB'),
         pitches: {
           balls: 4,
           strikes: 2,
@@ -43,7 +44,7 @@ describe('Scorekeepr tests', () => {
         bases: getBases({
           2: {
             endBase: 3,
-            result: resultGenerators.stolenBase(3)
+            result: actions.stolenBase(3)
           }
         })
       }),
@@ -59,7 +60,7 @@ describe('Scorekeepr tests', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(2),
+        result: actions.hit(2),
         bases: getBases({
           B: {
             endBase: 2,
@@ -89,7 +90,7 @@ describe('Scorekeepr tests', () => {
         bases: getBases({
           2: {
             endBase: 3,
-            result: resultGenerators.putout([1, 5]),
+            result: actions.putout([1, 5]),
             isOut: true
           }
         })
@@ -111,7 +112,7 @@ describe('Scorekeepr tests', () => {
         },
         {
           advanced: true,
-          result: resultGenerators.stolenBase(3)
+          result: actions.stolenBase(3)
         },
         {
           advanced: true
@@ -148,7 +149,7 @@ describe('Scorekeepr tests', () => {
         }
       ],
       isOut: false,
-      result: resultGenerators.pitcherResult('BB')
+      result: actions.pitcherResult('BB')
     })
 
     expect(sk.gameplay.visiting[0][2]).toEqual({
@@ -167,11 +168,11 @@ describe('Scorekeepr tests', () => {
         },
         {
           advanced: false,
-          result: resultGenerators.putout([1, 5])
+          result: actions.putout([1, 5])
         }
       ],
       isOut: true,
-      result: resultGenerators.hit(2)
+      result: actions.hit(2)
     })
 
     expect(sk.gameplay.visiting[0].length).toEqual(9)
@@ -183,7 +184,7 @@ describe('Scorekeepr tests', () => {
       .fill(null)
       .map((_, i) => {
         sk.handleGameEvent({
-          event: getGameEvent({ result: resultGenerators.pitcherResult('BB') }),
+          event: getGameEvent({ result: actions.pitcherResult('BB') }),
           inning: 0,
           lineupSpot: i,
           team: 'visiting'
@@ -194,7 +195,7 @@ describe('Scorekeepr tests', () => {
       .fill(null)
       .map((_, i) => {
         sk.handleGameEvent({
-          event: getGameEvent({ result: resultGenerators.pitcherResult('HB') }),
+          event: getGameEvent({ result: actions.pitcherResult('HB') }),
           inning: 0,
           lineupSpot: i,
           team: 'visiting'
@@ -203,13 +204,13 @@ describe('Scorekeepr tests', () => {
 
     expect(sk.gameplay.visiting[0].length).toEqual(18)
     expect(sk.gameplay.visiting[0][0].result).toEqual(
-      resultGenerators.pitcherResult('BB')
+      actions.pitcherResult('BB')
     )
     expect(sk.gameplay.visiting[0][9].result).toEqual(
-      resultGenerators.pitcherResult('HB')
+      actions.pitcherResult('HB')
     )
     expect(sk.gameplay.visiting[0][10].result).toEqual(
-      resultGenerators.pitcherResult('HB')
+      actions.pitcherResult('HB')
     )
   })
 })

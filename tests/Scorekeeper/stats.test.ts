@@ -1,11 +1,12 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getBases } from '../../lib/Scorekeepr/generators/'
-import * as actionGenerators from '../../lib/Scorekeepr/generators/action'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
-import { Stats, GameEvent } from '../../lib/types'
+import * as actions from '../../lib/generators/actions'
+import * as gameEvents from '../../lib/generators/gameEvents'
+import { GameStats, GameEvent } from '../../lib/types'
 
-describe('Scorekeepr - game stats', () => {
-  function getStats(overrides: Partial<Stats>): Stats {
+const { getBases } = gameEvents
+
+describe('Scorekeeper - game stats', () => {
+  function getStats(overrides: Partial<GameStats>): GameStats {
     return {
       scoring: [0],
       runs: 0,
@@ -39,7 +40,7 @@ describe('Scorekeepr - game stats', () => {
     const sk = new Scorekeepr()
 
     sk.handleGameEvent({
-      event: actionGenerators.hit(1),
+      event: gameEvents.hit(1),
       inning: 0,
       lineupSpot: 0,
       team: 'visiting'
@@ -53,7 +54,7 @@ describe('Scorekeepr - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: resultGenerators.error(6),
+        result: actions.error(6),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -78,7 +79,7 @@ describe('Scorekeepr - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: resultGenerators.hit(4),
+        result: actions.hit(4),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -108,7 +109,7 @@ describe('Scorekeepr - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: resultGenerators.hit(4),
+        result: actions.hit(4),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -123,10 +124,10 @@ describe('Scorekeepr - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
-            result: resultGenerators.error(4),
+            result: actions.error(4),
             endBase: 2
           }
         })

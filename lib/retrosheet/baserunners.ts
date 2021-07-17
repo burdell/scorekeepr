@@ -1,7 +1,7 @@
 import { RunnerAdjustment } from 'retrosheet-parse'
 import { Base, EventBaseResult, GameEvent } from '../types'
 import { getBase, getStartableBase } from './guards'
-import * as actions from '../Scorekeepr/generators/actions'
+import * as actions from '../generators/actions'
 import { getPutoutPositions } from './outs'
 
 export type BaserunnerMovements = ReturnType<typeof getBaserunnerMovements>

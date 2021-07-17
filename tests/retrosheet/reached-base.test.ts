@@ -1,13 +1,13 @@
 import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
-import { getBases } from '../../lib/Scorekeepr/generators/'
+import * as actions from '../../lib/generators/actions'
+import { getBases } from '../../lib/generators/gameEvents'
 
 describe('Retrosheet - Reached Base At-Bats', () => {
   it('handles hits', () => {
     const single = handleEvent(getAtBat({ result: 'S8/L' }))
     expect(single).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: {
           B: {
             isAtBatResult: true,
@@ -23,7 +23,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'S5' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -36,7 +36,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'S' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -49,7 +49,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'S.1-3#' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -66,7 +66,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'D' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(2),
+        result: actions.hit(2),
         bases: getBases({
           B: {
             endBase: 2,
@@ -79,7 +79,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'T' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(3),
+        result: actions.hit(3),
         bases: getBases({
           B: {
             endBase: 3,
@@ -92,7 +92,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'HR' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(4),
+        result: actions.hit(4),
         bases: getBases({
           B: {
             endBase: 4,
@@ -106,7 +106,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const double = handleEvent(getAtBat({ result: 'D7/L' }))
     expect(double).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(2),
+        result: actions.hit(2),
         bases: {
           B: {
             isAtBatResult: true,
@@ -123,7 +123,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const groundRuleDouble = handleEvent(getAtBat({ result: 'DGR/L' }))
     expect(groundRuleDouble).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(2),
+        result: actions.hit(2),
         bases: {
           B: {
             isAtBatResult: true,
@@ -140,7 +140,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const triple = handleEvent(getAtBat({ result: 'T9/F' }))
     expect(triple).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(3),
+        result: actions.hit(3),
         bases: {
           B: {
             isAtBatResult: true,
@@ -157,7 +157,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const homerun = handleEvent(getAtBat({ result: 'HR/78/F' }))
     expect(homerun).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(4),
+        result: actions.hit(4),
         bases: {
           B: {
             isAtBatResult: true,
@@ -174,7 +174,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const singleWithMultipleAdvancements = getResult('S8/G+.3-H(UR);2-H(UR)')
     expect(singleWithMultipleAdvancements).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: {
           B: {
             endBase: 1,
@@ -199,15 +199,13 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     )
     expect(singleWithPutout).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: {
           B: {
             isAtBatResult: true,
             endBase: 1,
             result: undefined,
-            additionalBases: [
-              { base: 2, result: resultGenerators.putout([8, 6]) }
-            ]
+            additionalBases: [{ base: 2, result: actions.putout([8, 6]) }]
           },
           1: undefined,
           2: undefined,
@@ -218,7 +216,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'S7/L.2-H;1-3;B-2(TH)' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -241,7 +239,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const fanInterferenceDouble = handleEvent(getAtBat({ result: 'D/L+/FINT' }))
     expect(fanInterferenceDouble).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(2),
+        result: actions.hit(2),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -255,7 +253,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
     const fanInterferenceTriple = handleEvent(getAtBat({ result: 'T/L+/FINT' }))
     expect(fanInterferenceTriple).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(3),
+        result: actions.hit(3),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -268,7 +266,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('S8!/F89XDW.1-3')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -285,7 +283,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('S8/G.3-H(UR);2-H(UR);1-3')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -314,7 +312,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(hbp).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('HB'),
+        result: actions.pitcherResult('HB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -332,7 +330,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
   it('handles walks', () => {
     expect(handleEvent(getAtBat({ result: 'W' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('BB'),
+        result: actions.pitcherResult('BB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -348,7 +346,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'IW' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('IBB'),
+        result: actions.pitcherResult('IBB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -364,7 +362,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'W.1-2' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('BB'),
+        result: actions.pitcherResult('BB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -383,7 +381,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'IW.1-2' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('IBB'),
+        result: actions.pitcherResult('IBB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -402,7 +400,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(handleEvent(getAtBat({ result: 'W+WP.2-3' }))).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('BB'),
+        result: actions.pitcherResult('BB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -412,7 +410,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
           1: undefined,
           2: {
             endBase: 3,
-            result: resultGenerators.wildPitch()
+            result: actions.wildPitch()
           },
           3: undefined
         }
@@ -421,7 +419,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('I')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('IBB'),
+        result: actions.pitcherResult('IBB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -437,7 +435,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('I.1-2')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.pitcherResult('IBB'),
+        result: actions.pitcherResult('IBB'),
         bases: {
           B: {
             isAtBatResult: true,
@@ -458,7 +456,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
   it('handles errors', () => {
     expect(getResult('E6/G6+')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.error(6),
+        result: actions.error(6),
         bases: {
           B: {
             isAtBatResult: true,
@@ -474,7 +472,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('CE2/G6+')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.error(2),
+        result: actions.error(2),
         bases: {
           B: {
             isAtBatResult: true,
@@ -490,7 +488,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('E7/L7M.2-H(NR)(UR);B-2')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.error(7),
+        result: actions.error(7),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -507,7 +505,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('5E3/G')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.error(3),
+        result: actions.error(3),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -520,7 +518,7 @@ describe('Retrosheet - Reached Base At-Bats', () => {
 
     expect(getResult('6E3/G.2-3')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.error(3),
+        result: actions.error(3),
         bases: getBases({
           B: {
             isAtBatResult: true,

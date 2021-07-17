@@ -1,6 +1,6 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
+import { getGameEvent, getBases } from '../../lib/generators/gameEvents'
+import * as resultGenerators from '../../lib/generators/actions'
 
 describe('Scorekeepr - baserunning', () => {
   it('records unsuccessful attempts to gain additional bases', () => {

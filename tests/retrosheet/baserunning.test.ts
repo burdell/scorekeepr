@@ -1,6 +1,6 @@
 import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
-import { getBases } from '../../lib/Scorekeepr/generators/'
+import * as actions from '../../lib/generators/actions'
+import { getBases } from '../../lib/generators/gameEvents'
 
 describe('Retrosheet - Baserunning', () => {
   it('handles runner adjustments (2020 extra inning rules)', () => {
@@ -14,7 +14,7 @@ describe('Retrosheet - Baserunning', () => {
       getEventWithDefaults({
         isOut: false,
         pitches: undefined,
-        result: resultGenerators.runnerAdjustment(2),
+        result: actions.runnerAdjustment(2),
         bases: {
           B: {
             endBase: 2,
@@ -37,7 +37,7 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: undefined,
           2: {
-            result: resultGenerators.error(1),
+            result: actions.error(1),
             endBase: 3
           },
           3: undefined
@@ -51,7 +51,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: {
           B: undefined,
           1: {
-            result: resultGenerators.error(1),
+            result: actions.error(1),
             endBase: 3
           },
           2: undefined,
@@ -69,7 +69,7 @@ describe('Retrosheet - Baserunning', () => {
           1: {
             result: undefined,
             endBase: 1,
-            onBasePutout: resultGenerators.pickOff([2, 3]),
+            onBasePutout: actions.pickOff([2, 3]),
             isOut: true
           },
           2: undefined,
@@ -90,7 +90,7 @@ describe('Retrosheet - Baserunning', () => {
           },
           3: {
             endBase: 4,
-            result: resultGenerators.error(2)
+            result: actions.error(2)
           }
         })
       })
@@ -105,7 +105,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: getBases({
           1: {
             endBase: 2,
-            result: resultGenerators.error(2)
+            result: actions.error(2)
           }
         })
       })
@@ -117,7 +117,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: getBases({
           2: {
             endBase: 3,
-            result: resultGenerators.error(2)
+            result: actions.error(2)
           }
         })
       })
@@ -129,7 +129,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: getBases({
           3: {
             endBase: 4,
-            result: resultGenerators.error(2)
+            result: actions.error(2)
           }
         })
       })
@@ -144,7 +144,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: {
           B: undefined,
           1: {
-            result: resultGenerators.caughtStealing([2, 6]),
+            result: actions.caughtStealing([2, 6]),
             endBase: 2,
             isOut: true
           },
@@ -162,7 +162,7 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: undefined,
           2: {
-            result: resultGenerators.caughtStealing([2, 5]),
+            result: actions.caughtStealing([2, 5]),
             endBase: 3,
             isOut: true
           },
@@ -178,7 +178,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: {
           B: undefined,
           1: {
-            result: resultGenerators.caughtStealing([2, 4]),
+            result: actions.caughtStealing([2, 4]),
             endBase: 2,
             isOut: true
           },
@@ -195,7 +195,7 @@ describe('Retrosheet - Baserunning', () => {
         bases: {
           B: undefined,
           1: {
-            result: resultGenerators.caughtStealing([2, 4, 3]),
+            result: actions.caughtStealing([2, 4, 3]),
             endBase: 2,
             isOut: true
           },
@@ -213,12 +213,12 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: undefined,
           2: {
-            result: resultGenerators.putout([5, 6]),
+            result: actions.putout([5, 6]),
             endBase: 3,
             isOut: true
           },
           3: {
-            result: resultGenerators.caughtStealing([2, 5]),
+            result: actions.caughtStealing([2, 5]),
             endBase: 4,
             isOut: true
           }
@@ -232,7 +232,7 @@ describe('Retrosheet - Baserunning', () => {
         pitches: undefined,
         bases: getBases({
           3: {
-            result: resultGenerators.caughtStealing([2]),
+            result: actions.caughtStealing([2]),
             isOut: true,
             endBase: 4
           }
@@ -249,7 +249,7 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.defensiveIndifference()
+            result: actions.defensiveIndifference()
           },
           2: undefined,
           3: undefined
@@ -263,12 +263,12 @@ describe('Retrosheet - Baserunning', () => {
     expect(lineoutDP).toEqual(
       getEventWithDefaults({
         isOut: true,
-        result: resultGenerators.lineOut(3),
+        result: actions.lineOut(3),
         bases: {
           B: undefined,
           1: {
             isOut: true,
-            onBasePutout: resultGenerators.putout([3]),
+            onBasePutout: actions.putout([3]),
             endBase: 1,
             result: undefined
           },
@@ -282,7 +282,7 @@ describe('Retrosheet - Baserunning', () => {
   it('handles on-base errors', () => {
     expect(getResult('FC6.1X3(6E4);B-2')).toEqual(
       getEventWithDefaults({
-        result: resultGenerators.fieldersChoice(1),
+        result: actions.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -292,7 +292,7 @@ describe('Retrosheet - Baserunning', () => {
           },
           1: {
             endBase: 3,
-            result: resultGenerators.error(4)
+            result: actions.error(4)
           },
           2: undefined,
           3: undefined
@@ -310,7 +310,7 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.stolenBase(2)
+            result: actions.stolenBase(2)
           },
           2: undefined,
           3: undefined
@@ -326,8 +326,8 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.stolenBase(2),
-            additionalBases: [{ base: 3, result: resultGenerators.error(2) }]
+            result: actions.stolenBase(2),
+            additionalBases: [{ base: 3, result: actions.error(2) }]
           },
           2: undefined,
           3: undefined
@@ -343,11 +343,11 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.stolenBase(2)
+            result: actions.stolenBase(2)
           },
           2: {
             endBase: 3,
-            result: resultGenerators.stolenBase(3)
+            result: actions.stolenBase(3)
           },
           3: undefined
         }
@@ -362,15 +362,15 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.stolenBase(2)
+            result: actions.stolenBase(2)
           },
           2: {
             endBase: 3,
-            result: resultGenerators.stolenBase(3)
+            result: actions.stolenBase(3)
           },
           3: {
             endBase: 4,
-            result: resultGenerators.stolenBase(4)
+            result: actions.stolenBase(4)
           }
         }
       })
@@ -388,7 +388,7 @@ describe('Retrosheet - Baserunning', () => {
           2: {
             isOut: true,
             endBase: 3,
-            result: resultGenerators.putout([2, 5])
+            result: actions.putout([2, 5])
           },
           3: undefined
         }
@@ -405,11 +405,11 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.wildPitch()
+            result: actions.wildPitch()
           },
           2: {
             endBase: 3,
-            result: resultGenerators.wildPitch()
+            result: actions.wildPitch()
           },
           3: undefined
         }
@@ -424,11 +424,11 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.passedBall()
+            result: actions.passedBall()
           },
           2: {
             endBase: 3,
-            result: resultGenerators.passedBall()
+            result: actions.passedBall()
           },
           3: undefined
         }
@@ -443,11 +443,11 @@ describe('Retrosheet - Baserunning', () => {
           B: undefined,
           1: {
             endBase: 2,
-            result: resultGenerators.balk()
+            result: actions.balk()
           },
           2: {
             endBase: 3,
-            result: resultGenerators.balk()
+            result: actions.balk()
           },
           3: undefined
         }
@@ -458,7 +458,7 @@ describe('Retrosheet - Baserunning', () => {
   it('handles foul territory errors', () => {
     expect(getResult('FLE7')).toEqual(
       getEventWithDefaults({
-        foulTerritoryError: resultGenerators.error(7)
+        foulTerritoryError: actions.error(7)
       })
     )
   })

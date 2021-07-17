@@ -1,6 +1,6 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent, getBases } from '../../lib/Scorekeepr/generators/'
-import * as resultGenerators from '../../lib/Scorekeepr/generators/result'
+import { getGameEvent, getBases } from '../../lib/generators/gameEvents'
+import * as actions from '../../lib/generators/actions'
 
 describe('Scorekeepr - outs', () => {
   it('handles strikeouts with a catcher putout', () => {
@@ -8,13 +8,13 @@ describe('Scorekeepr - outs', () => {
 
     sk.handleGameEvent({
       event: getGameEvent({
-        result: resultGenerators.pitcherResult('K'),
+        result: actions.pitcherResult('K'),
         isOut: true,
         bases: getBases({
           B: {
             isOut: true,
             endBase: 1,
-            result: resultGenerators.putout([2, 3]),
+            result: actions.putout([2, 3]),
             isAtBatResult: true
           }
         })
@@ -30,12 +30,12 @@ describe('Scorekeepr - outs', () => {
         {
           advanced: false,
           isAtBatResult: true,
-          result: resultGenerators.putout([2, 3])
+          result: actions.putout([2, 3])
         }
       ],
       isOut: true,
       pitchCount: 0,
-      result: resultGenerators.pitcherResult('K'),
+      result: actions.pitcherResult('K'),
       strikes: 0
     })
   })
@@ -50,7 +50,7 @@ describe('Scorekeepr - outs', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(3),
+        result: actions.hit(3),
         bases: getBases({
           B: {
             endBase: 3,
@@ -65,7 +65,7 @@ describe('Scorekeepr - outs', () => {
 
     sk.handleGameEvent({
       event: getGameEvent({
-        result: resultGenerators.flyOut(7),
+        result: actions.flyOut(7),
         isSacrifice: true,
         isOut: true,
         pitches: {
@@ -120,7 +120,7 @@ describe('Scorekeepr - outs', () => {
       bases: [],
       isOut: true,
       pitchCount: 1,
-      result: resultGenerators.flyOut(7),
+      result: actions.flyOut(7),
       strikes: 0,
       isSacrifice: true
     })
@@ -136,7 +136,7 @@ describe('Scorekeepr - outs', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -151,7 +151,7 @@ describe('Scorekeepr - outs', () => {
 
     sk.handleGameEvent({
       event: getGameEvent({
-        result: resultGenerators.putout([3, 4]),
+        result: actions.putout([3, 4]),
         isSacrifice: true,
         isOut: true,
         pitches: {
@@ -198,7 +198,7 @@ describe('Scorekeepr - outs', () => {
       bases: [],
       isOut: true,
       pitchCount: 1,
-      result: resultGenerators.putout([3, 4]),
+      result: actions.putout([3, 4]),
       strikes: 0,
       isSacrifice: true
     })
@@ -214,7 +214,7 @@ describe('Scorekeepr - outs', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: actions.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -233,7 +233,7 @@ describe('Scorekeepr - outs', () => {
         bases: getBases({
           1: {
             endBase: 1,
-            onBasePutout: resultGenerators.putout([1, 3]),
+            onBasePutout: actions.putout([1, 3]),
             isOut: true
           }
         })
@@ -249,13 +249,13 @@ describe('Scorekeepr - outs', () => {
         {
           advanced: true,
           isAtBatResult: true,
-          onBasePutout: resultGenerators.putout([1, 3]),
+          onBasePutout: actions.putout([1, 3]),
           result: undefined
         }
       ],
       isOut: true,
       pitchCount: 1,
-      result: resultGenerators.hit(1),
+      result: actions.hit(1),
       strikes: 0
     })
   })

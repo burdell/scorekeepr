@@ -1,5 +1,5 @@
 import { Base, StartableBase, AdvanceableBase, AtBatResult } from '../types'
-import * as actions from '../Scorekeepr/generators/actions'
+import * as actions from '../generators/actions'
 
 export function getHitType(hit: string) {
   if (hit === 'S') return 1

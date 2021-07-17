@@ -10,7 +10,7 @@ import {
 } from './baserunners'
 import { ActionConfig, Action } from './retrosheet.types'
 import { getBase } from './guards'
-import { runnerAdjustment } from '../Scorekeepr/generators/gameEvents'
+import { runnerAdjustment } from '../generators/gameEvents'
 
 type Logger = {
   log: (message: string) => void

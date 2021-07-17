@@ -1,11 +1,31 @@
-import * as resultGenerators from './actions'
+import * as gameEvents from './actions'
 
-import { getGameEvent, getBases } from '.'
-import { Base, PitcherResultString } from '../../types'
+import { Base, PitcherResultString, GameEvent, Bases } from '../types'
+
+export function getGameEvent(overrides: Partial<GameEvent> = {}): GameEvent {
+  return {
+    result: undefined,
+    isOut: false,
+    pitches: undefined,
+    isSacrifice: false,
+    bases: getBases(),
+    ...overrides
+  }
+}
+
+export function getBases(overrides: Partial<Bases> = {}) {
+  return {
+    B: undefined,
+    1: undefined,
+    2: undefined,
+    3: undefined,
+    ...overrides
+  }
+}
 
 export function hit(base: Base) {
   return getGameEvent({
-    result: resultGenerators.hit(base),
+    result: gameEvents.hit(base),
     bases: getBases({
       B: {
         result: undefined,
@@ -18,7 +38,7 @@ export function hit(base: Base) {
 
 export function pitcherResult(pitcherResultString: PitcherResultString) {
   return getGameEvent({
-    result: resultGenerators.pitcherResult(pitcherResultString),
+    result: gameEvents.pitcherResult(pitcherResultString),
     bases: getBases({
       B: {
         result: undefined,
@@ -31,7 +51,7 @@ export function pitcherResult(pitcherResultString: PitcherResultString) {
 
 export function fieldersChoice(base: Base = 1) {
   return getGameEvent({
-    result: resultGenerators.fieldersChoice(base),
+    result: gameEvents.fieldersChoice(base),
     bases: getBases({
       B: {
         result: undefined,
@@ -44,14 +64,14 @@ export function fieldersChoice(base: Base = 1) {
 
 export function putout(putoutPositions: number[]) {
   return getGameEvent({
-    result: resultGenerators.putout(putoutPositions),
+    result: gameEvents.putout(putoutPositions),
     isOut: true
   })
 }
 
 export function error(fielder: number, endBase: Base) {
   return getGameEvent({
-    result: resultGenerators.error(fielder),
+    result: gameEvents.error(fielder),
     bases: getBases({
       B: {
         result: undefined,
@@ -64,7 +84,7 @@ export function error(fielder: number, endBase: Base) {
 
 export function runnerAdjustment(base: Base) {
   return getGameEvent({
-    result: resultGenerators.runnerAdjustment(base),
+    result: gameEvents.runnerAdjustment(base),
     bases: getBases({ B: { endBase: base, isAtBatResult: true } })
   })
 }
