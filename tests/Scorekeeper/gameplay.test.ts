@@ -1,5 +1,5 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent } from '../../lib/generators/gameEvents'
+import { getGameEvent } from '../../lib/generators/utils'
 import * as actions from '../../lib/generators/actions'
 
 describe('Scorekeeper - Gameplay', () => {

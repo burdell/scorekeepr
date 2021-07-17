@@ -1,11 +1,10 @@
 import { ActionConfig } from '../retrosheet.types'
 
-import { getGameEvent, getBases } from '../../generators/gameEvents'
+import { getGameEvent, getBases } from '../../generators/utils'
 import {
   getBase,
   getNextBase,
   getPreviousBase,
-  getAdvanceableBase,
   getBaseFromString,
   getStartableBase
 } from '../guards'
@@ -13,7 +12,6 @@ import * as actions from '../../generators/actions'
 import { Bases } from '../../types'
 import { getPutoutPositions } from '../outs'
 import { getAllBaserunnerAction } from '../guards'
-import { start } from 'repl'
 
 const caughtStealing: ActionConfig = {
   actionType: 'baserunner',

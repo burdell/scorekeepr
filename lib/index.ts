@@ -1,6 +1,5 @@
+export * as generators from './generators'
 export * from './Scorekeepr'
-export * as gameEvents from './generators/gameEvents'
-export * as actions from './generators/actions'
 
 export type {
   InitialGame,

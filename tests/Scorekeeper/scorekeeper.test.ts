@@ -1,8 +1,7 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
 import * as gameEvents from '../../lib/generators/gameEvents'
 import * as actions from '../../lib/generators/actions'
-
-const { getGameEvent, getBases } = gameEvents
+import { getGameEvent, getBases } from '../../lib/generators/utils'
 
 describe('Scorekeepr tests', () => {
   it('handles gameplay events', () => {

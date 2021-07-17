@@ -2,13 +2,12 @@ import { AtBat } from 'retrosheet-parse'
 
 import * as actions from '../../generators/actions'
 import * as gameEvents from '../../generators/gameEvents'
+import { getBases, getGameEvent } from '../../generators/utils'
 
 import { GameEvent, AtBatResult } from '../../types'
 import { getPutoutPositions } from '../outs'
 import { ActionConfig } from '../retrosheet.types'
 import { getOutType, getNonGroundout, getMultiAction } from '../guards'
-
-const { getBases, getGameEvent } = gameEvents
 
 export function isSacrifice(atBatResult: string) {
   return !!atBatResult.match(/\/S(F|H)/)

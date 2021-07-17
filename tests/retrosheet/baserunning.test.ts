@@ -1,6 +1,6 @@
 import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
 import * as actions from '../../lib/generators/actions'
-import { getBases } from '../../lib/generators/gameEvents'
+import { getBases } from '../../lib/generators/utils'
 
 describe('Retrosheet - Baserunning', () => {
   it('handles runner adjustments (2020 extra inning rules)', () => {

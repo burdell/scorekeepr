@@ -1,9 +1,9 @@
 import { Scorekeepr } from '../../lib/Scorekeepr'
 import * as actions from '../../lib/generators/actions'
 import * as gameEvents from '../../lib/generators/gameEvents'
-import { GameStats, GameEvent } from '../../lib/types'
+import { getBases } from '../../lib/generators/utils'
 
-const { getBases } = gameEvents
+import { GameStats, GameEvent } from '../../lib/types'
 
 describe('Scorekeeper - game stats', () => {
   function getStats(overrides: Partial<GameStats>): GameStats {

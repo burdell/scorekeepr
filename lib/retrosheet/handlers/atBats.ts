@@ -2,8 +2,7 @@ import { ActionConfig } from '../retrosheet.types'
 import * as gameEvents from '../../generators/gameEvents'
 import * as actions from '../../generators/actions'
 import * as guards from '../guards'
-
-import { getGameEvent } from '../../generators/gameEvents'
+import { getGameEvent } from '../../generators/utils'
 
 const hit: ActionConfig = {
   actionType: 'batter',
