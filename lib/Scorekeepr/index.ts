@@ -9,7 +9,7 @@ import type {
   LineupEntry,
   GameEventHandler,
   InitialGame,
-  LineupsAndPitchers
+  Players
 } from '../types'
 
 /**
@@ -33,20 +33,24 @@ export class Scorekeepr {
     this._store = getStore()
     this.updateGameInfo(gameInfo)
     this.setLineups({
-      homePitchers: [],
-      visitingPitchers: [],
-      home: homeLineup.map((l) => [
-        {
-          ...l,
-          inning: 0
-        }
-      ]),
-      visiting: visitingLineup.map((l) => [
-        {
-          ...l,
-          inning: 0
-        }
-      ])
+      home: {
+        pitchers: [],
+        batters: homeLineup.map((l) => [
+          {
+            ...l,
+            inning: 0
+          }
+        ])
+      },
+      visiting: {
+        pitchers: [],
+        batters: visitingLineup.map((l) => [
+          {
+            ...l,
+            inning: 0
+          }
+        ])
+      }
     })
 
     if (initialInningCount) {
@@ -70,7 +74,7 @@ export class Scorekeepr {
     return calculateStats(this.gameplay, this.lineups)
   }
 
-  setLineups = (lineups: LineupsAndPitchers) => {
+  setLineups = (lineups: Players) => {
     this._store.dispatch(setLineups(lineups))
   }
 

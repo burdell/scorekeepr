@@ -36,16 +36,19 @@ export interface PitcherEntry {
   }
 }
 
-export interface LineupsAndPitchers {
-  home: Lineup
-  visiting: Lineup
-  homePitchers: PitcherEntry[]
-  visitingPitchers: PitcherEntry[]
+export interface Players {
+  home: {
+    batters: LineupEntry[][]
+    pitchers: PitcherEntry[]
+  }
+  visiting: {
+    batters: LineupEntry[][]
+    pitchers: PitcherEntry[]
+  }
 }
 export interface LineupSubstition {
   lineupSpot: number
   lineupEntry: LineupEntry
 }
-
 export type Lineup = LineupEntry[][]
 export type InitialLineupEntry = Pick<LineupEntry, 'player' | 'position'>

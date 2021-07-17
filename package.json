@@ -19,7 +19,7 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
-    "typecheck": "tsc --noEmit --project tsconfig.core.json",
+    "typecheck": "tsc --noEmit --project tsconfig.core.json && tsc --noEmit --project tsconfig.test.json && tsc --noEmit --project tsconfig.retrosheet.json",
     "build-core": "tsc --project tsconfig.core.json",
     "build-retrosheet": "tsc --project tsconfig.retrosheet.json && npm run copy-retrosheet-index",
     "build": "npm run build-core && npm run build-retrosheet",

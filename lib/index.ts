@@ -7,7 +7,7 @@ export type {
   Gameplay,
   AtBat,
   BaseResult,
-  LineupsAndPitchers,
+  Players,
   Lineup,
   LineupEntry,
   PitcherEntry,

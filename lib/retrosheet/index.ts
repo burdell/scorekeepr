@@ -29,10 +29,14 @@ export async function getRetrosheetScorekeepers(
     })
 
     scorekeeper.setLineups({
-      home: getLineup(lineup.home),
-      visiting: getLineup(lineup.visiting),
-      homePitchers: getPitchers(pitchers.home, game.data.er),
-      visitingPitchers: getPitchers(pitchers.visiting, game.data.er)
+      home: {
+        batters: getLineup(lineup.home),
+        pitchers: getPitchers(pitchers.home, game.data.er)
+      },
+      visiting: {
+        batters: getLineup(lineup.visiting),
+        pitchers: getPitchers(pitchers.visiting, game.data.er)
+      }
     })
 
     try {

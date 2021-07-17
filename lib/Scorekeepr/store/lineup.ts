@@ -1,4 +1,4 @@
-import { Lineup, LineupsAndPitchers, LineupSubstition } from '../../types'
+import { Lineup, Players, LineupSubstition } from '../../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 function sub(lineup: Lineup, sub: LineupSubstition) {
@@ -9,30 +9,34 @@ function sub(lineup: Lineup, sub: LineupSubstition) {
   lineup[sub.lineupSpot].push(sub.lineupEntry)
 }
 
-export const setLineups = createAction<LineupsAndPitchers>('setLineup')
+export const setLineups = createAction<Players>('setLineup')
 export const subHome = createAction<LineupSubstition>('subHome')
 export const subVisiting = createAction<LineupSubstition>('subVisiting')
 
-const initialState: LineupsAndPitchers = {
-  home: [],
-  visiting: [],
-  homePitchers: [],
-  visitingPitchers: []
+const initialState: Players = {
+  home: {
+    batters: [],
+    pitchers: []
+  },
+  visiting: {
+    batters: [],
+    pitchers: []
+  }
 }
 export const lineupReducer = createReducer(initialState, (builder) => {
   builder.addCase(setLineups, (state, action) => {
-    state.home = action.payload.home
-    state.visiting = action.payload.visiting
+    state.home.batters = action.payload.home.batters
+    state.visiting.batters = action.payload.visiting.batters
 
-    state.homePitchers = action.payload.homePitchers
-    state.visitingPitchers = action.payload.visitingPitchers
+    state.home.pitchers = action.payload.home.pitchers
+    state.visiting.pitchers = action.payload.visiting.pitchers
   })
   builder.addCase(subHome, (state, action) => {
-    sub(state.home, action.payload)
+    sub(state.home.batters, action.payload)
     return state
   })
   builder.addCase(subVisiting, (state, action) => {
-    sub(state.visiting, action.payload)
+    sub(state.visiting.batters, action.payload)
     return state
   })
 })

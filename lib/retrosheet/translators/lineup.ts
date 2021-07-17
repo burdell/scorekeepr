@@ -1,6 +1,7 @@
 import { Lineup as RetrosheetLineup, Player } from 'retrosheet-parse'
 
 import { LineupEntry, Lineup } from '../../types'
+import { getPosition } from '../guards'
 
 export function toLineupEntry(player: Player): LineupEntry {
   return {
@@ -9,7 +10,7 @@ export function toLineupEntry(player: Player): LineupEntry {
       name: player.name,
       number: undefined
     },
-    position: player.position
+    position: getPosition(player.position)
   }
 }
 
