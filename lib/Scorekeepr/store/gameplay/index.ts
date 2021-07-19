@@ -33,7 +33,7 @@ export const gameplayReducer = createReducer(initialState, (builder) => {
       currentBaserunners
     } = getCurrentData(action.payload, state)
 
-    if (event.result) {
+    if (event.result && event.result.type !== 'runner-adjustment') {
       currentLineupSpot.result = event.result
       currentLineupSpot.isOut = event.isOut
     }

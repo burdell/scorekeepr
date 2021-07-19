@@ -122,6 +122,6 @@ export function runnerAdjustment(base: Base) {
   return {
     type: 'runner-adjustment' as const,
     result: base,
-    display: ''
+    display: '' as const
   }
 }

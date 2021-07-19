@@ -18,7 +18,7 @@ export interface AtBat {
   strikes: number
   pitchCount: number
   isOut: boolean
-  result: AtBatResult | RunnerAdjustment | undefined
+  result: AtBatResult | undefined
   bases: BaseResult[]
   isSacrifice?: boolean
 }
