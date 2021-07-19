@@ -1,6 +1,6 @@
 import { Bases } from './baserunning'
 import { AtBatResult, BaseResult } from './result'
-import type { DefensiveError, RunnerAdjustment } from '../types/actions'
+import type { DefensiveError, RunnerAdjustment } from './actions'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 

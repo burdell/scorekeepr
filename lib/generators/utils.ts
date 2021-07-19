@@ -1,4 +1,4 @@
-import { Bases, GameEvent } from '../types'
+import { Bases, GameEvent } from '../Scorekeepr/types'
 
 export function getGameEvent(overrides: Partial<GameEvent> = {}): GameEvent {
   return {

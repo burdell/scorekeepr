@@ -1,4 +1,4 @@
-import { Lineup, Players, LineupSubstition } from '../../types'
+import { Lineup, Players, LineupSubstition } from '../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 function sub(lineup: Lineup, sub: LineupSubstition) {
@@ -9,7 +9,7 @@ function sub(lineup: Lineup, sub: LineupSubstition) {
   lineup[sub.lineupSpot].push(sub.lineupEntry)
 }
 
-export const setLineups = createAction<Players>('setLineup')
+export const setPlayers = createAction<Players>('setPlayers')
 export const subHome = createAction<LineupSubstition>('subHome')
 export const subVisiting = createAction<LineupSubstition>('subVisiting')
 
@@ -23,8 +23,8 @@ const initialState: Players = {
     pitchers: []
   }
 }
-export const lineupReducer = createReducer(initialState, (builder) => {
-  builder.addCase(setLineups, (state, action) => {
+export const playerReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setPlayers, (state, action) => {
     state.home.batters = action.payload.home.batters
     state.visiting.batters = action.payload.visiting.batters
 

@@ -1,4 +1,4 @@
-import { GameInfo } from '../../types'
+import { GameInfo } from '../types'
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 function getGame(overrides: Partial<GameInfo> = {}): GameInfo {

@@ -11,7 +11,7 @@ import type {
   Balk,
   PickOff,
   PutOut
-} from '../types/actions'
+} from './actions'
 
 export interface FlyOut {
   type: 'flyout'

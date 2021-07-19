@@ -1,6 +1,11 @@
 import * as gameEvents from './actions'
 
-import { Base, PitcherResultString, GameEvent, Bases } from '../types'
+import {
+  Base,
+  PitcherResultString,
+  GameEvent,
+  Bases
+} from '../Scorekeepr/types'
 import { getGameEvent, getBases } from './utils'
 
 export function hit(base: Base) {

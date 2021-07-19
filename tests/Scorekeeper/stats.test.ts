@@ -3,7 +3,7 @@ import * as actions from '../../lib/generators/actions'
 import * as gameEvents from '../../lib/generators/gameEvents'
 import { getBases } from '../../lib/generators/utils'
 
-import { GameStats, GameEvent } from '../../lib/types'
+import { GameStats, GameEvent } from '../../lib/Scorekeepr/types'
 
 describe('Scorekeeper - game stats', () => {
   function getStats(overrides: Partial<GameStats>): GameStats {

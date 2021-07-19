@@ -13,7 +13,7 @@ import {
   wildPitch,
   balk,
   runnerAdjustment
-} from '../generators/actions'
+} from '../../generators/actions'
 
 export type PitcherResult = ReturnType<typeof pitcherResult>
 export type PutOut = ReturnType<typeof putout>

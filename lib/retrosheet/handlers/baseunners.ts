@@ -9,7 +9,7 @@ import {
   getStartableBase
 } from '../guards'
 import * as actions from '../../generators/actions'
-import { Bases } from '../../types'
+import { Bases } from '../../Scorekeepr/types'
 import { getPutoutPositions } from '../outs'
 import { getAllBaserunnerAction } from '../guards'
 

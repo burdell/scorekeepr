@@ -1,5 +1,5 @@
-import { Base, BaseResult, BaseResultResult, AtBat } from '../../../types'
-import { AdditionalBases } from '../../../types/baserunning'
+import { Base, BaseResult, BaseResultResult, AtBat } from '../../types'
+import { AdditionalBases } from '../../types/baserunning'
 
 export function getEmptyInning() {
   return Array(9).fill(null)

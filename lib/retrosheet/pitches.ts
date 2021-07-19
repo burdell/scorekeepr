@@ -1,4 +1,4 @@
-import { PitchData } from '../types'
+import { PitchData } from '../Scorekeepr/types'
 
 const strikes = ['C', 'K', 'L', 'O', 'Q', 'S', 'T', 'M']
 const balls = ['B', 'I', 'V', 'P']

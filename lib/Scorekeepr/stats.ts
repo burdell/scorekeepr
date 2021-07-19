@@ -1,4 +1,4 @@
-import { GameStats, AtBat, Gameplay, Players } from '../types'
+import { GameStats, AtBat, Gameplay, Players } from './types'
 
 function calculateInningStats(atBats: AtBat[]) {
   const stats = {

@@ -1,7 +1,7 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
 import { handleEvent as realHandleEvent } from '../../lib/retrosheet/event'
-import { GameEvent } from '../../lib/types'
+import { GameEvent } from '../../lib/Scorekeepr/types'
 
 export function getEventWithDefaults(
   overrides: Partial<GameEvent> = {}

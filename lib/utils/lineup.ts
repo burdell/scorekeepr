@@ -1,5 +1,5 @@
 import { Lineup, GameplayEvent, Player } from 'retrosheet-parse'
-import { PitcherEntry } from '../types'
+import { PitcherEntry } from '../Scorekeepr/types'
 
 export function getLineupMap(lineup: Lineup) {
   return lineup.reduce<{ [player: string]: number }>(

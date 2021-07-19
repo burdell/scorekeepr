@@ -1,6 +1,6 @@
 import { formatStartTime } from '../../lib/utils/time'
 import { Scorekeepr } from '../../lib/Scorekeepr'
-import { InitialGame, InitialLineupEntry } from '../../lib/types'
+import { InitialGame, InitialLineupEntry } from '../../lib/Scorekeepr/types'
 
 describe('Scorekeepr - Game Info', () => {
   it('correctly formats start time', () => {
@@ -45,11 +45,11 @@ describe('Scorekeepr - Game Info', () => {
       visitingLineup
     })
 
-    expect(sk.lineups.home.batters).toEqual([
+    expect(sk.lineups.home).toEqual([
       [{ ...homeLineup[0], inning: 0 }],
       [{ ...homeLineup[1], inning: 0 }]
     ])
-    expect(sk.lineups.visiting.batters).toEqual([
+    expect(sk.lineups.visiting).toEqual([
       [{ ...visitingLineup[0], inning: 0 }],
       [{ ...visitingLineup[1], inning: 0 }]
     ])
@@ -87,7 +87,7 @@ describe('Scorekeepr - Game Info', () => {
       position: 3
     })
 
-    expect(sk.lineups.home.batters).toEqual([
+    expect(sk.lineups.home).toEqual([
       [
         { ...homeLineup[0], inning: 0 },
         { player: newHomePlayer, position: 1, inning: 1 }
@@ -95,7 +95,7 @@ describe('Scorekeepr - Game Info', () => {
       [{ ...homeLineup[1], inning: 0 }],
       [{ inning: 2, player: { name: 'Another Player' }, position: 3 }]
     ])
-    expect(sk.lineups.visiting.batters).toEqual([
+    expect(sk.lineups.visiting).toEqual([
       [{ ...visitingLineup[0], inning: 0 }],
       [
         { ...visitingLineup[1], inning: 0 },

@@ -105,6 +105,7 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Scorekeepr.html#gameInfo" class="tsd-kind-icon">game<wbr>Info</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Scorekeepr.html#gameplay" class="tsd-kind-icon">gameplay</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Scorekeepr.html#lineups" class="tsd-kind-icon">lineups</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Scorekeepr.html#pitchers" class="tsd-kind-icon">pitchers</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Scorekeepr.html#stats" class="tsd-kind-icon">stats</a></li>
 							</ul>
 						</section>
@@ -133,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L26">Scorekeepr/index.ts:26</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:26</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -155,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EnhancedStore</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">ThunkMiddleware</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ThunkMiddleware</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L24">Scorekeepr/index.ts:24</a></li>
+							<li>Defined in Scorekeepr/Scorekeepr.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -172,7 +173,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L61">Scorekeepr/index.ts:61</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:61</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/GameInfo.html" class="tsd-signature-type" data-tsd-kind="Interface">GameInfo</a></h4>
@@ -189,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L69">Scorekeepr/index.ts:69</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:81</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/Gameplay.html" class="tsd-signature-type" data-tsd-kind="Interface">Gameplay</a></h4>
@@ -200,16 +201,49 @@
 					<a name="lineups" class="tsd-anchor"></a>
 					<h3>lineups</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lineups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Players.html" class="tsd-signature-type" data-tsd-kind="Interface">Players</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lineups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L65">Scorekeepr/index.ts:65</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:65</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/Players.html" class="tsd-signature-type" data-tsd-kind="Interface">Players</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/LineupEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">LineupEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="pitchers" class="tsd-anchor"></a>
+					<h3>pitchers</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> pitchers<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:73</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/PitcherEntry.html" class="tsd-signature-type" data-tsd-kind="Interface">PitcherEntry</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -223,7 +257,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L73">Scorekeepr/index.ts:73</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:85</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>home<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol">; </span>visiting<span class="tsd-signature-symbol">: </span><a href="../interfaces/GameStats.html" class="tsd-signature-type" data-tsd-kind="Interface">GameStats</a><span class="tsd-signature-symbol"> }</span></h4>
@@ -251,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L93">Scorekeepr/index.ts:93</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:106</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -274,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L77">Scorekeepr/index.ts:77</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:90</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -297,7 +331,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L81">Scorekeepr/index.ts:81</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:94</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -323,7 +357,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L85">Scorekeepr/index.ts:85</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:98</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -349,7 +383,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/ef4710a/lib/Scorekeepr/index.ts#L89">Scorekeepr/index.ts:89</a></li>
+									<li>Defined in Scorekeepr/Scorekeepr.ts:102</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -393,6 +427,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="Scorekeepr.html#lineups" class="tsd-kind-icon">lineups</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="Scorekeepr.html#pitchers" class="tsd-kind-icon">pitchers</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="Scorekeepr.html#stats" class="tsd-kind-icon">stats</a>

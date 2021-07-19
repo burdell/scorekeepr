@@ -7,7 +7,7 @@ import { getLineupMap, getLineupSpot, getPitchers } from '../utils/lineup'
 import { alertSuccess, alertGameGenerated } from '../utils/alerts'
 import { formatStartTime } from '../utils/time'
 
-export * from '../types'
+export * from '../Scorekeepr/types'
 
 export async function getRetrosheetScorekeepers(
   filename: string

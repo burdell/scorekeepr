@@ -1,6 +1,6 @@
 import { Lineup as RetrosheetLineup, Player } from 'retrosheet-parse'
 
-import { LineupEntry, Lineup } from '../../types'
+import { LineupEntry, Lineup } from '../../Scorekeepr/types'
 import { getPosition } from '../guards'
 
 export function toLineupEntry(player: Player): LineupEntry {

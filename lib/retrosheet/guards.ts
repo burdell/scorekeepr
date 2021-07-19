@@ -1,4 +1,9 @@
-import { Base, StartableBase, AdvanceableBase, AtBatResult } from '../types'
+import {
+  Base,
+  StartableBase,
+  AdvanceableBase,
+  AtBatResult
+} from '../Scorekeepr/types'
 import * as actions from '../generators/actions'
 
 export function getHitType(hit: string) {

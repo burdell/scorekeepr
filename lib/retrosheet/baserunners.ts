@@ -1,5 +1,5 @@
 import { RunnerAdjustment } from 'retrosheet-parse'
-import { Base, EventBaseResult, GameEvent } from '../types'
+import { Base, EventBaseResult, GameEvent } from '../Scorekeepr/types'
 import { getBase, getStartableBase } from './guards'
 import * as actions from '../generators/actions'
 import { getPutoutPositions } from './outs'

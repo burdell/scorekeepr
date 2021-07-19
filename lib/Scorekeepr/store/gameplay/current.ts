@@ -1,4 +1,4 @@
-import { Gameplay, AtBat, GameEventHandler, GameEvent } from '../../../types'
+import { Gameplay, AtBat, GameEventHandler, GameEvent } from '../../types'
 
 import { getEmptyInning, getAtBat } from './utils'
 

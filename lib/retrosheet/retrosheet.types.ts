@@ -1,6 +1,6 @@
 import { AtBat } from 'retrosheet-parse'
 
-import { GameEvent } from '../types'
+import { GameEvent } from '../Scorekeepr/types'
 import { BaserunnerMovements } from './baserunners'
 
 type ActionType = 'baserunner' | 'batter'

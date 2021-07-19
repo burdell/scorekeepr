@@ -4,7 +4,7 @@ import * as actions from '../../generators/actions'
 import * as gameEvents from '../../generators/gameEvents'
 import { getBases, getGameEvent } from '../../generators/utils'
 
-import { GameEvent, AtBatResult } from '../../types'
+import { GameEvent, AtBatResult } from '../../Scorekeepr/types'
 import { getPutoutPositions } from '../outs'
 import { ActionConfig } from '../retrosheet.types'
 import { getOutType, getNonGroundout, getMultiAction } from '../guards'

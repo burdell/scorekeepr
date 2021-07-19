@@ -1,6 +1,6 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
-import { GameEvent } from '../types'
+import { GameEvent } from '../Scorekeepr/types'
 import { actionConfigs } from './handlers'
 import { getPitchData } from './pitches'
 import {

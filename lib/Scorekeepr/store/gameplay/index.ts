@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { Gameplay, GameEventHandler, StartableBase } from '../../../types'
+import { Gameplay, GameEventHandler, StartableBase } from '../../types'
 
 import { getCurrentData } from './current'
 import {

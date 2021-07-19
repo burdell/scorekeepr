@@ -1,5 +1,5 @@
 import { AdvanceBaseResult, BaseResultResult, OutBaseResult } from './result'
-import type { PickOff, PutOut } from '../types/actions'
+import type { PickOff, PutOut } from './actions'
 
 export type Base = 1 | 2 | 3 | 4
 export type AdvanceableBase = 2 | 3 | 4
