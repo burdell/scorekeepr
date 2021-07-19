@@ -18,5 +18,10 @@ export type {
   OutBaseResult,
   AtBatResult,
   Base,
-  PitcherResultString
+  PitcherResultString,
+  GameEventHandler,
+  GameEvent,
+  Bases,
+  PitchData,
+  EventBaseResult
 } from './types'

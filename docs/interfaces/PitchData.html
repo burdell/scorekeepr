@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LineupPlayer | scorekeepr</title>
+	<title>PitchData | scorekeepr</title>
 	<meta name="description" content="Documentation for scorekeepr">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">scorekeepr</a>
 				</li>
 				<li>
-					<a href="LineupPlayer.html">LineupPlayer</a>
+					<a href="PitchData.html">PitchData</a>
 				</li>
 			</ul>
-			<h1>Interface LineupPlayer</h1>
+			<h1>Interface PitchData</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LineupPlayer</span>
+						<span class="target">PitchData</span>
 					</li>
 				</ul>
 			</section>
@@ -80,8 +80,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="LineupPlayer.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="LineupPlayer.html#number" class="tsd-kind-icon">number</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="PitchData.html#balls" class="tsd-kind-icon">balls</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="PitchData.html#pitchCount" class="tsd-kind-icon">pitch<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="PitchData.html#strikes" class="tsd-kind-icon">strikes</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,22 +91,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="balls" class="tsd-anchor"></a>
+					<h3>balls</h3>
+					<div class="tsd-signature tsd-kind-icon">balls<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameInfo.ts#L8">Scorekeepr/types/gameInfo.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/pitching.ts#L2">Scorekeepr/types/pitching.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="number" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> number</h3>
-					<div class="tsd-signature tsd-kind-icon">number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="pitchCount" class="tsd-anchor"></a>
+					<h3>pitch<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">pitch<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameInfo.ts#L9">Scorekeepr/types/gameInfo.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/pitching.ts#L4">Scorekeepr/types/pitching.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="strikes" class="tsd-anchor"></a>
+					<h3>strikes</h3>
+					<div class="tsd-signature tsd-kind-icon">strikes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/pitching.ts#L3">Scorekeepr/types/pitching.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,24 +168,27 @@
 					<li class=" tsd-kind-interface">
 						<a href="LineupEntry.html" class="tsd-kind-icon">Lineup<wbr>Entry</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="LineupPlayer.html" class="tsd-kind-icon">Lineup<wbr>Player</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="LineupPlayer.html" class="tsd-kind-icon">Lineup<wbr>Player</a>
+						<a href="PitchData.html" class="tsd-kind-icon">Pitch<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="LineupPlayer.html#name" class="tsd-kind-icon">name</a>
+								<a href="PitchData.html#balls" class="tsd-kind-icon">balls</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="LineupPlayer.html#number" class="tsd-kind-icon">number</a>
+								<a href="PitchData.html#pitchCount" class="tsd-kind-icon">pitch<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="PitchData.html#strikes" class="tsd-kind-icon">strikes</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="PitchData.html" class="tsd-kind-icon">Pitch<wbr>Data</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="PitcherEntry.html" class="tsd-kind-icon">Pitcher<wbr>Entry</a>
 					</li>

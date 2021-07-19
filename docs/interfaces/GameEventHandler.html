@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LineupPlayer | scorekeepr</title>
+	<title>GameEventHandler | scorekeepr</title>
 	<meta name="description" content="Documentation for scorekeepr">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">scorekeepr</a>
 				</li>
 				<li>
-					<a href="LineupPlayer.html">LineupPlayer</a>
+					<a href="GameEventHandler.html">GameEventHandler</a>
 				</li>
 			</ul>
-			<h1>Interface LineupPlayer</h1>
+			<h1>Interface GameEventHandler</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LineupPlayer</span>
+						<span class="target">GameEventHandler</span>
 					</li>
 				</ul>
 			</section>
@@ -80,8 +80,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="LineupPlayer.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="LineupPlayer.html#number" class="tsd-kind-icon">number</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="GameEventHandler.html#event" class="tsd-kind-icon">event</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="GameEventHandler.html#inning" class="tsd-kind-icon">inning</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="GameEventHandler.html#lineupSpot" class="tsd-kind-icon">lineup<wbr>Spot</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="GameEventHandler.html#team" class="tsd-kind-icon">team</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,22 +92,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="event" class="tsd-anchor"></a>
+					<h3>event</h3>
+					<div class="tsd-signature tsd-kind-icon">event<span class="tsd-signature-symbol">:</span> <a href="GameEvent.html" class="tsd-signature-type" data-tsd-kind="Interface">GameEvent</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameInfo.ts#L8">Scorekeepr/types/gameInfo.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameplay.ts#L82">Scorekeepr/types/gameplay.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="number" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> number</h3>
-					<div class="tsd-signature tsd-kind-icon">number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="inning" class="tsd-anchor"></a>
+					<h3>inning</h3>
+					<div class="tsd-signature tsd-kind-icon">inning<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameInfo.ts#L9">Scorekeepr/types/gameInfo.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameplay.ts#L83">Scorekeepr/types/gameplay.ts:83</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="lineupSpot" class="tsd-anchor"></a>
+					<h3>lineup<wbr>Spot</h3>
+					<div class="tsd-signature tsd-kind-icon">lineup<wbr>Spot<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameplay.ts#L84">Scorekeepr/types/gameplay.ts:84</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="team" class="tsd-anchor"></a>
+					<h3>team</h3>
+					<div class="tsd-signature tsd-kind-icon">team<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;home&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;visiting&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/burdell/scorekeeper/blob/2728e2f/lib/Scorekeepr/types/gameplay.ts#L85">Scorekeepr/types/gameplay.ts:85</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,9 +161,27 @@
 					<li class=" tsd-kind-interface">
 						<a href="GameEvent.html" class="tsd-kind-icon">Game<wbr>Event</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="GameEventHandler.html" class="tsd-kind-icon">Game<wbr>Event<wbr>Handler</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="GameEventHandler.html#event" class="tsd-kind-icon">event</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="GameEventHandler.html#inning" class="tsd-kind-icon">inning</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="GameEventHandler.html#lineupSpot" class="tsd-kind-icon">lineup<wbr>Spot</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="GameEventHandler.html#team" class="tsd-kind-icon">team</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="GameInfo.html" class="tsd-kind-icon">Game<wbr>Info</a>
 					</li>
@@ -157,21 +197,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="LineupEntry.html" class="tsd-kind-icon">Lineup<wbr>Entry</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="LineupPlayer.html" class="tsd-kind-icon">Lineup<wbr>Player</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="LineupPlayer.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="LineupPlayer.html#number" class="tsd-kind-icon">number</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="PitchData.html" class="tsd-kind-icon">Pitch<wbr>Data</a>
 					</li>
