@@ -1,6 +1,6 @@
 import { Bases } from './baserunning'
 import { AtBatResult, BaseResult } from './result'
-import type { DefensiveError, RunnerAdjustment } from './actions'
+import type { DefensiveError, RunnerAdjustment } from '../../generators/types'
 import { PitchData } from './pitching'
 import { InitialLineupEntry, Team, Lineup, PitcherEntry } from './gameInfo'
 
@@ -18,7 +18,7 @@ export interface AtBat {
   strikes: number
   pitchCount: number
   isOut: boolean
-  result: AtBatResult | undefined
+  result: AtBatResult | RunnerAdjustment | undefined
   bases: BaseResult[]
   isSacrifice?: boolean
 }

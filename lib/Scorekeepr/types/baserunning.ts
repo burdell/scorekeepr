@@ -1,15 +1,15 @@
-import { AdvanceBaseResult, BaseResultResult, OutBaseResult } from './result'
-import type { PickOff, PutOut } from './actions'
+import { AdvanceBaseResult, BaseAction, OutBaseResult } from './result'
+import type { PickOff, PutOut } from '../../generators/types'
 
 export type Base = 1 | 2 | 3 | 4
 export type AdvanceableBase = 2 | 3 | 4
 export type StartableBase = 1 | 2 | 3
 
-export type AdditionalBases = Array<{ base: Base; result?: BaseResultResult }>
+export type AdditionalBases = Array<{ base: Base; result?: BaseAction }>
 
 export interface EventBaseResult {
   endBase: Base
-  result?: BaseResultResult
+  result?: BaseAction
   isOut?: boolean
   isAtBatResult?: boolean
   onBasePutout?: PutOut | PickOff

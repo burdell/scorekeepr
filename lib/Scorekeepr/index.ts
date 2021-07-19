@@ -13,8 +13,10 @@ export type {
   LineupPlayer,
   PlayerPosition,
   GameStats,
-  BaseResultResult,
+  BaseAction,
   AdvanceBaseResult,
   OutBaseResult,
-  AtBatResult
+  AtBatResult,
+  Base,
+  PitcherResultString
 } from './types'

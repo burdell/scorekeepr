@@ -1,4 +1,3 @@
-import { Base } from './baserunning'
 import type {
   PitcherResult,
   DefensiveError,
@@ -10,24 +9,12 @@ import type {
   WildPitch,
   Balk,
   PickOff,
-  PutOut
-} from './actions'
+  PutOut,
+  FlyOut,
+  LineOut,
+  Hit
+} from '../../generators/types'
 
-export interface FlyOut {
-  type: 'flyout'
-  result: number
-  display: string
-}
-export interface LineOut {
-  type: 'lineout'
-  result: number
-  display: string
-}
-export interface Hit {
-  type: 'hit'
-  result: Base
-  display: string
-}
 export type PitcherResultString = 'K' | 'K-looking' | 'BB' | 'IBB' | 'HB'
 
 export type AtBatResult =
@@ -47,13 +34,12 @@ export type AdvanceBaseResult =
   | DefensiveIndifference
   | PassedBall
   | WildPitch
-
 export type OutBaseResult = PutOut | CaughtStealing
-export type BaseResultResult = AdvanceBaseResult | OutBaseResult | undefined
+export type BaseAction = AdvanceBaseResult | OutBaseResult | undefined
 
 export interface BaseResult {
   advanced: boolean
-  result: BaseResultResult
+  result: BaseAction
   isAtBatResult?: boolean
   onBasePutout?: PutOut | PickOff
 }

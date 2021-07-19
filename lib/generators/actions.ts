@@ -3,7 +3,7 @@ import { PitcherResultString, Base, AdvanceableBase } from '../Scorekeepr/types'
 export function pitcherResult(result: PitcherResultString) {
   const display = result === 'K-looking' ? 'K' : result
   return {
-    type: 'pitcher-result',
+    type: 'pitcher-result' as const,
     result,
     display
   }
@@ -11,7 +11,7 @@ export function pitcherResult(result: PitcherResultString) {
 
 export function putout(defensivePlayers: number[]) {
   return {
-    type: 'putout',
+    type: 'putout' as const,
     result: defensivePlayers,
     display:
       defensivePlayers.length === 1
@@ -22,7 +22,7 @@ export function putout(defensivePlayers: number[]) {
 
 export function flyOut(defensivePlayer: number) {
   return {
-    type: 'flyout',
+    type: 'flyout' as const,
     result: defensivePlayer,
     display: defensivePlayer < 7 ? `P${defensivePlayer}` : `F${defensivePlayer}`
   }
@@ -30,7 +30,7 @@ export function flyOut(defensivePlayer: number) {
 
 export function lineOut(defensivePlayer: number) {
   return {
-    type: 'lineout',
+    type: 'lineout' as const,
     result: defensivePlayer,
     display: `L${defensivePlayer}`
   }
@@ -38,7 +38,7 @@ export function lineOut(defensivePlayer: number) {
 
 export function hit(base: Base) {
   return {
-    type: 'hit',
+    type: 'hit' as const,
     result: base,
     display: base === 4 ? 'HR' : `${base}B`
   }
@@ -46,7 +46,7 @@ export function hit(base: Base) {
 
 export function error(position: number) {
   return {
-    type: 'defensive-error',
+    type: 'defensive-error' as const,
     result: position,
     display: `E${position}`
   }
@@ -54,16 +54,16 @@ export function error(position: number) {
 
 export function fieldersChoice(baseAdvancedTo: Base) {
   return {
-    type: 'fielders-choice',
+    type: 'fielders-choice' as const,
     result: baseAdvancedTo,
-    display: 'FC'
+    display: 'FC' as const
   }
 }
 
 export function caughtStealing(putoutPositions: number[]) {
   const result = putout(putoutPositions)
   return {
-    type: 'caught-stealing',
+    type: 'caught-stealing' as const,
     result,
     display: `CS ${result.display}`
   }
@@ -72,7 +72,7 @@ export function caughtStealing(putoutPositions: number[]) {
 export function pickOff(putoutPositions: number[]) {
   const result = putout(putoutPositions)
   return {
-    type: 'pick-off',
+    type: 'pick-off' as const,
     result,
     display: `PO ${result.display}`
   }
@@ -80,47 +80,47 @@ export function pickOff(putoutPositions: number[]) {
 
 export function stolenBase(base: AdvanceableBase) {
   return {
-    type: 'stolen-base',
+    type: 'stolen-base' as const,
     result: base,
-    display: 'SB'
+    display: 'SB' as const
   }
 }
 
 export function defensiveIndifference() {
   return {
-    type: 'defensive-indifference',
-    display: 'DI',
-    result: 'DI'
+    type: 'defensive-indifference' as const,
+    display: 'DI' as const,
+    result: 'DI' as const
   }
 }
 
 export function passedBall() {
   return {
-    type: 'passed-ball',
-    result: 'PB',
-    display: 'PB'
+    type: 'passed-ball' as const,
+    result: 'PB' as const,
+    display: 'PB' as const
   }
 }
 
 export function wildPitch() {
   return {
-    type: 'wild-pitch',
-    result: 'WP',
-    display: 'WP'
+    type: 'wild-pitch' as const,
+    result: 'WP' as const,
+    display: 'WP' as const
   }
 }
 
 export function balk() {
   return {
-    type: 'balk',
-    result: 'BK',
-    display: 'BK'
+    type: 'balk' as const,
+    result: 'BK' as const,
+    display: 'BK' as const
   }
 }
 
 export function runnerAdjustment(base: Base) {
   return {
-    type: 'runner-adjustment',
+    type: 'runner-adjustment' as const,
     result: base,
     display: ''
   }

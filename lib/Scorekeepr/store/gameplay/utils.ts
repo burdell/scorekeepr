@@ -1,4 +1,4 @@
-import { Base, BaseResult, BaseResultResult, AtBat } from '../../types'
+import { Base, BaseResult, BaseAction, AtBat } from '../../types'
 import { AdditionalBases } from '../../types/baserunning'
 
 export function getEmptyInning() {
@@ -26,7 +26,7 @@ export function advanceRunnerHelper({
 }: {
   baseAdvancedTo: Base
   existingBases?: BaseResult[]
-  result?: BaseResultResult
+  result?: BaseAction
   isOut?: boolean
   isAtBatResult?: boolean
 }) {
