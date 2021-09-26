@@ -13,16 +13,14 @@ import type {
 } from './types'
 
 /**
- * Code blocks are great for examples
- *
- * ```typescript
- * // run typedoc --help for a list of supported languages
- * const instance = new MyClass();
- * ```
+ * Base class for scoring a game
  */
 export class Scorekeepr {
   private _store: ReturnType<typeof getStore>
 
+  /**
+   * @param game - the initial data for a game. Everything here is optional and you can add update most of the data passed here through `setLineups` and `updateGameInfo` methods
+   */
   constructor(game: Partial<InitialGame> = {}) {
     const {
       homeLineup = [],
