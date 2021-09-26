@@ -1,3 +1,3 @@
 export * from './stadiums'
 export * from './teams'
-export * from './lineup'
+export * from './players'

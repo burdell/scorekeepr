@@ -8,7 +8,7 @@ export type {
   BaseResult,
   Players,
   Lineup,
-  LineupEntry,
+  BatterEntry,
   PitcherEntry,
   LineupPlayer,
   PlayerPosition,
@@ -23,5 +23,6 @@ export type {
   GameEvent,
   Bases,
   PitchData,
-  EventBaseResult
+  EventBaseResult,
+  InitialLineupEntry
 } from './types'

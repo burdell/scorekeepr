@@ -61,8 +61,8 @@ export interface InitialGame {
   location?: string
   startTime?: string | undefined
   id?: string
-  homeLineup?: InitialLineupEntry[]
-  visitingLineup?: InitialLineupEntry[]
+  homeLineup?: InitialLineupEntry
+  visitingLineup?: InitialLineupEntry
   initialInningCount?: number
 }
 

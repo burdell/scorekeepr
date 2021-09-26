@@ -29,12 +29,17 @@ export function getPitchers(
 
   pitcherList.forEach((p) => {
     if (pitchers[p.id]) return
-    pitchers[p.id] = { player: p, stats: { er: pitchingStats[p.id] || 0 } }
+    pitchers[p.id] = {
+      player: p,
+      inning: p.inningEntered,
+      type: p.type === 'start' ? 'starter' : 'reliever',
+      stats: { er: pitchingStats[p.id] || 0 }
+    }
   })
 
   return Object.values(pitchers).sort((p1, p2) => {
-    if (p1.player.type === 'start') return -1
+    if (p1.type === 'starter') return -1
 
-    return p1.player.inningEntered - p2.player.inningEntered
+    return p1.inning - p2.inning
   })
 }

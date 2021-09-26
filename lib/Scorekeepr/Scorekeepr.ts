@@ -6,7 +6,7 @@ import { calculateStats } from './stats'
 
 import type {
   GameInfo,
-  LineupEntry,
+  BatterEntry,
   GameEventHandler,
   InitialGame,
   Players
@@ -23,17 +23,22 @@ export class Scorekeepr {
    */
   constructor(game: Partial<InitialGame> = {}) {
     const {
-      homeLineup = [],
-      visitingLineup = [],
+      homeLineup = { batters: [], pitchers: [] },
+      visitingLineup = { batters: [], pitchers: [] },
       initialInningCount,
       ...gameInfo
     } = game
     this._store = getStore()
     this.updateGameInfo(gameInfo)
-    this.setLineups({
+    this.setPlayers({
       home: {
-        pitchers: [],
-        batters: homeLineup.map((l) => [
+        pitchers: homeLineup.pitchers.map((l) => ({
+          player: l.player,
+          inning: 0,
+          type: 'starter',
+          stats: { er: 0 }
+        })),
+        batters: homeLineup.batters.map((l) => [
           {
             ...l,
             inning: 0
@@ -41,8 +46,13 @@ export class Scorekeepr {
         ])
       },
       visiting: {
-        pitchers: [],
-        batters: visitingLineup.map((l) => [
+        pitchers: visitingLineup.pitchers.map((l) => ({
+          player: l.player,
+          inning: 0,
+          stats: { er: 0 },
+          type: 'starter'
+        })),
+        batters: visitingLineup.batters.map((l) => [
           {
             ...l,
             inning: 0
@@ -60,7 +70,7 @@ export class Scorekeepr {
     return this._store.getState().gameInfo.currentGame
   }
 
-  get lineups() {
+  get batters() {
     const players = this._store.getState().players
     return {
       home: players.home.batters,
@@ -85,15 +95,15 @@ export class Scorekeepr {
     return calculateStats(this.gameplay, players)
   }
 
-  setLineups = (lineups: Players) => {
+  setPlayers = (lineups: Players) => {
     this._store.dispatch(setPlayers(lineups))
   }
 
-  substituteHomePlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
+  substituteHomePlayer = (lineupSpot: number, lineupEntry: BatterEntry) => {
     this._store.dispatch(subHome({ lineupSpot, lineupEntry }))
   }
 
-  substituteVisitingPlayer = (lineupSpot: number, lineupEntry: LineupEntry) => {
+  substituteVisitingPlayer = (lineupSpot: number, lineupEntry: BatterEntry) => {
     this._store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
   }
 

@@ -25,7 +25,8 @@ const initialState: Players = {
 }
 export const playerReducer = createReducer(initialState, (builder) => {
   builder.addCase(setPlayers, (state, action) => {
-    state.home.batters = action.payload.home.batters
+    if (action.payload)
+      if (action.payload.home) state.home.batters = action.payload.home.batters
     state.visiting.batters = action.payload.visiting.batters
 
     state.home.pitchers = action.payload.home.pitchers

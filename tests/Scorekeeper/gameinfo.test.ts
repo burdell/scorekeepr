@@ -31,40 +31,123 @@ describe('Scorekeepr - Game Info', () => {
     expect(sk.gameInfo).toEqual(gameInfo)
   })
 
-  it('sets the lineups', () => {
-    const homeLineup: InitialLineupEntry[] = [
-      { player: { name: 'Home Player 1' }, position: 1 },
-      { player: { name: 'Home Player 2' }, position: 2 }
-    ]
-    const visitingLineup: InitialLineupEntry[] = [
-      { player: { name: 'Visiting Player 1' }, position: 1 },
-      { player: { name: 'Visiting Player 2' }, position: 2 }
-    ]
+  it('sets the initial players', () => {
+    const homeLineup: InitialLineupEntry = {
+      batters: [
+        { player: { name: 'Home Player 1' }, position: 1 },
+        { player: { name: 'Home Player 2' }, position: 2 }
+      ],
+      pitchers: [{ player: { name: 'Home Pitcher' } }]
+    }
+    const visitingLineup: InitialLineupEntry = {
+      batters: [
+        { player: { name: 'Visiting Player 1' }, position: 1 },
+        { player: { name: 'Visiting Player 2' }, position: 2 }
+      ],
+      pitchers: [{ player: { name: 'Visiting Pitcher' } }]
+    }
     const sk = new Scorekeepr({
       homeLineup,
       visitingLineup
     })
 
-    expect(sk.lineups.home).toEqual([
-      [{ ...homeLineup[0], inning: 0 }],
-      [{ ...homeLineup[1], inning: 0 }]
+    expect(sk.batters.home).toEqual([
+      [{ ...homeLineup.batters[0], inning: 0 }],
+      [{ ...homeLineup.batters[1], inning: 0 }]
     ])
-    expect(sk.lineups.visiting).toEqual([
-      [{ ...visitingLineup[0], inning: 0 }],
-      [{ ...visitingLineup[1], inning: 0 }]
+    expect(sk.batters.visiting).toEqual([
+      [{ ...visitingLineup.batters[0], inning: 0 }],
+      [{ ...visitingLineup.batters[1], inning: 0 }]
+    ])
+    expect(sk.pitchers.home).toEqual([
+      {
+        ...homeLineup.pitchers[0],
+        inning: 0,
+        type: 'starter',
+        stats: { er: 0 }
+      }
+    ])
+    expect(sk.pitchers.visiting).toEqual([
+      {
+        ...visitingLineup.pitchers[0],
+        inning: 0,
+        type: 'starter',
+        stats: { er: 0 }
+      }
     ])
   })
 
+  it('updates info after initialization', () => {
+    const sk = new Scorekeepr()
+
+    const homeLineup = {
+      batters: [
+        [
+          { player: { name: 'Home Player 1' }, position: 3 as const, inning: 0 }
+        ],
+        [{ player: { name: 'Home Player 2' }, position: 3 as const, inning: 1 }]
+      ],
+      pitchers: [
+        {
+          player: { name: 'Home Pitcher 1' },
+          type: 'starter' as const,
+          inning: 0,
+          stats: { er: 0 }
+        }
+      ]
+    }
+    const visitingLineup = {
+      batters: [
+        [
+          {
+            player: { name: 'Visting Player 1' },
+            position: 3 as const,
+            inning: 0
+          },
+          {
+            player: { name: 'Visting Player 1' },
+            position: 3 as const,
+            inning: 1
+          }
+        ]
+      ],
+      pitchers: [
+        {
+          player: { name: 'Visting Pitcher 1' },
+          inning: 0,
+          type: 'starter' as const,
+          stats: { er: 0 }
+        }
+      ]
+    }
+
+    sk.setPlayers({
+      home: homeLineup,
+      visiting: visitingLineup
+    })
+
+    expect(sk.batters.home).toEqual(homeLineup.batters)
+    expect(sk.batters.visiting).toEqual(visitingLineup.batters)
+    expect(sk.pitchers.home).toEqual(homeLineup.pitchers)
+    expect(sk.pitchers.visiting).toEqual(visitingLineup.pitchers)
+  })
+
   it('substitutes players', () => {
-    const homeLineup: InitialLineupEntry[] = [
-      { player: { name: 'Home Player 1' }, position: 1 },
-      { player: { name: 'Home Player 2' }, position: 2 }
-    ]
+    const homeLineup: InitialLineupEntry = {
+      batters: [
+        { player: { name: 'Home Player 1' }, position: 1 },
+        { player: { name: 'Home Player 2' }, position: 2 }
+      ],
+      pitchers: [{ player: { name: 'Home Pitcher' } }]
+    }
     const newHomePlayer = { name: 'The Other Home Player' }
-    const visitingLineup: InitialLineupEntry[] = [
-      { player: { name: 'Visiting Player 1' }, position: 1 },
-      { player: { name: 'Visiting Player 2' }, position: 2 }
-    ]
+    const visitingLineup: InitialLineupEntry = {
+      batters: [
+        { player: { name: 'Visiting Player 1' }, position: 1 },
+        { player: { name: 'Visiting Player 2' }, position: 2 }
+      ],
+      pitchers: [{ player: { name: 'Visiting Pitcher' } }]
+    }
     const newVisitingPlayer = { name: 'The Other Visiting Player' }
 
     const sk = new Scorekeepr({
@@ -87,18 +170,18 @@ describe('Scorekeepr - Game Info', () => {
       position: 3
     })
 
-    expect(sk.lineups.home).toEqual([
+    expect(sk.batters.home).toEqual([
       [
-        { ...homeLineup[0], inning: 0 },
+        { ...homeLineup.batters[0], inning: 0 },
         { player: newHomePlayer, position: 1, inning: 1 }
       ],
-      [{ ...homeLineup[1], inning: 0 }],
+      [{ ...homeLineup.batters[1], inning: 0 }],
       [{ inning: 2, player: { name: 'Another Player' }, position: 3 }]
     ])
-    expect(sk.lineups.visiting).toEqual([
-      [{ ...visitingLineup[0], inning: 0 }],
+    expect(sk.batters.visiting).toEqual([
+      [{ ...visitingLineup.batters[0], inning: 0 }],
       [
-        { ...visitingLineup[1], inning: 0 },
+        { ...visitingLineup.batters[1], inning: 0 },
         { player: newVisitingPlayer, position: 2, inning: 2 }
       ]
     ])

@@ -1,7 +1,7 @@
 import { parseGames, GameplayEvent, Game } from 'retrosheet-parse'
 
 import { handleEvent } from './event'
-import { getTeam, getStadium, getLineup } from './translators'
+import { getTeam, getStadium, getBatters } from './translators'
 import { Scorekeepr } from '../Scorekeepr'
 import { getLineupMap, getLineupSpot, getPitchers } from '../utils/lineup'
 import { alertSuccess, alertGameGenerated } from '../utils/alerts'
@@ -28,13 +28,13 @@ export async function getRetrosheetScorekeepers(
       initialInningCount: game.play.visiting.length
     })
 
-    scorekeeper.setLineups({
+    scorekeeper.setPlayers({
       home: {
-        batters: getLineup(lineup.home),
+        batters: getBatters(lineup.home),
         pitchers: getPitchers(pitchers.home, game.data.er)
       },
       visiting: {
-        batters: getLineup(lineup.visiting),
+        batters: getBatters(lineup.visiting),
         pitchers: getPitchers(pitchers.visiting, game.data.er)
       }
     })
