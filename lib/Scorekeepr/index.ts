@@ -24,5 +24,6 @@ export type {
   Bases,
   PitchData,
   EventBaseResult,
-  InitialLineupEntry
+  InitialLineupEntry,
+  InitialPitcherEntry
 } from './types'

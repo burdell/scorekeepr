@@ -1,6 +1,6 @@
 import { getStore } from './store'
 import { setGameInfo } from './store/gameInfo'
-import { subHome, subVisiting, setPlayers } from './store/players'
+import { subHome, subVisiting, setPlayers, subPitcher } from './store/players'
 import { handleGameEvent, setInningLength } from './store/gameplay'
 import { calculateStats } from './stats'
 
@@ -9,7 +9,8 @@ import type {
   BatterEntry,
   GameEventHandler,
   InitialGame,
-  Players
+  Players,
+  InitialPitcherEntry
 } from './types'
 
 /**
@@ -99,12 +100,29 @@ export class Scorekeepr {
     this._store.dispatch(setPlayers(lineups))
   }
 
-  substituteHomePlayer = (lineupSpot: number, lineupEntry: BatterEntry) => {
-    this._store.dispatch(subHome({ lineupSpot, lineupEntry }))
+  subPlayer({
+    team,
+    ...options
+  }: {
+    lineupSpot: number
+    lineupEntry: BatterEntry
+    team: 'visiting' | 'home'
+  }) {
+    if (team === 'home') {
+      this._store.dispatch(subHome(options))
+    } else if (team === 'visiting') {
+      this._store.dispatch(subVisiting(options))
+    } else {
+      throw new Error('Invalid team')
+    }
   }
 
-  substituteVisitingPlayer = (lineupSpot: number, lineupEntry: BatterEntry) => {
-    this._store.dispatch(subVisiting({ lineupSpot, lineupEntry }))
+  subPitcher = (options: {
+    pitcher: InitialPitcherEntry
+    inning: number
+    team: 'home' | 'visiting'
+  }) => {
+    this._store.dispatch(subPitcher(options))
   }
 
   updateGameInfo = (gameInfo: Partial<GameInfo>) => {
