@@ -1,4 +1,3 @@
-
 export const testGame = {
   copyright:
     'Copyright 2021 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt',
