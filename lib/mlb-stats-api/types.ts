@@ -91,9 +91,77 @@ export interface MLBApiContextMetrics {
   homeWinProbability: number
 }
 
-export interface MlbStatsApiGame {
+interface PlayEvent {
+  details: {
+    call: {
+      code: string
+      description: string
+    }
+    description: string
+    code: string
+    ballColor: string
+    trailColor: string
+    isInPlay: boolean
+    isStrike: boolean
+    isBall: boolean
+    type: {
+      code: string
+      description: string
+    }
+    hasReview: boolean
+  }
+  count: {
+    balls: number
+    strikes: number
+    outs: number
+  }
+  pitchData: {
+    startSpeed: number
+    endSpeed: number
+    strikeZoneTop: number
+    strikeZoneBottom: number
+    coordinates: {
+      aY: number
+      aZ: number
+      pfxX: number
+      pfxZ: number
+      pX: number
+      pZ: number
+      vX0: number
+      vY0: number
+      vZ0: number
+      x: number
+      y: number
+      x0: number
+      y0: number
+      z0: number
+      aX: number
+    }
+    breaks: {
+      breakAngle: number
+      breakLength: number
+      breakY: number
+      spinRate: number
+      spinDirection: number
+    }
+    zone: number
+    typeConfidence: number
+    plateTime: number
+    extension: number
+  }
+  index: number
+  playId: string
+  pitchNumber: number
+  startTime: string
+  endTime: string
+  isPitch: boolean
+  type: string
+}
+export interface PlayByPlay {
   copyright: string
-  allPlays: {}
+  allPlays: Array<{
+    playEvents: Array<PlayEvent>
+  }>
 }
 
 export interface Team {
@@ -144,7 +212,53 @@ export interface Team {
   active: boolean
 }
 
-interface BoxScorePlayer {
+interface BattingStats {
+  gamesPlayed: number
+  flyOuts: number
+  groundOuts: number
+  runs: number
+  doubles: number
+  triples: number
+  homeRuns: number
+  strikeOuts: number
+  baseOnBalls: number
+  intentionalWalks: number
+  hits: number
+  hitByPitch: number
+  atBats: number
+  caughtStealing: number
+  stolenBases: number
+  stolenBasePercentage: string
+  groundIntoDoublePlay: number
+  groundIntoTriplePlay: number
+  plateAppearances: number
+  totalBases: number
+  rbi: number
+  leftOnBase: number
+  sacBunts: number
+  sacFlies: number
+  catchersInterference: number
+  pickoffs: number
+  atBatsPerHomeRun: string
+}
+
+interface PitchingStats {}
+
+interface FieldingStats {
+  gamesStarted: number
+  caughtStealing: number
+  stolenBases: number
+  stolenBasePercentage: string
+  assists: number
+  putOuts: number
+  errors: number
+  chances: number
+  fielding: string
+  passedBall: number
+  pickoffs: number
+}
+
+export interface BoxScorePlayer {
   person: {
     id: number
     fullName: string
@@ -161,56 +275,36 @@ interface BoxScorePlayer {
     code: string
     description: string
   }
-  parentTeamId: 144
-  battingOrder: string
+  parentTeamId: number
+  battingOrder?: string
   stats: {
-    batting: {
-      gamesPlayed: number
-      flyOuts: number
-      groundOuts: number
-      runs: number
-      doubles: number
-      triples: number
-      homeRuns: number
-      strikeOuts: number
-      baseOnBalls: number
-      intentionalWalks: number
-      hits: number
-      hitByPitch: number
-      atBats: number
-      caughtStealing: number
-      stolenBases: number
-      stolenBasePercentage: string
-      groundIntoDoublePlay: number
-      groundIntoTriplePlay: number
-      plateAppearances: number
-      totalBases: number
-      rbi: number
-      leftOnBase: number
-      sacBunts: number
-      sacFlies: number
-      catchersInterference: number
-      pickoffs: number
-      atBatsPerHomeRun: string
-    }
-    pitching: {}
-    fielding: {
-      gamesStarted: number
-      caughtStealing: number
-      stolenBases: number
-      stolenBasePercentage: string
-      assists: number
-      putOuts: number
-      errors: number
-      chances: number
-      fielding: string
-      passedBall: number
-      pickoffs: number
-    }
+    batting: Partial<BattingStats>
+    pitching: Partial<PitchingStats>
+    fielding: Partial<FieldingStats>
   }
   seasonStats: {
+    batting: Partial<BattingStats>
+    pitching: Partial<PitchingStats>
+    fielding: Partial<FieldingStats>
+  }
+  gameStatus: {
+    isCurrentBatter: boolean
+    isCurrentPitcher: boolean
+    isOnBench: boolean
+    isSubstitute: boolean
+  }
+  allPositions?: Array<{
+    code: string
+    name: string
+    type: string
+    abbreviation: string
+  }>
+}
+
+interface TeamBoxScore {
+  team: Team
+  teamStats: {
     batting: {
-      gamesPlayed: number
       flyOuts: number
       groundOuts: number
       runs: number
@@ -238,14 +332,11 @@ interface BoxScorePlayer {
       leftOnBase: number
       sacBunts: number
       sacFlies: number
-      babip: string
       catchersInterference: number
       pickoffs: number
       atBatsPerHomeRun: string
     }
     pitching: {
-      gamesPlayed: number
-      gamesStarted: number
       groundOuts: number
       airOuts: number
       runs: number
@@ -265,19 +356,14 @@ interface BoxScorePlayer {
       numberOfPitches: number
       era: string
       inningsPitched: string
-      wins: number
-      losses: number
-      saves: number
       saveOpportunities: number
-      holds: number
-      blownSaves: number
       earnedRuns: number
       whip: string
       battersFaced: number
       outs: number
-      gamesPitched: number
       completeGames: number
       shutouts: number
+      pitchesThrown: number
       balls: number
       strikes: number
       strikePercentage: string
@@ -287,13 +373,7 @@ interface BoxScorePlayer {
       pickoffs: number
       groundOutsToAirouts: string
       rbi: number
-      winPercentage: string
       pitchesPerInning: string
-      gamesFinished: number
-      strikeoutWalkRatio: string
-      strikeoutsPer9Inn: string
-      walksPer9Inn: string
-      hitsPer9Inn: string
       runsScoredPer9: string
       homeRunsPer9: string
       inheritedRunners: number
@@ -304,7 +384,6 @@ interface BoxScorePlayer {
       passedBall: number
     }
     fielding: {
-      gamesStarted: number
       caughtStealing: number
       stolenBases: number
       stolenBasePercentage: string
@@ -312,116 +391,9 @@ interface BoxScorePlayer {
       putOuts: number
       errors: number
       chances: number
-      fielding: string
       passedBall: number
       pickoffs: number
     }
-  }
-  gameStatus: {
-    isCurrentBatter: boolean
-    isCurrentPitcher: boolean
-    isOnBench: boolean
-    isSubstitute: boolean
-  }
-  allPositions: Array<{
-    code: string
-    name: string
-    type: string
-    abbreviation: string
-  }>
-}
-
-interface TeamBoxScore {
-  team: Team
-  batting: {
-    flyOuts: number
-    groundOuts: number
-    runs: number
-    doubles: number
-    triples: number
-    homeRuns: number
-    strikeOuts: number
-    baseOnBalls: number
-    intentionalWalks: number
-    hits: number
-    hitByPitch: number
-    avg: string
-    atBats: number
-    obp: string
-    slg: string
-    ops: string
-    caughtStealing: number
-    stolenBases: number
-    stolenBasePercentage: string
-    groundIntoDoublePlay: number
-    groundIntoTriplePlay: number
-    plateAppearances: number
-    totalBases: number
-    rbi: number
-    leftOnBase: number
-    sacBunts: number
-    sacFlies: number
-    catchersInterference: number
-    pickoffs: number
-    atBatsPerHomeRun: string
-  }
-  pitching: {
-    groundOuts: number
-    airOuts: number
-    runs: number
-    doubles: number
-    triples: number
-    homeRuns: number
-    strikeOuts: number
-    baseOnBalls: number
-    intentionalWalks: number
-    hits: number
-    hitByPitch: number
-    atBats: number
-    obp: string
-    caughtStealing: number
-    stolenBases: number
-    stolenBasePercentage: string
-    numberOfPitches: number
-    era: string
-    inningsPitched: string
-    saveOpportunities: number
-    earnedRuns: number
-    whip: string
-    battersFaced: number
-    outs: number
-    completeGames: number
-    shutouts: number
-    pitchesThrown: number
-    balls: number
-    strikes: number
-    strikePercentage: string
-    hitBatsmen: number
-    balks: number
-    wildPitches: number
-    pickoffs: number
-    groundOutsToAirouts: string
-    rbi: number
-    pitchesPerInning: string
-    runsScoredPer9: string
-    homeRunsPer9: string
-    inheritedRunners: number
-    inheritedRunnersScored: number
-    catchersInterference: number
-    sacBunts: number
-    sacFlies: number
-    passedBall: number
-  }
-  fielding: {
-    caughtStealing: number
-    stolenBases: number
-    stolenBasePercentage: string
-    assists: number
-    putOuts: number
-    errors: number
-    chances: number
-    passedBall: number
-    pickoffs: number
   }
   players: { [playerId: string]: BoxScorePlayer }
 }
