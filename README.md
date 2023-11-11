@@ -37,7 +37,7 @@ const scorekeeper = new Scorekeepr({
 })
 ```
 
-You can also set the game info after intialization:
+You can also set the game info after initialization:
 
 ```ts
 import { Scorekeepr } from 'scorekeepr'
