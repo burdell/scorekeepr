@@ -1,7 +1,6 @@
 import {
-  Lineup,
   Players,
-  LineupSubstition,
+  LineupSubstitution,
   PitcherEntry,
   BatterEntry,
   InitialPitcherEntry
@@ -13,7 +12,7 @@ function sub(
     batters: BatterEntry[][]
     pitchers: PitcherEntry[]
   },
-  sub: LineupSubstition
+  sub: LineupSubstitution
 ) {
   const lineup = players.batters
   if (!lineup[sub.lineupSpot]) {
@@ -33,8 +32,8 @@ function sub(
 }
 
 export const setPlayers = createAction<Players>('setPlayers')
-export const subHome = createAction<LineupSubstition>('subHome')
-export const subVisiting = createAction<LineupSubstition>('subVisiting')
+export const subHome = createAction<LineupSubstitution>('subHome')
+export const subVisiting = createAction<LineupSubstitution>('subVisiting')
 
 export const subPitcher = createAction<{
   pitcher: InitialPitcherEntry

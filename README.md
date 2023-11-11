@@ -37,7 +37,7 @@ const scorekeeper = new Scorekeepr({
 })
 ```
 
-You can also set the game info after intialization:
+You can also set the game info after initialization:
 
 ```ts
 import { Scorekeepr } from 'scorekeepr'
@@ -86,12 +86,12 @@ sk.setPlayers({
     batters: [
       [
         {
-          player: { name: 'Visting Player 1' },
+          player: { name: 'Visiting Player 1' },
           position: 3,
           inning: 0
         },
         {
-          player: { name: 'Visting Player 1' },
+          player: { name: 'Visiting Player 1' },
           position: 3,
           inning: 1
         }
@@ -99,7 +99,7 @@ sk.setPlayers({
     ],
     pitchers: [
       {
-        player: { name: 'Visting Pitcher 1' },
+        player: { name: 'Visiting Pitcher 1' },
         inning: 0,
         type: 'starter',
         stats: { er: 0 }
@@ -121,7 +121,7 @@ All game action currently goes through `Scorekeepr.handleGameEvent`. Currently, 
 
 #### Generators
 
-- You can pass data directly into `handleGameEvent`, but I would reccomend leaning on the functions exposed through `generators.actions` and `generators.gameEvents`.
+- You can pass data directly into `handleGameEvent`, but I would recommend leaning on the functions exposed through `generators.actions` and `generators.gameEvents`.
 - There are also 2 utility functions exposed in `generators.utils` - `getGameEvent` and `getBases` that take an override parameter generate a full game event and base movement that are very helpful
 - `gameEvents` are a level up from `actions` - they themselves typically contain an action from `generators.actions` & possibly additional data, and return a full `gameEvent`, which is what `handleGameEvent` accepts
 - it's very helpful to look at the tests [here](https://github.com/burdell/scorekeepr/tree/master/tests/Scorekeeper) to see how `handleGameEvent` is used in orchestration with the generators

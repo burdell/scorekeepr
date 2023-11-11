@@ -118,12 +118,12 @@ describe('Scorekeepr - Game Info', () => {
       batters: [
         [
           {
-            player: { name: 'Visting Player 1' },
+            player: { name: 'Visiting Player 1' },
             position: 3 as const,
             inning: 0
           },
           {
-            player: { name: 'Visting Player 1' },
+            player: { name: 'Visiting Player 1' },
             position: 3 as const,
             inning: 1
           }
@@ -131,7 +131,7 @@ describe('Scorekeepr - Game Info', () => {
       ],
       pitchers: [
         {
-          player: { name: 'Visting Pitcher 1' },
+          player: { name: 'Visiting Pitcher 1' },
           inning: 0,
           type: 'starter' as const,
           stats: { er: 0 }

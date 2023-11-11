@@ -46,7 +46,7 @@ export interface Players {
     pitchers: PitcherEntry[]
   }
 }
-export interface LineupSubstition {
+export interface LineupSubstitution {
   lineupSpot: number
   lineupEntry: BatterEntry
 }
