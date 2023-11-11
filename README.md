@@ -86,12 +86,12 @@ sk.setPlayers({
     batters: [
       [
         {
-          player: { name: 'Visting Player 1' },
+          player: { name: 'Visiting Player 1' },
           position: 3,
           inning: 0
         },
         {
-          player: { name: 'Visting Player 1' },
+          player: { name: 'Visiting Player 1' },
           position: 3,
           inning: 1
         }
@@ -99,7 +99,7 @@ sk.setPlayers({
     ],
     pitchers: [
       {
-        player: { name: 'Visting Pitcher 1' },
+        player: { name: 'Visiting Pitcher 1' },
         inning: 0,
         type: 'starter',
         stats: { er: 0 }
