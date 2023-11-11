@@ -1,5 +1,4 @@
 import {
-  Lineup,
   Players,
   LineupSubstitution,
   PitcherEntry,
