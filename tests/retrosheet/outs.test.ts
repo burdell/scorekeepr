@@ -7,7 +7,8 @@ describe('Retrosheet - Outs', () => {
     try {
       getResult('0/F')
       fail('Did not correctly fail with invalid players in flyout')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual(
         `Attempted to record an out without a valid defensive player: `
       )

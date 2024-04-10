@@ -42,8 +42,9 @@ export async function getRetrosheetScorekeepers(
     try {
       generateGameplay({ game, team: 'home', scorekeeper })
       generateGameplay({ game, team: 'visiting', scorekeeper })
-    } catch (e) {
-      console.error('Gameplay error: ', scorekeeper.gameInfo.id, e.message)
+    } catch (thrownError) {
+      const error = thrownError as Error
+      console.error('Gameplay error: ', scorekeeper.gameInfo.id, error.message)
       return
     }
 

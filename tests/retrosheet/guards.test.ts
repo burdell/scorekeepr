@@ -5,7 +5,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getHitType('8')
       fail()
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual('Attempted to record an invalid hit')
     }
   })
@@ -19,7 +20,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getBaseFromString('NOTABASE')
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual(
         'Attempted to parse an invalid base from NOTABASE'
       )
@@ -30,7 +32,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getNextBase(4)
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual('Attempted to get next base of invalid base 4')
     }
   })
@@ -39,7 +42,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getPreviousBase(1)
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual(
         'Attempted to get previous base of invalid base 1'
       )
@@ -50,7 +54,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getBase('NOTABASE')
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual('Attempted to use an invalid base')
     }
   })
@@ -61,7 +66,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getAdvanceableBase(1)
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual('Attempted to use an invalid advanceable base')
     }
   })
@@ -70,7 +76,8 @@ describe('Type Guard getters tests', () => {
     try {
       guards.getStartableBase(4)
       fail('Failed to throw for an invalid base')
-    } catch (e) {
+    } catch (thrownError) {
+      const e = thrownError as Error
       expect(e.message).toEqual('Attempted to use invalid start base 4')
     }
   })

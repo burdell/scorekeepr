@@ -7,12 +7,15 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverageFrom: ['**/lib/**'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-      diagnostics: {
-        ignoreCodes: [151001]
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+        diagnostics: {
+          ignoreCodes: [151001]
+        }
       }
-    }
+    ]
   }
 }

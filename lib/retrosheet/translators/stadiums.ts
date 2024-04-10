@@ -2,7 +2,7 @@ type TeamMap = {
   [retrosheetKey: string]: {
     abbreviation: string
     fullName?: string
-    fullNameFn?: (year: Number) => string
+    fullNameFn?: (year: number) => string
   }
 }
 
