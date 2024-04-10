@@ -1,5 +1,6 @@
-import { BatterEntry, PlayerPosition } from '../Scorekeepr'
-import { BoxScorePlayer } from './types'
+import { BatterEntry, PitcherEntry, PlayerPosition } from '../Scorekeepr'
+import { getPlayer } from './players'
+import type { BoxScorePlayer, PlayByPlay, BoxScore } from './types'
 
 function getPositionCode(mlbStatsApiCode: string): PlayerPosition {
   if (mlbStatsApiCode === '1') {
@@ -64,15 +65,90 @@ function getStartingBatters(players: Players) {
 export function getBatters(players: Players) {
   const starters = getStartingBatters(players)
 
-  return [starters]
+  return starters.map((starter) => [starter])
 }
 
-export function getPitchers(players: Players) {
-  const playersList = Object.values(players)
+type Substitution = {
+  player: BoxScorePlayer
+  inning: number
+}
 
-  const pitchers = playersList.filter(
-    (player) => player.position.code === '1' && !player.gameStatus.isOnBench
-  )
+function getSubstitutions({
+  playByPlay,
+  allPlayers,
+  isTopInning
+}: {
+  playByPlay: PlayByPlay
+  allPlayers: BoxScorePlayer[]
+  isTopInning: boolean
+}) {
+  let pitching: Substitution[] = []
+  const batting: Substitution[] = []
 
-  console.log('=== pitchers', pitchers)
+  playByPlay.allPlays.map(({ playEvents, about }) => {
+    const pitchingSubstitutions = playEvents
+      .filter((playEvent) => {
+        return (
+          playEvent.details.eventType === 'pitching_substitution' &&
+          about.isTopInning === isTopInning
+        )
+      })
+      .map((substitution) => ({
+        inning: about.inning,
+        player: getPlayer(substitution.player?.id || -1, allPlayers)
+      }))
+    pitching = pitching.concat(pitchingSubstitutions)
+  })
+
+  return { pitching, batting }
+}
+
+export function getLineups({
+  teamType,
+  playByPlay,
+  boxscore
+}: {
+  teamType: 'home' | 'away'
+  playByPlay: PlayByPlay
+  boxscore: BoxScore
+}) {
+  const targetTeamBoxScore =
+    teamType === 'away' ? boxscore.teams.away : boxscore.teams.home
+  const otherTeamBoxScore =
+    teamType === 'away' ? boxscore.teams.home : boxscore.teams.away
+
+  const players = targetTeamBoxScore.players
+  const batters = getBatters(players)
+
+  const allPlayers = [
+    ...Object.values(boxscore.teams.away.players),
+    ...Object.values(boxscore.teams.home.players)
+  ]
+  const substitutions = getSubstitutions({
+    playByPlay,
+    allPlayers,
+    isTopInning: teamType === 'away'
+  })
+
+  const startingPitcher = getPlayer(otherTeamBoxScore.pitchers[0], allPlayers)
+  const pitchers: PitcherEntry[] = [
+    {
+      inning: 1,
+      player: {
+        name: startingPitcher.person.fullName
+      },
+      stats: { er: startingPitcher.stats.pitching.earnedRuns || 0 },
+      type: 'starter'
+    },
+    ...substitutions.pitching.map(({ inning, player }) => ({
+      inning,
+      player: {
+        name: player.person.fullName
+      },
+      stats: { er: player.stats.pitching.earnedRuns || 0 },
+      type: 'reliever' as const
+    }))
+  ]
+
+  return { pitchers, batters }
 }

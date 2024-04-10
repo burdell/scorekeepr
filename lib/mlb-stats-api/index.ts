@@ -1,7 +1,7 @@
 import type { MLBApiContextMetrics, PlayByPlay, BoxScore } from './types'
 import { Scorekeepr } from '../Scorekeepr'
 import { getTimeAtVenue } from './getTimeAtVenue'
-import { getBatters, getPitchers } from './lineups'
+import { getLineups } from './lineups'
 
 export function getMLBStatsAPIScorekeeper({
   contextMetrics,
@@ -34,12 +34,19 @@ export function getMLBStatsAPIScorekeeper({
     })
   })
 
-  const homePlayers = boxscore.teams.home.players
-  const awayPlayers = boxscore.teams.away.players
-  const pitchers = getPitchers(awayPlayers)
+  const homeLineup = getLineups({
+    playByPlay,
+    boxscore,
+    teamType: 'home'
+  })
+  const awayLineup = getLineups({
+    playByPlay,
+    boxscore,
+    teamType: 'away'
+  })
   scorekeeper.setPlayers({
-    home: { batters: getBatters(homePlayers), pitchers: [] },
-    visiting: { batters: getBatters(awayPlayers), pitchers: [] }
+    home: { batters: homeLineup.batters, pitchers: homeLineup.pitchers },
+    visiting: { batters: awayLineup.batters, pitchers: awayLineup.pitchers }
   })
 
   return scorekeeper

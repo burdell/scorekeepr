@@ -1,11 +1,11 @@
-export const testContextMetrics = {
+export const contextMetrics = {
   game: {
-    gamePk: 661554,
-    link: '/api/v1.1/game/661554/feed/live',
+    gamePk: 661563,
+    link: '/api/v1.1/game/661563/feed/live',
     gameType: 'R',
     season: '2022',
-    gameDate: '2022-07-27T16:35:00Z',
-    officialDate: '2022-07-27',
+    gameDate: '2022-07-26T23:05:00Z',
+    officialDate: '2022-07-26',
     status: {
       abstractGameState: 'Final',
       codedGameState: 'F',
@@ -18,41 +18,41 @@ export const testContextMetrics = {
       away: {
         leagueRecord: {
           wins: 59,
-          losses: 41,
-          pct: '.590'
+          losses: 40,
+          pct: '.596'
         },
-        score: 2,
+        score: 6,
         team: {
           id: 144,
           name: 'Atlanta Braves',
           link: '/api/v1/teams/144'
         },
-        isWinner: false,
+        isWinner: true,
         probablePitcher: {
-          id: 450203,
-          fullName: 'Charlie Morton',
-          link: '/api/v1/people/450203'
+          id: 675911,
+          fullName: 'Spencer Strider',
+          link: '/api/v1/people/675911'
         },
         splitSquad: false,
         seriesNumber: 31
       },
       home: {
         leagueRecord: {
-          wins: 51,
+          wins: 50,
           losses: 47,
-          pct: '.520'
+          pct: '.515'
         },
-        score: 7,
+        score: 3,
         team: {
           id: 143,
           name: 'Philadelphia Phillies',
           link: '/api/v1/teams/143'
         },
-        isWinner: true,
+        isWinner: false,
         probablePitcher: {
-          id: 502043,
-          fullName: 'Kyle Gibson',
-          link: '/api/v1/people/502043'
+          id: 605400,
+          fullName: 'Aaron Nola',
+          link: '/api/v1/people/605400'
         },
         splitSquad: false,
         seriesNumber: 31
@@ -64,7 +64,7 @@ export const testContextMetrics = {
       link: '/api/v1/venues/2681'
     },
     content: {
-      link: '/api/v1/game/661554/content'
+      link: '/api/v1/game/661563/content'
     },
     isTie: false,
     gameNumber: 1,
@@ -72,23 +72,23 @@ export const testContextMetrics = {
     doubleHeader: 'N',
     gamedayType: 'P',
     tiebreaker: 'N',
-    calendarEventID: '14-661554-2022-07-27',
+    calendarEventID: '14-661563-2022-07-26',
     seasonDisplay: '2022',
-    dayNight: 'day',
+    dayNight: 'night',
     scheduledInnings: 9,
     reverseHomeAwayStatus: false,
     inningBreakLength: 120,
     gamesInSeries: 3,
-    seriesGameNumber: 3,
+    seriesGameNumber: 2,
     seriesDescription: 'Regular Season',
     recordSource: 'S',
     ifNecessary: 'N',
     ifNecessaryDescription: 'Normal Game',
-    gameId: '2022/07/27/atlmlb-phimlb-1'
+    gameId: '2022/07/26/atlmlb-phimlb-1'
   },
   leftFieldSacFlyProbability: {},
   centerFieldSacFlyProbability: {},
   rightFieldSacFlyProbability: {},
-  awayWinProbability: 0.0,
-  homeWinProbability: 100.0
+  awayWinProbability: 98.4,
+  homeWinProbability: 1.6
 }

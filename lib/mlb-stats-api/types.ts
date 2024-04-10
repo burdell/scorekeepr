@@ -91,31 +91,32 @@ export interface MLBApiContextMetrics {
   homeWinProbability: number
 }
 
-interface PlayEvent {
+export interface PlayEvent {
   details: {
-    call: {
-      code: string
-      description: string
+    call?: {
+      code?: string
+      description?: string
     }
     description: string
-    code: string
-    ballColor: string
-    trailColor: string
-    isInPlay: boolean
-    isStrike: boolean
-    isBall: boolean
-    type: {
+    code?: string
+    ballColor?: string
+    trailColor?: string
+    isInPlay?: boolean
+    isStrike?: boolean
+    isBall?: boolean
+    type?: {
       code: string
       description: string
     }
     hasReview: boolean
+    eventType?: string
   }
   count: {
     balls: number
     strikes: number
     outs: number
   }
-  pitchData: {
+  pitchData?: {
     startSpeed: number
     endSpeed: number
     strikeZoneTop: number
@@ -149,11 +150,15 @@ interface PlayEvent {
     plateTime: number
     extension: number
   }
+  player?: {
+    id: number
+    link: string
+  }
   index: number
-  playId: string
-  pitchNumber: number
+  playId?: string
+  pitchNumber?: number
   startTime: string
-  endTime: string
+  endTime?: string
   isPitch: boolean
   type: string
 }
@@ -161,6 +166,19 @@ export interface PlayByPlay {
   copyright: string
   allPlays: Array<{
     playEvents: Array<PlayEvent>
+    about: {
+      atBatIndex: number
+      halfInning: string
+      isTopInning: boolean
+      inning: number
+      startTime: string
+      endTime: string
+      isComplete: boolean
+      isScoringPlay: boolean
+      hasReview: boolean
+      hasOut: boolean
+      captivatingIndex: number
+    }
   }>
 }
 
@@ -242,7 +260,59 @@ interface BattingStats {
   atBatsPerHomeRun: string
 }
 
-interface PitchingStats {}
+interface PitchingStats {
+  note: string
+  gamesPlayed: number
+  gamesStarted: number
+  flyOuts: number
+  groundOuts: number
+  airOuts: number
+  runs: number
+  doubles: number
+  triples: number
+  homeRuns: number
+  strikeOuts: number
+  baseOnBalls: number
+  intentionalWalks: number
+  hits: number
+  hitByPitch: number
+  atBats: number
+  caughtStealing: number
+  stolenBases: number
+  stolenBasePercentage: string
+  numberOfPitches: number
+  inningsPitched: string
+  wins: number
+  losses: number
+  saves: number
+  saveOpportunities: number
+  holds: number
+  blownSaves: number
+  earnedRuns: number
+  battersFaced: number
+  outs: number
+  gamesPitched: number
+  completeGames: number
+  shutouts: number
+  pitchesThrown: number
+  balls: number
+  strikes: number
+  strikePercentage: string
+  hitBatsmen: number
+  balks: number
+  wildPitches: number
+  pickoffs: number
+  rbi: number
+  gamesFinished: number
+  runsScoredPer9: string
+  homeRunsPer9: string
+  inheritedRunners: number
+  inheritedRunnersScored: number
+  catchersInterference: number
+  sacBunts: number
+  sacFlies: number
+  passedBall: number
+}
 
 interface FieldingStats {
   gamesStarted: number
@@ -301,7 +371,7 @@ export interface BoxScorePlayer {
   }>
 }
 
-interface TeamBoxScore {
+export interface TeamBoxScore {
   team: Team
   teamStats: {
     batting: {
@@ -396,6 +466,7 @@ interface TeamBoxScore {
     }
   }
   players: { [playerId: string]: BoxScorePlayer }
+  pitchers: number[]
 }
 
 export interface BoxScore {

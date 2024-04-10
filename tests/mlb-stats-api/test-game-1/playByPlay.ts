@@ -1,4 +1,4 @@
-export const testPlayByPlay = {
+export const playByPlay = {
   copyright:
     'Copyright 2022 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt',
   allPlays: [

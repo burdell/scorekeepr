@@ -1,16 +1,14 @@
 import { getMLBStatsAPIScorekeeper } from '../../lib/mlb-stats-api'
 
-import { testContextMetrics } from './test-context-metrics'
-import { testBoxScore } from './test-boxscore'
-import { BoxScore } from '../../lib/mlb-stats-api/types'
-import { testPlayByPlay } from './test-playByPlay'
+import * as testGame1 from './test-game-1'
+import * as testGame2 from './test-game-2'
 
 describe('MLB Stats API', () => {
   it('parses game info', () => {
     const result = getMLBStatsAPIScorekeeper({
-      contextMetrics: testContextMetrics,
-      boxscore: testBoxScore,
-      playByPlay: testPlayByPlay as any
+      contextMetrics: testGame1.contextMetrics,
+      boxscore: testGame1.boxscore,
+      playByPlay: testGame1.playByPlay
     })
 
     expect(result.gameInfo).toEqual({
@@ -23,39 +21,117 @@ describe('MLB Stats API', () => {
     })
   })
 
-  it.only('sets the game lineups', () => {
+  it('sets the game lineups', () => {
     const result = getMLBStatsAPIScorekeeper({
-      contextMetrics: testContextMetrics,
-      boxscore: testBoxScore,
-      playByPlay: {} as any
+      contextMetrics: testGame1.contextMetrics,
+      boxscore: testGame1.boxscore,
+      playByPlay: testGame1.playByPlay
     })
 
     expect(result.batters).toEqual({
       home: [
-        [
-          { inning: 1, player: { name: 'Kyle Schwarber' }, position: 7 },
-          { inning: 1, player: { name: 'Rhys Hoskins' }, position: 3 },
-          { inning: 1, player: { name: 'J.T. Realmuto' }, position: 2 },
-          { inning: 1, player: { name: 'Darick Hall' }, position: 'DH' },
-          { inning: 1, player: { name: 'Nick Castellanos' }, position: 9 },
-          { inning: 1, player: { name: 'Bryson Stott' }, position: 4 },
-          { inning: 1, player: { name: 'Alec Bohm' }, position: 5 },
-          { inning: 1, player: { name: 'Didi Gregorius' }, position: 6 },
-          { inning: 1, player: { name: 'Odubel Herrera' }, position: 8 }
-        ]
+        [{ inning: 1, player: { name: 'Kyle Schwarber' }, position: 7 }],
+        [{ inning: 1, player: { name: 'Rhys Hoskins' }, position: 3 }],
+        [{ inning: 1, player: { name: 'J.T. Realmuto' }, position: 2 }],
+        [{ inning: 1, player: { name: 'Darick Hall' }, position: 'DH' }],
+        [{ inning: 1, player: { name: 'Nick Castellanos' }, position: 9 }],
+        [{ inning: 1, player: { name: 'Bryson Stott' }, position: 4 }],
+        [{ inning: 1, player: { name: 'Alec Bohm' }, position: 5 }],
+        [{ inning: 1, player: { name: 'Didi Gregorius' }, position: 6 }],
+        [{ inning: 1, player: { name: 'Odubel Herrera' }, position: 8 }]
       ],
       visiting: [
-        [
-          { inning: 1, player: { name: 'Michael Harris II' }, position: 8 },
-          { inning: 1, player: { name: 'Dansby Swanson' }, position: 6 },
-          { inning: 1, player: { name: 'Matt Olson' }, position: 3 },
-          { inning: 1, player: { name: 'Austin Riley' }, position: 5 },
-          { inning: 1, player: { name: 'Eddie Rosario' }, position: 9 },
-          { inning: 1, player: { name: 'William Contreras' }, position: 2 },
-          { inning: 1, player: { name: 'Marcell Ozuna' }, position: 7 },
-          { inning: 1, player: { name: 'Robinson Cano' }, position: 4 },
-          { inning: 1, player: { name: 'Mike Ford' }, position: 'DH' }
-        ]
+        [{ inning: 1, player: { name: 'Michael Harris II' }, position: 8 }],
+        [{ inning: 1, player: { name: 'Dansby Swanson' }, position: 6 }],
+        [{ inning: 1, player: { name: 'Matt Olson' }, position: 3 }],
+        [{ inning: 1, player: { name: 'Austin Riley' }, position: 5 }],
+        [{ inning: 1, player: { name: 'Eddie Rosario' }, position: 9 }],
+        [{ inning: 1, player: { name: 'William Contreras' }, position: 2 }],
+        [{ inning: 1, player: { name: 'Marcell Ozuna' }, position: 7 }],
+        [{ inning: 1, player: { name: 'Robinson Cano' }, position: 4 }],
+        [{ inning: 1, player: { name: 'Mike Ford' }, position: 'DH' }]
+      ]
+    })
+
+    expect(result.pitchers).toEqual({
+      home: [
+        {
+          inning: 1,
+          player: { name: 'Charlie Morton' },
+          stats: { er: 4 },
+          type: 'starter'
+        },
+        {
+          inning: 6,
+          player: { name: 'Tyler Matzek' },
+          stats: { er: 2 },
+          type: 'reliever'
+        },
+        {
+          inning: 7,
+          player: { name: 'Jesse Chavez' },
+          stats: { er: 0 },
+          type: 'reliever'
+        }
+      ],
+      visiting: [
+        {
+          inning: 1,
+          player: { name: 'Kyle Gibson' },
+          stats: { er: 2 },
+          type: 'starter'
+        },
+        {
+          inning: 7,
+          player: { name: 'Connor Brogdon' },
+          stats: { er: 0 },
+          type: 'reliever'
+        },
+        {
+          inning: 8,
+          player: { name: 'Brad Hand' },
+          stats: { er: 0 },
+          type: 'reliever'
+        },
+        {
+          inning: 9,
+          player: { name: 'Andrew Bellatti' },
+          stats: { er: 0 },
+          type: 'reliever'
+        }
+      ]
+    })
+  })
+
+  it('handles fielding substitutions', () => {
+    const result = getMLBStatsAPIScorekeeper({
+      contextMetrics: testGame2.contextMetrics,
+      boxscore: testGame2.boxscore,
+      playByPlay: testGame2.playByPlay
+    })
+
+    expect(result.batters).toEqual({
+      home: [
+        [{ inning: 1, player: { name: 'Kyle Schwarber' }, position: 7 }],
+        [{ inning: 1, player: { name: 'Rhys Hoskins' }, position: 3 }],
+        [{ inning: 1, player: { name: 'J.T. Realmuto' }, position: 2 }],
+        [{ inning: 1, player: { name: 'Darick Hall' }, position: 'DH' }],
+        [{ inning: 1, player: { name: 'Nick Castellanos' }, position: 9 }],
+        [{ inning: 1, player: { name: 'Bryson Stott' }, position: 4 }],
+        [{ inning: 1, player: { name: 'Alec Bohm' }, position: 5 }],
+        [{ inning: 1, player: { name: 'Didi Gregorius' }, position: 6 }],
+        [{ inning: 1, player: { name: 'Matt Vierling' }, position: 8 }]
+      ],
+      visiting: [
+        [{ inning: 1, player: { name: 'Ronald Acuna Jr.' }, position: 9 }],
+        [{ inning: 1, player: { name: 'Dansby Swanson' }, position: 6 }],
+        [{ inning: 1, player: { name: 'Matt Olson' }, position: 3 }],
+        [{ inning: 1, player: { name: 'Austin Riley' }, position: 5 }],
+        [{ inning: 1, player: { name: "Travis d'Arnaud" }, position: 2 }],
+        [{ inning: 1, player: { name: 'Eddie Rosario' }, position: 7 }],
+        [{ inning: 1, player: { name: 'Marcell Ozuna' }, position: 'DH' }],
+        [{ inning: 1, player: { name: 'Robinson Cano' }, position: 4 }],
+        [{ inning: 1, player: { name: 'Michael Harris II' }, position: 8 }]
       ]
     })
   })
