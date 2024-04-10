@@ -5,3 +5,4 @@ dist
 retrosheet
 !lib/retrosheet
 docs
+.vscode
