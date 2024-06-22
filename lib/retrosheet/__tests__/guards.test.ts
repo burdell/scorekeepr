@@ -1,4 +1,4 @@
-import * as guards from '../../lib/retrosheet/guards'
+import * as guards from '../guards'
 
 describe('Type Guard getters tests', () => {
   it('getHitType - throws an error for invalid hit types', () => {

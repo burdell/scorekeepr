@@ -1,6 +1,6 @@
-import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent, getBases } from '../../lib/generators/utils'
-import * as resultGenerators from '../../lib/generators/actions'
+import { Scorekeepr } from '..'
+import { getGameEvent, getBases } from '../../generators/utils'
+import * as gameEventResults from '../../generators/gameEventResults'
 
 describe('Scorekeepr - baserunning', () => {
   it('records unsuccessful attempts to gain additional bases', () => {
@@ -14,13 +14,13 @@ describe('Scorekeepr - baserunning', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: gameEventResults.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
             isAtBatResult: true,
             additionalBases: [
-              { base: 2, result: resultGenerators.putout([8, 4]) }
+              { base: 2, result: gameEventResults.putout([8, 4]) }
             ]
           }
         })
@@ -40,12 +40,12 @@ describe('Scorekeepr - baserunning', () => {
         },
         {
           advanced: false,
-          result: resultGenerators.putout([8, 4])
+          result: gameEventResults.putout([8, 4])
         }
       ],
       isOut: true,
       pitchCount: 1,
-      result: resultGenerators.hit(1),
+      result: gameEventResults.hit(1),
       strikes: 0
     })
 
@@ -57,7 +57,7 @@ describe('Scorekeepr - baserunning', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: gameEventResults.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -75,9 +75,9 @@ describe('Scorekeepr - baserunning', () => {
         bases: getBases({
           1: {
             endBase: 2,
-            result: resultGenerators.error(3),
+            result: gameEventResults.error(3),
             additionalBases: [
-              { base: 3, result: resultGenerators.putout([3, 5]) }
+              { base: 3, result: gameEventResults.putout([3, 5]) }
             ]
           }
         })
@@ -97,16 +97,16 @@ describe('Scorekeepr - baserunning', () => {
         },
         {
           advanced: true,
-          result: resultGenerators.error(3)
+          result: gameEventResults.error(3)
         },
         {
           advanced: false,
-          result: resultGenerators.putout([3, 5])
+          result: gameEventResults.putout([3, 5])
         }
       ],
       isOut: false,
       pitchCount: 1,
-      result: resultGenerators.hit(1),
+      result: gameEventResults.hit(1),
       strikes: 0
     })
   })
@@ -122,7 +122,7 @@ describe('Scorekeepr - baserunning', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: gameEventResults.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -151,7 +151,7 @@ describe('Scorekeepr - baserunning', () => {
       ],
       isOut: false,
       pitchCount: 1,
-      result: resultGenerators.hit(1),
+      result: gameEventResults.hit(1),
       strikes: 0
     })
 
@@ -163,7 +163,7 @@ describe('Scorekeepr - baserunning', () => {
           strikes: 0,
           pitchCount: 1
         },
-        result: resultGenerators.hit(1),
+        result: gameEventResults.hit(1),
         bases: getBases({
           B: {
             endBase: 1,
@@ -180,7 +180,7 @@ describe('Scorekeepr - baserunning', () => {
         bases: getBases({
           1: {
             endBase: 2,
-            result: resultGenerators.error(3),
+            result: gameEventResults.error(3),
             additionalBases: [{ base: 3 }]
           }
         })
@@ -200,7 +200,7 @@ describe('Scorekeepr - baserunning', () => {
         },
         {
           advanced: true,
-          result: resultGenerators.error(3)
+          result: gameEventResults.error(3)
         },
         {
           advanced: true
@@ -208,7 +208,7 @@ describe('Scorekeepr - baserunning', () => {
       ],
       isOut: false,
       pitchCount: 1,
-      result: resultGenerators.hit(1),
+      result: gameEventResults.hit(1),
       strikes: 0
     })
   })

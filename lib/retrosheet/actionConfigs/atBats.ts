@@ -1,6 +1,6 @@
 import { ActionConfig } from '../retrosheet.types'
 import * as gameEvents from '../../generators/gameEvents'
-import * as actions from '../../generators/actions'
+import * as gameEventResults from '../../generators/gameEventResults'
 import * as guards from '../guards'
 import { getGameEvent } from '../../generators/utils'
 
@@ -42,12 +42,8 @@ const walk: ActionConfig = {
   regexp: /^(I)?W[^P]|^(I)?W$|^(I)/,
   handler: (gameplayEvent, match) => {
     // WHY ARE THERE SO MANY WAYS TO RECORD A WALK
-    const [
-      fullMatch,
-      firstIntentional,
-      secondIntentional,
-      thirdIntentional
-    ] = match
+    const [fullMatch, firstIntentional, secondIntentional, thirdIntentional] =
+      match
     const isIntentional =
       firstIntentional === 'I' ||
       secondIntentional === 'I' ||
@@ -82,7 +78,7 @@ const foulTerritoryError: ActionConfig = {
   handler: (gameplayEvent, match) => {
     const [fullMatch, position] = match
     return getGameEvent({
-      foulTerritoryError: actions.error(Number(position))
+      foulTerritoryError: gameEventResults.error(Number(position))
     })
   }
 }

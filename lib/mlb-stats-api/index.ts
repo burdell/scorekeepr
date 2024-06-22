@@ -39,11 +39,13 @@ export function getMLBStatsAPIScorekeeper({
     boxscore,
     teamType: 'home'
   })
+
   const awayLineup = getLineups({
     playByPlay,
     boxscore,
     teamType: 'away'
   })
+
   scorekeeper.setPlayers({
     home: { batters: homeLineup.batters, pitchers: homeLineup.pitchers },
     visiting: { batters: awayLineup.batters, pitchers: awayLineup.pitchers }

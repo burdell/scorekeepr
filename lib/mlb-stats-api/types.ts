@@ -162,24 +162,86 @@ export interface PlayEvent {
   isPitch: boolean
   type: string
 }
+
+interface RunnerAction {
+  movement: {
+    originBase: number | null
+    start: number | null
+    end: number | null
+    outBase: string
+    isOut: boolean
+    outNumber: number
+  }
+
+  details: {
+    event: string
+    eventType: 'strikeout'
+    movementReason: null
+    runner: {
+      id: 671739
+      fullName: 'Michael Harris II'
+      link: '/api/v1/people/671739'
+    }
+    responsiblePitcher: null
+    isScoringEvent: false
+    rbi: false
+    earned: false
+    teamUnearned: false
+    playIndex: 6
+  }
+
+  credits: [
+    {
+      player: {
+        id: 592663
+        link: '/api/v1/people/592663'
+      }
+      position: {
+        code: '2'
+        name: 'Catcher'
+        type: 'Catcher'
+        abbreviation: 'C'
+      }
+      credit: 'f_putout'
+    }
+  ]
+}
+
+export interface Play {
+  playEvents: Array<PlayEvent>
+  result: {
+    type: string // 'atBat'
+    event: string
+    eventType: string // 'strikeout'
+    description: string
+    rbi: number
+    awayScore: number
+    homeScore: number
+  }
+  about: {
+    atBatIndex: number
+    halfInning: string
+    isTopInning: boolean
+    inning: number
+    startTime: string
+    endTime: string
+    isComplete: boolean
+    isScoringPlay: boolean
+    hasReview: boolean
+    hasOut: boolean
+    captivatingIndex: number
+  }
+  count: {
+    balls: number
+    strikes: number
+    outs: number
+  }
+  pitchIndex: number[]
+}
+
 export interface PlayByPlay {
   copyright: string
-  allPlays: Array<{
-    playEvents: Array<PlayEvent>
-    about: {
-      atBatIndex: number
-      halfInning: string
-      isTopInning: boolean
-      inning: number
-      startTime: string
-      endTime: string
-      isComplete: boolean
-      isScoringPlay: boolean
-      hasReview: boolean
-      hasOut: boolean
-      captivatingIndex: number
-    }
-  }>
+  allPlays: Play[]
 }
 
 export interface Team {

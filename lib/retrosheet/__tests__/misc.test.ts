@@ -1,9 +1,9 @@
-import { handleEvent } from '../../lib/retrosheet/event'
-import { getEventWithDefaults } from './utils'
+import { handleGameplayEvent } from '../gameplayEvents'
+import { getGameEventWithDefaults } from './utils'
 
 describe('Retrosheet - miscellaneous things', () => {
   it('handles comments', () => {
-    const result = handleEvent({
+    const result = handleGameplayEvent({
       type: 'comment',
       text: 'What a cool comment about this game'
     })
@@ -12,7 +12,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles non-plays', () => {
-    const result = handleEvent({
+    const result = handleGameplayEvent({
       type: 'at-bat',
       result: 'NP',
       pitchSequence: '',
@@ -24,7 +24,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles unknown actions', () => {
-    const result = handleEvent(
+    const result = handleGameplayEvent(
       {
         type: 'at-bat',
         result: 'this is definitely not something that would happen',
@@ -39,7 +39,7 @@ describe('Retrosheet - miscellaneous things', () => {
   })
 
   it('handles unknown plays', () => {
-    const result = handleEvent({
+    const result = handleGameplayEvent({
       type: 'at-bat',
       result: '99',
       pitchSequence: '',
@@ -47,6 +47,6 @@ describe('Retrosheet - miscellaneous things', () => {
       count: ''
     })
 
-    expect(result).toEqual(getEventWithDefaults({}))
+    expect(result).toEqual(getGameEventWithDefaults({}))
   })
 })

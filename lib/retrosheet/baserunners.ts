@@ -1,7 +1,6 @@
-import { RunnerAdjustment } from 'retrosheet-parse'
 import { Base, EventBaseResult, GameEvent } from '../Scorekeepr/types'
 import { getBase, getStartableBase } from './guards'
-import * as actions from '../generators/actions'
+import * as gameEventResults from '../generators/gameEventResults'
 import { getPutoutPositions } from './outs'
 
 export type BaserunnerMovements = ReturnType<typeof getBaserunnerMovements>
@@ -74,10 +73,10 @@ export function handleBaserunnerMovements(
           }
         ]
       } else if (errorPosition) {
-        baseMovement.result = actions.error(errorPosition)
+        baseMovement.result = gameEventResults.error(errorPosition)
       } else if (isOut) {
         baseMovement.isOut = true
-        const putOut = actions.putout(getPutoutPositions(result))
+        const putOut = gameEventResults.putout(getPutoutPositions(result))
         if (validatedStartBase === endBase) {
           baseMovement.onBasePutout = putOut
         } else {
@@ -107,11 +106,11 @@ function getAdditionalBaseResult(
   putoutResult: string
 ) {
   if (errorPosition) {
-    return actions.error(errorPosition)
+    return gameEventResults.error(errorPosition)
   }
 
   if (putoutResult) {
-    return actions.putout(getPutoutPositions(putoutResult))
+    return gameEventResults.putout(getPutoutPositions(putoutResult))
   }
 
   return undefined

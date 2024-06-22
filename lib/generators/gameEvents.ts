@@ -1,16 +1,11 @@
-import * as gameEvents from './actions'
+import * as gameActions from './gameEventResults'
 
-import {
-  Base,
-  PitcherResultString,
-  GameEvent,
-  Bases
-} from '../Scorekeepr/types'
+import { Base, PitcherResultString } from '../Scorekeepr/types'
 import { getGameEvent, getBases } from './utils'
 
 export function hit(base: Base) {
   return getGameEvent({
-    result: gameEvents.hit(base),
+    result: gameActions.hit(base),
     bases: getBases({
       B: {
         result: undefined,
@@ -23,7 +18,7 @@ export function hit(base: Base) {
 
 export function pitcherResult(pitcherResultString: PitcherResultString) {
   return getGameEvent({
-    result: gameEvents.pitcherResult(pitcherResultString),
+    result: gameActions.pitcherResult(pitcherResultString),
     bases: getBases({
       B: {
         result: undefined,
@@ -36,7 +31,7 @@ export function pitcherResult(pitcherResultString: PitcherResultString) {
 
 export function fieldersChoice(base: Base = 1) {
   return getGameEvent({
-    result: gameEvents.fieldersChoice(base),
+    result: gameActions.fieldersChoice(base),
     bases: getBases({
       B: {
         result: undefined,
@@ -49,14 +44,14 @@ export function fieldersChoice(base: Base = 1) {
 
 export function putout(putoutPositions: number[]) {
   return getGameEvent({
-    result: gameEvents.putout(putoutPositions),
+    result: gameActions.putout(putoutPositions),
     isOut: true
   })
 }
 
 export function error(fielder: number, endBase: Base) {
   return getGameEvent({
-    result: gameEvents.error(fielder),
+    result: gameActions.error(fielder),
     bases: getBases({
       B: {
         result: undefined,
@@ -69,7 +64,7 @@ export function error(fielder: number, endBase: Base) {
 
 export function runnerAdjustment(base: Base) {
   return getGameEvent({
-    result: gameEvents.runnerAdjustment(base),
+    result: gameActions.runnerAdjustment(base),
     bases: getBases({ B: { endBase: base, isAtBatResult: true } })
   })
 }

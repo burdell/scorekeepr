@@ -1,9 +1,9 @@
-import { Scorekeepr } from '../../lib/Scorekeepr'
-import * as actions from '../../lib/generators/actions'
-import * as gameEvents from '../../lib/generators/gameEvents'
-import { getBases } from '../../lib/generators/utils'
+import { Scorekeepr } from '..'
+import * as gameEventResults from '../../generators/gameEventResults'
+import * as gameEvents from '../../generators/gameEvents'
+import { getBases } from '../../generators/utils'
 
-import { GameStats, GameEvent } from '../../lib/Scorekeepr/types'
+import { GameStats, GameEvent } from '../types'
 
 describe('Scorekeeper - game stats', () => {
   function getStats(overrides: Partial<GameStats>): GameStats {
@@ -54,7 +54,7 @@ describe('Scorekeeper - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: actions.error(6),
+        result: gameEventResults.error(6),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -79,7 +79,7 @@ describe('Scorekeeper - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: actions.hit(4),
+        result: gameEventResults.hit(4),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -109,7 +109,7 @@ describe('Scorekeeper - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: actions.hit(4),
+        result: gameEventResults.hit(4),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -124,10 +124,10 @@ describe('Scorekeeper - game stats', () => {
 
     sk.handleGameEvent({
       event: getEventWithDefaults({
-        result: actions.hit(1),
+        result: gameEventResults.hit(1),
         bases: getBases({
           B: {
-            result: actions.error(4),
+            result: gameEventResults.error(4),
             endBase: 2
           }
         })

@@ -1,6 +1,6 @@
 import { AtBat } from 'retrosheet-parse'
 
-import * as actions from '../../generators/actions'
+import * as gameEventResults from '../../generators/gameEventResults'
 import * as gameEvents from '../../generators/gameEvents'
 import { getBases, getGameEvent } from '../../generators/utils'
 
@@ -14,7 +14,7 @@ export function isSacrifice(atBatResult: string) {
 }
 
 function getPutoutFromString(putout: string) {
-  return actions.putout(getPutoutPositions(putout))
+  return gameEventResults.putout(getPutoutPositions(putout))
 }
 
 function getBatterAction(atBatResult: string) {
@@ -31,7 +31,7 @@ const strikeout: ActionConfig = {
 
     const gameEvent = getGameEvent({
       isOut: true,
-      result: actions.pitcherResult(resultType)
+      result: gameEventResults.pitcherResult(resultType)
     })
 
     const batterMovement = baserunnnerMovements.find((m) => m.startBase === 'B')
@@ -60,7 +60,7 @@ function getOut(atBatResult: string) {
 
   let result: AtBatResult | undefined = undefined
   if (defensivePositions.length > 1 || outType === 'groundout') {
-    result = actions.putout(defensivePositions)
+    result = gameEventResults.putout(defensivePositions)
   } else {
     result = getNonGroundout(outType, defensivePositions)
   }
@@ -87,7 +87,7 @@ const oldSimpleOut: ActionConfig = {
     const [fullMatch, positions] = match
     if (positions.length === 1 && Number(positions) > 6) {
       return getGameEvent({
-        result: actions.flyOut(Number(positions)),
+        result: gameEventResults.flyOut(Number(positions)),
         isOut: true
       })
     }
@@ -102,9 +102,8 @@ const multiActionOut: ActionConfig = {
   regexp: /(\d+)\(([B|1|2|3])\)/g,
   handler: (gameplayEvent, match) => {
     const { result } = gameplayEvent
-    const { baseActions, batterMatch, batterResultType } = getMultiAction(
-      result
-    )
+    const { baseActions, batterMatch, batterResultType } =
+      getMultiAction(result)
 
     let batterAction = batterMatch ? batterMatch[2] : ''
     let firstBaseResult = ''
@@ -158,8 +157,8 @@ const multiActionOut: ActionConfig = {
       }
 
       return batterResult
-        ? actions.putout(getPutoutPositions(batterResult))
-        : actions.fieldersChoice(1)
+        ? gameEventResults.putout(getPutoutPositions(batterResult))
+        : gameEventResults.fieldersChoice(1)
     }
 
     const res = getAtBatResult()

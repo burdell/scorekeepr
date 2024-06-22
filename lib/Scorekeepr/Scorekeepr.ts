@@ -7,7 +7,7 @@ import { calculateStats } from './stats'
 import type {
   GameInfo,
   BatterEntry,
-  GameEventHandler,
+  GameEventObject,
   InitialGame,
   Players,
   InitialPitcherEntry
@@ -129,7 +129,7 @@ export class Scorekeepr {
     this._store.dispatch(setGameInfo({ gameInfo }))
   }
 
-  handleGameEvent({ event, inning, lineupSpot, team }: GameEventHandler) {
+  handleGameEvent({ event, inning, lineupSpot, team }: GameEventObject) {
     this._store.dispatch(
       handleGameEvent({
         event,

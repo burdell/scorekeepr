@@ -1,7 +1,7 @@
 import { GameplayEvent, AtBat } from 'retrosheet-parse'
 
 import { GameEvent } from '../Scorekeepr/types'
-import { actionConfigs } from './handlers'
+import { actionConfigs } from './actionConfigs'
 import { getPitchData } from './pitches'
 import {
   getBaserunnerMovements,
@@ -16,13 +16,49 @@ type Logger = {
   log: (message: string) => void
 }
 
-export function handleEvent(
+function findAction(eventResultString: string): Action | undefined {
+  let match: RegExpMatchArray | null = null
+  let foundAction: ActionConfig | undefined = undefined
+  for (let identifier of actionConfigs) {
+    match = eventResultString.match(identifier.regexp)
+    if (match) {
+      foundAction = identifier
+      break
+    }
+  }
+
+  if (!foundAction || !match) return
+
+  return {
+    actionType: foundAction.actionType,
+    handler: foundAction.handler,
+    match
+  }
+}
+
+function handleAction(
+  atBat: AtBat,
+  action: Action | undefined,
+  baserunnerMovements: BaserunnerMovements
+) {
+  if (!action) return undefined
+
+  const result = action.handler(atBat, action.match, baserunnerMovements)
+  if (result && action.actionType === 'batter') {
+    result.pitches = getPitchData(atBat)
+  }
+
+  return result
+}
+
+export function handleGameplayEvent(
   gameplayEvent: GameplayEvent,
   logger: Logger = { log: console.log }
 ) {
   switch (gameplayEvent.type) {
     case 'comment':
       return
+
     case 'at-bat':
       if (gameplayEvent.result === 'NP') {
         return
@@ -56,46 +92,8 @@ export function handleEvent(
       }
 
       return event
+
     case 'runner-adjustment':
       return runnerAdjustment(getBase(gameplayEvent.base))
   }
-}
-
-function findAction(eventResultString: string): Action | undefined {
-  let match: RegExpMatchArray | null = null
-  let foundAction: ActionConfig | undefined = undefined
-  for (let identifier of actionConfigs) {
-    match = eventResultString.match(identifier.regexp)
-    if (match) {
-      foundAction = identifier
-      break
-    }
-  }
-
-  if (!foundAction || !match) return
-
-  return {
-    actionType: foundAction.actionType,
-    handler: foundAction.handler,
-    match
-  }
-}
-
-function handleAction(
-  gameplayEvent: AtBat,
-  action: Action | undefined,
-  baserunnerMovements: BaserunnerMovements
-) {
-  if (!action) return undefined
-
-  const result = action.handler(
-    gameplayEvent,
-    action.match,
-    baserunnerMovements
-  )
-  if (result && action.actionType === 'batter') {
-    result.pitches = getPitchData(gameplayEvent)
-  }
-
-  return result
 }

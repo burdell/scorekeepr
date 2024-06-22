@@ -4,7 +4,7 @@ import {
   AdvanceableBase,
   AtBatResult
 } from '../Scorekeepr/types'
-import * as actions from '../generators/actions'
+import * as gameEventResult from '../generators/gameEventResults'
 
 export function getHitType(hit: string) {
   if (hit === 'S') return 1
@@ -17,9 +17,9 @@ export function getHitType(hit: string) {
 
 export function getAllBaserunnerAction(action: string) {
   let resultFn
-  if (action === 'PB') resultFn = actions.passedBall
-  else if (action === 'WP') resultFn = actions.wildPitch
-  else if (action === 'BK') resultFn = actions.balk
+  if (action === 'PB') resultFn = gameEventResult.passedBall
+  else if (action === 'WP') resultFn = gameEventResult.wildPitch
+  else if (action === 'BK') resultFn = gameEventResult.balk
 
   if (resultFn) {
     return resultFn()
@@ -103,9 +103,9 @@ export function getNonGroundout(
     )
 
   if (outType === 'flyout') {
-    result = actions.flyOut(defensivePosition)
+    result = gameEventResult.flyOut(defensivePosition)
   } else if (outType === 'lineout') {
-    result = actions.lineOut(defensivePosition)
+    result = gameEventResult.lineOut(defensivePosition)
   }
 
   return result

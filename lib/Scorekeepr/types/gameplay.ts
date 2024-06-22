@@ -78,7 +78,7 @@ export interface GameOutput {
   }
 }
 
-export interface GameEventHandler {
+export interface GameEventObject {
   event: GameEvent
   inning: number
   lineupSpot: number

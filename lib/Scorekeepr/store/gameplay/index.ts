@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { Gameplay, GameEventHandler, StartableBase } from '../../types'
+import { Gameplay, GameEventObject, StartableBase } from '../../types'
 
 import { getCurrentData } from './current'
 import {
@@ -15,7 +15,7 @@ const initialState: Gameplay = {
 }
 
 export const setInningLength = createAction<number>('setInningLength')
-export const handleGameEvent = createAction<GameEventHandler>('handleGameEvent')
+export const handleGameEvent = createAction<GameEventObject>('handleGameEvent')
 
 export const gameplayReducer = createReducer(initialState, (builder) => {
   builder.addCase(setInningLength, (state, action) => {

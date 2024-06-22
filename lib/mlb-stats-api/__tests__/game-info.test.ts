@@ -1,17 +1,22 @@
-import { getMLBStatsAPIScorekeeper } from '../../lib/mlb-stats-api'
+import { getMLBStatsAPIScorekeeper } from '..'
+import { Scorekeepr } from '../../Scorekeepr'
 
-import * as testGame1 from './test-game-1'
-import * as testGame2 from './test-game-2'
+import * as testGame1 from './data/test-game-1'
+import * as testGame2 from './data/test-game-2'
 
-describe('MLB Stats API', () => {
-  it('parses game info', () => {
-    const result = getMLBStatsAPIScorekeeper({
+describe('MLB Stats API - Game info', () => {
+  let scorekeeper: Scorekeepr
+
+  beforeEach(() => {
+    scorekeeper = getMLBStatsAPIScorekeeper({
       contextMetrics: testGame1.contextMetrics,
       boxscore: testGame1.boxscore,
       playByPlay: testGame1.playByPlay
     })
+  })
 
-    expect(result.gameInfo).toEqual({
+  it('parses game info', () => {
+    expect(scorekeeper.gameInfo).toEqual({
       date: '2022-07-27',
       homeTeam: { abbreviation: 'PHI', fullName: 'Philadelphia Phillies' },
       id: '2022/07/27/atlmlb-phimlb-1',
@@ -21,14 +26,8 @@ describe('MLB Stats API', () => {
     })
   })
 
-  it('sets the game lineups', () => {
-    const result = getMLBStatsAPIScorekeeper({
-      contextMetrics: testGame1.contextMetrics,
-      boxscore: testGame1.boxscore,
-      playByPlay: testGame1.playByPlay
-    })
-
-    expect(result.batters).toEqual({
+  it('sets the batting order', () => {
+    expect(scorekeeper.batters).toEqual({
       home: [
         [{ inning: 1, player: { name: 'Kyle Schwarber' }, position: 7 }],
         [{ inning: 1, player: { name: 'Rhys Hoskins' }, position: 3 }],
@@ -52,8 +51,10 @@ describe('MLB Stats API', () => {
         [{ inning: 1, player: { name: 'Mike Ford' }, position: 'DH' }]
       ]
     })
+  })
 
-    expect(result.pitchers).toEqual({
+  it('sets the pitchers', () => {
+    expect(scorekeeper.pitchers).toEqual({
       home: [
         {
           inning: 1,

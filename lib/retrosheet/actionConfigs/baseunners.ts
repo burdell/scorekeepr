@@ -8,7 +8,7 @@ import {
   getBaseFromString,
   getStartableBase
 } from '../guards'
-import * as actions from '../../generators/actions'
+import * as gameEventResults from '../../generators/gameEventResults'
 import { Bases } from '../../Scorekeepr/types'
 import { getPutoutPositions } from '../outs'
 import { getAllBaserunnerAction } from '../guards'
@@ -24,7 +24,7 @@ const caughtStealing: ActionConfig = {
       bases: getBases({
         [getPreviousBase(base)]: {
           endBase: base,
-          result: actions.caughtStealing(getPutoutPositions(putout)),
+          result: gameEventResults.caughtStealing(getPutoutPositions(putout)),
           isOut: true
         }
       })
@@ -43,7 +43,7 @@ const stolenBase: ActionConfig = {
 
       bases[previousBase] = {
         endBase: base,
-        result: actions.stolenBase(base)
+        result: gameEventResults.stolenBase(base)
       }
     })
 
@@ -63,7 +63,7 @@ const defensiveIndifference: ActionConfig = {
 
       bases[startBase] = {
         endBase: endBase,
-        result: actions.defensiveIndifference()
+        result: gameEventResults.defensiveIndifference()
       }
     })
 
@@ -88,7 +88,9 @@ const pickOff: ActionConfig = {
         bases: getBases({
           [base]: {
             endBase: movement ? movement.endBase : getNextBase(base),
-            result: actions.error(Number(putoutString.split('E').pop()))
+            result: gameEventResults.error(
+              Number(putoutString.split('E').pop())
+            )
           }
         })
       })
@@ -99,7 +101,7 @@ const pickOff: ActionConfig = {
         bases: getBases({
           [base]: {
             endBase: base,
-            onBasePutout: actions.pickOff(pickOff),
+            onBasePutout: gameEventResults.pickOff(pickOff),
             isOut: true
           }
         })

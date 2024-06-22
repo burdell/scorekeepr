@@ -1,4 +1,4 @@
-import { Gameplay, AtBat, GameEventHandler, GameEvent } from '../../types'
+import { Gameplay, AtBat, GameEventObject, GameEvent } from '../../types'
 
 import { getEmptyInning, getAtBat } from './utils'
 
@@ -8,16 +8,13 @@ type BaserunnerFinder = {
 }
 
 export function getCurrentData(
-  { inning, team, lineupSpot, event }: GameEventHandler,
+  { inning, team, lineupSpot, event }: GameEventObject,
   gameplay: Gameplay
 ) {
   let currentInning = getCurrentInning(inning, team, gameplay)
 
-  const {
-    currentLineupSpot,
-    battedAroundInning,
-    lineupSpotIndex
-  } = getCurrentLineupSpot(lineupSpot, currentInning, event)
+  const { currentLineupSpot, battedAroundInning, lineupSpotIndex } =
+    getCurrentLineupSpot(lineupSpot, currentInning, event)
   if (battedAroundInning) {
     currentInning = battedAroundInning
   }
@@ -31,9 +28,7 @@ export function getCurrentData(
   }
 }
 
-function getBaserunners(
-  inning: AtBat[]
-): {
+function getBaserunners(inning: AtBat[]): {
   1: BaserunnerFinder | undefined
   2: BaserunnerFinder | undefined
   3: BaserunnerFinder | undefined

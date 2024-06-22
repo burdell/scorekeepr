@@ -19,7 +19,7 @@ export type {
   AtBatResult,
   Base,
   PitcherResultString,
-  GameEventHandler,
+  GameEventObject as GameEventHandler,
   GameEvent,
   Bases,
   PitchData,

@@ -14,7 +14,7 @@ import {
   balk,
   runnerAdjustment,
   fieldersChoice
-} from './actions'
+} from './gameEventResults'
 
 export type PitcherResult = ReturnType<typeof pitcherResult>
 export type PutOut = ReturnType<typeof putout>

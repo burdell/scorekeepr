@@ -1,8 +1,7 @@
 type TeamMap = {
   [retrosheetKey: string]: {
     abbreviation: string
-    fullName?: string
-    fullNameFn?: (year: number) => string
+    fullName: string | ((year: number) => string)
   }
 }
 
@@ -13,7 +12,7 @@ function getGameYear(gameDate: string) {
 const stadiums: TeamMap = {
   DET04: {
     abbreviation: 'DET04',
-    fullNameFn: (year) => {
+    fullName: (year) => {
       if (year < 1938) return 'Navin Field'
       if (year >= 1938 && year < 1961) return 'Briggs Stadium'
       if (year >= 1961) return 'Tiger Stadium'
@@ -31,7 +30,7 @@ const stadiums: TeamMap = {
   },
   ATL03: {
     abbreviation: 'ATL03',
-    fullNameFn: (year) => {
+    fullName: (year) => {
       if (year < 2020) return 'SunTrust Park'
       return 'Truist Park'
     }
@@ -78,7 +77,7 @@ const stadiums: TeamMap = {
   },
   CLE08: {
     abbreviation: 'CLE08',
-    fullNameFn: (year) => {
+    fullName: (year) => {
       if (year < 2008) return 'Jacobs Field'
       return 'Progressive Field'
     }
@@ -165,7 +164,7 @@ const stadiums: TeamMap = {
   },
   SFO03: {
     abbreviation: 'SFO03',
-    fullNameFn: (year) => {
+    fullName: (year) => {
       if (year < 2004) return 'Pacific Bell Park'
       if (year >= 2004 && year < 2006) return 'SBC Park'
       if (year >= 2006 && year < 2019) return 'AT&T Park'
@@ -201,11 +200,11 @@ export function getStadium(retrosheetKey: string, gameDate: string) {
 
   if (!foundStadium) return ''
 
-  if (foundStadium.fullName) {
+  if (typeof foundStadium.fullName === 'string') {
     return foundStadium.fullName
   }
-  if (!foundStadium.fullNameFn) return ''
+  if (!foundStadium.fullName) return ''
 
   const gameYear = getGameYear(gameDate)
-  return foundStadium.fullNameFn(gameYear)
+  return foundStadium.fullName(gameYear)
 }

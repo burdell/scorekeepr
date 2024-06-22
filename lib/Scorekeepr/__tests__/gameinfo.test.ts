@@ -1,6 +1,6 @@
-import { formatStartTime } from '../../lib/utils/time'
-import { Scorekeepr } from '../../lib/Scorekeepr'
-import { InitialGame, InitialLineupEntry } from '../../lib/Scorekeepr/types'
+import { formatStartTime } from '../../utils/time'
+import { Scorekeepr } from '..'
+import { InitialGame, InitialLineupEntry } from '../types'
 
 describe('Scorekeepr - Game Info', () => {
   it('correctly formats start time', () => {

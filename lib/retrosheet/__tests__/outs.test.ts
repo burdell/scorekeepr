@@ -1,6 +1,11 @@
-import { handleEvent, getAtBat, getEventWithDefaults, getResult } from './utils'
-import * as actions from '../../lib/generators/actions'
-import { getBases } from '../../lib/generators/utils'
+import {
+  handleEvent,
+  getAtBat,
+  getGameEventWithDefaults,
+  getResult
+} from './utils'
+import * as gameEventResults from '../../generators/gameEventResults'
+import { getBases } from '../../generators/utils'
 
 describe('Retrosheet - Outs', () => {
   it('handles invalid players in outs', () => {
@@ -21,14 +26,14 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(strikeout).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         pitches: {
           pitchCount: 7,
           balls: 3,
           strikes: 2
         },
-        result: actions.pitcherResult('K')
+        result: gameEventResults.pitcherResult('K')
       })
     )
 
@@ -36,14 +41,14 @@ describe('Retrosheet - Outs', () => {
       getAtBat({ result: 'K', pitchSequence: 'CBFBC', count: '22' })
     )
     expect(lookingStrikeout).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         pitches: {
           pitchCount: 5,
           balls: 2,
           strikes: 2
         },
-        result: actions.pitcherResult('K-looking')
+        result: gameEventResults.pitcherResult('K-looking')
       })
     )
 
@@ -51,27 +56,27 @@ describe('Retrosheet - Outs', () => {
       getAtBat({ result: 'K', pitchSequence: 'B*BBCCC', count: '32' })
     )
     expect(lookingStrikeout2).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         pitches: {
           pitchCount: 6,
           balls: 3,
           strikes: 2
         },
-        result: actions.pitcherResult('K-looking')
+        result: gameEventResults.pitcherResult('K-looking')
       })
     )
 
     const strikeoutWithStolenBase = handleEvent(getAtBat({ result: 'K+SB2' }))
     expect(strikeoutWithStolenBase).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.pitcherResult('K'),
+        result: gameEventResults.pitcherResult('K'),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: actions.stolenBase(2)
+            result: gameEventResults.stolenBase(2)
           },
           2: undefined,
           3: undefined
@@ -80,31 +85,31 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('K+WP.3-H(TUR)(NR);B-1')).toEqual(
-      getEventWithDefaults({
-        result: actions.pitcherResult('K'),
+      getGameEventWithDefaults({
+        result: gameEventResults.pitcherResult('K'),
         isOut: false,
         bases: getBases({
           B: {
             endBase: 1,
             isAtBatResult: true,
-            result: actions.wildPitch()
+            result: gameEventResults.wildPitch()
           },
           3: {
             endBase: 4,
-            result: actions.wildPitch()
+            result: gameEventResults.wildPitch()
           }
         })
       })
     )
 
     expect(getResult('K.1-2;B-1(E2/TH)')).toEqual(
-      getEventWithDefaults({
-        result: actions.pitcherResult('K'),
+      getGameEventWithDefaults({
+        result: gameEventResults.pitcherResult('K'),
         isOut: false,
         bases: getBases({
           B: {
             endBase: 1,
-            result: actions.error(2)
+            result: gameEventResults.error(2)
           },
           1: {
             endBase: 2,
@@ -115,14 +120,14 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('K.BX1(23)')).toEqual(
-      getEventWithDefaults({
-        result: actions.pitcherResult('K'),
+      getGameEventWithDefaults({
+        result: gameEventResults.pitcherResult('K'),
         isOut: true,
         bases: getBases({
           B: {
             isOut: true,
             endBase: 1,
-            result: actions.putout([2, 3]),
+            result: gameEventResults.putout([2, 3]),
             isAtBatResult: true
           }
         })
@@ -136,10 +141,10 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(outfieldFlyout).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         pitches: { pitchCount: 2, balls: 0, strikes: 1 },
-        result: actions.flyOut(7)
+        result: gameEventResults.flyOut(7)
       })
     )
 
@@ -149,64 +154,64 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(infieldFlyout).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         pitches: { pitchCount: 5, balls: 1, strikes: 2 },
-        result: actions.flyOut(4)
+        result: gameEventResults.flyOut(4)
       })
     )
 
     expect(handleEvent(getAtBat({ result: '3/BP23F' }))).toEqual(
-      getEventWithDefaults({
-        result: actions.flyOut(3),
+      getGameEventWithDefaults({
+        result: gameEventResults.flyOut(3),
         isOut: true
       })
     )
 
     expect(getResult('9.1-2')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.flyOut(9),
+        result: gameEventResults.flyOut(9),
         bases: getBases({ 1: { endBase: 2, result: undefined } })
       })
     )
 
     expect(getResult('8!/F')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.flyOut(8)
+        result: gameEventResults.flyOut(8)
       })
     )
 
     expect(getResult('8/F.2-3')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.flyOut(8),
+        result: gameEventResults.flyOut(8),
         bases: getBases({ 2: { endBase: 3, result: undefined } })
       })
     )
 
     expect(getResult('5/BP-')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.flyOut(5)
+        result: gameEventResults.flyOut(5)
       })
     )
 
     expect(getResult('5/L')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.lineOut(5)
+        result: gameEventResults.lineOut(5)
       })
     )
   })
 
   it('records sacrifice flys', () => {
     expect(getResult('7/F/SF.3-H')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         isSacrifice: true,
-        result: actions.flyOut(7),
+        result: gameEventResults.flyOut(7),
         bases: getBases({
           3: {
             result: undefined,
@@ -219,10 +224,10 @@ describe('Retrosheet - Outs', () => {
 
   it('records sacrifice bunts', () => {
     expect(getResult('34/BG/SH.1-2')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
         isSacrifice: true,
-        result: actions.putout([3, 4]),
+        result: gameEventResults.putout([3, 4]),
         bases: getBases({
           1: {
             result: undefined,
@@ -235,44 +240,44 @@ describe('Retrosheet - Outs', () => {
 
   it('handles putouts', () => {
     expect(getResult('93/L')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([9, 3])
+        result: gameEventResults.putout([9, 3])
       })
     )
 
     expect(getResult('53')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([5, 3])
+        result: gameEventResults.putout([5, 3])
       })
     )
 
     expect(getResult('5')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([5])
+        result: gameEventResults.putout([5])
       })
     )
 
     expect(getResult('13#')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([1, 3])
+        result: gameEventResults.putout([1, 3])
       })
     )
 
     expect(getResult('5!3/G+')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([5, 3])
+        result: gameEventResults.putout([5, 3])
       })
     )
 
     expect(getResult('85(2)/FO/F.1-2')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: false,
-        result: actions.fieldersChoice(1),
+        result: gameEventResults.fieldersChoice(1),
         bases: getBases({
           B: {
             isAtBatResult: true,
@@ -286,16 +291,16 @@ describe('Retrosheet - Outs', () => {
           2: {
             endBase: 3,
             isOut: true,
-            result: actions.putout([8, 5])
+            result: gameEventResults.putout([8, 5])
           }
         })
       })
     )
 
     expect(getResult('53.2-3;1-2')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([5, 3]),
+        result: gameEventResults.putout([5, 3]),
         bases: getBases({
           2: {
             endBase: 3,
@@ -312,14 +317,14 @@ describe('Retrosheet - Outs', () => {
 
   it('handles double/triple plays and fielders choices', () => {
     expect(getResult('64(1)3/GDP')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([6, 4, 3]),
+        result: gameEventResults.putout([6, 4, 3]),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: actions.putout([6, 4]),
+            result: gameEventResults.putout([6, 4]),
             isOut: true
           },
           2: undefined,
@@ -329,8 +334,8 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('64(1)/G')).toEqual(
-      getEventWithDefaults({
-        result: actions.fieldersChoice(1),
+      getGameEventWithDefaults({
+        result: gameEventResults.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -339,7 +344,7 @@ describe('Retrosheet - Outs', () => {
           },
           1: {
             endBase: 2,
-            result: actions.putout([6, 4]),
+            result: gameEventResults.putout([6, 4]),
             isOut: true
           },
           2: undefined,
@@ -349,8 +354,8 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('2(3)/FO/G-.2-3;1-2')).toEqual(
-      getEventWithDefaults({
-        result: actions.fieldersChoice(1),
+      getGameEventWithDefaults({
+        result: gameEventResults.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -367,7 +372,7 @@ describe('Retrosheet - Outs', () => {
           },
           3: {
             endBase: 4,
-            result: actions.putout([2]),
+            result: gameEventResults.putout([2]),
             isOut: true
           }
         }
@@ -375,19 +380,19 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('5(2)4(1)3/GDP')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.putout([5, 4, 3]),
+        result: gameEventResults.putout([5, 4, 3]),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: actions.putout([5, 4]),
+            result: gameEventResults.putout([5, 4]),
             isOut: true
           },
           2: {
             endBase: 3,
-            result: actions.putout([5]),
+            result: gameEventResults.putout([5]),
             isOut: true
           },
           3: undefined
@@ -396,8 +401,8 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('54(1)/FO/G5.3-H;B-1')).toEqual(
-      getEventWithDefaults({
-        result: actions.fieldersChoice(1),
+      getGameEventWithDefaults({
+        result: gameEventResults.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -406,7 +411,7 @@ describe('Retrosheet - Outs', () => {
           },
           1: {
             endBase: 2,
-            result: actions.putout([5, 4]),
+            result: gameEventResults.putout([5, 4]),
             isOut: true
           },
           2: undefined,
@@ -419,8 +424,8 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('FC6.1X2(64)')).toEqual(
-      getEventWithDefaults({
-        result: actions.fieldersChoice(1),
+      getGameEventWithDefaults({
+        result: gameEventResults.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -429,7 +434,7 @@ describe('Retrosheet - Outs', () => {
           },
           1: {
             endBase: 2,
-            result: actions.putout([6, 4]),
+            result: gameEventResults.putout([6, 4]),
             isOut: true
           },
           2: undefined,
@@ -439,20 +444,20 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('1(B)16(2)63(1)/LTP/L1')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.lineOut(1),
+        result: gameEventResults.lineOut(1),
         bases: {
           B: undefined,
           1: {
             endBase: 2,
             // TODO: fix this
-            result: actions.putout([1, 6, 6, 3]),
+            result: gameEventResults.putout([1, 6, 6, 3]),
             isOut: true
           },
           2: {
             endBase: 3,
-            result: actions.putout([1, 6]),
+            result: gameEventResults.putout([1, 6]),
             isOut: true
           },
           3: undefined
@@ -461,16 +466,16 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('1(B)15(3)/LDP/L1')).toEqual(
-      getEventWithDefaults({
+      getGameEventWithDefaults({
         isOut: true,
-        result: actions.lineOut(1),
+        result: gameEventResults.lineOut(1),
         bases: {
           B: undefined,
           1: undefined,
           2: undefined,
           3: {
             endBase: 4,
-            result: actions.putout([1, 5]),
+            result: gameEventResults.putout([1, 5]),
             isOut: true
           }
         }
@@ -478,8 +483,8 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('36(1)/FO/G.2-H(E6/TH)(UR)(NR)')).toEqual(
-      getEventWithDefaults({
-        result: actions.fieldersChoice(1),
+      getGameEventWithDefaults({
+        result: gameEventResults.fieldersChoice(1),
         bases: {
           B: {
             endBase: 1,
@@ -488,12 +493,12 @@ describe('Retrosheet - Outs', () => {
           },
           1: {
             endBase: 2,
-            result: actions.putout([3, 6]),
+            result: gameEventResults.putout([3, 6]),
             isOut: true
           },
           2: {
             endBase: 4,
-            result: actions.error(6)
+            result: gameEventResults.error(6)
           },
           3: undefined
         }
@@ -501,14 +506,14 @@ describe('Retrosheet - Outs', () => {
     )
 
     expect(getResult('16!4(1)3/GDP/G6M')).toEqual(
-      getEventWithDefaults({
-        result: actions.putout([1, 6, 4, 3]),
+      getGameEventWithDefaults({
+        result: gameEventResults.putout([1, 6, 4, 3]),
         isOut: true,
         bases: {
           B: undefined,
           1: {
             endBase: 2,
-            result: actions.putout([1, 6, 4]),
+            result: gameEventResults.putout([1, 6, 4]),
             isOut: true
           },
           2: undefined,

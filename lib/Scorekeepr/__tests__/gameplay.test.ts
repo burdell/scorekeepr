@@ -1,11 +1,11 @@
-import { Scorekeepr } from '../../lib/Scorekeepr'
-import { getGameEvent } from '../../lib/generators/utils'
-import * as actions from '../../lib/generators/actions'
+import { Scorekeepr } from '..'
+import { getGameEvent } from '../../generators/utils'
+import * as gameEventResults from '../../generators/gameEventResults'
 
 describe('Scorekeeper - Gameplay', () => {
   it('handles events for innings that arent yet there', () => {
     const sk = new Scorekeepr()
-    const result = actions.lineOut(7)
+    const result = gameEventResults.lineOut(7)
     sk.handleGameEvent({
       event: getGameEvent({
         result,
