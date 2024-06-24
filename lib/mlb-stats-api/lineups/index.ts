@@ -1,6 +1,6 @@
-import { BatterEntry, PitcherEntry, PlayerPosition } from '../Scorekeepr'
+import { BatterEntry, PitcherEntry, PlayerPosition } from '../../Scorekeepr'
 import { getPlayer } from './players'
-import type { BoxScorePlayer, PlayByPlay, BoxScore } from './types'
+import type { BoxScorePlayer, PlayByPlay, BoxScore } from '../types'
 
 function getPositionCode(mlbStatsApiCode: string): PlayerPosition {
   if (mlbStatsApiCode === '1') {

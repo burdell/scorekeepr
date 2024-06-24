@@ -154,6 +154,15 @@ export interface PlayEvent {
     id: number
     link: string
   }
+  hitData?: {
+    launchSpeed: number
+    launchAngle: number
+    totalDistance: number
+    trajectory: string
+    hardness: string
+    location: string
+    coordinates: { coordX: number; coordY: number }
+  }
   index: number
   playId?: string
   pitchNumber?: number
@@ -237,6 +246,7 @@ export interface Play {
     outs: number
   }
   pitchIndex: number[]
+  actionIndex: number[]
 }
 
 export interface PlayByPlay {

@@ -25,7 +25,8 @@
     "build": "npm run build-core && npm run build-retrosheet",
     "prepublish": "npm run test && npm run build",
     "copy-retrosheet-index": "cp ./retrosheet_lib/** ./retrosheet",
-    "generate-docs": "typedoc lib/index.ts --tsconfig tsconfig.core.json --readme readme.md"
+    "generate-docs": "typedoc lib/index.ts --tsconfig tsconfig.core.json --readme readme.md",
+    "fetch-api-data": "ts-node lib/mlb-stats-api/fetchData/index.ts"
   },
   "author": "nathan griffin <nathanjgriffin@gmail.com>",
   "license": "MIT",
@@ -39,5 +40,8 @@
     "ts-jest": "^29.1.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
   }
 }

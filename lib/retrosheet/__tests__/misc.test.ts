@@ -1,5 +1,5 @@
+import { getGameEventWithDefaults } from '../../Scorekeepr/__tests__/utils'
 import { handleGameplayEvent } from '../gameplayEvents'
-import { getGameEventWithDefaults } from './utils'
 
 describe('Retrosheet - miscellaneous things', () => {
   it('handles comments', () => {

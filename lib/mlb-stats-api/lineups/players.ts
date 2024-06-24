@@ -1,4 +1,4 @@
-import type { BoxScore, BoxScorePlayer } from './types'
+import type { BoxScore, BoxScorePlayer } from '../types'
 
 export function getPlayers(boxscore: BoxScore) {
   return [

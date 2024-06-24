@@ -2,6 +2,7 @@ import type { MLBApiContextMetrics, PlayByPlay, BoxScore } from './types'
 import { Scorekeepr } from '../Scorekeepr'
 import { getTimeAtVenue } from './getTimeAtVenue'
 import { getLineups } from './lineups'
+import { getGameEventObjectFromPlay } from './plays/getGameEventObjectFromPlay'
 
 export function getMLBStatsAPIScorekeeper({
   contextMetrics,
@@ -50,6 +51,13 @@ export function getMLBStatsAPIScorekeeper({
     home: { batters: homeLineup.batters, pitchers: homeLineup.pitchers },
     visiting: { batters: awayLineup.batters, pitchers: awayLineup.pitchers }
   })
+
+  // playByPlay.allPlays.forEach((play) => {
+  //   const gameEventObject = getGameEventObjectFromPlay({ play })
+  //   if (gameEventObject) {
+  //     scorekeeper.handleGameEvent(gameEventObject)
+  //   }
+  // })
 
   return scorekeeper
 }

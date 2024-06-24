@@ -1,11 +1,7 @@
-import {
-  handleEvent,
-  getAtBat,
-  getGameEventWithDefaults,
-  getResult
-} from './utils'
+import { handleEvent, getAtBat, getResult } from './utils'
 import * as gameEventResults from '../../generators/gameEventResults'
 import { getBases } from '../../generators/utils'
+import { getGameEventWithDefaults } from '../../Scorekeepr/__tests__/utils'
 
 describe('Retrosheet - Reached Base At-Bats', () => {
   it('handles hits', () => {

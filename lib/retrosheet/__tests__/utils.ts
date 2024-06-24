@@ -1,29 +1,6 @@
 import { AtBat, GameplayEvent } from 'retrosheet-parse'
 
 import { handleGameplayEvent as realHandleEvent } from '../gameplayEvents'
-import { GameEvent } from '../../Scorekeepr/types'
-
-export function getGameEventWithDefaults(
-  overrides: Partial<GameEvent> = {}
-): GameEvent {
-  return {
-    result: undefined,
-    isOut: false,
-    pitches: {
-      balls: 0,
-      pitchCount: 0,
-      strikes: 0
-    },
-    isSacrifice: false,
-    bases: {
-      B: undefined,
-      1: undefined,
-      2: undefined,
-      3: undefined
-    },
-    ...overrides
-  }
-}
 
 export function getResult(result: string) {
   return handleEvent(getAtBat({ result }))
